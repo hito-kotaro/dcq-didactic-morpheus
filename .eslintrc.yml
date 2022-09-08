@@ -28,5 +28,6 @@ rules:
     'import/extensions': [1, { '.js', '.jsx', '.ts', '.tsx' }],
     'react/jsx-filename-extension':
       [2, { 'extensions': ['.js', '.jsx', '.ts', '.tsx'] }],
+    'react/function-component-definition': 0,
     'no-unused-vars': 1,
   }
