@@ -1,10 +1,10 @@
 import { ChangeEvent, useState } from 'react';
 
 const useInputForm = () => {
-  const [input, setInput] = useState('');
+  const [value, setValue] = useState('');
 
   const onChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setInput(e.target.value);
+    setValue(e.target.value);
   };
 
   const onChangeNumber = (
@@ -12,15 +12,15 @@ const useInputForm = () => {
   ) => {
     const re = /^[0-9\b]+$/;
     if (e.target.value === '' || re.test(e.target.value)) {
-      setInput(e.target.value);
+      setValue(e.target.value);
     }
   };
 
   const clear = () => {
-    setInput('');
+    setValue('');
   };
 
-  return { input, clear, onChange, onChangeNumber, setInput };
+  return { value, clear, onChange, onChangeNumber, setValue };
 };
 
 export default useInputForm;
