@@ -1,11 +1,25 @@
 import React from 'react';
 import { TextField, Button } from '@mui/material';
 import useInputForm from '../../../hooks/InputForm/useInputForm';
+import SelectForm from '../SelectForm/SelectForm';
+import { selectMenuType } from '../SelectForm/selectItemType';
 
 const CreateUserForm = () => {
   const userHandler = useInputForm();
   const pwdHandler = useInputForm();
   const rePwdHandler = useInputForm();
+
+  const roles: selectMenuType[] = [
+    { id: 1, label: 'master' },
+    { id: 2, label: 'leader' },
+    { id: 3, label: 'member' },
+  ];
+  const groups: selectMenuType[] = [
+    { id: 1, label: 'GroupA' },
+    { id: 2, label: 'GroupB' },
+    { id: 3, label: 'GroupC' },
+  ];
+
   return (
     <div className="flex">
       <div className="w-1/2">新しいユーザーを作成する</div>
@@ -36,6 +50,13 @@ const CreateUserForm = () => {
           onChange={rePwdHandler.onChange}
           value={rePwdHandler.value}
         />
+
+        <div className="h-3" />
+        <SelectForm menu={roles} label="ロールを選択してください" />
+
+        <div className="h-3" />
+        <SelectForm menu={groups} label="グループを選択してください" />
+
         <div className="h-3" />
         <Button variant="contained">新しいユーザーを作成</Button>
       </div>

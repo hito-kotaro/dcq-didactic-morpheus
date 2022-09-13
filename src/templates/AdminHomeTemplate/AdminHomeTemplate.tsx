@@ -1,4 +1,4 @@
-import { Button, TextField } from '@mui/material';
+import { Divider } from '@mui/material';
 import React from 'react';
 import CreateUserForm from '../../components/mol/AdminMenu/CreateUserForm';
 import AdminHomeHeader from '../../components/org/AdminHomeHeader/AdminHomeHeader';
@@ -12,8 +12,11 @@ const AdminHomeTemplate = () => {
           <div className="h-10" />
           <AdminHomeHeader />
           <div className="h-10" />
-          <div className="bg-green-50 rounded-lg border-1">
+          <div className="bg-green-50 rounded-lg border-1 py-3 px-1">
             <CreateUserForm />
+            <div className="my-5">
+              <Divider />
+            </div>
           </div>
         </div>
       </div>
