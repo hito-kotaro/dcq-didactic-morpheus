@@ -3,6 +3,9 @@ module.exports = {
   purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
   theme: {
     extend: {
+      borderWidth: {
+        1: '1px',
+      },
       minHeight: {
         0: '0',
         '1/4': '25%',
@@ -19,6 +22,7 @@ module.exports = {
         '3/4': '75%',
         full: '100%',
         400: '400px',
+        100: '200px',
       },
       maxHeight: {
         0: '0',
