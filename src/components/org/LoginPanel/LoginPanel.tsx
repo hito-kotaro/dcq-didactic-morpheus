@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { TextField, Button } from '@mui/material';
 import sampleLogo from '../../../images/sampleLogo.svg';
 import useInputForm from '../../../hooks/InputForm/useInputForm';
+import useLogin from '../../../hooks/Login/useLogin';
 
 const LoginPanel = () => {
   const [isSignUp, setIsSignUp] = useState(false);
   const userHandler = useInputForm();
   const pwdHandler = useInputForm();
   const tenantHandler = useInputForm();
+  const { login, signUp } = useLogin();
 
   return (
     <div>
@@ -63,7 +65,9 @@ const LoginPanel = () => {
           </Button>
           <div className="h-10" />
           <div className="flex justify-center">
-            <Button variant="contained">Login</Button>
+            <Button variant="contained" onClick={isSignUp ? signUp : login}>
+              {isSignUp ? '新しいテナントの作成' : 'ログイン'}
+            </Button>
           </div>
         </div>
         <div className="h-10" />
