@@ -3,6 +3,9 @@ module.exports = {
   purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
   theme: {
     extend: {
+      zIndex: {
+        1300: '1300',
+      },
       borderWidth: {
         1: '1px',
       },
@@ -48,6 +51,9 @@ module.exports = {
         secondary: '#FBB066',
         base: '#FFF4EB',
         text: '#6F7073',
+        // for header
+        h_text: '#C9CACE',
+        h_base: '#1E212A',
         // for badge
         open: '#5CD63D',
         cancel: '#FFE602',
