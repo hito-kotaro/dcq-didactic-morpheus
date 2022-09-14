@@ -5,7 +5,6 @@ import { selectMenuType } from './selectItemType';
 
 type Props = {
   label: string;
-
   menu: selectMenuType[];
 };
 
