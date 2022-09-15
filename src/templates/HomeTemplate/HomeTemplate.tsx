@@ -1,12 +1,31 @@
 import React from 'react';
+import InboxIcon from '@mui/icons-material/MoveToInbox';
+import SideMenu from '../../components/org/SideMenu/SideMenu';
+import Header from '../../components/org/Header/Header';
+import Summary from '../../components/org/Summary/Summary';
 
 const HomeTemplate = () => {
+  const dummy = () => {
+    console.log('hello');
+  };
+
+  const itemList = [
+    { label: '一般設定', icon: <InboxIcon />, action: dummy },
+    { label: 'どりかむリスト', icon: <InboxIcon />, action: dummy },
+    { label: 'ログアウト', icon: <InboxIcon />, action: dummy },
+  ];
+
   return (
-    <div className="flex h-screen">
-      <div className="bg-red-200 w-1/12 min-w-100">side</div>
-      <div className="bg-green-200 w-4/12">MainMenu</div>
-      <div className="bg-blue-200 w-7/12">MainPanel</div>
-    </div>
+    <>
+      <Header />
+      <div className="flex h-screen py-10">
+        <SideMenu itemList={itemList} />
+        <div className="h-full w-full">
+          <div className="h-5" />
+          <Summary />
+        </div>
+      </div>
+    </>
   );
 };
 

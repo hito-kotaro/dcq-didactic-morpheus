@@ -2,8 +2,10 @@ import React from 'react';
 import { Button } from '@mui/material';
 import SelectForm from '../SelectForm/SelectForm';
 import { selectMenuType } from '../SelectForm/selectItemType';
+import useSelectForm from '../SelectForm/useSelectForm';
 
 const SeasonSetting = () => {
+  const seasonSelectHandler = useSelectForm();
   const menus: selectMenuType[] = [
     { id: 1, label: '年度半年(4/1 ~ 9/30  /  10/1  ~ 3/31)' },
     {
@@ -26,7 +28,11 @@ const SeasonSetting = () => {
         <div className="font-semibold">現在の連携先ID</div>
         <div className="text-text">年度半年(4/1 ~ 9/30 / 10/1 ~ 3/31)</div>
         <div className="h-2" />
-        <SelectForm menu={menus} label="シーズン区切りを選択" />
+        <SelectForm
+          menu={menus}
+          label="シーズン区切りを選択"
+          handler={seasonSelectHandler}
+        />
         <div className="h-2" />
         <Button variant="contained">更新</Button>
       </div>

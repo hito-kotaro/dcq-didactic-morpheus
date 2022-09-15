@@ -3,11 +3,14 @@ import { TextField, Button } from '@mui/material';
 import useInputForm from '../../../hooks/InputForm/useInputForm';
 import SelectForm from '../SelectForm/SelectForm';
 import { selectMenuType } from '../SelectForm/selectItemType';
+import useSelectForm from '../SelectForm/useSelectForm';
 
 const CreateUserForm = () => {
   const userHandler = useInputForm();
   const pwdHandler = useInputForm();
   const rePwdHandler = useInputForm();
+  const roleSelectHandler = useSelectForm();
+  const teamSelectHandler = useSelectForm();
 
   const roles: selectMenuType[] = [
     { id: 1, label: 'master' },
@@ -52,10 +55,18 @@ const CreateUserForm = () => {
         />
 
         <div className="h-3" />
-        <SelectForm menu={roles} label="ロールを選択してください" />
+        <SelectForm
+          menu={roles}
+          label="ロールを選択してください"
+          handler={roleSelectHandler}
+        />
 
         <div className="h-3" />
-        <SelectForm menu={groups} label="グループを選択してください" />
+        <SelectForm
+          menu={groups}
+          label="グループを選択してください"
+          handler={teamSelectHandler}
+        />
 
         <div className="h-3" />
         <Button variant="contained">新しいユーザーを作成</Button>

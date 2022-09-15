@@ -4,10 +4,11 @@ import { SelectChangeEvent } from '@mui/material';
 const useSelectForm = () => {
   const [value, setValue] = useState('');
 
-  const handler = (event: SelectChangeEvent) => {
+  const handleChange = (event: SelectChangeEvent) => {
     setValue(event.target.value as string);
   };
-  return { value, handler };
+
+  return { value, handleChange };
 };
 
 export default useSelectForm;
