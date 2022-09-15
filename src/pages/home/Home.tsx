@@ -37,14 +37,6 @@ const Home = () => {
     </>,
   ];
   const [isAdmin, setIsAdmin] = useState(false);
-  return (
-    <div>
-      {isAdmin ? (
-        <AdminHomeTemplate settings={settings} />
-      ) : (
-        <AdminHomeTemplate settings={settings} />
-      )}
-    </div>
-  );
+  return <div>{isAdmin ? <HomeTemplate /> : <HomeTemplate />}</div>;
 };
 export default Home;
