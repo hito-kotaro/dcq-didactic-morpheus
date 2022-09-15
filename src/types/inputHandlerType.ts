@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+import { SelectChangeEvent } from '@mui/material';
 import { ChangeEvent } from 'react';
 
 export type inputHandlerType = {
@@ -13,5 +14,5 @@ export type inputHandlerType = {
 
 export type selectHandlerType = {
   value: string;
-  handleChange: (e: ChangeEvent<HTMLSelectElement>) => void;
+  handleChange: (event: SelectChangeEvent) => void;
 };
