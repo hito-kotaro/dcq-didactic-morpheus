@@ -16,7 +16,6 @@ type Props = {
 
 const BarGraph: VFC<Props> = (props) => {
   const { data, width, height } = props;
-  console.log(data.length * 50);
   return (
     // <ResponsiveContainer>
     <ComposedChart

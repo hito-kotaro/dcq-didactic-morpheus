@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from '@mui/material';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import SideMenu from '../../components/org/SideMenu/SideMenu';
@@ -11,6 +11,9 @@ import useSelectForm from '../../components/mol/SelectForm/useSelectForm';
 
 const HomeTemplate = () => {
   const selectHandler = useSelectForm();
+  const [filterdUserData, setFilterdUserData] = useState([
+    { name: 'Aさん', point: 8, team_id: 1 },
+  ]);
   const [isTeam, setIsTeam] = useState(false);
   const [width, height] = useWindowSize();
   const dummy = () => {
@@ -24,37 +27,58 @@ const HomeTemplate = () => {
   ];
 
   const userData = [
-    { name: 'Aさん', point: 8, team: 'A' },
-    { name: 'Bさん', point: 9, team: 'A' },
-    { name: 'Bさん', point: 10, team: 'A' },
-    { name: 'Bさん', point: 1, team: 'A' },
-    { name: 'Bさん', point: 8, team: 'A' },
-    { name: 'Bさん', point: 8, team: 'A' },
-    { name: 'Bさん', point: 8, team: 'A' },
-    { name: 'Bさん', point: 18, team: 'A' },
-    { name: 'Bさん', point: 6, team: 'A' },
-    { name: 'Bさん', point: 10, team: 'B' },
-    { name: 'Bさん', point: 4, team: 'B' },
-    { name: 'Bさん', point: 1, team: 'B' },
-    { name: 'Bさん', point: 0, team: 'B' },
-    { name: 'Bさん', point: 6, team: 'B' },
-    { name: 'Bさん', point: 8, team: 'B' },
-    { name: 'Bさん', point: 6, team: 'B' },
-    { name: 'Bさん', point: 6, team: 'B' },
-    { name: 'Bさん', point: 6, team: 'B' },
-    { name: 'Bさん', point: 6, team: 'B' },
+    { name: 'Aさん', point: 8, team_id: 1 },
+    { name: 'Bさん', point: 9, team_id: 1 },
+    { name: 'Bさん', point: 10, team_id: 1 },
+    { name: 'Bさん', point: 1, team_id: 1 },
+    { name: 'Bさん', point: 8, team_id: 1 },
+    { name: 'Bさん', point: 8, team_id: 1 },
+    { name: 'Bさん', point: 8, team_id: 1 },
+    { name: 'Bさん', point: 18, team_id: 1 },
+    { name: 'Bさん', point: 6, team_id: 1 },
+    { name: 'Bさん', point: 10, team_id: 2 },
+    { name: 'Bさん', point: 4, team_id: 2 },
+    { name: 'Bさん', point: 1, team_id: 2 },
+    { name: 'Bさん', point: 0, team_id: 2 },
+    { name: 'Bさん', point: 6, team_id: 2 },
+    { name: 'Bさん', point: 8, team_id: 2 },
+    { name: 'Bさん', point: 6, team_id: 2 },
+    { name: 'Bさん', point: 6, team_id: 2 },
+    { name: 'Bさん', point: 6, team_id: 2 },
+    { name: 'Bさん', point: 6, team_id: 2 },
   ];
 
   const teamData = [
-    { name: 'teamA', point: 16, team: 'A' },
-    { name: 'teamB', point: 26, team: 'B' },
+    { name: 'teamA', point: 16, team_id: 1 },
+    { name: 'teamB', point: 26, team_id: 2 },
   ];
 
   const toggleGraph = () => {
     setIsTeam(!isTeam);
   };
 
-  const items: selectMenuType[] = [{ id: 1, label: 'test' }];
+  const items: selectMenuType[] = [
+    { id: 0, label: '全てのユーザを表示' },
+    { id: 1, label: 'Team1' },
+    { id: 2, label: 'Team2' },
+  ];
+
+  useEffect(() => {
+    console.log(selectHandler.value);
+    if (Number(selectHandler.value) === 0) {
+      // filterしない
+      setFilterdUserData(userData);
+    } else {
+      const tmp = userData.filter((u: any) => {
+        return u.team_id === selectHandler.value;
+      });
+      setFilterdUserData(tmp);
+    }
+  }, [selectHandler.value]);
+
+  useEffect(() => {
+    setFilterdUserData(userData);
+  }, []);
 
   return (
     <>
@@ -85,7 +109,7 @@ const HomeTemplate = () => {
             </div>
           </div>
           <BarGraph
-            data={isTeam ? teamData : userData}
+            data={isTeam ? teamData : filterdUserData}
             width={width}
             height={height}
           />
