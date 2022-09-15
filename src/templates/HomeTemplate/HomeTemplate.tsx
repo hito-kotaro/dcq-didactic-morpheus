@@ -10,9 +10,11 @@ const HomeTemplate = () => {
   };
 
   const itemList = [
-    { label: '一般設定', icon: <InboxIcon />, action: dummy },
-    { label: 'どりかむリスト', icon: <InboxIcon />, action: dummy },
-    { label: 'ログアウト', icon: <InboxIcon />, action: dummy },
+    { label: '集計', icon: <InboxIcon />, action: dummy },
+    { label: 'チーム/ユーザー管理', icon: <InboxIcon />, action: dummy },
+    { label: 'クエストボード', icon: <InboxIcon />, action: dummy },
+    { label: 'ペナルティ', icon: <InboxIcon />, action: dummy },
+    { label: 'リクエスト', icon: <InboxIcon />, action: dummy },
   ];
 
   return (
