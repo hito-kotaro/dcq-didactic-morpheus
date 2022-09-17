@@ -3,6 +3,7 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import SideMenu from '../../components/org/SideMenu/SideMenu';
 import Header from '../../components/org/Header/Header';
 import Summary from '../../components/org/Summary/Summary';
+import TeamManagement from '../../components/org/TeamManagement/TeamManagement';
 
 const HomeTemplate = () => {
   const dummy = () => {
@@ -23,8 +24,8 @@ const HomeTemplate = () => {
       <div className="flex h-screen py-10">
         <SideMenu itemList={itemList} />
         <div className="h-full w-full">
-          <div className="h-5" />
-          <Summary />
+          <TeamManagement />
+          {/* <Summary /> */}
         </div>
       </div>
     </>
