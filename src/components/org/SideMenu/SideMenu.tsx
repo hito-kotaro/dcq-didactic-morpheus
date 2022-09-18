@@ -8,6 +8,7 @@ import {
   ListItemIcon,
   ListItemText,
 } from '@mui/material';
+import useWindowSize from '../../../hooks/WindowSize/useWindowSize';
 
 type Props = {
   itemList: { label: string; icon: ReactElement; action: () => void }[];
@@ -15,8 +16,9 @@ type Props = {
 
 const SideMenu: VFC<Props> = (props) => {
   type item = { label: string; icon: ReactElement; action: () => void };
+  const [width, height] = useWindowSize();
   const { itemList } = props;
-  const drawerWidth = 240;
+  const drawerWidth = width / 5;
   return (
     <Drawer
       variant="permanent"
