@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { TextField, Button } from '@mui/material';
-import sampleLogo from '../../../images/sampleLogo.svg';
+import sampleLogo from '../../../images/LoginLogo.svg';
 import useInputForm from '../../../hooks/InputForm/useInputForm';
 import useLogin from '../../../hooks/Login/useLogin';
 
