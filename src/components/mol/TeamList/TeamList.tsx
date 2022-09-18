@@ -1,11 +1,8 @@
-import { TextField } from '@mui/material';
+import { Divider } from '@mui/material';
 import React from 'react';
-import useInputForm from '../../../hooks/InputForm/useInputForm';
-import TeamList from '../../mol/TeamList/TeamList';
-import SplitTemplate from '../../templates/SplitTemplate';
+import TeamListItem from '../TeamListItem/TeamListItem';
 
-const TeamManagement = () => {
-  const teamHandler = useInputForm();
+const TeamList = () => {
   const teamData = [
     { name: 'teamA', point: 16, penalty: 1, member: 1 },
     { name: 'teamB', point: 26, penalty: 1, member: 1 },
@@ -20,22 +17,23 @@ const TeamManagement = () => {
     { name: 'teamB', point: 26, penalty: 1, member: 1 },
     { name: 'teamB', point: 26, penalty: 1, member: 1 },
   ];
-
   return (
-    <SplitTemplate
-      menuTool={
-        <TextField
-          fullWidth
-          type="text"
-          label="チーム名で検索"
-          variant="outlined"
-          onChange={teamHandler.onChange}
-          value={teamHandler.value}
-        />
-      }
-      menuContents={<TeamList />}
-    />
+    <div className="bg-blue-200">
+      {teamData.map((t: any) => (
+        <>
+          <TeamListItem
+            name={t.name}
+            member={t.member}
+            point={t.point}
+            penalty={t.penalty}
+          />
+          <div className="my-3">
+            <Divider />
+          </div>
+        </>
+      ))}
+    </div>
   );
 };
 
-export default TeamManagement;
+export default TeamList;

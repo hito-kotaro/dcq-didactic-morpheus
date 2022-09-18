@@ -1,15 +1,19 @@
 import React from 'react';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
+import { TextField } from '@mui/material';
 import SideMenu from '../../components/org/SideMenu/SideMenu';
 import Header from '../../components/org/Header/Header';
-import Summary from '../../components/org/Summary/Summary';
-import TeamManagement from '../../components/org/TeamManagement/TeamManagement';
 import MyAvatar from '../../components/atoms/MyAvatar/MyAvatar';
+import useInputForm from '../../hooks/InputForm/useInputForm';
+import TeamList from '../../components/mol/TeamList/TeamList';
+import SplitTemplate from '../../components/templates/SplitTemplate';
+import TeamManagement from '../../components/org/TeamManagement/TeamManagement';
 
 const HomeTemplate = () => {
   const dummy = () => {
     console.log('hello');
   };
+  const teamHandler = useInputForm();
 
   const itemList = [
     { label: '集計', icon: <InboxIcon />, action: dummy },
@@ -24,19 +28,8 @@ const HomeTemplate = () => {
       <Header />
       <div className="flex h-screen pt-10">
         <SideMenu itemList={itemList} />
-        <div className="w-full h-full ">
-          <div className="flex w-full h-full ">
-            <div className=" w-1/2 bg-red-200 h-full">
-              <div className=" pt-7 px-3 bg-green-500 h-1/6">
-                <MyAvatar name="KOTARO" team="team" />
-              </div>
-              <div className="h-5/6 bg-blue-500">MenuContents</div>
-            </div>
-            <div className=" w-1/2 bg-green-200 h-full">test</div>
-          </div>
-          {/* <TeamManagement /> */}
-          {/* <Summary /> */}
-        </div>
+        {/* ここで表示するコンポーネントを切り替える。 */}
+        <TeamManagement />
       </div>
     </>
   );
