@@ -1,25 +1,13 @@
-import { TextField } from '@mui/material';
 import React from 'react';
+import { TextField } from '@mui/material';
 import useInputForm from '../../../hooks/InputForm/useInputForm';
 import TeamList from '../../mol/TeamList/TeamList';
 import SplitTemplate from '../../templates/SplitTemplate';
+import UserList from '../UserList/UserList';
+import { users } from '../../../testData/UserData';
 
 const TeamManagement = () => {
   const teamHandler = useInputForm();
-  const teamData = [
-    { name: 'teamA', point: 16, penalty: 1, member: 1 },
-    { name: 'teamB', point: 26, penalty: 1, member: 1 },
-    { name: 'teamB', point: 26, penalty: 1, member: 1 },
-    { name: 'teamB', point: 26, penalty: 1, member: 1 },
-    { name: 'teamB', point: 26, penalty: 1, member: 1 },
-    { name: 'teamB', point: 26, penalty: 1, member: 1 },
-    { name: 'teamB', point: 26, penalty: 1, member: 1 },
-    { name: 'teamB', point: 26, penalty: 1, member: 1 },
-    { name: 'teamB', point: 26, penalty: 1, member: 1 },
-    { name: 'teamB', point: 26, penalty: 1, member: 1 },
-    { name: 'teamB', point: 26, penalty: 1, member: 1 },
-    { name: 'teamB', point: 26, penalty: 1, member: 1 },
-  ];
 
   return (
     <SplitTemplate
@@ -34,6 +22,8 @@ const TeamManagement = () => {
         />
       }
       menuContents={<TeamList />}
+      mainHeader={<div className="pt-7 h-1/6">Team名 のメンバー</div>}
+      mainContents={<UserList users={users} />}
     />
   );
 };
