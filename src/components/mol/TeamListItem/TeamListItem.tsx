@@ -5,7 +5,6 @@ import Groups3Icon from '@mui/icons-material/Groups3';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import ErrorIcon from '@mui/icons-material/Error';
 
-// チーム名とかをPropsで渡す
 type Props = {
   name: string;
   member: number;

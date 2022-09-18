@@ -4,6 +4,7 @@ import SideMenu from '../../components/org/SideMenu/SideMenu';
 import Header from '../../components/org/Header/Header';
 import Summary from '../../components/org/Summary/Summary';
 import TeamManagement from '../../components/org/TeamManagement/TeamManagement';
+import MyAvatar from '../../components/atoms/MyAvatar/MyAvatar';
 
 const HomeTemplate = () => {
   const dummy = () => {
@@ -21,10 +22,19 @@ const HomeTemplate = () => {
   return (
     <>
       <Header />
-      <div className="flex h-screen py-10">
+      <div className="flex h-screen pt-10">
         <SideMenu itemList={itemList} />
-        <div className="h-full w-full">
-          <TeamManagement />
+        <div className="w-full h-full ">
+          <div className="flex w-full h-full ">
+            <div className=" w-1/2 bg-red-200 h-full">
+              <div className=" pt-7 px-3 bg-green-500 h-1/6">
+                <MyAvatar name="KOTARO" team="team" />
+              </div>
+              <div className="h-5/6 bg-blue-500">MenuContents</div>
+            </div>
+            <div className=" w-1/2 bg-green-200 h-full">test</div>
+          </div>
+          {/* <TeamManagement /> */}
           {/* <Summary /> */}
         </div>
       </div>
