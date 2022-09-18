@@ -18,7 +18,7 @@ const TeamList = () => {
     { name: 'teamB', point: 26, penalty: 1, member: 1 },
   ];
   return (
-    <div className="bg-blue-200">
+    <div className="">
       {teamData.map((t: any) => (
         <>
           <TeamListItem

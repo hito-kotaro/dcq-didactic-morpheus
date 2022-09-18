@@ -4,6 +4,7 @@ import TipsAndUpdatesIcon from '@mui/icons-material/TipsAndUpdates';
 import Groups3Icon from '@mui/icons-material/Groups3';
 import LightbulbIcon from '@mui/icons-material/Lightbulb';
 import ErrorIcon from '@mui/icons-material/Error';
+import ScoreIcon from '../../atoms/ScoreIcon/ScoreIcon';
 
 type Props = {
   name: string;
@@ -32,20 +33,20 @@ const TeamListItem: VFC<Props> = (props) => {
         </div>
 
         <div className="flex justify-around  w-2/5">
-          <div>
-            <LightbulbIcon sx={{ fontSize: 40, color: '#5CD63D' }} />
-            <div className=" font-semibold text-text text-lg">{point}</div>
-          </div>
-          <div>
-            <ErrorIcon sx={{ fontSize: 40, color: '#F47171' }} />
-            <div className=" font-semibold text-text text-lg">{penalty}</div>
-          </div>
-          <div>
-            <TipsAndUpdatesIcon sx={{ fontSize: 40, color: '#FBA305' }} />
-            <div className="font-semibold text-text text-lg">
-              {point - penalty}
-            </div>
-          </div>
+          <ScoreIcon
+            icon={<LightbulbIcon sx={{ fontSize: 40, color: '#5CD63D' }} />}
+            score={point}
+          />
+          <ScoreIcon
+            icon={<ErrorIcon sx={{ fontSize: 40, color: '#F47171' }} />}
+            score={penalty}
+          />
+          <ScoreIcon
+            icon={
+              <TipsAndUpdatesIcon sx={{ fontSize: 40, color: '#FBA305' }} />
+            }
+            score={point - penalty}
+          />
         </div>
       </div>
     </Button>
