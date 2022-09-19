@@ -11,6 +11,7 @@ import useTeamManagements from './useTeamManagements';
 import CreateTeam from './CreateTeam';
 import TeamPanelHeader from '../TeamPanelHeader/TeamPanelHeader';
 import UpdateTeam from './UpdateTeam';
+import useUserList from '../UserList/useUserList';
 
 const TeamManagement = () => {
   const {
@@ -33,6 +34,8 @@ const TeamManagement = () => {
     filteringTeam,
     selectTeam,
   } = useTeamManagements();
+
+  const { user, selectUser } = useUserList();
 
   useEffect(() => {
     filteringUser(users);
@@ -78,7 +81,7 @@ const TeamManagement = () => {
             onClickCancel={onClickCancel}
           />
         ) : (
-          <UserList users={filterdUsers} />
+          <UserList users={filterdUsers} onClick={selectUser} />
         )
       }
     />

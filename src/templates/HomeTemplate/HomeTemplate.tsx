@@ -1,13 +1,9 @@
 import React from 'react';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
-import { TextField } from '@mui/material';
 import SideMenu from '../../components/org/SideMenu/SideMenu';
 import Header from '../../components/org/Header/Header';
-import MyAvatar from '../../components/atoms/MyAvatar/MyAvatar';
 import useInputForm from '../../hooks/InputForm/useInputForm';
-import TeamList from '../../components/mol/TeamList/TeamList';
-import SplitTemplate from '../../components/templates/SplitTemplate';
-import TeamManagement from '../../components/org/TeamManagement/TeamManagement';
+import UserManagement from '../../components/org/UserManagement/UserManagement';
 
 const HomeTemplate = () => {
   const dummy = () => {
@@ -29,7 +25,8 @@ const HomeTemplate = () => {
       <div className="flex h-screen pt-10">
         <SideMenu itemList={itemList} />
         {/* ここで表示するコンポーネントを切り替える。 */}
-        <TeamManagement />
+        <UserManagement />
+        {/* <TeamManagement /> */}
       </div>
     </>
   );
