@@ -5,39 +5,14 @@ import SelectForm from '../../mol/SelectForm/SelectForm';
 import { selectMenuType } from '../../mol/SelectForm/selectItemType';
 import BarGraph from '../BarGraph/BarGraph';
 import useBarGraph from '../BarGraph/useBarGraph';
+import { users } from '../../../testData/UserData';
+import { teams } from '../../../testData/TeamData';
 
 const Summary = () => {
   const { selectHandler, setFilterdUserData, filteringData, filterdUserData } =
     useBarGraph();
   const [isTeam, setIsTeam] = useState(false);
   const [width, height] = useWindowSize();
-
-  const userData = [
-    { name: 'Aさん', point: 8, team_id: 1 },
-    { name: 'Bさん', point: 9, team_id: 1 },
-    { name: 'Bさん', point: 10, team_id: 1 },
-    { name: 'Bさん', point: 1, team_id: 1 },
-    { name: 'Bさん', point: 8, team_id: 1 },
-    { name: 'Bさん', point: 8, team_id: 1 },
-    { name: 'Bさん', point: 8, team_id: 1 },
-    { name: 'Bさん', point: 18, team_id: 1 },
-    { name: 'Bさん', point: 6, team_id: 1 },
-    { name: 'Bさん', point: 10, team_id: 2 },
-    { name: 'Bさん', point: 4, team_id: 2 },
-    { name: 'Bさん', point: 1, team_id: 2 },
-    { name: 'Bさん', point: 0, team_id: 2 },
-    { name: 'Bさん', point: 6, team_id: 2 },
-    { name: 'Bさん', point: 8, team_id: 2 },
-    { name: 'Bさん', point: 6, team_id: 2 },
-    { name: 'Bさん', point: 6, team_id: 2 },
-    { name: 'Bさん', point: 6, team_id: 2 },
-    { name: 'Bさん', point: 6, team_id: 2 },
-  ];
-
-  const teamData = [
-    { name: 'teamA', point: 16, team_id: 1 },
-    { name: 'teamB', point: 26, team_id: 2 },
-  ];
 
   const toggleGraph = () => {
     setIsTeam(!isTeam);
@@ -51,11 +26,11 @@ const Summary = () => {
 
   useEffect(() => {
     console.log(selectHandler.value);
-    setFilterdUserData(userData);
+    setFilterdUserData(users);
   }, []);
 
   useEffect(() => {
-    filteringData(userData);
+    filteringData(users);
   }, [selectHandler.value]);
 
   return (
@@ -80,7 +55,7 @@ const Summary = () => {
         </div>
       </div>
       <BarGraph
-        data={isTeam ? teamData : filterdUserData}
+        data={isTeam ? teams : filterdUserData}
         width={width}
         height={height}
       />

@@ -1,14 +1,25 @@
 import React from 'react';
+import CssBaseline from '@mui/material/CssBaseline';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { BrowserRouter } from 'react-router-dom';
-import logo from './logo.svg';
 import './App.css';
 import Router from './router/Router';
 
 const App: React.FC = function () {
+  const theme = createTheme({
+    typography: {
+      button: {
+        textTransform: 'none',
+      },
+    },
+  });
   return (
-    <BrowserRouter>
-      <Router />
-    </BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <BrowserRouter>
+        <Router />
+      </BrowserRouter>
+    </ThemeProvider>
   );
 };
 

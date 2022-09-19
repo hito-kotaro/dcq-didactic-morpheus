@@ -1,5 +1,5 @@
 import React, { VFC } from 'react';
-import LightbulbIcon from '@mui/icons-material/Lightbulb';
+import SpeedIcon from '@mui/icons-material/Speed';
 import MyAvatar from '../../atoms/MyAvatar/MyAvatar';
 import ScoreIcon from '../../atoms/ScoreIcon/ScoreIcon';
 
@@ -12,11 +12,11 @@ type Props = {
 const UserInfo: VFC<Props> = (props) => {
   const { name, team, score } = props;
   return (
-    <div className="flex">
+    <div className="flex px-5 pt-3">
       <MyAvatar name={name} team={team} />
       <div className="ml-auto">
         <ScoreIcon
-          icon={<LightbulbIcon sx={{ fontSize: 40, color: '#5CD63D' }} />}
+          icon={<SpeedIcon sx={{ fontSize: 26, color: '#5CD63D' }} />}
           score={score}
         />
       </div>

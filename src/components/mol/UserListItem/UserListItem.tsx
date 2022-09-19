@@ -1,5 +1,6 @@
 import React, { VFC } from 'react';
-import LightbulbIcon from '@mui/icons-material/Lightbulb';
+import { Button } from '@mui/material';
+import SpeedIcon from '@mui/icons-material/Speed';
 import MyAvatar from '../../atoms/MyAvatar/MyAvatar';
 import ScoreIcon from '../../atoms/ScoreIcon/ScoreIcon';
 
@@ -13,13 +14,15 @@ const UserListItem: VFC<Props> = (props) => {
   const { name, team, score } = props;
   return (
     <div className="flex px-3">
-      <MyAvatar name={name} team={team} />
-      <div className="ml-auto">
-        <ScoreIcon
-          icon={<LightbulbIcon sx={{ fontSize: 40, color: '#5CD63D' }} />}
-          score={score}
-        />
-      </div>
+      <Button fullWidth>
+        <MyAvatar name={name} team={team} />
+        <div className="ml-auto">
+          <ScoreIcon
+            icon={<SpeedIcon sx={{ fontSize: 26, color: '#5CD63D' }} />}
+            score={score}
+          />
+        </div>
+      </Button>
     </div>
   );
 };
