@@ -1,11 +1,16 @@
 import { useState } from 'react';
 import useInputForm from '../../../hooks/InputForm/useInputForm';
 import { teams } from '../../../testData/TeamData';
-import { teamDataType } from '../../../types/data/teamDataType';
+import { newTeamType, teamDataType } from '../../../types/data/teamDataType';
 import { userDataType } from '../../../types/data/userDataType';
 
 const useTeamManagements = () => {
   const teamHandler = useInputForm();
+  const newNameHandler = useInputForm();
+  const newDescHandler = useInputForm();
+  const updNameHandler = useInputForm();
+  const updDescHandler = useInputForm();
+
   const [team, setTeam] = useState<teamDataType>({
     id: 0,
     name: '',
@@ -15,7 +20,39 @@ const useTeamManagements = () => {
   });
   const [filterdUsers, setFilterdUsers] = useState<userDataType[]>([]);
   const [filterdTeams, setFilterdTeams] = useState<teamDataType[]>([]);
+  const [isCreate, setIsCreate] = useState(false);
+  const [isUpdate, setIsUpdate] = useState(false);
 
+  const toggleUpdate = () => {
+    setIsUpdate(!isUpdate);
+  };
+
+  const toggleCreate = () => {
+    setIsCreate(!isCreate);
+  };
+  const onClickCancel = () => {
+    newNameHandler.clear();
+    newDescHandler.clear();
+    updNameHandler.clear();
+    updDescHandler.clear();
+    setIsCreate(false);
+    setIsUpdate(false);
+    // toggleCreate();
+  };
+
+  const onClickCreate = (newTeam: newTeamType) => {
+    console.log(newTeam);
+    newNameHandler.clear();
+    newDescHandler.clear();
+    toggleCreate();
+  };
+
+  const onClickUpdate = (newTeam: newTeamType) => {
+    console.log(newTeam);
+    updNameHandler.clear();
+    updDescHandler.clear();
+    toggleUpdate();
+  };
   const filteringUser = (data: userDataType[]) => {
     setFilterdUsers(
       data.filter((u: userDataType) => {
@@ -41,10 +78,21 @@ const useTeamManagements = () => {
   };
 
   return {
+    isCreate,
+    isUpdate,
     filterdUsers,
     filterdTeams,
     team,
     teamHandler,
+    newNameHandler,
+    newDescHandler,
+    updNameHandler,
+    updDescHandler,
+    onClickCancel,
+    onClickCreate,
+    onClickUpdate,
+    toggleCreate,
+    toggleUpdate,
     selectTeam,
     filteringUser,
     filteringTeam,

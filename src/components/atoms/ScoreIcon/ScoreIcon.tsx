@@ -1,3 +1,4 @@
+import Badge from '@mui/material/Badge/Badge';
 import React, { ReactElement, VFC } from 'react';
 
 type Props = {
@@ -9,10 +10,17 @@ const ScoreIcon: VFC<Props> = (props) => {
   const { icon, score } = props;
   return (
     <div>
-      {icon}
-      <div className=" font-semibold text-text text-lg text-center">
-        {score}
-      </div>
+      <Badge
+        color="primary"
+        badgeContent={score}
+        max={999}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'right',
+        }}
+      >
+        {icon}
+      </Badge>
     </div>
   );
 };
