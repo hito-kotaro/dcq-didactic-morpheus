@@ -1,15 +1,32 @@
-import React from 'react';
-import { TextField } from '@mui/material';
+import React, { useEffect } from 'react';
 import useInputForm from '../../../hooks/InputForm/useInputForm';
 import TeamList from '../../mol/TeamList/TeamList';
 import SplitTemplate from '../../templates/SplitTemplate';
 import UserList from '../UserList/UserList';
 import { users } from '../../../testData/UserData';
+import { teams } from '../../../testData/TeamData';
 import UserInfo from '../../mol/MenuHeader/UserInfo';
 import TeamListTool from '../../mol/MainMenuTools/TeamListTool';
+import useTeamManagements from './useTeamManagements';
 
 const TeamManagement = () => {
-  const teamHandler = useInputForm();
+  const {
+    team,
+    teamHandler,
+    filterdUsers,
+    filterdTeams,
+    filteringUser,
+    filteringTeam,
+    selectTeam,
+  } = useTeamManagements();
+
+  useEffect(() => {
+    filteringUser(users);
+  }, [team]);
+
+  useEffect(() => {
+    filteringTeam(teams);
+  }, [teamHandler.value]);
 
   return (
     <SplitTemplate
@@ -20,13 +37,13 @@ const TeamManagement = () => {
           onClick={() => console.log('new')}
         />
       }
-      menuContents={<TeamList />}
+      menuContents={<TeamList teams={filterdTeams} onClick={selectTeam} />}
       mainHeader={
         <div className="pt-7 h-1/6 text-center">
-          <span className="text-2xl font-semibold">Team</span>のメンバー
+          <span className="text-2xl font-semibold">{team.name}</span>のメンバー
         </div>
       }
-      mainContents={<UserList users={users} />}
+      mainContents={<UserList users={filterdUsers} />}
     />
   );
 };

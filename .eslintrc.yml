@@ -26,6 +26,7 @@ plugins:
 rules:
   {
     'import/extensions': [1, { '.js', '.jsx', '.ts', '.tsx' }],
+    'import/prefer-default-export': 0,
     'react/jsx-filename-extension':
       [2, { 'extensions': ['.js', '.jsx', '.ts', '.tsx'] }],
     'react/prop-types': 0,

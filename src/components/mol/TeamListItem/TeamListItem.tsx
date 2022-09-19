@@ -7,15 +7,18 @@ import ErrorIcon from '@mui/icons-material/Error';
 import ScoreIcon from '../../atoms/ScoreIcon/ScoreIcon';
 
 type Props = {
+  id: number;
   name: string;
   member: number;
   point: number;
   penalty: number;
+  onClick: (id: number) => void;
 };
 const TeamListItem: VFC<Props> = (props) => {
-  const { name, member, point, penalty } = props;
+  const { id, name, member, point, penalty, onClick } = props;
+
   return (
-    <Button fullWidth>
+    <Button fullWidth onClick={() => onClick(id)}>
       <div className="flex ml-3 w-full">
         <div className="w-1/5">
           <div className="h-10 w-10 bg-orange-300 rounded-md" />

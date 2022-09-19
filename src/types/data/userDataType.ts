@@ -4,7 +4,8 @@ export type graphUserData = {
   team_id: number;
 };
 
-export type userData = {
+export type userDataType = {
+  id: number;
   name: string;
   point: number;
   team: string;
