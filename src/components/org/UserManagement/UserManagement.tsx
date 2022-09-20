@@ -37,10 +37,10 @@ const UserManagement = () => {
     teamSelectHandler,
   };
 
-  const wrapSelectUser = (u: userDataType) => {
-    selectUser(u);
+  const wrapSelectUser = (id: number) => {
+    const u: userDataType = selectUser(id);
     wrapSetIsDetail(true);
-    mainContents.chComponent(<UserDetail user={user} />);
+    console.log(`3.${u.name}`);
   };
 
   return (
