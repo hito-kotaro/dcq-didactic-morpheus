@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { users } from '../../../testData/UserData';
 import { userDataType } from '../../../types/data/userDataType';
 
 const useUserList = () => {
@@ -11,12 +10,10 @@ const useUserList = () => {
     team_id: 0,
   });
 
-  const selectUser = (id: number) => {
-    const filter: userDataType[] = users.filter((u: userDataType) => {
-      return u.id === id;
-    });
-    setUser(filter[0]);
+  const selectUser = (u: userDataType) => {
+    setUser(u);
   };
+
   return { user, selectUser };
 };
 

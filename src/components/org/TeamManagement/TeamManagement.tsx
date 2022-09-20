@@ -12,8 +12,10 @@ import CreateTeam from './CreateTeam';
 import TeamPanelHeader from '../TeamPanelHeader/TeamPanelHeader';
 import UpdateTeam from './UpdateTeam';
 import useUserList from '../UserList/useUserList';
+import useUserManagement from '../UserManagement/useUserManagement';
 
 const TeamManagement = () => {
+  const { onClickUser } = useUserManagement();
   const {
     isCreate,
     isUpdate,
@@ -81,6 +83,9 @@ const TeamManagement = () => {
             onClickCancel={onClickCancel}
           />
         ) : (
+          // 型エラーが出ないようにとりあえずonClickUserを入れている。
+          // チーム管理画面でユーザボタンをクリックした時にどのような動きをするか未定。
+          // 決まり次第適切な関数を入れてあげる
           <UserList users={filterdUsers} onClick={selectUser} />
         )
       }

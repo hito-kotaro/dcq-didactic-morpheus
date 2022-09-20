@@ -1,32 +1,25 @@
 import { TextField, Button } from '@mui/material';
 import React, { VFC } from 'react';
-import {
-  inputHandlerType,
-  selectHandlerType,
-} from '../../../types/inputHandlerType';
 import SelectForm from '../../mol/SelectForm/SelectForm';
 import { roles } from '../../../testData/RoleData';
 import { teams } from '../../../testData/TeamData';
 import { selectMenuType } from '../../mol/SelectForm/selectItemType';
 import { teamDataType } from '../../../types/data/teamDataType';
+import { userCreateHandlerType } from './types/userCreateHandler';
 
 type Props = {
-  userHandler: inputHandlerType;
-  pwdHandler: inputHandlerType;
-  rePwdHandler: inputHandlerType;
-  roleSelectHandler: selectHandlerType;
-  teamSelectHandler: selectHandlerType;
+  userCreateHandler: userCreateHandlerType;
 };
 
 const UserCreate: VFC<Props> = (props) => {
+  const { userCreateHandler } = props;
   const {
     userHandler,
     pwdHandler,
     rePwdHandler,
     roleSelectHandler,
     teamSelectHandler,
-  } = props;
-
+  } = userCreateHandler;
   const teamMenu: selectMenuType[] = teams.map((t: teamDataType) => ({
     id: t.id,
     label: t.name,

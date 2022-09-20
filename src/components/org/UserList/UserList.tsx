@@ -1,11 +1,11 @@
-import React, { VFC } from 'react';
+import React, { ReactElement, VFC } from 'react';
 import { Divider } from '@mui/material';
 import UserListItem from '../../mol/UserListItem/UserListItem';
 import { userDataType } from '../../../types/data/userDataType';
 
 type Props = {
   users: userDataType[];
-  onClick: (id: number) => void;
+  onClick: (user: userDataType) => void;
 };
 
 const UserList: VFC<Props> = (props) => {
