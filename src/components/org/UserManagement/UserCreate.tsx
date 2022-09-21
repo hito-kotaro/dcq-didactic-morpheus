@@ -30,7 +30,7 @@ const UserCreate: VFC<Props> = (props) => {
       <TextField
         fullWidth
         type="text"
-        label="ユーザー名"
+        label="ユーザ名"
         variant="outlined"
         onChange={userHandler.onChange}
         value={userHandler.value}
@@ -64,12 +64,12 @@ const UserCreate: VFC<Props> = (props) => {
       <div className="h-3" />
       <SelectForm
         menu={teamMenu}
-        label="グループを選択してください"
+        label="チームを選択してください"
         handler={teamSelectHandler}
       />
 
       <div className="h-3" />
-      <Button variant="contained">新しいユーザーを作成</Button>
+      <Button variant="contained">新しいユーザを作成</Button>
     </div>
   );
 };

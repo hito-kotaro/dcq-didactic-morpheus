@@ -40,7 +40,7 @@ const UserManagement = () => {
   const wrapSelectUser = (id: number) => {
     const u: userDataType = selectUser(id);
     wrapSetIsDetail(true);
-    console.log(`3.${u.name}`);
+    mainContents.chComponent(<UserDetail user={u} />);
   };
 
   return (

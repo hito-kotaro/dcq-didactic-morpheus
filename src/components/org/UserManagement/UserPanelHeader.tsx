@@ -4,8 +4,8 @@ import { userDataType } from '../../../types/data/userDataType';
 import MenuButton from '../../mol/MenuButton/MenuButton';
 import MyModal from '../../mol/MyModal/MyModal';
 import useMyModal from '../../mol/MyModal/useMyModal';
-import UserDetail from './UserDetail';
-import UserUpdate from './UserUpdate';
+import UserNameUpdate from './UserNameUpdate';
+import UserPwdUpdate from './UserPwdUpdate';
 
 type Props = {
   user: userDataType;
@@ -20,13 +20,17 @@ const UserPanelHeader: VFC<Props> = (props) => {
   const { isDetail, user, chComponent } = props;
   const { open, handleOpen, handleClose } = useMyModal();
 
-  const wrapChComponent = () => {
-    chComponent(<UserUpdate />);
+  const userNameUpdate = () => {
+    chComponent(<UserNameUpdate currentName={user.name} />);
+  };
+  const pwdUpdate = () => {
+    chComponent(<UserPwdUpdate name={user.name} />);
   };
 
   const menuItems: { label: string; onClick: () => void }[] = [
     { label: 'ユーザを削除', onClick: handleOpen },
-    { label: 'ユーザ情報を更新', onClick: wrapChComponent },
+    { label: 'ユーザ名を変更', onClick: userNameUpdate },
+    { label: 'パスワードを変更', onClick: pwdUpdate },
   ];
 
   const deleteUser = () => {
