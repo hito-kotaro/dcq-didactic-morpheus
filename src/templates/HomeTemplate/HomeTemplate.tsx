@@ -5,6 +5,7 @@ import Header from '../../components/org/Header/Header';
 import UserManagement from '../../components/org/UserManagement/UserManagement';
 import TeamManagement from '../../components/org/TeamManagement/TeamManagement';
 import Summary from '../../components/org/Summary/Summary';
+import QuestManagement from '../../components/org/QuestManagement/QuestManagement';
 
 const HomeTemplate = () => {
   const [component, setComponent] = useState<ReactElement>(<Summary />);
@@ -36,10 +37,10 @@ const HomeTemplate = () => {
       component: <UserManagement />,
     },
     {
-      label: 'ペナルティ',
+      label: 'クエスト管理',
       icon: <InboxIcon />,
       action: chComponent,
-      component: <UserManagement />,
+      component: <QuestManagement />,
     },
     {
       label: 'リクエスト',
@@ -54,11 +55,7 @@ const HomeTemplate = () => {
       <Header />
       <div className="flex h-screen pt-10">
         <SideMenu itemList={itemList} />
-        {/* ここで表示するコンポーネントを切り替える。 */}
         <div className="w-full">{component}</div>
-        {/* <UserManagement /> */}
-
-        {/* <TeamManagement /> */}
       </div>
     </>
   );
