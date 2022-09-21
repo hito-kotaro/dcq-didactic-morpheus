@@ -47,7 +47,7 @@ const UserPanelHeader: VFC<Props> = (props) => {
         positiveBtnMsg="削除"
         positiveBtnAction={deleteUser}
       />
-      <span className="text-2xl font-semibold">ユーザ管理</span>
+      <span className="text-2xl font-semibold text-text">ユーザ管理</span>
       <div className="flex justify-end">
         {isDetail ? <MenuButton menuItems={menuItems} /> : ''}
       </div>
