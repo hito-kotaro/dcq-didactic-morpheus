@@ -1,28 +1,39 @@
 /* eslint-disable no-nested-ternary */
-import React, { VFC } from 'react';
+import React, { ReactElement, VFC } from 'react';
 import { userDataType } from '../../../types/data/userDataType';
 import MenuButton from '../../mol/MenuButton/MenuButton';
 import MyModal from '../../mol/MyModal/MyModal';
 import useMyModal from '../../mol/MyModal/useMyModal';
+import UserNameUpdate from './UserNameUpdate';
+import UserPwdUpdate from './UserPwdUpdate';
 
 type Props = {
   user: userDataType;
   toggleUpdate: () => void;
+  chComponent: (component: ReactElement) => void;
+  mainComponent: ReactElement;
   headerMsg: string;
-  isCreate: boolean;
-  isUpdate: boolean;
+  isDetail: boolean;
 };
 
 const UserPanelHeader: VFC<Props> = (props) => {
-  const { isUpdate, isCreate, user, toggleUpdate } = props;
+  const { isDetail, user, chComponent } = props;
   const { open, handleOpen, handleClose } = useMyModal();
+
+  const userNameUpdate = () => {
+    chComponent(<UserNameUpdate currentName={user.name} />);
+  };
+  const pwdUpdate = () => {
+    chComponent(<UserPwdUpdate name={user.name} />);
+  };
+
   const menuItems: { label: string; onClick: () => void }[] = [
     { label: 'ユーザを削除', onClick: handleOpen },
-    { label: 'ユーザ情報を更新', onClick: toggleUpdate },
+    { label: 'ユーザ名を変更', onClick: userNameUpdate },
+    { label: 'パスワードを変更', onClick: pwdUpdate },
   ];
 
   const deleteUser = () => {
-    console.log(`delete ${user.name}`);
     handleClose();
   };
   return (
@@ -38,7 +49,7 @@ const UserPanelHeader: VFC<Props> = (props) => {
       />
       <span className="text-2xl font-semibold">ユーザ管理</span>
       <div className="flex justify-end">
-        {user.name !== '' ? <MenuButton menuItems={menuItems} /> : ''}
+        {isDetail ? <MenuButton menuItems={menuItems} /> : ''}
       </div>
     </div>
   );

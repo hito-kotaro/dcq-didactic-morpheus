@@ -11,12 +11,16 @@ const useUserList = () => {
     team_id: 0,
   });
 
+  // idを渡してユーザを返す
   const selectUser = (id: number) => {
     const filter: userDataType[] = users.filter((u: userDataType) => {
       return u.id === id;
     });
-    setUser(filter[0]);
+    const u: userDataType = filter[0];
+    setUser(u);
+    return u;
   };
+
   return { user, selectUser };
 };
 

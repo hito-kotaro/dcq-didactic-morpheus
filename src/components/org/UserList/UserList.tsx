@@ -1,4 +1,4 @@
-import React, { VFC } from 'react';
+import React, { ReactElement, VFC } from 'react';
 import { Divider } from '@mui/material';
 import UserListItem from '../../mol/UserListItem/UserListItem';
 import { userDataType } from '../../../types/data/userDataType';
@@ -14,7 +14,7 @@ const UserList: VFC<Props> = (props) => {
     <div>
       {users.map((u: userDataType) => (
         <div key={u.id}>
-          <UserListItem user={u} onClick={onClick} />
+          <UserListItem user={u} onClick={() => onClick(u.id)} />
           <div className="my-3">
             <Divider />
           </div>
