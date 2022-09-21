@@ -35,7 +35,7 @@ const Summary = () => {
 
   return (
     <>
-      <div className="flex px-3">
+      <div className="flex  w-full mt-10">
         {isTeam ? (
           ''
         ) : (

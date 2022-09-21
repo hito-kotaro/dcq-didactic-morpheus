@@ -11,11 +11,22 @@ import {
 import useWindowSize from '../../../hooks/WindowSize/useWindowSize';
 
 type Props = {
-  itemList: { label: string; icon: ReactElement; action: () => void }[];
+  itemList: {
+    label: string;
+    icon: ReactElement;
+    action: (c: ReactElement) => void;
+    component: ReactElement;
+  }[];
 };
 
 const SideMenu: VFC<Props> = (props) => {
-  type item = { label: string; icon: ReactElement; action: () => void };
+  type item = {
+    label: string;
+    icon: ReactElement;
+    action: (c: ReactElement) => void;
+    component: ReactElement;
+  };
+
   const [width, height] = useWindowSize();
   const { itemList } = props;
   const drawerWidth = width / 5;
@@ -35,7 +46,11 @@ const SideMenu: VFC<Props> = (props) => {
       <div>
         <List>
           {itemList.map((i: item) => (
-            <ListItem key={i.label} disablePadding onClick={i.action}>
+            <ListItem
+              key={i.label}
+              disablePadding
+              onClick={() => i.action(i.component)}
+            >
               <ListItemButton>
                 <ListItemIcon>{i.icon}</ListItemIcon>
                 <ListItemText primary={i.label} />

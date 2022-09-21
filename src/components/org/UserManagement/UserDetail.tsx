@@ -1,5 +1,5 @@
-import { Avatar, Divider } from '@mui/material';
 import React, { VFC } from 'react';
+import { Divider } from '@mui/material';
 import { userDataType } from '../../../types/data/userDataType';
 import ActivityList from '../ActivityList/ActivityList';
 import { activityData } from '../../../testData/ActivityData';

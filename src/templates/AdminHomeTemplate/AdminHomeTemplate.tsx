@@ -11,14 +11,29 @@ type Props = {
 
 const AdminHomeTemplate: VFC<Props> = (props) => {
   const { settings } = props;
-  const dummy = () => {
+  const dummy = (c: ReactElement) => {
     console.log('hello temmmmy');
   };
 
   const itemList = [
-    { label: '一般設定', icon: <InboxIcon />, action: dummy },
-    { label: 'どりかむリスト', icon: <InboxIcon />, action: dummy },
-    { label: 'ログアウト', icon: <InboxIcon />, action: dummy },
+    {
+      label: '一般設定',
+      icon: <InboxIcon />,
+      action: dummy,
+      component: <div>dummy</div>,
+    },
+    {
+      label: 'どりかむリスト',
+      icon: <InboxIcon />,
+      action: dummy,
+      component: <div>dummy</div>,
+    },
+    {
+      label: 'ログアウト',
+      icon: <InboxIcon />,
+      action: dummy,
+      component: <div>dummy</div>,
+    },
   ];
 
   return (
