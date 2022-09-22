@@ -9,6 +9,8 @@ const useUserList = () => {
     point: 0,
     team: '',
     team_id: 0,
+    role: '',
+    role_id: 0,
   });
 
   // idを渡してユーザを返す

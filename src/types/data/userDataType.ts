@@ -10,4 +10,6 @@ export type userDataType = {
   point: number;
   team: string;
   team_id: number;
+  role: string;
+  role_id: number;
 };

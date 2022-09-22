@@ -4,6 +4,7 @@ import { userDataType } from '../../../types/data/userDataType';
 import MenuButton from '../../mol/MenuButton/MenuButton';
 import MyModal from '../../mol/MyModal/MyModal';
 import useMyModal from '../../mol/MyModal/useMyModal';
+import UserAtrbuteUpdate from './UserAtrbuteUpdate';
 import UserNameUpdate from './UserNameUpdate';
 import UserPwdUpdate from './UserPwdUpdate';
 
@@ -26,11 +27,15 @@ const UserPanelHeader: VFC<Props> = (props) => {
   const pwdUpdate = () => {
     chComponent(<UserPwdUpdate name={user.name} />);
   };
+  const atrUpdate = () => {
+    chComponent(<UserAtrbuteUpdate user={user} />);
+  };
 
   const menuItems: { label: string; onClick: () => void }[] = [
     { label: 'ユーザを削除', onClick: handleOpen },
     { label: 'ユーザ名を変更', onClick: userNameUpdate },
     { label: 'パスワードを変更', onClick: pwdUpdate },
+    { label: 'ユーザ属性を変更', onClick: atrUpdate },
   ];
 
   const deleteUser = () => {
