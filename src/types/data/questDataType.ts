@@ -4,4 +4,7 @@ export type questDataType = {
   description: string;
   reward: number;
   date: string;
+  owner: string;
+  owner_id: number;
+  example: string;
 };

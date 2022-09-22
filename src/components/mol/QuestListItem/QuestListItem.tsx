@@ -5,14 +5,15 @@ import MyBadge from '../../atoms/MyBadge/MyBadge';
 
 type Props = {
   quest: questDataType;
+  onClick: (q: questDataType) => void;
 };
 
 const QuestListItem: VFC<Props> = (props) => {
-  const { quest } = props;
+  const { quest, onClick } = props;
 
   return (
     <>
-      <Button fullWidth>
+      <Button fullWidth onClick={() => onClick(quest)}>
         <div className="w-full flex text-text p-3">
           <Avatar />
           <div className="ml-3 w-full">

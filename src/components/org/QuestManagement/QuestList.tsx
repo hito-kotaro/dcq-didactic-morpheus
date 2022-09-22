@@ -4,13 +4,15 @@ import QuestListItem from '../../mol/QuestListItem/QuestListItem';
 
 type Props = {
   quests: questDataType[];
+  onClick: (q: questDataType) => void;
 };
+
 const QuestList: VFC<Props> = (props) => {
-  const { quests } = props;
+  const { quests, onClick } = props;
   return (
     <>
       {quests.map((q: questDataType) => (
-        <QuestListItem quest={q} />
+        <QuestListItem quest={q} onClick={onClick} />
       ))}
     </>
   );

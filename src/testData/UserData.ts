@@ -4,11 +4,11 @@ import { userDataType } from '../types/data/userDataType';
 export const users: userDataType[] = [
   {
     id: 1,
-    name: 'Aさん',
+    name: '佐藤',
     point: 8,
     team: 'teamA',
     team_id: 1,
-    role: 'member',
+    role: 'master',
     role_id: 3,
   },
   {
