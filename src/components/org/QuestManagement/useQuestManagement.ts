@@ -2,8 +2,11 @@ import { useState } from 'react';
 import { questDataType } from '../../../types/data/questDataType';
 import { users } from '../../../testData/UserData';
 import { userDataType } from '../../../types/data/userDataType';
+import useInputForm from '../../../hooks/InputForm/useInputForm';
 
 const useQuestManagement = () => {
+  const questSearchHandler = useInputForm();
+  const [filterdQuests, setFilterdQuests] = useState<questDataType[]>([]);
   const [owner, setOwner] = useState<userDataType>({
     id: 0,
     name: '',
@@ -32,7 +35,22 @@ const useQuestManagement = () => {
     });
     setOwner(user[0]);
   };
-  return { quest, owner, onClickQuestItem };
+
+  const filteringQuest = (data: questDataType[]) => {
+    setFilterdQuests(
+      data.filter(
+        (q: questDataType) => q.title.indexOf(questSearchHandler.value) !== -1,
+      ),
+    );
+  };
+  return {
+    quest,
+    filterdQuests,
+    owner,
+    questSearchHandler,
+    onClickQuestItem,
+    filteringQuest,
+  };
 };
 
 export default useQuestManagement;
