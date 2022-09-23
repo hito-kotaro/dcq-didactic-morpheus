@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from 'react';
 
-const useInputForm = () => {
-  const [value, setValue] = useState('');
+const useInputForm = (defValue?: string) => {
+  const [value, setValue] = useState(defValue ?? '');
   const [valNum, setValNum] = useState(0);
 
   const onChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {

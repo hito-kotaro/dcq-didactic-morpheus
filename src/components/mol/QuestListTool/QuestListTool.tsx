@@ -4,10 +4,11 @@ import { inputHandlerType } from '../../../types/inputHandlerType';
 
 type Props = {
   handler: inputHandlerType;
+  onClickCreate: () => void;
 };
 
 const QuestListTool: VFC<Props> = (props) => {
-  const { handler } = props;
+  const { handler, onClickCreate } = props;
   return (
     <div className="flex">
       <div className="w-4/6">
@@ -21,7 +22,9 @@ const QuestListTool: VFC<Props> = (props) => {
         />
       </div>
       <div className="ml-auto pt-2 text-right">
-        <Button variant="contained">新規作成</Button>
+        <Button variant="contained" onClick={onClickCreate}>
+          新規作成
+        </Button>
       </div>
     </div>
   );

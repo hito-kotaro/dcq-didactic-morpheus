@@ -41,6 +41,7 @@ const UserPanelHeader: VFC<Props> = (props) => {
   const deleteUser = () => {
     handleClose();
   };
+
   return (
     <div className="pt-7 text-center">
       <MyModal

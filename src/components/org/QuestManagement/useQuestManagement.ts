@@ -7,6 +7,7 @@ import useInputForm from '../../../hooks/InputForm/useInputForm';
 const useQuestManagement = () => {
   const questSearchHandler = useInputForm();
   const [filterdQuests, setFilterdQuests] = useState<questDataType[]>([]);
+  const [isDetail, setIsDetail] = useState(false);
   const [owner, setOwner] = useState<userDataType>({
     id: 0,
     name: '',
@@ -30,6 +31,7 @@ const useQuestManagement = () => {
   // クエストをクリックした時に、クエストとユーザを取得する必要あり
   const onClickQuestItem = (q: questDataType) => {
     setQuest(q);
+    setIsDetail(true);
     const user: userDataType[] = users.filter((u: userDataType) => {
       return u.id === q.owner_id;
     });
@@ -44,10 +46,12 @@ const useQuestManagement = () => {
     );
   };
   return {
+    isDetail,
     quest,
     filterdQuests,
     owner,
     questSearchHandler,
+    setIsDetail,
     onClickQuestItem,
     filteringQuest,
   };
