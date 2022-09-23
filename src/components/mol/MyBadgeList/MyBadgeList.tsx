@@ -13,7 +13,7 @@ const MyBadgeList: VFC<Props> = (props) => {
       {badgeList.length >= 1
         ? badgeList.map((b: badgeType) => (
             <>
-              <MyBadge content={b.content} color={b.color} />
+              <MyBadge content={b.content} bg={b.bg} text={b.text} />
               <div className="w-3" />
             </>
           ))

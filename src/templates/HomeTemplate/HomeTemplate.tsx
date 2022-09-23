@@ -6,6 +6,7 @@ import UserManagement from '../../components/org/UserManagement/UserManagement';
 import TeamManagement from '../../components/org/TeamManagement/TeamManagement';
 import Summary from '../../components/org/Summary/Summary';
 import QuestManagement from '../../components/org/QuestManagement/QuestManagement';
+import RequestManagement from '../../components/org/RequestManagement/RequestManagement';
 
 const HomeTemplate = () => {
   const [component, setComponent] = useState<ReactElement>(<Summary />);
@@ -46,7 +47,7 @@ const HomeTemplate = () => {
       label: 'リクエスト',
       icon: <InboxIcon />,
       action: chComponent,
-      component: <UserManagement />,
+      component: <RequestManagement />,
     },
   ];
 

@@ -1,25 +1,30 @@
 import { Avatar } from '@mui/material';
 import React, { VFC } from 'react';
-import { questDataType } from '../../../types/data/questDataType';
-import { userDataType } from '../../../types/data/userDataType';
-import MyBadge from '../../atoms/MyBadge/MyBadge';
+import MyBadgeList from '../MyBadgeList/MyBadgeList';
+import { badgeType } from '../MyBadgeList/myBadgeType';
 
 type Props = {
-  owner: userDataType;
-  quest: questDataType;
+  owner: string;
+  date: string;
+  reward: number;
+  status: string;
 };
 const OwnerHeader: VFC<Props> = (props) => {
-  const { owner, quest } = props;
+  const { owner, date, reward, status } = props;
+  const badges: badgeType[] = [
+    { bg: `bg-${status}`, text: `text-${status}`, content: status },
+    { bg: `bg-other`, text: `text-other`, content: String(reward) },
+  ];
   return (
     <div className="flex w-full">
       <Avatar />
       <div className="w-5" />
       <div className="text-text w-full">
-        <div className="text-lg font-semibold">{owner.name}</div>
+        <div className="text-lg font-semibold">{owner}</div>
         <div className="flex w-full">
-          <div className="text-sm">{quest.date}</div>
+          <div className="text-sm">{date}</div>
           <div className="ml-auto">
-            <MyBadge color="bg-success" content={String(quest.reward)} />
+            <MyBadgeList badgeList={badges} />
           </div>
         </div>
       </div>

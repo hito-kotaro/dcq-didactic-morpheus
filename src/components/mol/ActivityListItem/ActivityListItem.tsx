@@ -26,8 +26,16 @@ const ActivityListItem: VFC<Props> = (props) => {
                 <div className="ml-auto">
                   <MyBadgeList
                     badgeList={[
-                      { color: 'bg-success', content: activity.status },
-                      { color: 'bg-success', content: String(activity.reward) },
+                      {
+                        bg: 'bg-open',
+                        text: 'text-open',
+                        content: activity.status,
+                      },
+                      {
+                        bg: 'bg-open',
+                        text: 'text-open',
+                        content: String(activity.reward),
+                      },
                     ]}
                   />
                 </div>

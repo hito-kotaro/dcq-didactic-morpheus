@@ -17,7 +17,6 @@ const QuestManagement = () => {
   const {
     quest,
     filterdQuests,
-    owner,
     isDetail,
     setIsDetail,
     questSearchHandler,
@@ -28,10 +27,7 @@ const QuestManagement = () => {
 
   const wrapOnClickQuestItem = (q: questDataType) => {
     onClickQuestItem(q);
-    const o: userDataType[] = users.filter(
-      (u: userDataType) => u.id === q.owner_id,
-    );
-    mainContents.chComponent(<QuestDetail quest={q} owner={o[0]} />);
+    mainContents.chComponent(<QuestDetail quest={q} owner={q.owner} />);
   };
 
   const wrapOnclickCreateQuest = () => {

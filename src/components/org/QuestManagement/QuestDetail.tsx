@@ -2,12 +2,11 @@ import { Button, Divider, TextField } from '@mui/material';
 import React, { VFC } from 'react';
 import useInputForm from '../../../hooks/InputForm/useInputForm';
 import { questDataType } from '../../../types/data/questDataType';
-import { userDataType } from '../../../types/data/userDataType';
 import OwnerHeader from '../../mol/OwnerHeader/OwnerHeader';
 
 type Props = {
   quest: questDataType;
-  owner: userDataType;
+  owner: string;
 };
 const QuestDetail: VFC<Props> = (props) => {
   const { quest, owner } = props;
@@ -22,7 +21,12 @@ const QuestDetail: VFC<Props> = (props) => {
       ) : (
         <div className="px-3">
           <div className="h-3" />
-          <OwnerHeader owner={owner} quest={quest} />
+          <OwnerHeader
+            owner={owner}
+            date={quest.date}
+            reward={quest.reward}
+            status="open"
+          />
           <div className="my-3">
             <Divider />
           </div>

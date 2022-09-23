@@ -8,15 +8,6 @@ const useQuestManagement = () => {
   const questSearchHandler = useInputForm();
   const [filterdQuests, setFilterdQuests] = useState<questDataType[]>([]);
   const [isDetail, setIsDetail] = useState(false);
-  const [owner, setOwner] = useState<userDataType>({
-    id: 0,
-    name: '',
-    team: '',
-    team_id: 0,
-    point: 0,
-    role: '',
-    role_id: 0,
-  });
   const [quest, setQuest] = useState<questDataType>({
     id: 0,
     title: '',
@@ -28,14 +19,9 @@ const useQuestManagement = () => {
     example: '',
   });
 
-  // クエストをクリックした時に、クエストとユーザを取得する必要あり
   const onClickQuestItem = (q: questDataType) => {
     setQuest(q);
     setIsDetail(true);
-    const user: userDataType[] = users.filter((u: userDataType) => {
-      return u.id === q.owner_id;
-    });
-    setOwner(user[0]);
   };
 
   const filteringQuest = (data: questDataType[]) => {
@@ -49,7 +35,7 @@ const useQuestManagement = () => {
     isDetail,
     quest,
     filterdQuests,
-    owner,
+    // owner,
     questSearchHandler,
     setIsDetail,
     onClickQuestItem,

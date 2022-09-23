@@ -23,7 +23,11 @@ const QuestListItem: VFC<Props> = (props) => {
             <div className="flex">
               <div>{quest.date}</div>
               <div className="ml-auto">
-                <MyBadge color="bg-success" content={String(quest.reward)} />
+                <MyBadge
+                  bg="bg-open"
+                  text="text-open"
+                  content={String(quest.reward)}
+                />
               </div>
             </div>
             <div className="text-left">

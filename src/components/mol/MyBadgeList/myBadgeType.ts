@@ -1,4 +1,5 @@
 export type badgeType = {
-  color: string;
+  bg: string;
+  text: string;
   content: string;
 };
