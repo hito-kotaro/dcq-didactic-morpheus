@@ -1,12 +1,12 @@
 import React from 'react';
 import { Button } from '@mui/material';
 import SelectForm from '../SelectForm/SelectForm';
-import { selectMenuType } from '../SelectForm/selectItemType';
+import { selectItemType } from '../SelectForm/selectItemType';
 import useSelectForm from '../SelectForm/useSelectForm';
 
 const SeasonSetting = () => {
   const seasonSelectHandler = useSelectForm();
-  const menus: selectMenuType[] = [
+  const menus: selectItemType[] = [
     { id: 1, label: '年度半年(4/1 ~ 9/30  /  10/1  ~ 3/31)' },
     {
       id: 2,

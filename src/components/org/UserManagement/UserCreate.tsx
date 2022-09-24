@@ -3,7 +3,7 @@ import React, { VFC } from 'react';
 import SelectForm from '../../mol/SelectForm/SelectForm';
 import { roles } from '../../../testData/RoleData';
 import { teams } from '../../../testData/TeamData';
-import { selectMenuType } from '../../mol/SelectForm/selectItemType';
+import { selectItemType } from '../../mol/SelectForm/selectItemType';
 import { teamDataType } from '../../../types/data/teamDataType';
 import { userCreateHandlerType } from './types/userCreateHandler';
 
@@ -20,7 +20,7 @@ const UserCreate: VFC<Props> = (props) => {
     roleSelectHandler,
     teamSelectHandler,
   } = userCreateHandler;
-  const teamMenu: selectMenuType[] = teams.map((t: teamDataType) => ({
+  const teamMenu: selectItemType[] = teams.map((t: teamDataType) => ({
     id: t.id,
     label: t.name,
   }));

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import useChangeComponent from '../../../hooks/ChangeComponent/useChangeComponent';
 import { requestDataType } from '../../../types/data/requestDataType';
 import UserInfo from '../../mol/MenuHeader/UserInfo';
@@ -8,22 +8,40 @@ import useRequestmanagement from './useRequestmanagement';
 import { requests } from '../../../testData/RequestData';
 import RequestDetail from './RequestDetail';
 import RequestPanelHeader from './RequestPanelHeader';
+import RequestListTool from '../../mol/RequestListTool/RequestListTool';
 
 const RequestManagement = () => {
-  const { request, isDetail, onClickRequestItem, setIsDetail } =
-    useRequestmanagement();
+  const {
+    request,
+    isDetail,
+    userSelectItems,
+    filterdRequests,
+    requestSearchHandler,
+    toolStatusSelectHandler,
+    toolApplicantSelectHandler,
+    filteringRequest,
+    onClickRequestItem,
+    setIsDetail,
+  } = useRequestmanagement();
   const mainContents = useChangeComponent();
 
   const wrapOnClickRequestItem = (r: requestDataType) => {
     onClickRequestItem(r);
     mainContents.chComponent(<RequestDetail request={r} />);
   };
+
+  useEffect(() => {
+    filteringRequest(requests);
+  }, [requestSearchHandler.value]);
   return (
     <SplitTemplate
       menuHeader={<UserInfo name="KOTARO" team="teamA" score={10} />}
-      menuTool={<div>menutool</div>}
+      menuTool={<RequestListTool inputHandler={requestSearchHandler} />}
       menuContents={
-        <RequestList requests={requests} onClick={wrapOnClickRequestItem} />
+        <RequestList
+          requests={filterdRequests}
+          onClick={wrapOnClickRequestItem}
+        />
       }
       mainHeader={<RequestPanelHeader />}
       mainContents={

@@ -2,7 +2,7 @@ import React from 'react';
 import { TextField, Button } from '@mui/material';
 import useInputForm from '../../../hooks/InputForm/useInputForm';
 import SelectForm from '../SelectForm/SelectForm';
-import { selectMenuType } from '../SelectForm/selectItemType';
+import { selectItemType } from '../SelectForm/selectItemType';
 import useSelectForm from '../SelectForm/useSelectForm';
 
 const CreateUserForm = () => {
@@ -12,12 +12,12 @@ const CreateUserForm = () => {
   const roleSelectHandler = useSelectForm();
   const teamSelectHandler = useSelectForm();
 
-  const roles: selectMenuType[] = [
+  const roles: selectItemType[] = [
     { id: 1, label: 'master' },
     { id: 2, label: 'leader' },
     { id: 3, label: 'member' },
   ];
-  const groups: selectMenuType[] = [
+  const groups: selectItemType[] = [
     { id: 1, label: 'GroupA' },
     { id: 2, label: 'GroupB' },
     { id: 3, label: 'GroupC' },

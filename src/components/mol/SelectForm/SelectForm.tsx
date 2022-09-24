@@ -1,11 +1,11 @@
 import React, { VFC } from 'react';
 import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
-import { selectMenuType } from './selectItemType';
+import { selectItemType } from './selectItemType';
 import { selectHandlerType } from '../../../types/inputHandlerType';
 
 type Props = {
   label: string;
-  menu: selectMenuType[];
+  menu: selectItemType[];
   handler: selectHandlerType;
 };
 
@@ -22,7 +22,7 @@ const SelectForm: VFC<Props> = (props) => {
         label={label}
         onChange={handler.handleChange}
       >
-        {menu.map((m: selectMenuType) => (
+        {menu.map((m: selectItemType) => (
           <MenuItem value={m.id}>{m.label}</MenuItem>
         ))}
       </Select>

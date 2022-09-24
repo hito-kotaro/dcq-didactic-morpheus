@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button } from '@mui/material';
 import useWindowSize from '../../../hooks/WindowSize/useWindowSize';
 import SelectForm from '../../mol/SelectForm/SelectForm';
-import { selectMenuType } from '../../mol/SelectForm/selectItemType';
+import { selectItemType } from '../../mol/SelectForm/selectItemType';
 import BarGraph from '../BarGraph/BarGraph';
 import useBarGraph from '../BarGraph/useBarGraph';
 import { users } from '../../../testData/UserData';
@@ -18,7 +18,7 @@ const Summary = () => {
     setIsTeam(!isTeam);
   };
 
-  const items: selectMenuType[] = [
+  const items: selectItemType[] = [
     { id: 0, label: '全てのユーザを表示' },
     { id: 1, label: 'Team1' },
     { id: 2, label: 'Team2' },

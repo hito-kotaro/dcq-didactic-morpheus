@@ -5,7 +5,7 @@ import { teams } from '../../../testData/TeamData';
 import { teamDataType } from '../../../types/data/teamDataType';
 import { userDataType } from '../../../types/data/userDataType';
 import SelectForm from '../../mol/SelectForm/SelectForm';
-import { selectMenuType } from '../../mol/SelectForm/selectItemType';
+import { selectItemType } from '../../mol/SelectForm/selectItemType';
 import useSelectForm from '../../mol/SelectForm/useSelectForm';
 
 type Props = {
@@ -15,7 +15,7 @@ const UserAtrbuteUpdate: VFC<Props> = (props) => {
   const { user } = props;
   const teamSelectHandler = useSelectForm();
   const roleSelectHandler = useSelectForm();
-  const teamMenu: selectMenuType[] = teams.map((t: teamDataType) => ({
+  const teamMenu: selectItemType[] = teams.map((t: teamDataType) => ({
     id: t.id,
     label: t.name,
   }));
