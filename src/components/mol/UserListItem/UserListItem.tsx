@@ -1,10 +1,9 @@
 import React, { VFC } from 'react';
 import { Button } from '@mui/material';
-import SpeedIcon from '@mui/icons-material/Speed';
 import MyAvatar from '../../atoms/MyAvatar/MyAvatar';
 import ScoreIcon from '../../atoms/ScoreIcon/ScoreIcon';
 import { userDataType } from '../../../types/data/userDataType';
-import UserDetail from '../../org/UserManagement/UserDetail';
+import DcpIcon from '../../atoms/DcpIcon/DcpIcon';
 
 type Props = {
   user: userDataType;
@@ -18,10 +17,7 @@ const UserListItem: VFC<Props> = (props) => {
       <Button fullWidth onClick={() => onClick(user)}>
         <MyAvatar name={user.name} team={user.team} />
         <div className="ml-auto">
-          <ScoreIcon
-            icon={<SpeedIcon sx={{ fontSize: 26, color: '#5CD63D' }} />}
-            score={user.point}
-          />
+          <ScoreIcon icon={<DcpIcon size="sm" />} score={user.point} />
         </div>
       </Button>
     </div>

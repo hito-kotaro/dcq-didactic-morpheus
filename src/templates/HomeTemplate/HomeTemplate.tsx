@@ -1,5 +1,9 @@
 import React, { ReactElement, useState } from 'react';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
+import AnnouncementIcon from '@mui/icons-material/Announcement';
+import EqualizerIcon from '@mui/icons-material/Equalizer';
+import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
+import PersonIcon from '@mui/icons-material/Person';
+import GroupsIcon from '@mui/icons-material/Groups';
 import SideMenu from '../../components/org/SideMenu/SideMenu';
 import Header from '../../components/org/Header/Header';
 import UserManagement from '../../components/org/UserManagement/UserManagement';
@@ -21,31 +25,31 @@ const HomeTemplate = () => {
   const itemList = [
     {
       label: '集計',
-      icon: <InboxIcon />,
+      icon: <EqualizerIcon />,
       action: chComponent,
       component: <Summary />,
     },
     {
       label: 'チーム管理',
-      icon: <InboxIcon />,
+      icon: <GroupsIcon />,
       action: chComponent,
       component: <TeamManagement />,
     },
     {
       label: 'ユーザ管理',
-      icon: <InboxIcon />,
+      icon: <PersonIcon />,
       action: chComponent,
       component: <UserManagement />,
     },
     {
       label: 'クエスト管理',
-      icon: <InboxIcon />,
+      icon: <AssignmentTurnedInIcon />,
       action: chComponent,
       component: <QuestManagement />,
     },
     {
       label: 'リクエスト',
-      icon: <InboxIcon />,
+      icon: <AnnouncementIcon />,
       action: chComponent,
       component: <RequestManagement />,
     },

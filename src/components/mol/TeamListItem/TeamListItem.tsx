@@ -3,6 +3,7 @@ import { Button } from '@mui/material';
 import Groups3Icon from '@mui/icons-material/Groups3';
 import SpeedIcon from '@mui/icons-material/Speed';
 import ScoreIcon from '../../atoms/ScoreIcon/ScoreIcon';
+import DcpIcon from '../../atoms/DcpIcon/DcpIcon';
 
 type Props = {
   id: number;
@@ -34,7 +35,7 @@ const TeamListItem: VFC<Props> = (props) => {
               {/* <div className="w-10"/> */}
               <div className="flex ml-auto">
                 <ScoreIcon
-                  icon={<SpeedIcon sx={{ fontSize: 28, color: '#6F7073' }} />}
+                  icon={<DcpIcon size="sm" />}
                   score={point - penalty}
                 />
               </div>

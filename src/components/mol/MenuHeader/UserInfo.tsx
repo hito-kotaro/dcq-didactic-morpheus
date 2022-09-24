@@ -1,7 +1,7 @@
 import React, { VFC } from 'react';
-import SpeedIcon from '@mui/icons-material/Speed';
 import MyAvatar from '../../atoms/MyAvatar/MyAvatar';
 import ScoreIcon from '../../atoms/ScoreIcon/ScoreIcon';
+import DcpIcon from '../../atoms/DcpIcon/DcpIcon';
 
 type Props = {
   name: string;
@@ -15,10 +15,7 @@ const UserInfo: VFC<Props> = (props) => {
     <div className="flex px-5 pt-3">
       <MyAvatar name={name} team={team} />
       <div className="ml-auto">
-        <ScoreIcon
-          icon={<SpeedIcon sx={{ fontSize: 26, color: '#5CD63D' }} />}
-          score={score}
-        />
+        <ScoreIcon icon={<DcpIcon size="sm" />} score={score} />
       </div>
     </div>
   );
