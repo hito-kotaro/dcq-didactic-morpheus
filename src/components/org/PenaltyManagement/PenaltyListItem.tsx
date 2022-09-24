@@ -1,31 +1,31 @@
 import { Button, Avatar, Divider } from '@mui/material';
 import React, { VFC } from 'react';
-import { questDataType } from '../../../types/data/questDataType';
-import DcpIcon from '../../atoms/DcpIcon/DcpIcon';
-import MyBadge from '../../atoms/MyBadge/MyBadge';
+import { penaltyDataType } from '../../../types/data/penaltyDataType';
+import PenaltyIcon from '../../atoms/Icons/PenaltyIcon';
 import ScoreIcon from '../../atoms/ScoreIcon/ScoreIcon';
 
 type Props = {
-  quest: questDataType;
-  onClick: (q: questDataType) => void;
+  penalty: penaltyDataType;
+  onClick: (p: penaltyDataType) => void;
 };
-
-const QuestListItem: VFC<Props> = (props) => {
-  const { quest, onClick } = props;
-
+const PenaltyListItem: VFC<Props> = (props) => {
+  const { penalty, onClick } = props;
   return (
     <>
-      <Button fullWidth onClick={() => onClick(quest)}>
+      <Button fullWidth onClick={() => onClick(penalty)}>
         <div className="w-full flex text-text p-3">
           <Avatar />
           <div className="ml-3 w-full">
             <div className="text-text text-lg font-semibold text-left">
-              {quest.title}
+              {penalty.title}
             </div>
             <div className="flex">
-              <div>{quest.date}</div>
+              <div>{penalty.date}</div>
               <div className="ml-auto">
-                <ScoreIcon icon={<DcpIcon size="sm" />} score={quest.reward} />
+                <ScoreIcon
+                  icon={<PenaltyIcon size="sm" />}
+                  score={penalty.penalty}
+                />
                 {/* <MyBadge
                   bg="bg-open"
                   text="text-open"
@@ -34,7 +34,7 @@ const QuestListItem: VFC<Props> = (props) => {
               </div>
             </div>
             <div className="text-left">
-              <p>{quest.description}</p>
+              <p>{penalty.description}</p>
             </div>
           </div>
         </div>
@@ -44,4 +44,4 @@ const QuestListItem: VFC<Props> = (props) => {
   );
 };
 
-export default QuestListItem;
+export default PenaltyListItem;

@@ -27,7 +27,7 @@ const QuestManagement = () => {
 
   const wrapOnClickQuestItem = (q: questDataType) => {
     onClickQuestItem(q);
-    mainContents.chComponent(<QuestDetail quest={q} owner={q.owner} />);
+    mainContents.chComponent(<QuestDetail quest={q} />);
   };
 
   const wrapOnclickCreateQuest = () => {
@@ -40,7 +40,12 @@ const QuestManagement = () => {
 
   return (
     <SplitTemplate
-      menuHeader={<UserInfo name="KOTARO" team="TeamA" score={10} />}
+      menuHeader={
+        <QuestListTool
+          handler={questSearchHandler}
+          onClickCreate={wrapOnclickCreateQuest}
+        />
+      }
       menuTool={
         <QuestListTool
           handler={questSearchHandler}

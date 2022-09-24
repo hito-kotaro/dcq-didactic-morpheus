@@ -1,5 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import React, { VFC } from 'react';
+import MenuIcon from '@mui/icons-material/Menu';
 import { teamDataType } from '../../../types/data/teamDataType';
 import MenuButton from '../../mol/MenuButton/MenuButton';
 import MyModal from '../../mol/MyModal/MyModal';
@@ -46,7 +47,11 @@ const TeamPanelHeader: VFC<Props> = (props) => {
           : 'チームを選択してください'}
       </span>
       <div className="flex justify-end">
-        {team.name !== '' ? <MenuButton menuItems={menuItems} /> : ''}
+        {team.name !== '' ? (
+          <MenuButton menuItems={menuItems} icon={<MenuIcon />} />
+        ) : (
+          ''
+        )}
       </div>
     </div>
   );

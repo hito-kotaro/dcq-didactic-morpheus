@@ -1,5 +1,6 @@
 /* eslint-disable no-nested-ternary */
 import React, { ReactElement, VFC } from 'react';
+import MenuIcon from '@mui/icons-material/Menu';
 import { userDataType } from '../../../types/data/userDataType';
 import MenuButton from '../../mol/MenuButton/MenuButton';
 import MyModal from '../../mol/MyModal/MyModal';
@@ -55,7 +56,11 @@ const UserPanelHeader: VFC<Props> = (props) => {
       />
       <span className="text-2xl font-semibold text-text">ユーザ管理</span>
       <div className="flex justify-end">
-        {isDetail ? <MenuButton menuItems={menuItems} /> : ''}
+        {isDetail ? (
+          <MenuButton menuItems={menuItems} icon={<MenuIcon />} />
+        ) : (
+          ''
+        )}
       </div>
     </div>
   );

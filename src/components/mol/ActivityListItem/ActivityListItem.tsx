@@ -31,11 +31,11 @@ const ActivityListItem: VFC<Props> = (props) => {
                         text: 'text-open',
                         content: activity.status,
                       },
-                      {
-                        bg: 'bg-open',
-                        text: 'text-open',
-                        content: String(activity.reward),
-                      },
+                      // {
+                      //   bg: 'bg-open',
+                      //   text: 'text-open',
+                      //   content: String(activity.reward),
+                      // },
                     ]}
                   />
                 </div>

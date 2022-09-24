@@ -2,8 +2,8 @@ import React from 'react';
 
 const RequestPanelHeader = () => {
   return (
-    <div className="pt-10 text-center text-text text-lg font-semibold">
-      リクエスト管理
+    <div className="pt-7 text-center">
+      <span className="text-2xl font-semibold text-text">リクエスト管理</span>
     </div>
   );
 };

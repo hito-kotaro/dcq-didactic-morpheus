@@ -1,4 +1,5 @@
 import React, { ReactElement, VFC } from 'react';
+import MenuIcon from '@mui/icons-material/Menu';
 import { questDataType } from '../../../types/data/questDataType';
 import MenuButton from '../../mol/MenuButton/MenuButton';
 import MyModal from '../../mol/MyModal/MyModal';
@@ -42,10 +43,14 @@ const QuestPanelHeader: VFC<Props> = (props) => {
         positiveBtnMsg="削除"
         positiveBtnAction={deleteQuest}
       />
-      <span className="text-2xl font-semibold text-text">クエスト管理</span>
       <div className="flex justify-end">
-        {isDetail ? <MenuButton menuItems={menuItems} /> : ''}
+        {isDetail ? (
+          <MenuButton menuItems={menuItems} icon={<MenuIcon />} />
+        ) : (
+          ''
+        )}
       </div>
+      <span className="text-2xl font-semibold text-text">クエスト管理</span>
     </div>
   );
 };

@@ -1,13 +1,14 @@
-import React, { VFC } from 'react';
+import React, { ReactElement, VFC } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Button, Menu, MenuItem } from '@mui/material';
+import { Button, IconButton, Menu, MenuItem } from '@mui/material';
 
 type Props = {
+  icon: ReactElement;
   menuItems: { label: string; onClick: () => void }[];
 };
 
 const MenuButton: VFC<Props> = (props) => {
-  const { menuItems } = props;
+  const { menuItems, icon } = props;
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -20,15 +21,15 @@ const MenuButton: VFC<Props> = (props) => {
   };
   return (
     <div>
-      <Button
+      <IconButton
         id="basic-button"
         aria-controls={open ? 'basic-menu' : undefined}
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
       >
-        <MenuIcon />
-      </Button>
+        {icon}
+      </IconButton>
       <Menu
         anchorEl={anchorEl}
         open={open}

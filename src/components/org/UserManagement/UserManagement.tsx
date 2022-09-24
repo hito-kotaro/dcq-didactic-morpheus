@@ -65,7 +65,13 @@ const UserManagement = () => {
           isDetail={isDetail}
         />
       }
-      mainContents={mainContents.component ?? <div>ユーザ管理</div>}
+      mainContents={
+        mainContents.component ?? (
+          <div className="text-text text-lg font-semibold text-center border-b-1">
+            ユーザを選択してください
+          </div>
+        )
+      }
     />
   );
 };

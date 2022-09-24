@@ -35,7 +35,7 @@ const Summary = () => {
 
   return (
     <>
-      <div className="flex  w-full mt-10">
+      <div className="flex w-full px-3 mt-10">
         {isTeam ? (
           ''
         ) : (
@@ -54,11 +54,13 @@ const Summary = () => {
           </Button>
         </div>
       </div>
-      <BarGraph
-        data={isTeam ? teams : filterdUserData}
-        width={width}
-        height={height}
-      />
+      <div className="h-5/6 overflow-y-scroll">
+        <BarGraph
+          data={isTeam ? teams : filterdUserData}
+          width={width}
+          height={height}
+        />
+      </div>
     </>
   );
 };

@@ -6,15 +6,22 @@ import OwnerHeader from '../../mol/OwnerHeader/OwnerHeader';
 
 type Props = {
   quest: questDataType;
-  owner: string;
+  // owner: string;
 };
 const QuestDetail: VFC<Props> = (props) => {
-  const { quest, owner } = props;
+  const { quest } = props;
   const requestHandler = useInputForm();
   return (
     <div>
       <div className="text-text text-lg font-semibold text-center border-b-1">
-        {quest.title === '' ? 'クエストを選択してください' : quest.title}
+        {
+          quest.title === ''
+            ? 'クエストを選択してください'
+            : // <div className="flex">
+              quest.title
+
+          // </div>
+        }
       </div>
       {quest.title === '' ? (
         ''
@@ -22,7 +29,7 @@ const QuestDetail: VFC<Props> = (props) => {
         <div className="px-3">
           <div className="h-3" />
           <OwnerHeader
-            owner={owner}
+            owner={quest.owner}
             date={quest.date}
             reward={quest.reward}
             status="open"
@@ -31,7 +38,9 @@ const QuestDetail: VFC<Props> = (props) => {
             <Divider />
           </div>
           <div className="text-text">
-            <div className="text-lg">クエスト詳細</div>
+            <div className="flex">
+              <div className="text-lg">クエスト詳細</div>
+            </div>
             <div className="h-3" />
             <div>
               <p>{quest.description}</p>
