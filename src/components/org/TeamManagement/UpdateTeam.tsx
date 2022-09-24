@@ -1,17 +1,23 @@
 import React, { VFC } from 'react';
 import { TextField, Divider, Button } from '@mui/material';
-import { newTeamType } from '../../../types/data/teamDataType';
+import { newTeamType, teamDataType } from '../../../types/data/teamDataType';
 import { inputHandlerType } from '../../../types/inputHandlerType';
+import useInputForm from '../../../hooks/InputForm/useInputForm';
 
 type Props = {
-  nameHandler: inputHandlerType;
-  descHandler: inputHandlerType;
-  onClickUpdate: (newTeam: newTeamType) => void;
-  onClickCancel: () => void;
+  team: teamDataType;
+  // nameHandler: inputHandlerType;
+  // descHandler: inputHandlerType;
+  // onClickUpdate: (newTeam: newTeamType) => void;
+  // onClickCancel: () => void;
 };
 
 const UpdateTeam: VFC<Props> = (props) => {
-  const { nameHandler, descHandler, onClickUpdate, onClickCancel } = props;
+  const nameHandler = useInputForm();
+  const descHandler = useInputForm();
+  const onClickUpdate = (update: { name: string; description: string }) => {
+    console.log(update);
+  };
 
   return (
     <div className="px-3">
@@ -45,9 +51,6 @@ const UpdateTeam: VFC<Props> = (props) => {
       </div>
 
       <div className="flex justify-around">
-        <Button variant="contained" color="inherit" onClick={onClickCancel}>
-          キャンセル
-        </Button>
         <Button
           variant="contained"
           onClick={() =>

@@ -1,32 +1,30 @@
-import { TextField, Button } from '@mui/material';
+import { TextField, Button, Divider } from '@mui/material';
 import React, { VFC } from 'react';
 import SelectForm from '../../mol/SelectForm/SelectForm';
 import { roles } from '../../../testData/RoleData';
 import { teams } from '../../../testData/TeamData';
 import { selectItemType } from '../../mol/SelectForm/selectItemType';
 import { teamDataType } from '../../../types/data/teamDataType';
-import { userCreateHandlerType } from './types/userCreateHandler';
+import useInputForm from '../../../hooks/InputForm/useInputForm';
+import useSelectForm from '../../mol/SelectForm/useSelectForm';
 
-type Props = {
-  userCreateHandler: userCreateHandlerType;
-};
-
-const UserCreate: VFC<Props> = (props) => {
-  const { userCreateHandler } = props;
-  const {
-    userHandler,
-    pwdHandler,
-    rePwdHandler,
-    roleSelectHandler,
-    teamSelectHandler,
-  } = userCreateHandler;
+const UserCreate = () => {
   const teamMenu: selectItemType[] = teams.map((t: teamDataType) => ({
     id: t.id,
     label: t.name,
   }));
+  const userHandler = useInputForm();
+  const pwdHandler = useInputForm();
+  const rePwdHandler = useInputForm();
+  const roleSelectHandler = useSelectForm();
+  const teamSelectHandler = useSelectForm();
 
   return (
-    <div>
+    <div className="px-3">
+      <div className="text-text text-lg font-semibold">ユーザ新規作成</div>
+      <div className="my-3">
+        <Divider />
+      </div>
       <TextField
         fullWidth
         type="text"

@@ -1,4 +1,4 @@
-import { Button } from '@mui/material';
+import { Button, Divider } from '@mui/material';
 import React, { VFC } from 'react';
 import { roles } from '../../../testData/RoleData';
 import { teams } from '../../../testData/TeamData';
@@ -21,10 +21,19 @@ const UserAtrbuteUpdate: VFC<Props> = (props) => {
   }));
   return (
     <div className="px-3">
+      <div className="text-lg text-text font-semibold">
+        {user.name}さんのユーザ属性変更
+      </div>
+      <div className="my-3">
+        <Divider />
+      </div>
       <div className="h-3" />
       <div className="text-text">
         <span className="font-semibold text-lg">現在のロール: </span>
         {user.role}
+      </div>
+      <div className="my-3">
+        <Divider />
       </div>
       <SelectForm
         menu={roles}
@@ -35,6 +44,9 @@ const UserAtrbuteUpdate: VFC<Props> = (props) => {
       <div className="text-text">
         <span className="font-semibold text-lg">現在のチーム: </span>
         {user.team}
+      </div>
+      <div className="my-3">
+        <Divider />
       </div>
       <SelectForm
         menu={teamMenu}

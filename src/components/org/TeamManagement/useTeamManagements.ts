@@ -20,6 +20,7 @@ const useTeamManagements = () => {
   });
   const [filterdUsers, setFilterdUsers] = useState<userDataType[]>([]);
   const [filterdTeams, setFilterdTeams] = useState<teamDataType[]>([]);
+  const [isDetail, setIsDetail] = useState(false);
   const [isCreate, setIsCreate] = useState(false);
   const [isUpdate, setIsUpdate] = useState(false);
 
@@ -70,6 +71,11 @@ const useTeamManagements = () => {
     );
   };
 
+  const onClickTeamListItem = (t: teamDataType) => {
+    setIsDetail(true);
+    setTeam(t);
+  };
+
   const selectTeam = (id: number) => {
     const filter: teamDataType[] = teams.filter((t: teamDataType) => {
       return t.id === id;
@@ -80,6 +86,7 @@ const useTeamManagements = () => {
   return {
     isCreate,
     isUpdate,
+    isDetail,
     filterdUsers,
     filterdTeams,
     team,
@@ -88,6 +95,7 @@ const useTeamManagements = () => {
     newDescHandler,
     updNameHandler,
     updDescHandler,
+    onClickTeamListItem,
     onClickCancel,
     onClickCreate,
     onClickUpdate,

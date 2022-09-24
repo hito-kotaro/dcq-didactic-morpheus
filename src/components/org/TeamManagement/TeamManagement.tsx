@@ -13,6 +13,9 @@ import TeamPanelHeader from '../TeamPanelHeader/TeamPanelHeader';
 import UpdateTeam from './UpdateTeam';
 import useUserList from '../UserList/useUserList';
 import useUserManagement from '../UserManagement/useUserManagement';
+import useChangeComponent from '../../../hooks/ChangeComponent/useChangeComponent';
+import { teamDataType } from '../../../types/data/teamDataType';
+import { userDataType } from '../../../types/data/userDataType';
 
 const TeamManagement = () => {
   const { onClickUser } = useUserManagement();
@@ -27,6 +30,7 @@ const TeamManagement = () => {
     filterdTeams,
     updNameHandler,
     updDescHandler,
+    onClickTeamListItem,
     onClickCancel,
     onClickUpdate,
     onClickCreate,
@@ -38,7 +42,7 @@ const TeamManagement = () => {
   } = useTeamManagements();
 
   const { user, selectUser } = useUserList();
-
+  const mainContents = useChangeComponent();
   useEffect(() => {
     filteringUser(users);
   }, [team]);
@@ -47,46 +51,29 @@ const TeamManagement = () => {
     filteringTeam(teams);
   }, [teamHandler.value]);
 
+  const wrapOnClickTeamListItem = (t: teamDataType) => {
+    onClickTeamListItem(t);
+    const filterd: userDataType[] = users.filter(
+      (u: userDataType) => t.id === u.team_id,
+    );
+    mainContents.chComponent(<UserList users={filterd} onClick={selectUser} />);
+  };
+
   return (
     <SplitTemplate
       menuHeader={<UserInfo name="KOTARO" team="TeamA" score={10} />}
       menuTool={<TeamListTool handler={teamHandler} onClick={toggleCreate} />}
-      menuContents={<TeamList teams={filterdTeams} onClick={selectTeam} />}
+      menuContents={
+        <TeamList teams={filterdTeams} onClick={wrapOnClickTeamListItem} />
+      }
       mainHeader={
-        <div className="pt-7 h-1/6 text-center">
-          {isCreate ? (
-            <span className="text-2xl font-semibold pt-5">
-              新しいチームを作る
-            </span>
-          ) : (
-            <TeamPanelHeader
-              isUpdate={isUpdate}
-              team={team}
-              toggleUpdate={toggleUpdate}
-            />
-          )}
-        </div>
+        <TeamPanelHeader team={team} chComponent={mainContents.chComponent} />
       }
       mainContents={
-        isCreate ? (
-          <CreateTeam
-            nameHandler={newNameHandler}
-            descHandler={newDescHandler}
-            onClickCancel={onClickCancel}
-            onClickCreate={onClickCreate}
-          />
-        ) : isUpdate ? (
-          <UpdateTeam
-            nameHandler={updNameHandler}
-            descHandler={updDescHandler}
-            onClickUpdate={onClickUpdate}
-            onClickCancel={onClickCancel}
-          />
-        ) : (
-          // 型エラーが出ないようにとりあえずonClickUserを入れている。
-          // チーム管理画面でユーザボタンをクリックした時にどのような動きをするか未定。
-          // 決まり次第適切な関数を入れてあげる
-          <UserList users={filterdUsers} onClick={selectUser} />
+        mainContents.component ?? (
+          <div className="text-text text-lg font-semibold text-center border-b-1">
+            チームを選択してください
+          </div>
         )
       }
     />

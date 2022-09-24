@@ -15,7 +15,7 @@ const UserListTool: VFC<Props> = (props) => {
   const { handler, onClick, userCreateHandler, wrapSetIsDetail } = props;
   const wrapOnClick = () => {
     wrapSetIsDetail(false);
-    onClick(<UserCreate userCreateHandler={userCreateHandler} />);
+    onClick(<UserCreate />);
   };
 
   return (

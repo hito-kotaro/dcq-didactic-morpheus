@@ -5,7 +5,7 @@ import TeamListItem from '../TeamListItem/TeamListItem';
 
 type Props = {
   teams: teamDataType[];
-  onClick: (id: number) => void;
+  onClick: (t: teamDataType) => void;
 };
 
 const TeamList: VFC<Props> = (props) => {
@@ -14,14 +14,7 @@ const TeamList: VFC<Props> = (props) => {
     <div className="">
       {teams.map((t: teamDataType) => (
         <div key={t.id}>
-          <TeamListItem
-            id={t.id}
-            name={t.name}
-            member={t.member}
-            point={t.point}
-            penalty={t.penalty}
-            onClick={onClick}
-          />
+          <TeamListItem team={t} onClick={onClick} />
           <div className="my-3">
             <Divider />
           </div>

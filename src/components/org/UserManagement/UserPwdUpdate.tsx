@@ -12,7 +12,13 @@ const UserPwdUpdate: VFC<Props> = (props) => {
   const reNewPwdHandler = useInputForm();
   return (
     <div className="px-5">
-      <div className="text-lg font-semibold">{name}のユーザ名変更</div>
+      <div className="text-lg text-text font-semibold">
+        {name}さんのユーザ名変更
+      </div>
+      <div className="my-3">
+        <Divider />
+      </div>
+
       <div className="h-3" />
       <TextField
         fullWidth

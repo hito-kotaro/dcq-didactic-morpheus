@@ -1,26 +1,27 @@
 /* eslint-disable no-nested-ternary */
-import React, { VFC } from 'react';
+import React, { ReactElement, VFC } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import { teamDataType } from '../../../types/data/teamDataType';
 import MenuButton from '../../mol/MenuButton/MenuButton';
 import MyModal from '../../mol/MyModal/MyModal';
 import useMyModal from '../../mol/MyModal/useMyModal';
+import UpdateTeam from '../TeamManagement/UpdateTeam';
 
 type Props = {
   team: teamDataType;
-  toggleUpdate: () => void;
-  isUpdate: boolean;
+  chComponent: (component: ReactElement) => void;
 };
 
 const TeamPanelHeader: VFC<Props> = (props) => {
-  const { isUpdate, team, toggleUpdate } = props;
+  const { team, chComponent } = props;
   const { open, handleOpen, handleClose } = useMyModal();
-  const dummy = () => {
-    console.log('hello');
+
+  const teamUpdate = () => {
+    chComponent(<UpdateTeam team={team} />);
   };
   const menuItems: { label: string; onClick: () => void }[] = [
     { label: 'チームを削除', onClick: handleOpen },
-    { label: 'チーム情報を更新', onClick: toggleUpdate },
+    { label: 'チーム情報を更新', onClick: teamUpdate },
   ];
 
   const deleteTeam = () => {
@@ -29,7 +30,7 @@ const TeamPanelHeader: VFC<Props> = (props) => {
   };
 
   return (
-    <div>
+    <div className="pt-7 text-center">
       <MyModal
         open={open}
         handleOpen={handleOpen}
@@ -39,13 +40,8 @@ const TeamPanelHeader: VFC<Props> = (props) => {
         positiveBtnMsg="削除"
         positiveBtnAction={deleteTeam}
       />
-      <span className="text-2xl font-semibold">
-        {isUpdate
-          ? `${team.name}を更新`
-          : team.name !== ''
-          ? team.name
-          : 'チームを選択してください'}
-      </span>
+
+      <span className="text-2xl font-semibold text-text">チーム管理</span>
       <div className="flex justify-end">
         {team.name !== '' ? (
           <MenuButton menuItems={menuItems} icon={<MenuIcon />} />
