@@ -1,4 +1,61 @@
-import { requestDataType } from '../types/data/requestDataType';
+import {
+  closedRequestDataType,
+  requestDataType,
+} from '../types/data/requestDataType';
+
+export const closedRequests: closedRequestDataType[] = [
+  {
+    id: 1,
+    date: '2022/01/01',
+    title: '月報提出-完了報告',
+    description: '9/1月報提出',
+    q_title: '月報提出',
+    q_description: '月報の提出',
+    q_owner_id: 1,
+    q_owner: '佐藤',
+    q_reward: 1,
+    status: 'approved',
+    applicant_id: 2,
+    applicant: '鈴木',
+    authorizer: '佐藤',
+    authorizer_id: 1,
+    comment: '月報の提出を確認しました',
+  },
+  {
+    id: 2,
+    date: '2022/01/01',
+    title: '月報提出-完了報告',
+    description: '9/1月報提出',
+    q_title: '月報提出',
+    q_description: '月報の提出',
+    q_owner_id: 1,
+    q_owner: '佐藤',
+    q_reward: 1,
+    status: 'approved',
+    applicant_id: 3,
+    applicant: '高橋',
+    authorizer: '佐藤',
+    authorizer_id: 1,
+    comment: '月報の提出を確認しました',
+  },
+  {
+    id: 3,
+    date: '2022/01/01',
+    title: '月報提出-完了報告',
+    description: '9/1月報提出',
+    q_title: '月報提出',
+    q_description: '月報の提出',
+    q_owner_id: 1,
+    q_owner: '佐藤',
+    q_reward: 1,
+    status: 'rejected',
+    applicant_id: 3,
+    applicant: '田中',
+    authorizer: '佐藤',
+    authorizer_id: 1,
+    comment: '提出先のフォルダが違います',
+  },
+];
 
 export const requests: requestDataType[] = [
   {

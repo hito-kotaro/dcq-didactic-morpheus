@@ -1,9 +1,12 @@
 import React, { VFC } from 'react';
-import { requestDataType } from '../../../types/data/requestDataType';
+import {
+  closedRequestDataType,
+  requestDataType,
+} from '../../../types/data/requestDataType';
 import RequestListItem from '../../mol/RequestListItem/RequestListItem';
 
 type Props = {
-  requests: requestDataType[];
+  requests: requestDataType[] | closedRequestDataType[];
   onClick: (q: requestDataType) => void;
 };
 
