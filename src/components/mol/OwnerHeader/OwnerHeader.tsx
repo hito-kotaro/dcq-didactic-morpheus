@@ -30,6 +30,9 @@ const OwnerHeader: VFC<Props> = (props) => {
 
         <div className="flex w-full ">
           <div className="text-sm">{date}</div>
+          <div className="w-3" />
+          <MyBadgeList badgeList={badges} />
+
           <div className="ml-auto mr-7">
             <ScoreIcon
               icon={
@@ -38,9 +41,6 @@ const OwnerHeader: VFC<Props> = (props) => {
               score={reward}
             />
           </div>
-        </div>
-        <div className="ml-auto">
-          <MyBadgeList badgeList={badges} />
         </div>
       </div>
     </div>
