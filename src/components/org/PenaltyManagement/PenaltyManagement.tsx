@@ -9,6 +9,8 @@ import useChangeComponent from '../../../hooks/ChangeComponent/useChangeComponen
 import PenaltyDetail from './PenaltyDetail';
 import PenaltyListTool from '../../mol/PenaltyListTool/PenaltyListTool';
 import PenaltyPanelHeader from './PenaltyPanelHeader';
+import PenaltyUpdate from './PenaltyUpdate';
+import PenaltyCreate from './PenaltyCreate';
 
 const PenaltyManagement = () => {
   const dummy = (p: penaltyDataType) => {};
@@ -33,8 +35,9 @@ const PenaltyManagement = () => {
 
   const wrapOnClickCreatePenalty = () => {
     // create componentに切り替える
-    // mainContents.chComponent()
+    mainContents.chComponent(<PenaltyCreate />);
   };
+
   return (
     <SplitTemplate
       menuHeader={<UserInfo name="KOTARO" team="TeamA" score={10} />}

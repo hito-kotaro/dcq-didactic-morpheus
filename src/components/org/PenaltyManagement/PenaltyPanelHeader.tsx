@@ -15,7 +15,7 @@ const PenaltyPanelHeader: VFC<Props> = (props) => {
   const { penalty, isDetail, chComponent } = props;
   const { open, handleOpen, handleClose } = useMyModal();
   const penaltyUpdate = () => {
-    chComponent(<PenaltyUpdate />);
+    chComponent(<PenaltyUpdate penalty={penalty} />);
   };
   const deletePenalty = () => {};
   const menuItems: { label: string; onClick: () => void }[] = [
@@ -29,8 +29,8 @@ const PenaltyPanelHeader: VFC<Props> = (props) => {
         open={open}
         handleOpen={handleOpen}
         handleClose={handleClose}
-        mainMsg={`${penalty.title}を削除しますか？`}
-        subMsg="削除しても、過去のクエスト達成履歴は保持されます。"
+        mainMsg={`「${penalty.title}」を削除しますか？`}
+        subMsg="削除しても、過去のペナルティ付与履歴は保持されます。"
         positiveBtnMsg="削除"
         positiveBtnAction={deletePenalty}
       />

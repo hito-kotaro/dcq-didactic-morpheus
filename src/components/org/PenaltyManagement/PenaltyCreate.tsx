@@ -1,17 +1,11 @@
+import React from 'react';
 import { TextField, Button, Divider } from '@mui/material';
-import React, { VFC } from 'react';
 import useInputForm from '../../../hooks/InputForm/useInputForm';
-import { penaltyDataType } from '../../../types/data/penaltyDataType';
 
-type Props = {
-  penalty: penaltyDataType;
-};
-
-const PenaltyUpdate: VFC<Props> = (props) => {
-  const { penalty } = props;
-  const titleHandler = useInputForm(penalty.title);
-  const penaltyHandler = useInputForm(String(penalty.penalty));
-  const descHandler = useInputForm(penalty.description);
+const PenaltyCreate = () => {
+  const titleHandler = useInputForm();
+  const penaltyHandler = useInputForm();
+  const descHandler = useInputForm();
 
   return (
     <div className="px-3 text-text">
@@ -42,7 +36,7 @@ const PenaltyUpdate: VFC<Props> = (props) => {
           />
         </div>
         <div className="ml-auto">
-          <Button variant="contained">ペナルティ更新</Button>
+          <Button variant="contained">ペナルティ発行</Button>
         </div>
       </div>
       <div className="my-5">
@@ -53,7 +47,7 @@ const PenaltyUpdate: VFC<Props> = (props) => {
         fullWidth
         type="text"
         // label="新しいチームの説明(任意)"
-        label="クエスト内容"
+        label="ペナルティ内容"
         variant="outlined"
         onChange={descHandler.onChange}
         value={descHandler.value}
@@ -65,4 +59,4 @@ const PenaltyUpdate: VFC<Props> = (props) => {
   );
 };
 
-export default PenaltyUpdate;
+export default PenaltyCreate;

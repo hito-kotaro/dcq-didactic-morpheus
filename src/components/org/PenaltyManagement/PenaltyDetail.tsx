@@ -1,12 +1,12 @@
 import React, { VFC } from 'react';
-import { Button, Divider } from '@mui/material';
+import { Button, Divider, TextField } from '@mui/material';
 import { penaltyDataType } from '../../../types/data/penaltyDataType';
 import OwnerHeader from '../../mol/OwnerHeader/OwnerHeader';
 import SelectForm from '../../mol/SelectForm/SelectForm';
 import useSelectForm from '../../mol/SelectForm/useSelectForm';
 import { teams } from '../../../testData/TeamData';
 import { teamDataType } from '../../../types/data/teamDataType';
-import { selectItemType } from '../../mol/SelectForm/selectItemType';
+import useInputForm from '../../../hooks/InputForm/useInputForm';
 
 type Props = {
   penalty: penaltyDataType;
@@ -15,6 +15,7 @@ type Props = {
 const PenaltyDetail: VFC<Props> = (props) => {
   const { penalty } = props;
   const teamSelectHandler = useSelectForm();
+  const commentHandler = useInputForm();
 
   const convertedSelectMenu = () => {
     return teams.map((t: teamDataType) => ({ id: t.id, label: t.name }));
@@ -55,7 +56,21 @@ const PenaltyDetail: VFC<Props> = (props) => {
               menu={convertedSelectMenu()}
             />
             <div className="h-5" />
+            <TextField
+              fullWidth
+              type="text"
+              // label="新しいチームの説明(任意)"
+              label="ペナルティコメント(任意)"
+              variant="outlined"
+              onChange={commentHandler.onChange}
+              value={commentHandler.value}
+              multiline
+              maxRows={5}
+              minRows={5}
+            />
+            <div className="h-5" />
             <Button variant="contained">ペナルティを付与</Button>
+            <div className="h-5" />
           </div>
         </div>
       )}
