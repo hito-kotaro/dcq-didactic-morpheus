@@ -12,3 +12,5 @@ export type requestDataType = {
   applicant: string;
   status: string;
 };
+
+export type closedRequestDataType = {};

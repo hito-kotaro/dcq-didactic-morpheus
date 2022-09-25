@@ -1,4 +1,5 @@
 import React, { ReactElement, useState } from 'react';
+import HistoryIcon from '@mui/icons-material/History';
 import AnnouncementIcon from '@mui/icons-material/Announcement';
 import EqualizerIcon from '@mui/icons-material/Equalizer';
 import ReviewsIcon from '@mui/icons-material/Reviews';
@@ -13,6 +14,7 @@ import Summary from '../../components/org/Summary/Summary';
 import QuestManagement from '../../components/org/QuestManagement/QuestManagement';
 import RequestManagement from '../../components/org/RequestManagement/RequestManagement';
 import PenaltyManagement from '../../components/org/PenaltyManagement/PenaltyManagement';
+import RequestHistoryManagement from '../../components/org/RequestHistoryManagement/RequestHistoryManagement';
 
 const HomeTemplate = () => {
   const [component, setComponent] = useState<ReactElement>(<Summary />);
@@ -60,6 +62,12 @@ const HomeTemplate = () => {
       icon: <AnnouncementIcon />,
       action: chComponent,
       component: <PenaltyManagement />,
+    },
+    {
+      label: 'リクエスト履歴',
+      icon: <HistoryIcon />,
+      action: chComponent,
+      component: <RequestHistoryManagement />,
     },
   ];
 
