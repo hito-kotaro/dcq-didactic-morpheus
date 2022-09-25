@@ -6,6 +6,7 @@ export type penaltyDataType = {
   date: string;
   owner: string;
   owner_id: number;
+  comment?: string;
 };
 
 export type assignedPenaltyDateType = {
@@ -14,11 +15,11 @@ export type assignedPenaltyDateType = {
   title: string;
   p_title: string;
   p_desciription: string;
-  description: string;
   penalty: number;
   date: string;
   team: string;
   team_id: number;
   owner: string;
   owner_id: number;
+  comment?: string;
 };

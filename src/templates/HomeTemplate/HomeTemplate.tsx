@@ -15,6 +15,7 @@ import QuestManagement from '../../components/org/QuestManagement/QuestManagemen
 import RequestManagement from '../../components/org/RequestManagement/RequestManagement';
 import PenaltyManagement from '../../components/org/PenaltyManagement/PenaltyManagement';
 import RequestHistoryManagement from '../../components/org/RequestHistoryManagement/RequestHistoryManagement';
+import PenaltyHistoryManagement from '../../components/org/PenaltyHistoryManagement/PenaltyHistoryManagement';
 
 const HomeTemplate = () => {
   const [component, setComponent] = useState<ReactElement>(<Summary />);
@@ -68,6 +69,12 @@ const HomeTemplate = () => {
       icon: <HistoryIcon />,
       action: chComponent,
       component: <RequestHistoryManagement />,
+    },
+    {
+      label: 'ペナルティ履歴',
+      icon: <HistoryIcon />,
+      action: chComponent,
+      component: <PenaltyHistoryManagement />,
     },
   ];
 

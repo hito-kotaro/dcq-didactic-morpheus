@@ -1,4 +1,70 @@
-import { penaltyDataType } from '../types/data/penaltyDataType';
+import {
+  assignedPenaltyDateType,
+  penaltyDataType,
+} from '../types/data/penaltyDataType';
+
+export const assinedPenalty: assignedPenaltyDateType[] = [
+  {
+    id: 1,
+    p_id: 1,
+    title: '月報未提出-付与',
+    p_title: '月報未提出',
+    p_desciription:
+      '月報の提出期限は、対象月の最終営業日〜翌月1日までのため、翌月1日の24:00時点で提出が行われていないメンバーを対象とする。※対象月が休業扱いの場合を除く',
+    penalty: 10,
+    date: '2022/01/01',
+    team: 'teamA',
+    team_id: 1,
+    owner: '佐藤',
+    owner_id: 1,
+    comment: '未提出',
+  },
+  {
+    id: 1,
+    p_id: 1,
+    title: '月報未提出-付与',
+    p_title: '月報未提出',
+    p_desciription:
+      '月報の提出期限は、対象月の最終営業日〜翌月1日までのため、翌月1日の24:00時点で提出が行われていないメンバーを対象とする。※対象月が休業扱いの場合を除く',
+    penalty: 10,
+    date: '2022/01/01',
+    team: 'teamA',
+    team_id: 1,
+    owner: '佐藤',
+    owner_id: 1,
+    comment: '未提出',
+  },
+  {
+    id: 1,
+    p_id: 1,
+    title: '月報未提出-付与',
+    p_title: '月報未提出',
+    p_desciription:
+      '月報の提出期限は、対象月の最終営業日〜翌月1日までのため、翌月1日の24:00時点で提出が行われていないメンバーを対象とする。※対象月が休業扱いの場合を除く',
+    penalty: 10,
+    date: '2022/01/01',
+    team: 'teamA',
+    team_id: 1,
+    owner: '佐藤',
+    owner_id: 1,
+    comment: '未提出',
+  },
+  {
+    id: 1,
+    p_id: 1,
+    title: '月報未提出-付与',
+    p_title: '月報未提出',
+    p_desciription:
+      '月報の提出期限は、対象月の最終営業日〜翌月1日までのため、翌月1日の24:00時点で提出が行われていないメンバーを対象とする。※対象月が休業扱いの場合を除く',
+    penalty: 10,
+    date: '2022/01/01',
+    team: 'teamA',
+    team_id: 1,
+    owner: '佐藤',
+    owner_id: 1,
+    comment: '未提出',
+  },
+];
 
 export const penalties: penaltyDataType[] = [
   {
