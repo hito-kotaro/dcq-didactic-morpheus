@@ -9,6 +9,7 @@ import RequestHistoryDetail from './RequestHistoryDetail';
 import RequestHistoryList from './RequestHistoryList';
 import RequestHistoryListTool from './RequestHistoryListTool';
 import RequestHistoryMenuHeader from './RequestHistoryMenuHeader';
+import RequestHistoryPanelHeader from './RequestHistoryPanelHeader';
 import useRequestHistoryManagement from './useRequestHistoryManagement';
 
 const RequestHistoryManagement = () => {
@@ -52,7 +53,7 @@ const RequestHistoryManagement = () => {
           onClick={wrapOnClickListItem}
         />
       }
-      mainHeader={<div>main header</div>}
+      mainHeader={<RequestHistoryPanelHeader />}
       mainContents={
         mainComponents.component ?? (
           <EmptyStateIcon msg="リクエストを選択してください" />
