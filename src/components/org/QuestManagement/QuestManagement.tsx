@@ -6,12 +6,10 @@ import useQuestManagement from './useQuestManagement';
 import QuestDetail from './QuestDetail';
 import useChangeComponent from '../../../hooks/ChangeComponent/useChangeComponent';
 import { questDataType } from '../../../types/data/questDataType';
-import { users } from '../../../testData/UserData';
-import { userDataType } from '../../../types/data/userDataType';
 import QuestListTool from '../../mol/QuestListTool/QuestListTool';
 import QuestCreate from './QuestCreate';
-import UserInfo from '../../mol/MenuHeader/UserInfo';
 import QuestPanelHeader from './QuestPanelHeader';
+import EmptyStateIcon from '../../mol/EmptyStateIcon/EmptyStateIcon';
 
 const QuestManagement = () => {
   const {
@@ -64,9 +62,7 @@ const QuestManagement = () => {
       }
       mainContents={
         mainContents.component ?? (
-          <div className="text-text text-lg font-semibold text-center border-b-1">
-            クエストを選択してください
-          </div>
+          <EmptyStateIcon msg="クエストを選択してください" />
         )
       }
     />

@@ -11,6 +11,7 @@ import PenaltyListTool from '../../mol/PenaltyListTool/PenaltyListTool';
 import PenaltyPanelHeader from './PenaltyPanelHeader';
 import PenaltyUpdate from './PenaltyUpdate';
 import PenaltyCreate from './PenaltyCreate';
+import EmptyStateIcon from '../../mol/EmptyStateIcon/EmptyStateIcon';
 
 const PenaltyManagement = () => {
   const dummy = (p: penaltyDataType) => {};
@@ -62,9 +63,7 @@ const PenaltyManagement = () => {
       }
       mainContents={
         mainContents.component ?? (
-          <div className="text-text text-lg font-semibold text-center border-b-1">
-            ペナルティを選択してください
-          </div>
+          <EmptyStateIcon msg="ペナルティを選択してください" />
         )
       }
     />

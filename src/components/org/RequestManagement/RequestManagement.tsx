@@ -9,6 +9,7 @@ import { requests } from '../../../testData/RequestData';
 import RequestDetail from './RequestDetail';
 import RequestPanelHeader from './RequestPanelHeader';
 import RequestListTool from '../../mol/RequestListTool/RequestListTool';
+import EmptyStateIcon from '../../mol/EmptyStateIcon/EmptyStateIcon';
 
 const RequestManagement = () => {
   const {
@@ -46,9 +47,7 @@ const RequestManagement = () => {
       mainHeader={<RequestPanelHeader />}
       mainContents={
         mainContents.component ?? (
-          <div className="text-text text-lg font-semibold text-center border-b-1">
-            リクエストを選択してください
-          </div>
+          <EmptyStateIcon msg="リクエストを選択してください" />
         )
       }
     />

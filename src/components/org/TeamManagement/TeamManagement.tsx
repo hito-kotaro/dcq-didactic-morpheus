@@ -16,6 +16,7 @@ import useUserManagement from '../UserManagement/useUserManagement';
 import useChangeComponent from '../../../hooks/ChangeComponent/useChangeComponent';
 import { teamDataType } from '../../../types/data/teamDataType';
 import { userDataType } from '../../../types/data/userDataType';
+import EmptyStateIcon from '../../mol/EmptyStateIcon/EmptyStateIcon';
 
 const TeamManagement = () => {
   const { onClickUser } = useUserManagement();
@@ -71,9 +72,7 @@ const TeamManagement = () => {
       }
       mainContents={
         mainContents.component ?? (
-          <div className="text-text text-lg font-semibold text-center border-b-1">
-            チームを選択してください
-          </div>
+          <EmptyStateIcon msg="チームを選択してください" />
         )
       }
     />

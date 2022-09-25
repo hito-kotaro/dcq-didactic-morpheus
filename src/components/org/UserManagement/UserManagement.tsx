@@ -12,6 +12,7 @@ import { userCreateHandlerType } from './types/userCreateHandler';
 import { userDataType } from '../../../types/data/userDataType';
 import UserUpdate from './UserUpdate';
 import UserDetail from './UserDetail';
+import EmptyStateIcon from '../../mol/EmptyStateIcon/EmptyStateIcon';
 
 const UserManagement = () => {
   const {
@@ -67,9 +68,7 @@ const UserManagement = () => {
       }
       mainContents={
         mainContents.component ?? (
-          <div className="text-text text-lg font-semibold text-center border-b-1">
-            ユーザを選択してください
-          </div>
+          <EmptyStateIcon msg="ユーザを選択してください" />
         )
       }
     />
