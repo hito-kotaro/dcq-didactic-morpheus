@@ -4,6 +4,24 @@ import { closedRequestDataType } from '../../../types/data/requestDataType';
 import useSelectForm from '../../mol/SelectForm/useSelectForm';
 
 const useRequestHistoryManagement = () => {
+  const [closedRequest, setClosedRequest] = useState<closedRequestDataType>({
+    id: 0,
+    date: '',
+    title: '',
+    description: '',
+    q_title: '',
+    q_description: '',
+    q_owner_id: 0,
+    q_owner: '',
+    q_reward: 0,
+    status: '',
+    applicant_id: 0,
+    applicant: '',
+    authorizer: '',
+    authorizer_id: 0,
+    comment: '',
+  });
+
   const userSelectHandler = useSelectForm();
   const statusSelectHandler = useSelectForm();
   const requestSearchHandler = useInputForm();
@@ -25,6 +43,10 @@ const useRequestHistoryManagement = () => {
       status = '';
     }
     return status;
+  };
+
+  const onClickListItem = (r: closedRequestDataType) => {
+    setClosedRequest(r);
   };
 
   // requestDataを受け取って条件に一致していれば1していなければ-1を返す
@@ -56,7 +78,6 @@ const useRequestHistoryManagement = () => {
   };
 
   const filteringRequestHistory = (data: closedRequestDataType[]) => {
-    console.log('kuso');
     setFilterdRequests(
       data.filter((cr: closedRequestDataType) => filterCheck(cr)),
     );
@@ -64,6 +85,8 @@ const useRequestHistoryManagement = () => {
 
   return {
     filterdRequests,
+    closedRequest,
+    onClickListItem,
     filteringRequestHistory,
     requestSearchHandler,
     userSelectHandler,

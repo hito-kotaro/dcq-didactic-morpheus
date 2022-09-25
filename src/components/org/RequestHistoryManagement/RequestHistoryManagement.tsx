@@ -1,7 +1,12 @@
 import React, { useEffect } from 'react';
+import useChangeComponent from '../../../hooks/ChangeComponent/useChangeComponent';
 import { closedRequests } from '../../../testData/RequestData';
+import { closedRequestDataType } from '../../../types/data/requestDataType';
+import EmptyStateIcon from '../../mol/EmptyStateIcon/EmptyStateIcon';
 import SplitTemplate from '../../templates/SplitTemplate';
 import RequestList from '../RequestList/RequestList';
+import RequestHistoryDetail from './RequestHistoryDetail';
+import RequestHistoryList from './RequestHistoryList';
 import RequestHistoryListTool from './RequestHistoryListTool';
 import RequestHistoryMenuHeader from './RequestHistoryMenuHeader';
 import useRequestHistoryManagement from './useRequestHistoryManagement';
@@ -10,12 +15,18 @@ const RequestHistoryManagement = () => {
   const {
     filterdRequests,
     filteringRequestHistory,
+    onClickListItem,
     requestSearchHandler,
     userSelectHandler,
     statusSelectHandler,
   } = useRequestHistoryManagement();
+  const mainComponents = useChangeComponent();
   const dummy = () => {};
 
+  const wrapOnClickListItem = (r: closedRequestDataType) => {
+    onClickListItem(r);
+    mainComponents.chComponent(<RequestHistoryDetail cr={r} />);
+  };
   useEffect(() => {
     filteringRequestHistory(closedRequests);
   }, [
@@ -35,9 +46,18 @@ const RequestHistoryManagement = () => {
           statusSelectHandler={statusSelectHandler}
         />
       }
-      menuContents={<RequestList requests={filterdRequests} onClick={dummy} />}
+      menuContents={
+        <RequestHistoryList
+          requests={filterdRequests}
+          onClick={wrapOnClickListItem}
+        />
+      }
       mainHeader={<div>main header</div>}
-      mainContents={<div>main contents</div>}
+      mainContents={
+        mainComponents.component ?? (
+          <EmptyStateIcon msg="リクエストを選択してください" />
+        )
+      }
     />
   );
 };
