@@ -8,42 +8,43 @@ import { teams } from '../../../testData/TeamData';
 import UserInfo from '../../mol/MenuHeader/UserInfo';
 import TeamListTool from '../../mol/MainMenuTools/TeamListTool';
 import useTeamManagements from './useTeamManagements';
-import CreateTeam from './CreateTeam';
 import TeamPanelHeader from '../TeamPanelHeader/TeamPanelHeader';
-import UpdateTeam from './UpdateTeam';
 import useUserList from '../UserList/useUserList';
 import useUserManagement from '../UserManagement/useUserManagement';
 import useChangeComponent from '../../../hooks/ChangeComponent/useChangeComponent';
 import { teamDataType } from '../../../types/data/teamDataType';
 import { userDataType } from '../../../types/data/userDataType';
 import EmptyStateIcon from '../../mol/EmptyStateIcon/EmptyStateIcon';
+import UserDetail from '../UserManagement/UserDetail';
+import { requestDataType } from '../../../types/data/requestDataType';
+import RequestDetail from '../RequestManagement/RequestDetail';
 
 const TeamManagement = () => {
-  const { onClickUser } = useUserManagement();
   const {
-    isCreate,
-    isUpdate,
     team,
     teamHandler,
-    newNameHandler,
-    newDescHandler,
-    filterdUsers,
     filterdTeams,
-    updNameHandler,
-    updDescHandler,
     onClickTeamListItem,
-    onClickCancel,
-    onClickUpdate,
-    onClickCreate,
     toggleCreate,
-    toggleUpdate,
     filteringUser,
     filteringTeam,
-    selectTeam,
   } = useTeamManagements();
 
   const { user, selectUser } = useUserList();
+
   const mainContents = useChangeComponent();
+
+  const wrapOnClickRequestItem = (r: requestDataType) => {
+    // wrapSetIsDetail(true);
+    mainContents.chComponent(<RequestDetail request={r} />);
+  };
+
+  const onClickUserItem = (u: userDataType) => {
+    mainContents.chComponent(
+      <UserDetail user={u} onClick={wrapOnClickRequestItem} />,
+    );
+  };
+
   useEffect(() => {
     filteringUser(users);
   }, [team]);
@@ -57,7 +58,9 @@ const TeamManagement = () => {
     const filterd: userDataType[] = users.filter(
       (u: userDataType) => t.id === u.team_id,
     );
-    mainContents.chComponent(<UserList users={filterd} onClick={selectUser} />);
+    mainContents.chComponent(
+      <UserList users={filterd} onClick={onClickUserItem} />,
+    );
   };
 
   return (

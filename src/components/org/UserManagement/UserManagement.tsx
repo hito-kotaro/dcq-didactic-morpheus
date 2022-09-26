@@ -13,6 +13,8 @@ import { userDataType } from '../../../types/data/userDataType';
 import UserUpdate from './UserUpdate';
 import UserDetail from './UserDetail';
 import EmptyStateIcon from '../../mol/EmptyStateIcon/EmptyStateIcon';
+import { requestDataType } from '../../../types/data/requestDataType';
+import RequestDetail from '../RequestManagement/RequestDetail';
 
 const UserManagement = () => {
   const {
@@ -38,10 +40,16 @@ const UserManagement = () => {
     teamSelectHandler,
   };
 
-  const wrapSelectUser = (id: number) => {
-    const u: userDataType = selectUser(id);
+  const wrapOnClickRequestItem = (r: requestDataType) => {
     wrapSetIsDetail(true);
-    mainContents.chComponent(<UserDetail user={u} />);
+    mainContents.chComponent(<RequestDetail request={r} />);
+  };
+
+  const wrapSelectUser = (u: userDataType) => {
+    wrapSetIsDetail(true);
+    mainContents.chComponent(
+      <UserDetail user={u} onClick={wrapOnClickRequestItem} />,
+    );
   };
 
   return (

@@ -1,32 +1,34 @@
 import React, { VFC } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
-import { closedRequestDataType } from '../../../types/data/requestDataType';
+import { assignedPenaltyDateType } from '../../../types/data/penaltyDataType';
 import MenuButton from '../../mol/MenuButton/MenuButton';
 import MyModal from '../../mol/MyModal/MyModal';
 import useMyModal from '../../mol/MyModal/useMyModal';
 
 type Props = {
-  cr: closedRequestDataType;
+  penalty: assignedPenaltyDateType;
   isDetail: boolean;
 };
 
-const RequestHistoryPanelHeader: VFC<Props> = (props) => {
-  const { isDetail, cr } = props;
+const PenaltyHistoryPanelHeader: VFC<Props> = (props) => {
+  const { penalty, isDetail } = props;
   const { open, handleOpen, handleClose } = useMyModal();
   const menuItems: { label: string; onClick: () => void }[] = [
-    { label: '承認を取り消し', onClick: handleOpen },
+    { label: 'ペナルティを取り消し', onClick: handleOpen },
   ];
-  const deleteRequest = () => {};
+
+  const deletePenalty = () => {};
+
   return (
     <div className="pt-7 text-center">
       <MyModal
         open={open}
         handleOpen={handleOpen}
         handleClose={handleClose}
-        mainMsg={`「${cr.title}」を取り消しますか？`}
-        subMsg="取り消しすると付与されたポイント分が減少します。　取り消された履歴は残ります。"
+        mainMsg={`「${penalty.title}」を取り消しますか？`}
+        subMsg="取り消すると付与されたペナルティポイントは減少します。　取り消された履歴は残ります。"
         positiveBtnMsg="承認を取り消し"
-        positiveBtnAction={deleteRequest}
+        positiveBtnAction={deletePenalty}
       />
       <div className="flex justify-end">
         {isDetail ? (
@@ -36,10 +38,10 @@ const RequestHistoryPanelHeader: VFC<Props> = (props) => {
         )}
       </div>
       <span className="text-2xl font-semibold text-text">
-        リクエスト履歴管理
+        ペナルティ付与履歴管理
       </span>
     </div>
   );
 };
 
-export default RequestHistoryPanelHeader;
+export default PenaltyHistoryPanelHeader;

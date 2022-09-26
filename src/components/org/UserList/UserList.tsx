@@ -5,7 +5,7 @@ import { userDataType } from '../../../types/data/userDataType';
 
 type Props = {
   users: userDataType[];
-  onClick: (id: number) => void;
+  onClick: (u: userDataType) => void;
 };
 
 const UserList: VFC<Props> = (props) => {
@@ -14,7 +14,7 @@ const UserList: VFC<Props> = (props) => {
     <div>
       {users.map((u: userDataType) => (
         <div key={u.id}>
-          <UserListItem user={u} onClick={() => onClick(u.id)} />
+          <UserListItem user={u} onClick={onClick} />
           <div className="my-3">
             <Divider />
           </div>

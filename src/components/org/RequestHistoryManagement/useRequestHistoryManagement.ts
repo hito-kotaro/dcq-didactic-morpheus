@@ -21,6 +21,24 @@ const useRequestHistoryManagement = () => {
     authorizer_id: 0,
     comment: '',
   });
+  const [isDetail, setIsDetail] = useState(false);
+  const [request, setRequest] = useState<closedRequestDataType>({
+    id: 0,
+    date: '',
+    title: '',
+    description: '',
+    q_title: '',
+    q_description: '',
+    q_owner_id: 0,
+    q_owner: '',
+    q_reward: 0,
+    status: '',
+    applicant_id: 0,
+    applicant: '',
+    authorizer: '',
+    authorizer_id: 0,
+    comment: '',
+  });
 
   const userSelectHandler = useSelectForm();
   const statusSelectHandler = useSelectForm();
@@ -46,6 +64,8 @@ const useRequestHistoryManagement = () => {
   };
 
   const onClickListItem = (r: closedRequestDataType) => {
+    setIsDetail(true);
+    setRequest(r);
     setClosedRequest(r);
   };
 
@@ -84,8 +104,12 @@ const useRequestHistoryManagement = () => {
   };
 
   return {
+    request,
+    isDetail,
     filterdRequests,
     closedRequest,
+    setRequest,
+    setIsDetail,
     onClickListItem,
     filteringRequestHistory,
     requestSearchHandler,

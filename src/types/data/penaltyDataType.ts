@@ -22,4 +22,6 @@ export type assignedPenaltyDateType = {
   owner: string;
   owner_id: number;
   comment?: string;
+  authorizer: string;
+  authorizer_id: number;
 };

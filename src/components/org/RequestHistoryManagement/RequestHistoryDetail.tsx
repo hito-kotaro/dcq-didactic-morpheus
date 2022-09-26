@@ -1,5 +1,4 @@
 import React, { VFC } from 'react';
-import { Divider } from '@mui/material';
 import { closedRequestDataType } from '../../../types/data/requestDataType';
 import OwnerHeader from '../../mol/OwnerHeader/OwnerHeader';
 
@@ -22,7 +21,7 @@ const RequestHistoryDetail: VFC<Props> = (props) => {
           owner={cr.applicant}
           date={cr.date}
           reward={cr.q_reward}
-          status="open"
+          status={cr.status}
         />
 
         <div className="h-8" />

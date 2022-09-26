@@ -4,7 +4,6 @@ import { closedRequests } from '../../../testData/RequestData';
 import { closedRequestDataType } from '../../../types/data/requestDataType';
 import EmptyStateIcon from '../../mol/EmptyStateIcon/EmptyStateIcon';
 import SplitTemplate from '../../templates/SplitTemplate';
-import RequestList from '../RequestList/RequestList';
 import RequestHistoryDetail from './RequestHistoryDetail';
 import RequestHistoryList from './RequestHistoryList';
 import RequestHistoryListTool from './RequestHistoryListTool';
@@ -14,6 +13,8 @@ import useRequestHistoryManagement from './useRequestHistoryManagement';
 
 const RequestHistoryManagement = () => {
   const {
+    request,
+    isDetail,
     filterdRequests,
     filteringRequestHistory,
     onClickListItem,
@@ -22,7 +23,6 @@ const RequestHistoryManagement = () => {
     statusSelectHandler,
   } = useRequestHistoryManagement();
   const mainComponents = useChangeComponent();
-  const dummy = () => {};
 
   const wrapOnClickListItem = (r: closedRequestDataType) => {
     onClickListItem(r);
@@ -53,7 +53,9 @@ const RequestHistoryManagement = () => {
           onClick={wrapOnClickListItem}
         />
       }
-      mainHeader={<RequestHistoryPanelHeader />}
+      mainHeader={
+        <RequestHistoryPanelHeader isDetail={isDetail} cr={request} />
+      }
       mainContents={
         mainComponents.component ?? (
           <EmptyStateIcon msg="リクエストを選択してください" />

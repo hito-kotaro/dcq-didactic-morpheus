@@ -22,6 +22,7 @@ const usePenaltyManagement = () => {
     setPenalty(p);
     setIsDetail(true);
   };
+
   const filteringPenalty = (data: penaltyDataType[]) => {
     setFilterdPenalties(
       data.filter(

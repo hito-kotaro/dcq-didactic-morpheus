@@ -17,10 +17,12 @@ export const assinedPenalty: assignedPenaltyDateType[] = [
     team_id: 1,
     owner: '佐藤',
     owner_id: 1,
+    authorizer: '佐藤',
+    authorizer_id: 1,
     comment: '未提出',
   },
   {
-    id: 1,
+    id: 2,
     p_id: 1,
     title: '月報未提出-付与',
     p_title: '月報未提出',
@@ -33,9 +35,11 @@ export const assinedPenalty: assignedPenaltyDateType[] = [
     owner: '佐藤',
     owner_id: 1,
     comment: '未提出',
+    authorizer: '佐藤',
+    authorizer_id: 1,
   },
   {
-    id: 1,
+    id: 3,
     p_id: 1,
     title: '月報未提出-付与',
     p_title: '月報未提出',
@@ -48,9 +52,11 @@ export const assinedPenalty: assignedPenaltyDateType[] = [
     owner: '佐藤',
     owner_id: 1,
     comment: '未提出',
+    authorizer: '佐藤',
+    authorizer_id: 1,
   },
   {
-    id: 1,
+    id: 4,
     p_id: 1,
     title: '月報未提出-付与',
     p_title: '月報未提出',
@@ -63,6 +69,8 @@ export const assinedPenalty: assignedPenaltyDateType[] = [
     owner: '佐藤',
     owner_id: 1,
     comment: '未提出',
+    authorizer: '佐藤',
+    authorizer_id: 1,
   },
 ];
 
