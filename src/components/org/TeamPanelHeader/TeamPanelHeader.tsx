@@ -41,7 +41,7 @@ const TeamPanelHeader: VFC<Props> = (props) => {
         positiveBtnAction={deleteTeam}
       />
 
-      <span className="text-2xl font-semibold text-text">チーム管理</span>
+      <span className="text-2xl font-semibold text-text">チームメンバ一覧</span>
       <div className="flex justify-end">
         {team.name !== '' ? (
           <MenuButton menuItems={menuItems} icon={<MenuIcon />} />

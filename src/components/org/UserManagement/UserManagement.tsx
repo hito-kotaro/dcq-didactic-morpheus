@@ -1,5 +1,4 @@
-import React, { ReactElement } from 'react';
-import UserInfo from '../../mol/MenuHeader/UserInfo';
+import React from 'react';
 import SplitTemplate from '../../templates/SplitTemplate';
 import UserList from '../UserList/UserList';
 import { users } from '../../../testData/UserData';
@@ -10,11 +9,11 @@ import useUserList from '../UserList/useUserList';
 import useChangeComponent from '../../../hooks/ChangeComponent/useChangeComponent';
 import { userCreateHandlerType } from './types/userCreateHandler';
 import { userDataType } from '../../../types/data/userDataType';
-import UserUpdate from './UserUpdate';
 import UserDetail from './UserDetail';
 import EmptyStateIcon from '../../mol/EmptyStateIcon/EmptyStateIcon';
 import { requestDataType } from '../../../types/data/requestDataType';
 import RequestDetail from '../RequestManagement/RequestDetail';
+import UserSearchWindow from './UserSearchWindow';
 
 const UserManagement = () => {
   const {
@@ -25,7 +24,6 @@ const UserManagement = () => {
     rePwdHandler,
     roleSelectHandler,
     teamSelectHandler,
-    toggleUpdate,
     wrapSetIsDetail,
   } = useUserManagement();
 
@@ -54,7 +52,13 @@ const UserManagement = () => {
 
   return (
     <SplitTemplate
-      menuHeader={<UserInfo name="KOTARO" team="TeamA" score={10} />}
+      menuHeader={
+        <UserSearchWindow
+          handler={userSearchHandler}
+          onClickUserCreate={mainContents.chComponent}
+        />
+      }
+      // ここは、ロールでの絞り込みにする
       menuTool={
         <UserListTool
           handler={userSearchHandler}
@@ -66,11 +70,8 @@ const UserManagement = () => {
       menuContents={<UserList users={users} onClick={wrapSelectUser} />}
       mainHeader={
         <UserPanelHeader
-          headerMsg=""
           user={user}
-          toggleUpdate={toggleUpdate}
           chComponent={mainContents.chComponent}
-          mainComponent={mainContents.component ?? <div>n</div>}
           isDetail={isDetail}
         />
       }

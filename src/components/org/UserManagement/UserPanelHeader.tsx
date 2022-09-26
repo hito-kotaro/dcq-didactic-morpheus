@@ -11,10 +11,7 @@ import UserPwdUpdate from './UserPwdUpdate';
 
 type Props = {
   user: userDataType;
-  toggleUpdate: () => void;
   chComponent: (component: ReactElement) => void;
-  mainComponent: ReactElement;
-  headerMsg: string;
   isDetail: boolean;
 };
 
