@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { questDataType } from '../../../types/data/questDataType';
-import { users } from '../../../testData/UserData';
-import { userDataType } from '../../../types/data/userDataType';
 import useInputForm from '../../../hooks/InputForm/useInputForm';
+import useSelectForm from '../../mol/SelectForm/useSelectForm';
 
 const useQuestManagement = () => {
   const questSearchHandler = useInputForm();
+  const selectHandler = useSelectForm();
   const [filterdQuests, setFilterdQuests] = useState<questDataType[]>([]);
   const [isDetail, setIsDetail] = useState(false);
   const [quest, setQuest] = useState<questDataType>({
@@ -37,6 +37,7 @@ const useQuestManagement = () => {
     filterdQuests,
     // owner,
     questSearchHandler,
+    selectHandler,
     setIsDetail,
     onClickQuestItem,
     filteringQuest,

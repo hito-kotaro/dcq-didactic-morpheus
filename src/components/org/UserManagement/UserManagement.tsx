@@ -14,6 +14,7 @@ import EmptyStateIcon from '../../mol/EmptyStateIcon/EmptyStateIcon';
 import { requestDataType } from '../../../types/data/requestDataType';
 import RequestDetail from '../RequestManagement/RequestDetail';
 import UserSearchWindow from './UserSearchWindow';
+import UserCreate from './UserCreate';
 
 const UserManagement = () => {
   const {
@@ -57,13 +58,16 @@ const UserManagement = () => {
       <UserDetail user={u} onClick={wrapOnClickRequestItem} />,
     );
   };
+  const wrapOnclickUserCreate = () => {
+    mainContents.chComponent(<UserCreate />);
+  };
 
   return (
     <SplitTemplate
       menuHeader={
         <UserSearchWindow
           handler={userSearchHandler}
-          onClickUserCreate={mainContents.chComponent}
+          onClickUserCreate={wrapOnclickUserCreate}
         />
       }
       // ここは、ロールでの絞り込みにする
