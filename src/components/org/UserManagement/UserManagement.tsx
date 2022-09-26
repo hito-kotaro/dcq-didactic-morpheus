@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import SplitTemplate from '../../templates/SplitTemplate';
 import UserList from '../UserList/UserList';
 import { users } from '../../../testData/UserData';
@@ -18,13 +18,16 @@ import UserSearchWindow from './UserSearchWindow';
 const UserManagement = () => {
   const {
     isDetail,
+    filterd,
     userSearchHandler,
     userHandler,
     pwdHandler,
     rePwdHandler,
     roleSelectHandler,
     teamSelectHandler,
+    selectHandler,
     wrapSetIsDetail,
+    filteringUser,
   } = useUserManagement();
 
   const { user, selectUser } = useUserList();
@@ -37,6 +40,11 @@ const UserManagement = () => {
     roleSelectHandler,
     teamSelectHandler,
   };
+
+  useEffect(() => {
+    console.log('kusokasu');
+    filteringUser(users);
+  }, [userSearchHandler.value, selectHandler.value]);
 
   const wrapOnClickRequestItem = (r: requestDataType) => {
     wrapSetIsDetail(true);
@@ -59,15 +67,8 @@ const UserManagement = () => {
         />
       }
       // ここは、ロールでの絞り込みにする
-      menuTool={
-        <UserListTool
-          handler={userSearchHandler}
-          onClick={mainContents.chComponent}
-          userCreateHandler={userCreateHandler}
-          wrapSetIsDetail={wrapSetIsDetail}
-        />
-      }
-      menuContents={<UserList users={users} onClick={wrapSelectUser} />}
+      menuTool={<UserListTool handler={selectHandler} />}
+      menuContents={<UserList users={filterd} onClick={wrapSelectUser} />}
       mainHeader={
         <UserPanelHeader
           user={user}
