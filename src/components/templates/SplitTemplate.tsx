@@ -15,7 +15,7 @@ const SplitTemplate: VFC<Props> = (props) => {
     <div className="w-full h-full ">
       <div className="flex w-full h-full ">
         <div className=" w-1/2 h-full">
-          <div className=" pt-7 px-3  h-1/6 border-b-1">
+          <div className="px-3 pt-10 h-1/6 border-b-1">
             {/* Menu Header */}
             {menuHeader}
           </div>

@@ -1,30 +1,43 @@
+/* eslint-disable consistent-return */
+/* eslint-disable array-callback-return */
 import React, { VFC } from 'react';
-import { TextField, Button } from '@mui/material';
-import { inputHandlerType } from '../../../types/inputHandlerType';
+import { selectHandlerType } from '../../../types/inputHandlerType';
+import { quests } from '../../../testData/QuestData';
+import { questDataType } from '../../../types/data/questDataType';
+import SelectForm from '../SelectForm/SelectForm';
+import { selectItemType } from '../SelectForm/selectItemType';
 
 type Props = {
-  handler: inputHandlerType;
-  onClickCreate: () => void;
+  handler: selectHandlerType;
 };
 
 const QuestListTool: VFC<Props> = (props) => {
-  const { handler, onClickCreate } = props;
+  const { handler } = props;
+
+  const userToSelectMenu = () => {
+    const owners = quests.map((q: questDataType) => ({
+      id: q.owner_id,
+      label: q.owner,
+    }));
+
+    const dupDel = owners.filter((o: selectItemType, i, self) => {
+      const tmp = self.map((item: selectItemType) => item.id);
+      if (tmp.indexOf(o.id) === i) {
+        return o;
+      }
+    });
+    console.log(dupDel);
+    return [{ id: 0, label: 'all' }, ...dupDel];
+  };
+
   return (
     <div className="flex">
       <div className="w-4/6">
-        <TextField
-          fullWidth
-          type="text"
-          placeholder="クエストタイトルで検索"
-          variant="outlined"
-          onChange={handler.onChange}
-          value={handler.value}
+        <SelectForm
+          label="クエストオーナーで絞り込み"
+          handler={handler}
+          menu={userToSelectMenu()}
         />
-      </div>
-      <div className="ml-auto pt-2 text-right">
-        <Button variant="contained" onClick={onClickCreate}>
-          新規作成
-        </Button>
       </div>
     </div>
   );

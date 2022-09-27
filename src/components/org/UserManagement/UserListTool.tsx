@@ -1,39 +1,36 @@
-import { TextField, Button } from '@mui/material';
-import React, { ReactElement, VFC } from 'react';
-import { inputHandlerType } from '../../../types/inputHandlerType';
-import { userCreateHandlerType } from './types/userCreateHandler';
-import UserCreate from './UserCreate';
+import React, { VFC } from 'react';
+import { users } from '../../../testData/UserData';
+import { userDataType } from '../../../types/data/userDataType';
+import { selectHandlerType } from '../../../types/inputHandlerType';
+import SelectForm from '../../mol/SelectForm/SelectForm';
+import { selectItemType } from '../../mol/SelectForm/selectItemType';
 
 type Props = {
-  handler: inputHandlerType;
-  onClick: (component: ReactElement) => void;
-  userCreateHandler: userCreateHandlerType;
-  wrapSetIsDetail: (d: boolean) => void;
+  handler: selectHandlerType;
 };
 
 const UserListTool: VFC<Props> = (props) => {
-  const { handler, onClick, userCreateHandler, wrapSetIsDetail } = props;
-  const wrapOnClick = () => {
-    wrapSetIsDetail(false);
-    onClick(<UserCreate />);
+  const { handler } = props;
+
+  const userToSelectMenu = () => {
+    const tmp = users.map((u: userDataType) => ({ id: u.id, label: u.name }));
+    return [{ id: 0, label: 'all' }, ...tmp];
   };
+  const roleSelectMenu: selectItemType[] = [
+    { id: 0, label: 'all' },
+    { id: 1, label: 'member' },
+    { id: 2, label: 'leader' },
+    { id: 3, label: 'master' },
+  ];
 
   return (
     <div className="flex">
       <div className="w-4/6">
-        <TextField
-          fullWidth
-          type="text"
-          label="ユーザ名で検索"
-          variant="outlined"
-          onChange={handler.onChange}
-          value={handler.value}
+        <SelectForm
+          label="ロールで絞り込み"
+          handler={handler}
+          menu={roleSelectMenu}
         />
-      </div>
-      <div className="ml-auto pt-2 text-right">
-        <Button variant="contained" onClick={wrapOnClick}>
-          新規作成
-        </Button>
       </div>
     </div>
   );

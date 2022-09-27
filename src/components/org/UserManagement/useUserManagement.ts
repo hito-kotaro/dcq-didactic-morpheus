@@ -1,69 +1,60 @@
-import { ReactElement, useState } from 'react';
+import { useState } from 'react';
 import useInputForm from '../../../hooks/InputForm/useInputForm';
+import { userDataType } from '../../../types/data/userDataType';
 import useSelectForm from '../../mol/SelectForm/useSelectForm';
 
 const useUserManagement = () => {
   const userSearchHandler = useInputForm();
+  const selectHandler = useSelectForm();
   const userHandler = useInputForm();
   const pwdHandler = useInputForm();
   const rePwdHandler = useInputForm();
-  const [isCreate, setIsCreate] = useState(false);
-  const [isUpdate, setIsUpdate] = useState(false);
   const [isDetail, setIsDetail] = useState(false);
-  const [mainComponent, setMainComponent] = useState<ReactElement>();
+  const [filterd, setFilterd] = useState<userDataType[]>([]);
 
   const roleSelectHandler = useSelectForm();
   const teamSelectHandler = useSelectForm();
-
-  const toggleCreate = () => {
-    setIsCreate(!isCreate);
-  };
-  const toggleUpdate = () => {
-    setIsUpdate(!isUpdate);
-  };
-
-  const toggleDetail = () => {
-    setIsDetail(!isDetail);
-  };
-
-  // const chMainComponent = (component: ReactElement) => {
-  //   setMainComponent(component);
-  // };
-
-  const onClickCreate = (component: ReactElement) => {
-    setMainComponent(component);
-  };
-
-  const onClickUpdate = () => {};
-
-  const onClickUser = (component: ReactElement) => {
-    // mainComponentを切り替える
-    setMainComponent(component);
-  };
 
   const wrapSetIsDetail = (d: boolean) => {
     setIsDetail(d);
   };
 
+  const filterCheck = (data: userDataType) => {
+    let flg = false;
+
+    // allの時の絞り込み
+    if (Number(selectHandler.value) === 0) {
+      console.log('all');
+      if (data.name.indexOf(userSearchHandler.value) !== -1) {
+        flg = true;
+      }
+    } else if (Number(selectHandler.value) !== 0) {
+      if (
+        data.role_id === Number(selectHandler.value) &&
+        data.name.indexOf(userSearchHandler.value) !== -1
+      ) {
+        flg = true;
+      }
+    }
+    return flg;
+  };
+
+  const filteringUser = (data: userDataType[]) => {
+    setFilterd(data.filter((u: userDataType) => filterCheck(u)));
+  };
+
   return {
-    isCreate,
-    isUpdate,
     isDetail,
+    filterd,
+    userSearchHandler,
     userHandler,
     pwdHandler,
     rePwdHandler,
-    userSearchHandler,
     roleSelectHandler,
     teamSelectHandler,
-    mainComponent,
-    setIsUpdate,
+    selectHandler,
     wrapSetIsDetail,
-    onClickCreate,
-    onClickUpdate,
-    onClickUser,
-    toggleCreate,
-    toggleUpdate,
-    toggleDetail,
+    filteringUser,
   };
 };
 

@@ -6,6 +6,7 @@ const useChangeComponent = () => {
   const chComponent = (c: ReactElement) => {
     setComponent(c);
   };
+
   return { chComponent, component };
 };
 

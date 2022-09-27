@@ -1,5 +1,4 @@
-import React, { ReactElement } from 'react';
-import UserInfo from '../../mol/MenuHeader/UserInfo';
+import React, { useEffect } from 'react';
 import SplitTemplate from '../../templates/SplitTemplate';
 import UserList from '../UserList/UserList';
 import { users } from '../../../testData/UserData';
@@ -10,23 +9,26 @@ import useUserList from '../UserList/useUserList';
 import useChangeComponent from '../../../hooks/ChangeComponent/useChangeComponent';
 import { userCreateHandlerType } from './types/userCreateHandler';
 import { userDataType } from '../../../types/data/userDataType';
-import UserUpdate from './UserUpdate';
 import UserDetail from './UserDetail';
 import EmptyStateIcon from '../../mol/EmptyStateIcon/EmptyStateIcon';
 import { requestDataType } from '../../../types/data/requestDataType';
 import RequestDetail from '../RequestManagement/RequestDetail';
+import UserSearchWindow from './UserSearchWindow';
+import UserCreate from './UserCreate';
 
 const UserManagement = () => {
   const {
     isDetail,
+    filterd,
     userSearchHandler,
     userHandler,
     pwdHandler,
     rePwdHandler,
     roleSelectHandler,
     teamSelectHandler,
-    toggleUpdate,
+    selectHandler,
     wrapSetIsDetail,
+    filteringUser,
   } = useUserManagement();
 
   const { user, selectUser } = useUserList();
@@ -40,6 +42,11 @@ const UserManagement = () => {
     teamSelectHandler,
   };
 
+  useEffect(() => {
+    console.log('kusokasu');
+    filteringUser(users);
+  }, [userSearchHandler.value, selectHandler.value]);
+
   const wrapOnClickRequestItem = (r: requestDataType) => {
     wrapSetIsDetail(true);
     mainContents.chComponent(<RequestDetail request={r} />);
@@ -51,26 +58,25 @@ const UserManagement = () => {
       <UserDetail user={u} onClick={wrapOnClickRequestItem} />,
     );
   };
+  const wrapOnclickUserCreate = () => {
+    mainContents.chComponent(<UserCreate />);
+  };
 
   return (
     <SplitTemplate
-      menuHeader={<UserInfo name="KOTARO" team="TeamA" score={10} />}
-      menuTool={
-        <UserListTool
+      menuHeader={
+        <UserSearchWindow
           handler={userSearchHandler}
-          onClick={mainContents.chComponent}
-          userCreateHandler={userCreateHandler}
-          wrapSetIsDetail={wrapSetIsDetail}
+          onClickUserCreate={wrapOnclickUserCreate}
         />
       }
-      menuContents={<UserList users={users} onClick={wrapSelectUser} />}
+      // ここは、ロールでの絞り込みにする
+      menuTool={<UserListTool handler={selectHandler} />}
+      menuContents={<UserList users={filterd} onClick={wrapSelectUser} />}
       mainHeader={
         <UserPanelHeader
-          headerMsg=""
           user={user}
-          toggleUpdate={toggleUpdate}
           chComponent={mainContents.chComponent}
-          mainComponent={mainContents.component ?? <div>n</div>}
           isDetail={isDetail}
         />
       }

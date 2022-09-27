@@ -51,4 +51,14 @@ export const quests: questDataType[] = [
     owner_id: 1,
     example: '1/30 プレゼンの実施',
   },
+  {
+    id: 6,
+    title: '帰社会でのプレゼン提案・実施 tesuttetete',
+    description: '帰社会での登壇者も振り返りで付与対象とする。',
+    reward: 10,
+    date: '2022/01/01',
+    owner: '鈴木',
+    owner_id: 2,
+    example: '1/30 プレゼンの実施',
+  },
 ];

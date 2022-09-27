@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { questDataType } from '../../../types/data/questDataType';
-import { users } from '../../../testData/UserData';
-import { userDataType } from '../../../types/data/userDataType';
 import useInputForm from '../../../hooks/InputForm/useInputForm';
+import useSelectForm from '../../mol/SelectForm/useSelectForm';
 
 const useQuestManagement = () => {
   const questSearchHandler = useInputForm();
+  const selectHandler = useSelectForm();
   const [filterdQuests, setFilterdQuests] = useState<questDataType[]>([]);
   const [isDetail, setIsDetail] = useState(false);
   const [quest, setQuest] = useState<questDataType>({
@@ -24,19 +24,34 @@ const useQuestManagement = () => {
     setIsDetail(true);
   };
 
+  const filterCheck = (data: questDataType) => {
+    let flg = false;
+
+    // allの時の絞り込み
+    if (Number(selectHandler.value) === 0) {
+      if (data.owner.indexOf(questSearchHandler.value) !== -1) {
+        flg = true;
+      }
+    } else if (Number(selectHandler.value) !== 0) {
+      if (
+        data.owner_id === Number(selectHandler.value) &&
+        data.owner.indexOf(questSearchHandler.value) !== -1
+      ) {
+        flg = true;
+      }
+    }
+    return flg;
+  };
+
   const filteringQuest = (data: questDataType[]) => {
-    setFilterdQuests(
-      data.filter(
-        (q: questDataType) => q.title.indexOf(questSearchHandler.value) !== -1,
-      ),
-    );
+    setFilterdQuests(data.filter((q: questDataType) => filterCheck(q)));
   };
   return {
     isDetail,
     quest,
     filterdQuests,
-    // owner,
     questSearchHandler,
+    selectHandler,
     setIsDetail,
     onClickQuestItem,
     filteringQuest,

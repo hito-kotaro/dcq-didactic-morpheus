@@ -10,6 +10,7 @@ import QuestListTool from '../../mol/QuestListTool/QuestListTool';
 import QuestCreate from './QuestCreate';
 import QuestPanelHeader from './QuestPanelHeader';
 import EmptyStateIcon from '../../mol/EmptyStateIcon/EmptyStateIcon';
+import QuestSearchWindow from './QuestSearchWindow';
 
 const QuestManagement = () => {
   const {
@@ -18,6 +19,7 @@ const QuestManagement = () => {
     isDetail,
     setIsDetail,
     questSearchHandler,
+    selectHandler,
     onClickQuestItem,
     filteringQuest,
   } = useQuestManagement();
@@ -28,28 +30,23 @@ const QuestManagement = () => {
     mainContents.chComponent(<QuestDetail quest={q} />);
   };
 
-  const wrapOnclickCreateQuest = () => {
+  const wrapOnclickQuestCreate = () => {
     setIsDetail(false);
     mainContents.chComponent(<QuestCreate />);
   };
   useEffect(() => {
     filteringQuest(quests);
-  }, [questSearchHandler.value]);
+  }, [questSearchHandler.value, selectHandler.value]);
 
   return (
     <SplitTemplate
       menuHeader={
-        <QuestListTool
+        <QuestSearchWindow
           handler={questSearchHandler}
-          onClickCreate={wrapOnclickCreateQuest}
+          onClickQuestCreate={wrapOnclickQuestCreate}
         />
       }
-      menuTool={
-        <QuestListTool
-          handler={questSearchHandler}
-          onClickCreate={wrapOnclickCreateQuest}
-        />
-      }
+      menuTool={<QuestListTool handler={selectHandler} />}
       menuContents={
         <QuestList quests={filterdQuests} onClick={wrapOnClickQuestItem} />
       }

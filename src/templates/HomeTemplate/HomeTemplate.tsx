@@ -16,18 +16,16 @@ import RequestManagement from '../../components/org/RequestManagement/RequestMan
 import PenaltyManagement from '../../components/org/PenaltyManagement/PenaltyManagement';
 import RequestHistoryManagement from '../../components/org/RequestHistoryManagement/RequestHistoryManagement';
 import PenaltyHistoryManagement from '../../components/org/PenaltyHistoryManagement/PenaltyHistoryManagement';
+import { sideMenuDataType } from '../../components/org/SideMenu/sideMenuDataType';
 
 const HomeTemplate = () => {
   const [component, setComponent] = useState<ReactElement>(<Summary />);
-  const dummy = () => {
-    console.log('hello');
-  };
 
   const chComponent = (c: ReactElement) => {
     setComponent(c);
   };
 
-  const itemList = [
+  const sideMenuItemList: sideMenuDataType[] = [
     {
       label: '集計',
       icon: <EqualizerIcon />,
@@ -82,7 +80,7 @@ const HomeTemplate = () => {
     <>
       <Header />
       <div className="flex h-screen pt-10">
-        <SideMenu itemList={itemList} />
+        <SideMenu itemList={sideMenuItemList} />
         <div className="w-full">{component}</div>
       </div>
     </>
