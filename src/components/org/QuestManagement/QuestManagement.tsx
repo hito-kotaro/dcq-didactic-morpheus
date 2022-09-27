@@ -36,7 +36,7 @@ const QuestManagement = () => {
   };
   useEffect(() => {
     filteringQuest(quests);
-  }, [questSearchHandler.value]);
+  }, [questSearchHandler.value, selectHandler.value]);
 
   return (
     <SplitTemplate

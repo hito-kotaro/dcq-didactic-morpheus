@@ -10,19 +10,14 @@ import RequestDetail from './RequestDetail';
 import RequestPanelHeader from './RequestPanelHeader';
 import RequestListTool from '../../mol/RequestListTool/RequestListTool';
 import EmptyStateIcon from '../../mol/EmptyStateIcon/EmptyStateIcon';
+import SearchWindow from '../../mol/SearchWindow/SearchWindow';
 
 const RequestManagement = () => {
   const {
-    request,
-    isDetail,
-    userSelectItems,
     filterdRequests,
     requestSearchHandler,
-    toolStatusSelectHandler,
-    toolApplicantSelectHandler,
     filteringRequest,
     onClickRequestItem,
-    setIsDetail,
   } = useRequestmanagement();
   const mainContents = useChangeComponent();
 
@@ -36,7 +31,12 @@ const RequestManagement = () => {
   }, [requestSearchHandler.value]);
   return (
     <SplitTemplate
-      menuHeader={<UserInfo name="KOTARO" team="teamA" score={10} />}
+      menuHeader={
+        <SearchWindow
+          handler={requestSearchHandler}
+          placeholder="リクエストタイトルで検索"
+        />
+      }
       menuTool={<RequestListTool inputHandler={requestSearchHandler} />}
       menuContents={
         <RequestList

@@ -26,7 +26,7 @@ const QuestListTool: VFC<Props> = (props) => {
         return o;
       }
     });
-
+    console.log(dupDel);
     return [{ id: 0, label: 'all' }, ...dupDel];
   };
 

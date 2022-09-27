@@ -2,7 +2,7 @@ import { TextField } from '@mui/material';
 import React, { VFC } from 'react';
 import { inputHandlerType } from '../../../types/inputHandlerType';
 
-// タイトル検索
+// 申請者で絞り込み
 type Props = {
   inputHandler: inputHandlerType;
 };
