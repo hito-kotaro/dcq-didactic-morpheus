@@ -13,6 +13,7 @@ const useRequestmanagement = () => {
   const requestSearchHandler = useInputForm();
   const toolStatusSelectHandler = useSelectForm();
   const toolApplicantSelectHandler = useSelectForm();
+  const applicantSelectHandler = useSelectForm();
 
   const [request, setRequest] = useState<requestDataType>({
     id: 0,
@@ -34,34 +35,34 @@ const useRequestmanagement = () => {
     setIsDetail(true);
   };
 
-  const filteringRequest = (data: requestDataType[]) => {
-    setFilterdRequests(
-      data.filter(
-        (r: requestDataType) =>
-          r.title.indexOf(requestSearchHandler.value) !== -1,
-      ),
-    );
+  const filterCheck = (data: requestDataType) => {
+    let flg = false;
+
+    // allの時の絞り込み
+    if (Number(applicantSelectHandler.value) === 0) {
+      if (data.title.indexOf(requestSearchHandler.value) !== -1) {
+        flg = true;
+      }
+    } else if (Number(applicantSelectHandler.value) !== 0) {
+      if (
+        data.applicant_id === Number(applicantSelectHandler.value) &&
+        data.title.indexOf(requestSearchHandler.value) !== -1
+      ) {
+        flg = true;
+      }
+    }
+    return flg;
   };
 
-  const filteringUserSelectMenu = () => {
-    setUserSelectItems(
-      users.map((u: userDataType) => {
-        const item: selectItemType = { id: u.id, label: u.name };
-        return item;
-      }),
-    );
+  const filteringRequest = (data: requestDataType[]) => {
+    setFilterdRequests(data.filter((r: requestDataType) => filterCheck(r)));
   };
 
   return {
-    isDetail,
-    request,
-    userSelectItems,
-    requestSearchHandler,
-    toolStatusSelectHandler,
-    toolApplicantSelectHandler,
     filterdRequests,
+    requestSearchHandler,
     filteringRequest,
-    setIsDetail,
+    applicantSelectHandler,
     onClickRequestItem,
   };
 };

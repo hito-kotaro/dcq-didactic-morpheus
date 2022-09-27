@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import useInputForm from '../../../hooks/InputForm/useInputForm';
 import { penaltyDataType } from '../../../types/data/penaltyDataType';
+import useSelectForm from '../../mol/SelectForm/useSelectForm';
 
 const usePenaltyManagement = () => {
   const [isDetail, setIsDetail] = useState(false);
   const [filterdPenalties, setFilterdPenalties] = useState<penaltyDataType[]>(
     [],
   );
+  const selectHandler = useSelectForm();
   const penaltySearchHandler = useInputForm();
   const [penalty, setPenalty] = useState<penaltyDataType>({
     id: 0,
@@ -23,13 +25,27 @@ const usePenaltyManagement = () => {
     setIsDetail(true);
   };
 
+  const filterCheck = (data: penaltyDataType) => {
+    let flg = false;
+
+    // allの時の絞り込み
+    if (Number(selectHandler.value) === 0) {
+      if (data.owner.indexOf(penaltySearchHandler.value) !== -1) {
+        flg = true;
+      }
+    } else if (Number(selectHandler.value) !== 0) {
+      if (
+        data.owner_id === Number(selectHandler.value) &&
+        data.owner.indexOf(penaltySearchHandler.value) !== -1
+      ) {
+        flg = true;
+      }
+    }
+    return flg;
+  };
+
   const filteringPenalty = (data: penaltyDataType[]) => {
-    setFilterdPenalties(
-      data.filter(
-        (q: penaltyDataType) =>
-          q.title.indexOf(penaltySearchHandler.value) !== -1,
-      ),
-    );
+    setFilterdPenalties(data.filter((p: penaltyDataType) => filterCheck(p)));
   };
 
   return {
@@ -39,6 +55,7 @@ const usePenaltyManagement = () => {
     penaltySearchHandler,
     onClickPenaltyItem,
     filteringPenalty,
+    selectHandler,
   };
 };
 

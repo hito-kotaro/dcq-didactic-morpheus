@@ -12,9 +12,9 @@ import PenaltyPanelHeader from './PenaltyPanelHeader';
 import PenaltyUpdate from './PenaltyUpdate';
 import PenaltyCreate from './PenaltyCreate';
 import EmptyStateIcon from '../../mol/EmptyStateIcon/EmptyStateIcon';
+import PenaltySearchWindow from './PenaltySearchWindow';
 
 const PenaltyManagement = () => {
-  const dummy = (p: penaltyDataType) => {};
   const {
     penalty,
     filterdPenalties,
@@ -22,12 +22,13 @@ const PenaltyManagement = () => {
     penaltySearchHandler,
     onClickPenaltyItem,
     filteringPenalty,
+    selectHandler,
   } = usePenaltyManagement();
   const mainContents = useChangeComponent();
 
   useEffect(() => {
     filteringPenalty(penalties);
-  }, [penaltySearchHandler.value]);
+  }, [penaltySearchHandler.value, selectHandler.value]);
 
   const wrapOnClickPenaltyItem = (p: penaltyDataType) => {
     onClickPenaltyItem(p);
@@ -41,13 +42,13 @@ const PenaltyManagement = () => {
 
   return (
     <SplitTemplate
-      menuHeader={<UserInfo name="KOTARO" team="TeamA" score={10} />}
-      menuTool={
-        <PenaltyListTool
+      menuHeader={
+        <PenaltySearchWindow
           handler={penaltySearchHandler}
-          onClick={wrapOnClickCreatePenalty}
+          onClickPenaltyCreate={wrapOnClickCreatePenalty}
         />
       }
+      menuTool={<PenaltyListTool handler={selectHandler} />}
       menuContents={
         <PenaltyList
           penalties={filterdPenalties}

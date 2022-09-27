@@ -128,4 +128,18 @@ export const requests: requestDataType[] = [
     applicant_id: 2,
     applicant: '鈴木',
   },
+  {
+    id: 4,
+    date: '2022/01/01',
+    title: '採用面接に同席-完了報告',
+    description: '1/30Aさんの面談に同席',
+    q_title: '採用面接に同席',
+    q_description: '採用面接実施時に、同席者として参加する。',
+    q_owner_id: 1,
+    q_owner: '佐藤',
+    q_reward: 1,
+    status: 'canceled',
+    applicant_id: 3,
+    applicant: '高橋',
+  },
 ];

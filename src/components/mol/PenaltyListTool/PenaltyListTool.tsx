@@ -1,29 +1,41 @@
-import { TextField, Button } from '@mui/material';
+/* eslint-disable consistent-return */
+/* eslint-disable array-callback-return */
 import React, { VFC } from 'react';
-import { inputHandlerType } from '../../../types/inputHandlerType';
+import { penalties } from '../../../testData/PenaltyData';
+import { penaltyDataType } from '../../../types/data/penaltyDataType';
+import { selectHandlerType } from '../../../types/inputHandlerType';
+import SelectForm from '../SelectForm/SelectForm';
+import { selectItemType } from '../SelectForm/selectItemType';
 
 type Props = {
-  handler: inputHandlerType;
-  onClick: () => void;
+  handler: selectHandlerType;
 };
 const PenaltyListTool: VFC<Props> = (props) => {
-  const { handler, onClick } = props;
+  const { handler } = props;
+
+  const penaltyToSelectMenu = () => {
+    const owners = penalties.map((p: penaltyDataType) => ({
+      id: p.owner_id,
+      label: p.owner,
+    }));
+
+    const dupDel = owners.filter((o: selectItemType, i, self) => {
+      const tmp = self.map((item: selectItemType) => item.id);
+      if (tmp.indexOf(o.id) === i) {
+        return o;
+      }
+    });
+    console.log(dupDel);
+    return [{ id: 0, label: 'all' }, ...dupDel];
+  };
   return (
     <div className="flex">
       <div className="w-4/6">
-        <TextField
-          fullWidth
-          type="text"
-          placeholder="ペナルティタイトルで検索"
-          variant="outlined"
-          onChange={handler.onChange}
-          value={handler.value}
+        <SelectForm
+          label="ペナルティオーナーで絞り込み"
+          handler={handler}
+          menu={penaltyToSelectMenu()}
         />
-      </div>
-      <div className="ml-auto pt-2 text-right">
-        <Button variant="contained" onClick={onClick}>
-          新規作成
-        </Button>
       </div>
     </div>
   );

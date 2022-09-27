@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import useChangeComponent from '../../../hooks/ChangeComponent/useChangeComponent';
 import { requestDataType } from '../../../types/data/requestDataType';
-import UserInfo from '../../mol/MenuHeader/UserInfo';
 import SplitTemplate from '../../templates/SplitTemplate';
 import RequestList from '../RequestList/RequestList';
 import useRequestmanagement from './useRequestmanagement';
@@ -17,6 +16,7 @@ const RequestManagement = () => {
     filterdRequests,
     requestSearchHandler,
     filteringRequest,
+    applicantSelectHandler,
     onClickRequestItem,
   } = useRequestmanagement();
   const mainContents = useChangeComponent();
@@ -28,7 +28,7 @@ const RequestManagement = () => {
 
   useEffect(() => {
     filteringRequest(requests);
-  }, [requestSearchHandler.value]);
+  }, [requestSearchHandler.value, applicantSelectHandler.value]);
   return (
     <SplitTemplate
       menuHeader={
@@ -37,7 +37,7 @@ const RequestManagement = () => {
           placeholder="リクエストタイトルで検索"
         />
       }
-      menuTool={<RequestListTool inputHandler={requestSearchHandler} />}
+      menuTool={<RequestListTool handler={applicantSelectHandler} />}
       menuContents={
         <RequestList
           requests={filterdRequests}

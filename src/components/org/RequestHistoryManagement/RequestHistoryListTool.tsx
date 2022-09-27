@@ -29,7 +29,7 @@ const RequestHistoryListTool: VFC<Props> = (props) => {
     <div className="flex">
       <div className=" w-6/12">
         <SelectForm
-          label="ユーザ名で絞り込み"
+          label="申請者名で絞り込み"
           handler={userSelectHandler}
           menu={userToSelectMenu()}
         />
@@ -37,7 +37,7 @@ const RequestHistoryListTool: VFC<Props> = (props) => {
       <div className="w-1/12" />
       <div className=" w-5/12">
         <SelectForm
-          label="statusで絞り込み"
+          label="ステータスで絞り込み"
           handler={statusSelectHandler}
           menu={statusSelectMenu}
         />

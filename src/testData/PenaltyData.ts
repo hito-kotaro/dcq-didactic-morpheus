@@ -114,4 +114,13 @@ export const penalties: penaltyDataType[] = [
     owner: '佐藤',
     owner_id: 1,
   },
+  {
+    id: 4,
+    title: 'twitterフォロワー購入',
+    description: 'フォロワーを購入する',
+    penalty: 1000,
+    date: '2022/01/01',
+    owner: '鈴木',
+    owner_id: 2,
+  },
 ];
