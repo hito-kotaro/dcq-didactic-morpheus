@@ -1,12 +1,11 @@
 import React, { VFC } from 'react';
-import { Avatar, Button } from '@mui/material';
-import MyAvatar from '../../atoms/MyAvatar/MyAvatar';
+import { Button } from '@mui/material';
 import ScoreIcon from '../../atoms/ScoreIcon/ScoreIcon';
 import { userDataType } from '../../../types/data/userDataType';
 import DcpIcon from '../../atoms/DcpIcon/DcpIcon';
-import MyBadge from '../../atoms/MyBadge/MyBadge';
 import { badgeType } from '../MyBadgeList/myBadgeType';
 import MyBadgeList from '../MyBadgeList/MyBadgeList';
+import BoringAvatar from '../../atoms/MyAvatar/BoringAvatar';
 
 type Props = {
   user: userDataType;
@@ -21,7 +20,7 @@ const UserListItem: VFC<Props> = (props) => {
       <div className="w-full">
         <div className="flex px-3">
           <div>
-            <Avatar />
+            <BoringAvatar name={user.name} />
           </div>
           <div className="w-3" />
           <div className="w-full">

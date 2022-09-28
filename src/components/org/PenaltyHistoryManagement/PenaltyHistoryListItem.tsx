@@ -1,7 +1,8 @@
 import React, { VFC } from 'react';
-import { Button, Avatar, Divider } from '@mui/material';
+import { Button, Divider } from '@mui/material';
 import { assignedPenaltyDateType } from '../../../types/data/penaltyDataType';
 import MyBadge from '../../atoms/MyBadge/MyBadge';
+import BoringAvatar from '../../atoms/MyAvatar/BoringAvatar';
 
 type Props = {
   penalty: assignedPenaltyDateType;
@@ -13,7 +14,7 @@ const PenaltyHistoryListItem: VFC<Props> = (props) => {
     <>
       <Button fullWidth onClick={() => onClick(penalty)}>
         <div className="w-full flex text-text p-3">
-          <Avatar />
+          <BoringAvatar name={penalty.team} isTeam />
           <div className="ml-3 w-full">
             <div className="flex">
               <div className="text-text text-lg font-semibold text-left">

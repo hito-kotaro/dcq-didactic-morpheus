@@ -23,6 +23,7 @@ const PenaltyHistoryDetail: VFC<Props> = (props) => {
           reward={penalty.penalty}
           status="penalty"
           isPenalty
+          isTeam
         />
 
         <div className="h-8" />
