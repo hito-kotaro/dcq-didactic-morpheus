@@ -1,5 +1,6 @@
 import React, { ReactElement, useState } from 'react';
 import HistoryIcon from '@mui/icons-material/History';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 import AnnouncementIcon from '@mui/icons-material/Announcement';
 import EqualizerIcon from '@mui/icons-material/Equalizer';
 import ReviewsIcon from '@mui/icons-material/Reviews';
@@ -16,16 +17,23 @@ import RequestManagement from '../../components/org/RequestManagement/RequestMan
 import PenaltyManagement from '../../components/org/PenaltyManagement/PenaltyManagement';
 import RequestHistoryManagement from '../../components/org/RequestHistoryManagement/RequestHistoryManagement';
 import PenaltyHistoryManagement from '../../components/org/PenaltyHistoryManagement/PenaltyHistoryManagement';
+import DashBoard from '../../components/org/DashBoard/DashBoard';
 import { sideMenuDataType } from '../../components/org/SideMenu/sideMenuDataType';
 
 const HomeTemplate = () => {
-  const [component, setComponent] = useState<ReactElement>(<Summary />);
+  const [component, setComponent] = useState<ReactElement>(<DashBoard />);
 
   const chComponent = (c: ReactElement) => {
     setComponent(c);
   };
 
   const sideMenuItemList: sideMenuDataType[] = [
+    {
+      label: 'ダッシュボード',
+      icon: <DashboardIcon />,
+      action: chComponent,
+      component: <DashBoard />,
+    },
     {
       label: '集計',
       icon: <EqualizerIcon />,

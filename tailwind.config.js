@@ -9,6 +9,9 @@ module.exports = {
       borderWidth: {
         1: '1px',
       },
+      height: {
+        128: '32rem',
+      },
       minHeight: {
         0: '0',
         '1/4': '25%',
