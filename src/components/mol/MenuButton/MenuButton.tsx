@@ -1,14 +1,16 @@
 import React, { ReactElement, VFC } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Button, IconButton, Menu, MenuItem } from '@mui/material';
+import { Button, Divider, IconButton, Menu, MenuItem } from '@mui/material';
+import BoringAvatar from '../../atoms/MyAvatar/BoringAvatar';
 
 type Props = {
   icon: ReactElement;
   menuItems: { label: string; onClick: () => void }[];
+  isHeaderMenu?: boolean;
 };
 
 const MenuButton: VFC<Props> = (props) => {
-  const { menuItems, icon } = props;
+  const { menuItems, icon, isHeaderMenu } = props;
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -38,6 +40,22 @@ const MenuButton: VFC<Props> = (props) => {
           'aria-labelledby': 'basic-button',
         }}
       >
+        {isHeaderMenu ? (
+          <div className="px-2">
+            <div className="flex">
+              <BoringAvatar name="佐藤" />
+              <div className="w-2" />
+              <div className="text-text text-lg font-semibold leading-10">
+                佐藤
+              </div>
+            </div>
+            <div className="my-3">
+              <Divider />
+            </div>
+          </div>
+        ) : (
+          ''
+        )}
         {menuItems.map((item: { label: string; onClick: () => void }) => (
           <MenuItem onClick={item.onClick}>{item.label}</MenuItem>
         ))}

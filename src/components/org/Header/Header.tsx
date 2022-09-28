@@ -14,7 +14,11 @@ const Header = () => {
     <div className="w-full bg-h_base fixed text-h_text z-1300 p-1 flex">
       <DoIcon />
       <div className="ml-auto mr-5">
-        <MenuButton menuItems={menuItems} icon={<BoringAvatar name="佐藤" />} />
+        <MenuButton
+          menuItems={menuItems}
+          icon={<BoringAvatar name="佐藤" />}
+          isHeaderMenu
+        />
       </div>
     </div>
   );
