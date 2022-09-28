@@ -1,7 +1,9 @@
 import React, { VFC } from 'react';
-import { Button, Avatar, Divider } from '@mui/material';
+import { Button, Divider } from '@mui/material';
+
 import { requestDataType } from '../../../types/data/requestDataType';
 import MyBadge from '../../atoms/MyBadge/MyBadge';
+import BoringAvatar from '../../atoms/MyAvatar/BoringAvatar';
 
 type Props = {
   request: requestDataType;
@@ -13,7 +15,7 @@ const RequestListItem: VFC<Props> = (props) => {
     <>
       <Button fullWidth onClick={() => onClick(request)}>
         <div className="w-full flex text-text p-3">
-          <Avatar />
+          <BoringAvatar name={request.applicant} />
           <div className="ml-3 w-full">
             <div className="flex">
               <div className="text-text text-lg font-semibold text-left">

@@ -2,6 +2,7 @@ import { Button, Avatar, Divider } from '@mui/material';
 import React, { VFC } from 'react';
 import { penaltyDataType } from '../../../types/data/penaltyDataType';
 import PenaltyIcon from '../../atoms/Icons/PenaltyIcon';
+import BoringAvatar from '../../atoms/MyAvatar/BoringAvatar';
 import ScoreIcon from '../../atoms/ScoreIcon/ScoreIcon';
 
 type Props = {
@@ -14,7 +15,7 @@ const PenaltyListItem: VFC<Props> = (props) => {
     <>
       <Button fullWidth onClick={() => onClick(penalty)}>
         <div className="w-full flex text-text p-3">
-          <Avatar />
+          <BoringAvatar name={penalty.owner} />
           <div className="ml-3 w-full">
             <div className="text-text text-lg font-semibold text-left">
               {penalty.title}

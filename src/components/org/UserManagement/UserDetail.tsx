@@ -1,8 +1,6 @@
 import React, { useEffect, useState, VFC } from 'react';
 import { Divider } from '@mui/material';
 import { userDataType } from '../../../types/data/userDataType';
-import ActivityList from '../ActivityList/ActivityList';
-import { activityData } from '../../../testData/ActivityData';
 import RequestList from '../RequestList/RequestList';
 import { requestDataType } from '../../../types/data/requestDataType';
 import { requests } from '../../../testData/RequestData';
@@ -29,7 +27,6 @@ const UserDetail: VFC<Props> = (props) => {
       <div className="mt-3">
         <Divider />
       </div>
-      {/* <ActivityList activities={activityData} /> */}
       <RequestList requests={filterd} onClick={onClick} />
     </div>
   );

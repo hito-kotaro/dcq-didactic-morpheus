@@ -1,10 +1,10 @@
-import { Avatar } from '@mui/material';
 import React, { VFC } from 'react';
 import DcpIcon from '../../atoms/DcpIcon/DcpIcon';
 import PenaltyIcon from '../../atoms/Icons/PenaltyIcon';
 import ScoreIcon from '../../atoms/ScoreIcon/ScoreIcon';
 import MyBadgeList from '../MyBadgeList/MyBadgeList';
 import { badgeType } from '../MyBadgeList/myBadgeType';
+import BoringAvatar from '../../atoms/MyAvatar/BoringAvatar';
 
 type Props = {
   owner: string;
@@ -12,16 +12,17 @@ type Props = {
   reward: number;
   status: string;
   isPenalty?: boolean;
+  isTeam?: boolean;
 };
 const OwnerHeader: VFC<Props> = (props) => {
-  const { owner, date, reward, status, isPenalty } = props;
+  const { owner, date, reward, status, isPenalty, isTeam } = props;
   const badges: badgeType[] = [
     { bg: `bg-${status}`, text: `text-${status}`, content: status },
   ];
 
   return (
     <div className="flex w-full">
-      <Avatar />
+      <BoringAvatar name={owner} isTeam={isTeam} />
       <div className="w-5" />
       <div className="text-text w-full">
         <div className="flex">

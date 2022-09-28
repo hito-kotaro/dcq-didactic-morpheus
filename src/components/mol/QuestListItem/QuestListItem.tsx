@@ -1,9 +1,9 @@
-import { Button, Avatar, Divider } from '@mui/material';
 import React, { VFC } from 'react';
+import { Button, Divider } from '@mui/material';
 import { questDataType } from '../../../types/data/questDataType';
 import DcpIcon from '../../atoms/DcpIcon/DcpIcon';
-import MyBadge from '../../atoms/MyBadge/MyBadge';
 import ScoreIcon from '../../atoms/ScoreIcon/ScoreIcon';
+import BoringAvatar from '../../atoms/MyAvatar/BoringAvatar';
 
 type Props = {
   quest: questDataType;
@@ -17,7 +17,7 @@ const QuestListItem: VFC<Props> = (props) => {
     <>
       <Button fullWidth onClick={() => onClick(quest)}>
         <div className="w-full flex text-text p-3">
-          <Avatar />
+          <BoringAvatar name={quest.owner} />
           <div className="ml-3 w-full">
             <div className="text-text text-lg font-semibold text-left">
               {quest.title}

@@ -1,6 +1,7 @@
 import React, { VFC } from 'react';
 import { Button } from '@mui/material';
 import Groups3Icon from '@mui/icons-material/Groups3';
+import Avatar from 'boring-avatars';
 import ScoreIcon from '../../atoms/ScoreIcon/ScoreIcon';
 import DcpIcon from '../../atoms/DcpIcon/DcpIcon';
 import PenaltyIcon from '../../atoms/Icons/PenaltyIcon';
@@ -17,7 +18,13 @@ const TeamListItem: VFC<Props> = (props) => {
     <Button fullWidth onClick={() => onClick(team)}>
       <div className="flex ml-3 w-full pt-2 mx-5">
         <div className="w-1/5">
-          <div className="h-10 w-10 bg-orange-300 rounded-md" />
+          {/* <div className="h-10 w-10 bg-orange-300 rounded-md" /> */}
+          <Avatar
+            size={40}
+            name={team.name}
+            variant="marble"
+            colors={['#FFBD87', '#FFD791', '#F7E8A6', '#D9E8AE', '#BFE3C0']}
+          />
         </div>
         <div className="w-full">
           <div className="text-text text-lg text-left">
