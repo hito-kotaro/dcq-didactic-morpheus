@@ -65,7 +65,19 @@ const LoginPanel = () => {
           </Button>
           <div className="h-10" />
           <div className="flex justify-center">
-            <Button variant="contained" onClick={isSignUp ? signUp : login}>
+            <Button
+              variant="contained"
+              onClick={
+                isSignUp
+                  ? () => signUp(tenantHandler.value, pwdHandler.value)
+                  : () =>
+                      login(
+                        tenantHandler.value,
+                        userHandler.value,
+                        pwdHandler.value,
+                      )
+              }
+            >
               {isSignUp ? '新しいテナントの作成' : 'ログイン'}
             </Button>
           </div>

@@ -1,12 +1,9 @@
 import { AxiosResponse } from 'axios';
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { axiosInstance } from '../../lib/axiosInstance';
 
-const useLogin = () => {
+const useLoginApi = () => {
   const navigate = useNavigate();
-
-  // ログイン時の画面遷移
 
   const login = async (
     tenantName: string,
@@ -32,23 +29,7 @@ const useLogin = () => {
       console.log(e);
     }
   };
-
-  const signUp = async (tenantName: string, password: string) => {
-    const signUpParam = { tenant_name: tenantName, password };
-    try {
-      const result: AxiosResponse = await axiosInstance.post(
-        '/tenant',
-        signUpParam,
-      );
-
-      console.log(result);
-      // navigate('/home');
-      // localStorage.setItem('token', result.data.access_token);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-  return { login, signUp };
+  return {};
 };
 
-export default useLogin;
+export default useLoginApi;
