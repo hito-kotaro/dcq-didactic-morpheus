@@ -1,20 +1,10 @@
-import React, { ReactElement, useState, VFC } from 'react';
-import { TextField, Button, Box } from '@mui/material';
+import React from 'react';
+import { Box } from '@mui/material';
 import sampleLogo from '../../../images/LoginLogo.svg';
-import useInputForm from '../../../hooks/InputForm/useInputForm';
-import useLogin from '../../../hooks/Login/useLogin';
 import LoginForm from './LoginForm';
-import AdminLoginForm from './AdminLoginForm';
-import SignUpForm from './SignUpForm';
 import useChangeComponent from '../../../hooks/ChangeComponent/useChangeComponent';
 
-type Props = {
-  changePanel: () => void;
-};
-
-const LoginPanel: VFC<Props> = (props) => {
-  const { changePanel } = props;
-  const [isAdmin, setIsAdmin] = useState(false);
+const LoginPanel = () => {
   const form = useChangeComponent();
 
   return (
