@@ -4,6 +4,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import AdminHomeHeader from '../../components/org/AdminHomeHeader/AdminHomeHeader';
 import Header from '../../components/org/Header/Header';
 import SideMenu from '../../components/org/SideMenu/SideMenu';
+import useLoginApi from '../../hooks/Api/useLoginApi';
 
 type Props = {
   settings: ReactElement[];
@@ -11,6 +12,7 @@ type Props = {
 
 const AdminHomeTemplate: VFC<Props> = (props) => {
   const { settings } = props;
+  const { logout } = useLoginApi();
   const dummy = (c: ReactElement) => {
     console.log('hello temmmmy');
   };
@@ -31,7 +33,7 @@ const AdminHomeTemplate: VFC<Props> = (props) => {
     {
       label: 'ログアウト',
       icon: <InboxIcon />,
-      action: dummy,
+      action: logout,
       component: <div>dummy</div>,
     },
   ];

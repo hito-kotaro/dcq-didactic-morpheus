@@ -1,7 +1,7 @@
-import { TextField, Button } from '@mui/material';
 import React, { ReactElement, VFC } from 'react';
+import { TextField, Button } from '@mui/material';
+import useLoginApi from '../../../hooks/Api/useLoginApi';
 import useInputForm from '../../../hooks/InputForm/useInputForm';
-import useLogin from '../../../hooks/Login/useLogin';
 import LoginForm from './LoginForm';
 import SignUpForm from './SignUpForm';
 
@@ -11,10 +11,9 @@ type Props = {
 
 const AdminLoginForm: VFC<Props> = (props) => {
   const { chComponent } = props;
-  const userHandler = useInputForm();
   const pwdHandler = useInputForm();
   const tenantHandler = useInputForm();
-  const { login } = useLogin();
+  const { tenantLogin } = useLoginApi();
   return (
     <>
       <div className="text-text font-semibold text-lg text-center">
@@ -61,9 +60,7 @@ const AdminLoginForm: VFC<Props> = (props) => {
         <div className="flex justify-center">
           <Button
             variant="contained"
-            onClick={() =>
-              login(tenantHandler.value, userHandler.value, pwdHandler.value)
-            }
+            onClick={() => tenantLogin(tenantHandler.value, pwdHandler.value)}
           >
             ログイン
           </Button>

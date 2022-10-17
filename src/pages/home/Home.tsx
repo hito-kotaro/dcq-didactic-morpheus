@@ -36,7 +36,16 @@ const Home = () => {
       </div>
     </>,
   ];
-  const [isAdmin, setIsAdmin] = useState(false);
-  return <div>{isAdmin ? <HomeTemplate /> : <HomeTemplate />}</div>;
+  const [isAdmin, setIsAdmin] = useState(localStorage.getItem('admin'));
+
+  return (
+    <div>
+      {localStorage.getItem('admin') ? (
+        <AdminHomeTemplate settings={settings} />
+      ) : (
+        <HomeTemplate />
+      )}
+    </div>
+  );
 };
 export default Home;
