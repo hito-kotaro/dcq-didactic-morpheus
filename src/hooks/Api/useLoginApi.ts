@@ -53,12 +53,12 @@ const useLoginApi = () => {
     const signUpParam = { name: tenantName, password };
     try {
       const result: AxiosResponse = await axiosInstance.post(
-        '/tenant',
+        '/auth/signup',
         signUpParam,
       );
       console.log(result.data);
       localStorage.setItem('token', result.data.access_token);
-      localStorage.setItem('tenant_name', result.data.tenant_name);
+      localStorage.setItem('tenant_name', result.data.tenant);
       localStorage.setItem('admin', '1');
       navigate('/home');
     } catch (e) {
