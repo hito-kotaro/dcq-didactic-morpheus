@@ -1,30 +1,36 @@
+import React, { useEffect } from 'react';
 import { TextField, Button, Divider } from '@mui/material';
-import React, { VFC } from 'react';
 import SelectForm from '../../mol/SelectForm/SelectForm';
-import { roles } from '../../../testData/RoleData';
-import { teams } from '../../../testData/TeamData';
-import { selectItemType } from '../../mol/SelectForm/selectItemType';
-import { teamDataType } from '../../../types/data/teamDataType';
 import useInputForm from '../../../hooks/InputForm/useInputForm';
 import useSelectForm from '../../mol/SelectForm/useSelectForm';
+import useRoleStore from '../../../stores/RoleStore/useRoleStore';
+import useTeamStore from '../../../stores/TeamStore/useTeamStore';
 
 const UserCreate = () => {
-  const teamMenu: selectItemType[] = teams.map((t: teamDataType) => ({
-    id: t.id,
-    label: t.name,
-  }));
+  const { roles } = useRoleStore();
+  const { teams } = useTeamStore();
   const userHandler = useInputForm();
   const pwdHandler = useInputForm();
   const rePwdHandler = useInputForm();
   const roleSelectHandler = useSelectForm();
   const teamSelectHandler = useSelectForm();
 
+  useEffect(() => {
+    roleSelectHandler.formatSelectItem(roles);
+  }, [roles]);
+
+  useEffect(() => {
+    teamSelectHandler.formatSelectItem(teams);
+  }, [teams]);
+
   return (
     <div className="px-3">
       <div className="text-text text-lg font-semibold">ユーザ新規作成</div>
+
       <div className="my-3">
         <Divider />
       </div>
+
       <TextField
         fullWidth
         type="text"
@@ -33,7 +39,9 @@ const UserCreate = () => {
         onChange={userHandler.onChange}
         value={userHandler.value}
       />
+
       <div className="h-3" />
+
       <TextField
         fullWidth
         type="password"
@@ -42,7 +50,9 @@ const UserCreate = () => {
         onChange={pwdHandler.onChange}
         value={pwdHandler.value}
       />
+
       <div className="h-3" />
+
       <TextField
         fullWidth
         type="password"
@@ -54,14 +64,14 @@ const UserCreate = () => {
 
       <div className="h-3" />
       <SelectForm
-        menu={roles}
+        menu={roleSelectHandler.selectItem}
         label="ロールを選択してください"
         handler={roleSelectHandler}
       />
 
       <div className="h-3" />
       <SelectForm
-        menu={teamMenu}
+        menu={teamSelectHandler.selectItem}
         label="チームを選択してください"
         handler={teamSelectHandler}
       />

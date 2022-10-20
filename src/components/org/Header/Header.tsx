@@ -1,12 +1,14 @@
 import React from 'react';
+import useLoginApi from '../../../hooks/Api/useLoginApi';
 import DoIcon from '../../atoms/Icons/DoIcon';
 import BoringAvatar from '../../atoms/MyAvatar/BoringAvatar';
 import MenuButton from '../../mol/MenuButton/MenuButton';
 
 const Header = () => {
+  const { logout } = useLoginApi();
   const dummy = () => {};
   const menuItems: { label: string; onClick: () => void }[] = [
-    { label: 'ログアウト', onClick: dummy },
+    { label: 'ログアウト', onClick: logout },
     { label: 'ユーザ情報変更', onClick: dummy },
   ];
 

@@ -1,7 +1,7 @@
 import { Button, Divider } from '@mui/material';
-import React, { VFC } from 'react';
-import { roles } from '../../../testData/RoleData';
-import { teams } from '../../../testData/TeamData';
+import React, { useEffect, VFC } from 'react';
+import useRoleStore from '../../../stores/RoleStore/useRoleStore';
+import useTeamStore from '../../../stores/TeamStore/useTeamStore';
 import { teamDataType } from '../../../types/data/teamDataType';
 import { userDataType } from '../../../types/data/userDataType';
 import SelectForm from '../../mol/SelectForm/SelectForm';
@@ -13,12 +13,20 @@ type Props = {
 };
 const UserAtrbuteUpdate: VFC<Props> = (props) => {
   const { user } = props;
+  const { roles } = useRoleStore();
+  const { teams } = useTeamStore();
+
   const teamSelectHandler = useSelectForm();
   const roleSelectHandler = useSelectForm();
-  const teamMenu: selectItemType[] = teams.map((t: teamDataType) => ({
-    id: t.id,
-    label: t.name,
-  }));
+
+  useEffect(() => {
+    roleSelectHandler.formatSelectItem(roles);
+  }, [roles]);
+
+  useEffect(() => {
+    teamSelectHandler.formatSelectItem(teams);
+  }, [teams]);
+
   return (
     <div className="px-3">
       <div className="text-lg text-text font-semibold">
@@ -36,7 +44,7 @@ const UserAtrbuteUpdate: VFC<Props> = (props) => {
         <Divider />
       </div>
       <SelectForm
-        menu={roles}
+        menu={roleSelectHandler.selectItem}
         label="ロールを選択してください"
         handler={roleSelectHandler}
       />
@@ -49,7 +57,7 @@ const UserAtrbuteUpdate: VFC<Props> = (props) => {
         <Divider />
       </div>
       <SelectForm
-        menu={teamMenu}
+        menu={teamSelectHandler.selectItem}
         label="チームを選択してください"
         handler={teamSelectHandler}
       />

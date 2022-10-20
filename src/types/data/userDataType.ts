@@ -13,3 +13,11 @@ export type userDataType = {
   role: string;
   role_id: number;
 };
+
+export type userCreateType = {
+  tenant_id: number;
+  role_id: number;
+  team_id: number;
+  name: string;
+  password: string;
+};

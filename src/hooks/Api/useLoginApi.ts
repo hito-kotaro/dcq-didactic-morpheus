@@ -25,8 +25,8 @@ const useLoginApi = () => {
       );
 
       console.log(result);
-      navigate('/home');
       // localStorage.setItem('token', result.data.access_token);
+      navigate('/home');
     } catch (e) {
       console.log(e);
     }
@@ -50,7 +50,7 @@ const useLoginApi = () => {
   };
 
   const signUp = async (tenantName: string, password: string) => {
-    const signUpParam = { tenant_name: tenantName, password };
+    const signUpParam = { name: tenantName, password };
     try {
       const result: AxiosResponse = await axiosInstance.post(
         '/tenant',

@@ -1,10 +1,12 @@
-import React, { ReactElement, VFC } from 'react';
+import React, { ReactElement, useEffect, VFC } from 'react';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import AdminHomeHeader from '../../components/org/AdminHomeHeader/AdminHomeHeader';
 import Header from '../../components/org/Header/Header';
 import SideMenu from '../../components/org/SideMenu/SideMenu';
 import useLoginApi from '../../hooks/Api/useLoginApi';
+import useTeamApi from '../../hooks/Api/useTeamApi';
+import useRoleApi from '../../hooks/Api/useRoleApi';
 
 type Props = {
   settings: ReactElement[];
@@ -12,10 +14,17 @@ type Props = {
 
 const AdminHomeTemplate: VFC<Props> = (props) => {
   const { settings } = props;
+  const { fetchAllTeams } = useTeamApi();
+  const { fetchAllRoles } = useRoleApi();
   const { logout } = useLoginApi();
   const dummy = (c: ReactElement) => {
     console.log('hello temmmmy');
   };
+
+  useEffect(() => {
+    fetchAllTeams();
+    fetchAllRoles();
+  }, []);
 
   const itemList = [
     {

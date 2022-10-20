@@ -9,7 +9,7 @@ import {
 } from 'recharts';
 
 type Props = {
-  data: { name: string; point: number }[];
+  data: { team_name?: string; point: number }[];
   width: number;
   height: number;
 };

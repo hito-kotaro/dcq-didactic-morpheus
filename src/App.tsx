@@ -1,4 +1,5 @@
 import React from 'react';
+import { RecoilRoot } from 'recoil';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { BrowserRouter } from 'react-router-dom';
@@ -16,9 +17,11 @@ const App: React.FC = function () {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <BrowserRouter>
-        <Router />
-      </BrowserRouter>
+      <RecoilRoot>
+        <BrowserRouter>
+          <Router />
+        </BrowserRouter>
+      </RecoilRoot>
     </ThemeProvider>
   );
 };
