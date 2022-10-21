@@ -3,6 +3,7 @@ import React from 'react';
 import useInputForm from '../../../hooks/InputForm/useInputForm';
 
 const ChangeTenantPassword = () => {
+  const currentPwdHandler = useInputForm();
   const pwdHandler = useInputForm();
   const rePwdHandler = useInputForm();
 
@@ -10,6 +11,15 @@ const ChangeTenantPassword = () => {
     <div className="flex">
       <div className="w-1/2">テナントパスワードを変更する</div>
       <div className="w-1/2">
+        <TextField
+          fullWidth
+          type="password"
+          label="現在のパスワード"
+          variant="outlined"
+          onChange={currentPwdHandler.onChange}
+          value={currentPwdHandler.value}
+        />
+        <div className="h-3" />
         <TextField
           fullWidth
           type="password"

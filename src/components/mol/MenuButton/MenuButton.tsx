@@ -57,7 +57,9 @@ const MenuButton: VFC<Props> = (props) => {
           ''
         )}
         {menuItems.map((item: { label: string; onClick: () => void }) => (
-          <MenuItem onClick={item.onClick}>{item.label}</MenuItem>
+          <MenuItem key={item.label} onClick={item.onClick}>
+            {item.label}
+          </MenuItem>
         ))}
       </Menu>
     </div>

@@ -5,6 +5,7 @@ import { selectItemType } from './selectItemType';
 const useSelectForm = () => {
   const [value, setValue] = useState('');
   const [selectItem, setSelectItem] = useState<selectItemType[]>([]);
+
   const handleChange = (event: SelectChangeEvent) => {
     setValue(event.target.value as string);
   };
@@ -16,7 +17,7 @@ const useSelectForm = () => {
     setSelectItem(items);
   };
 
-  return { value, handleChange, formatSelectItem, selectItem };
+  return { value, setValue, handleChange, formatSelectItem, selectItem };
 };
 
 export default useSelectForm;

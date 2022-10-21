@@ -1,7 +1,7 @@
 import { TextField, Button } from '@mui/material';
 import React, { ReactElement, VFC } from 'react';
+import useLoginApi from '../../../hooks/Api/useLoginApi';
 import useInputForm from '../../../hooks/InputForm/useInputForm';
-import useLogin from '../../../hooks/Login/useLogin';
 import AdminLoginForm from './AdminLoginForm';
 import SignUpForm from './SignUpForm';
 
@@ -14,7 +14,7 @@ const LoginForm: VFC<Props> = (props) => {
   const userHandler = useInputForm();
   const pwdHandler = useInputForm();
   const tenantHandler = useInputForm();
-  const { login } = useLogin();
+  const { login } = useLoginApi();
   return (
     <>
       <div className="text-text font-semibold text-lg text-center">

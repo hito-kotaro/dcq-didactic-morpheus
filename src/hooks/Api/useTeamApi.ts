@@ -17,7 +17,21 @@ const useTeamApi = () => {
     }
   };
 
-  return { fetchAllTeams };
+  const createTeam = async (team: string) => {
+    const createParam = { tenant_id: localStorage.getItem('id'), name: team };
+    try {
+      const result: AxiosResponse = await axiosTokenInstance.post(
+        `/team`,
+        createParam,
+      );
+      fetchAllTeams();
+      console.log(result.data);
+    } catch {
+      alert('画面を更新してください');
+    }
+  };
+
+  return { createTeam, fetchAllTeams };
 };
 
 export default useTeamApi;

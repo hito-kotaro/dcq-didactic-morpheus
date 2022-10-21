@@ -3,7 +3,6 @@ import TeamList from '../../mol/TeamList/TeamList';
 import SplitTemplate from '../../templates/SplitTemplate';
 import UserList from '../UserList/UserList';
 import { users } from '../../../testData/UserData';
-import { teams } from '../../../testData/TeamData';
 import TeamListTool from '../../mol/MainMenuTools/TeamListTool';
 import useTeamManagements from './useTeamManagements';
 import TeamPanelHeader from '../TeamPanelHeader/TeamPanelHeader';
@@ -17,17 +16,26 @@ import RequestDetail from '../RequestManagement/RequestDetail';
 import UserPanelHeader from '../UserManagement/UserPanelHeader';
 import RequestPanelHeader from '../RequestManagement/RequestPanelHeader';
 import TeamCreate from './TeamCreate';
+import useTeamApi from '../../../hooks/Api/useTeamApi';
+import useTeamStore from '../../../stores/TeamStore/useTeamStore';
 
 const TeamManagement = () => {
   const { team, teamHandler, filterdTeams, setIsDetail, filteringTeam } =
     useTeamManagements();
 
+  const { teams } = useTeamStore();
+
+  const { fetchAllTeams } = useTeamApi();
   const mainContents = useChangeComponent();
   const mainHeaderContents = useChangeComponent();
 
   useEffect(() => {
+    fetchAllTeams();
+  }, []);
+
+  useEffect(() => {
     filteringTeam(teams);
-  }, [teamHandler.value]);
+  }, [teams, teamHandler.value]);
 
   const wrapOnClickRequestItem = (r: requestDataType) => {
     mainContents.chComponent(<RequestDetail request={r} />);

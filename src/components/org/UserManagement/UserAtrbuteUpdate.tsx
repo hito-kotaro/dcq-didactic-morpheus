@@ -2,10 +2,8 @@ import { Button, Divider } from '@mui/material';
 import React, { useEffect, VFC } from 'react';
 import useRoleStore from '../../../stores/RoleStore/useRoleStore';
 import useTeamStore from '../../../stores/TeamStore/useTeamStore';
-import { teamDataType } from '../../../types/data/teamDataType';
 import { userDataType } from '../../../types/data/userDataType';
 import SelectForm from '../../mol/SelectForm/SelectForm';
-import { selectItemType } from '../../mol/SelectForm/selectItemType';
 import useSelectForm from '../../mol/SelectForm/useSelectForm';
 
 type Props = {

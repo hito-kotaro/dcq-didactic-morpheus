@@ -27,6 +27,19 @@ const CreateUserForm = () => {
     teamSelectHandler.formatSelectItem(teams);
   }, [teams]);
 
+  const onClickCreate = () => {
+    createUser(
+      userHandler.value,
+      pwdHandler.value,
+      Number(roleSelectHandler.value),
+      Number(teamSelectHandler.value),
+    );
+    userHandler.clear();
+    pwdHandler.clear();
+    rePwdHandler.clear();
+    roleSelectHandler.setValue('');
+    teamSelectHandler.setValue('');
+  };
   return (
     <div className="flex">
       <div className="w-1/2">新しいユーザーを作成する</div>
@@ -73,17 +86,7 @@ const CreateUserForm = () => {
         />
 
         <div className="h-3" />
-        <Button
-          variant="contained"
-          onClick={() =>
-            createUser(
-              userHandler.value,
-              pwdHandler.value,
-              Number(roleSelectHandler.value),
-              Number(teamSelectHandler.value),
-            )
-          }
-        >
+        <Button variant="contained" onClick={onClickCreate}>
           新しいユーザーを作成
         </Button>
       </div>

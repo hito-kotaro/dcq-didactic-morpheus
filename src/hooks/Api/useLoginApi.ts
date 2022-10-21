@@ -24,7 +24,12 @@ const useLoginApi = () => {
         authParam,
       );
 
-      console.log(result);
+      console.log(result.data.access_token);
+
+      localStorage.setItem('token', result.data.access_token);
+      localStorage.setItem('tenant_name', result.data.tenant_name);
+      localStorage.setItem('user_id', result.data.user);
+      localStorage.setItem('user', result.data.user_id);
       // localStorage.setItem('token', result.data.access_token);
       navigate('/home');
     } catch (e) {
