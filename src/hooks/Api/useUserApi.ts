@@ -5,6 +5,18 @@ import { userCreateType } from '../../types/data/userDataType';
 const useUserApi = () => {
   const axiosTokenInstance = createAxiosTokenInstance();
 
+  // 特定のチームに所属するユーザを取得する。
+  const fetchTeamMember = async (teamId: number) => {
+    try {
+      const result: AxiosResponse = await axiosTokenInstance.get(
+        `/user/member/${teamId}`,
+      );
+      return result.data.users;
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
   const createUser = async (
     name: string,
     password: string,
@@ -29,7 +41,8 @@ const useUserApi = () => {
       console.log(e);
     }
   };
-  return { createUser };
+
+  return { createUser, fetchTeamMember };
 };
 
 export default useUserApi;

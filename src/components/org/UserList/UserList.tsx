@@ -10,6 +10,7 @@ type Props = {
 
 const UserList: VFC<Props> = (props) => {
   const { users, onClick } = props;
+  console.log(users);
   return (
     <div>
       {users.map((u: userDataType) => (

@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import TeamList from '../../mol/TeamList/TeamList';
 import SplitTemplate from '../../templates/SplitTemplate';
 import UserList from '../UserList/UserList';
-import { users } from '../../../testData/UserData';
 import TeamListTool from '../../mol/MainMenuTools/TeamListTool';
 import useTeamManagements from './useTeamManagements';
 import TeamPanelHeader from '../TeamPanelHeader/TeamPanelHeader';
@@ -18,13 +17,14 @@ import RequestPanelHeader from '../RequestManagement/RequestPanelHeader';
 import TeamCreate from './TeamCreate';
 import useTeamApi from '../../../hooks/Api/useTeamApi';
 import useTeamStore from '../../../stores/TeamStore/useTeamStore';
+import useUserApi from '../../../hooks/Api/useUserApi';
 
 const TeamManagement = () => {
   const { team, teamHandler, filterdTeams, setIsDetail, filteringTeam } =
     useTeamManagements();
 
   const { teams } = useTeamStore();
-
+  const { fetchTeamMember } = useUserApi();
   const { fetchAllTeams } = useTeamApi();
   const mainContents = useChangeComponent();
   const mainHeaderContents = useChangeComponent();
@@ -55,13 +55,16 @@ const TeamManagement = () => {
     );
   };
 
-  const wrapOnClickTeamListItem = (t: teamDataType) => {
+  const wrapOnClickTeamListItem = async (t: teamDataType) => {
     // 詳細表示になったことを保持
     setIsDetail(true);
     // 対象のチームメンバを取得
-    const filterd: userDataType[] = users.filter(
-      (u: userDataType) => t.id === u.team_id,
-    );
+    // クリックしたチームのUser情報を取得
+    const filterd: userDataType[] = await fetchTeamMember(t.id);
+
+    // const filterd: userDataType[] = users.filter(
+    //   (u: userDataType) => t.id === u.team_id,
+    // );
 
     // コンポーネントを切り替え
     mainContents.chComponent(

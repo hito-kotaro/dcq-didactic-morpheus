@@ -8,10 +8,10 @@ export type userDataType = {
   id: number;
   name: string;
   point: number;
-  team: string;
   team_id: number;
-  role: string;
+  team: string;
   role_id: number;
+  role: string;
 };
 
 export type userCreateType = {
