@@ -1,5 +1,5 @@
 import React, { VFC } from 'react';
-import { users } from '../../../testData/UserData';
+import useUserStore from '../../../stores/UserStore/useUserStore';
 import { userDataType } from '../../../types/data/userDataType';
 import { selectHandlerType } from '../../../types/inputHandlerType';
 import SelectForm from '../../mol/SelectForm/SelectForm';
@@ -11,6 +11,7 @@ type Props = {
 };
 const RequestHistoryListTool: VFC<Props> = (props) => {
   const { userSelectHandler, statusSelectHandler } = props;
+  const { users } = useUserStore();
 
   const userToSelectMenu = () => {
     const tmp = users.map((u: userDataType) => ({ id: u.id, label: u.name }));

@@ -1,10 +1,20 @@
 import { AxiosResponse } from 'axios';
 import { createAxiosTokenInstance } from '../../lib/axiosInstance';
+import useUserStore from '../../stores/UserStore/useUserStore';
 import { userCreateType } from '../../types/data/userDataType';
 
 const useUserApi = () => {
   const axiosTokenInstance = createAxiosTokenInstance();
-
+  const { setUsers } = useUserStore();
+  // テナント内のユーザを全て取得する
+  const fetchTenantMember = async () => {
+    try {
+      const result: AxiosResponse = await axiosTokenInstance.get('/user');
+      setUsers(result.data.users);
+    } catch (e) {
+      console.log(e);
+    }
+  };
   // 特定のチームに所属するユーザを取得する。
   const fetchTeamMember = async (teamId: number) => {
     try {
@@ -42,7 +52,7 @@ const useUserApi = () => {
     }
   };
 
-  return { createUser, fetchTeamMember };
+  return { createUser, fetchTeamMember, fetchTenantMember };
 };
 
 export default useUserApi;

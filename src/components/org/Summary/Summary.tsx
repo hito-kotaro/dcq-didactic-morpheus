@@ -5,12 +5,13 @@ import SelectForm from '../../mol/SelectForm/SelectForm';
 import { selectItemType } from '../../mol/SelectForm/selectItemType';
 import BarGraph from '../BarGraph/BarGraph';
 import useBarGraph from '../BarGraph/useBarGraph';
-import { users } from '../../../testData/UserData';
 import { teams } from '../../../testData/TeamData';
+import useUserStore from '../../../stores/UserStore/useUserStore';
 
 const Summary = () => {
   const { selectHandler, setFilterdUserData, filteringData, filterdUserData } =
     useBarGraph();
+  const { users } = useUserStore();
   const [isTeam, setIsTeam] = useState(false);
   const [width, height] = useWindowSize();
 

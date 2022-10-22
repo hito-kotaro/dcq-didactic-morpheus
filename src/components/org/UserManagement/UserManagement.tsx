@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import SplitTemplate from '../../templates/SplitTemplate';
 import UserList from '../UserList/UserList';
-import { users } from '../../../testData/UserData';
 import UserListTool from './UserListTool';
 import useUserManagement from './useUserManagement';
 import UserPanelHeader from './UserPanelHeader';
@@ -15,6 +14,8 @@ import { requestDataType } from '../../../types/data/requestDataType';
 import RequestDetail from '../RequestManagement/RequestDetail';
 import UserSearchWindow from './UserSearchWindow';
 import UserCreate from './UserCreate';
+import useUserStore from '../../../stores/UserStore/useUserStore';
+import useUserApi from '../../../hooks/Api/useUserApi';
 
 const UserManagement = () => {
   const {
@@ -32,6 +33,8 @@ const UserManagement = () => {
   } = useUserManagement();
 
   const { user, selectUser } = useUserList();
+  const { users, setUsers } = useUserStore();
+  const { fetchTenantMember } = useUserApi();
   const mainContents = useChangeComponent();
 
   const userCreateHandler: userCreateHandlerType = {
@@ -43,9 +46,12 @@ const UserManagement = () => {
   };
 
   useEffect(() => {
-    console.log('kusokasu');
+    fetchTenantMember();
+  }, []);
+
+  useEffect(() => {
     filteringUser(users);
-  }, [userSearchHandler.value, selectHandler.value]);
+  }, [users, userSearchHandler.value, selectHandler.value]);
 
   const wrapOnClickRequestItem = (r: requestDataType) => {
     wrapSetIsDetail(true);

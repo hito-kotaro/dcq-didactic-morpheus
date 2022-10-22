@@ -2,9 +2,9 @@ import { useState } from 'react';
 import useInputForm from '../../../hooks/InputForm/useInputForm';
 import { requestDataType } from '../../../types/data/requestDataType';
 import useSelectForm from '../../mol/SelectForm/useSelectForm';
-import { users } from '../../../testData/UserData';
 import { selectItemType } from '../../mol/SelectForm/selectItemType';
 import { userDataType } from '../../../types/data/userDataType';
+import useUserStore from '../../../stores/UserStore/useUserStore';
 
 const useRequestmanagement = () => {
   const [isDetail, setIsDetail] = useState(false);
@@ -14,7 +14,7 @@ const useRequestmanagement = () => {
   const toolStatusSelectHandler = useSelectForm();
   const toolApplicantSelectHandler = useSelectForm();
   const applicantSelectHandler = useSelectForm();
-
+  const { users } = useUserStore();
   const [request, setRequest] = useState<requestDataType>({
     id: 0,
     date: '',
