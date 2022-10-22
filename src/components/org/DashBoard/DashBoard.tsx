@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import { teams } from '../../../testData/TeamData';
+import useTeamStore from '../../../stores/TeamStore/useTeamStore';
 import { teamDataType } from '../../../types/data/teamDataType';
 import DcpIcon from '../../atoms/DcpIcon/DcpIcon';
 import PenaltyIcon from '../../atoms/Icons/PenaltyIcon';
@@ -14,10 +14,40 @@ import DashBoardTemplate from '../../templates/DashBoardTemplate';
 import PiGraph from '../PiGraph/PiGraph';
 
 const DashBoard = () => {
+  const { teams } = useTeamStore();
+
+  // テナント内の合計ポイント
+  const totalPoint: number = teams.reduce(
+    (acc: number, val: teamDataType): number => {
+      return acc + val.point;
+    },
+    0,
+  );
+
+  // テナント内の合計ペナルティ
+  const totalPenalty: number = teams.reduce(
+    (acc: number, val: teamDataType): number => {
+      return acc + val.penalty;
+    },
+    0,
+  );
+
   const firstDisplays: ReactElement[] = [
-    <PointDisplay icon={<DcpIcon />} msg="どりかむポイント" point={10} />,
-    <PointDisplay icon={<PenaltyIcon />} msg="ペナルティポイント" point={10} />,
-    <PointDisplay icon={<SumIcon />} msg="合計" point={0} />,
+    <PointDisplay
+      icon={<DcpIcon />}
+      msg="どりかむポイント"
+      point={totalPoint}
+    />,
+    <PointDisplay
+      icon={<PenaltyIcon />}
+      msg="ペナルティポイント"
+      point={totalPenalty}
+    />,
+    <PointDisplay
+      icon={<SumIcon />}
+      msg="合計"
+      point={totalPoint - totalPenalty}
+    />,
   ];
 
   const secondDisplays: ReactElement[] = [

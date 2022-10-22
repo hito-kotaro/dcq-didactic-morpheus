@@ -12,10 +12,14 @@ const useBarGraph = () => {
       setFilterdUserData(data);
     } else {
       // 選択したチームでフィルターする
+      const filterData = data.filter((u: graphUserData) => {
+        return u.team_id === Number(selectHandler.value);
+      });
+      console.log(filterData);
       setFilterdUserData(
-        data.filter((u: graphUserData) => {
-          return u.team_id === Number(selectHandler.value);
-        }),
+        filterData.length > 0
+          ? filterData
+          : [{ name: 'NoMember', point: 0, team_id: 1 }],
       );
     }
   };

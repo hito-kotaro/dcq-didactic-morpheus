@@ -2,16 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { Button } from '@mui/material';
 import useWindowSize from '../../../hooks/WindowSize/useWindowSize';
 import SelectForm from '../../mol/SelectForm/SelectForm';
-import { selectItemType } from '../../mol/SelectForm/selectItemType';
 import BarGraph from '../BarGraph/BarGraph';
 import useBarGraph from '../BarGraph/useBarGraph';
-import { teams } from '../../../testData/TeamData';
 import useUserStore from '../../../stores/UserStore/useUserStore';
+import useTeamStore from '../../../stores/TeamStore/useTeamStore';
+import useTeamApi from '../../../hooks/Api/useTeamApi';
+import useUserApi from '../../../hooks/Api/useUserApi';
 
 const Summary = () => {
   const { selectHandler, setFilterdUserData, filteringData, filterdUserData } =
     useBarGraph();
   const { users } = useUserStore();
+  const { teams } = useTeamStore();
+  const { fetchTenantMember } = useUserApi();
+  const { fetchAllTeams } = useTeamApi();
   const [isTeam, setIsTeam] = useState(false);
   const [width, height] = useWindowSize();
 
@@ -19,16 +23,15 @@ const Summary = () => {
     setIsTeam(!isTeam);
   };
 
-  const items: selectItemType[] = [
-    { id: 0, label: '全てのユーザを表示' },
-    { id: 1, label: 'Team1' },
-    { id: 2, label: 'Team2' },
-  ];
+  useEffect(() => {
+    setFilterdUserData(users);
+    fetchAllTeams();
+    fetchTenantMember();
+  }, []);
 
   useEffect(() => {
-    console.log(selectHandler.value);
-    setFilterdUserData(users);
-  }, []);
+    selectHandler.formatSelectItem(teams);
+  }, [teams]);
 
   useEffect(() => {
     filteringData(users);
@@ -42,7 +45,7 @@ const Summary = () => {
         ) : (
           <div className="w-1/3">
             <SelectForm
-              menu={items}
+              menu={[{ id: 0, label: 'all' }, ...selectHandler.selectItem]}
               label="チームで絞り込み"
               handler={selectHandler}
             />

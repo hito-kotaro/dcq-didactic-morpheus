@@ -7,6 +7,7 @@ const useTeamApi = () => {
   const axiosTokenInstance = createAxiosTokenInstance();
   const { setTeams } = useTeamStore();
 
+  // テナント内のチームを取得
   const fetchAllTeams = async () => {
     try {
       const result: AxiosResponse = await axiosTokenInstance.get('/team');

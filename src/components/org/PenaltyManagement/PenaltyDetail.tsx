@@ -4,9 +4,9 @@ import { penaltyDataType } from '../../../types/data/penaltyDataType';
 import OwnerHeader from '../../mol/OwnerHeader/OwnerHeader';
 import SelectForm from '../../mol/SelectForm/SelectForm';
 import useSelectForm from '../../mol/SelectForm/useSelectForm';
-import { teams } from '../../../testData/TeamData';
 import { teamDataType } from '../../../types/data/teamDataType';
 import useInputForm from '../../../hooks/InputForm/useInputForm';
+import useTeamStore from '../../../stores/TeamStore/useTeamStore';
 
 type Props = {
   penalty: penaltyDataType;
@@ -15,6 +15,7 @@ type Props = {
 const PenaltyDetail: VFC<Props> = (props) => {
   const { penalty } = props;
   const teamSelectHandler = useSelectForm();
+  const { teams } = useTeamStore();
   const commentHandler = useInputForm();
 
   const convertedSelectMenu = () => {
