@@ -3,7 +3,7 @@ import { Divider } from '@mui/material';
 import { userDataType } from '../../../types/data/userDataType';
 import RequestList from '../RequestList/RequestList';
 import { requestDataType } from '../../../types/data/requestDataType';
-import { requests } from '../../../testData/RequestData';
+import useRequestStore from '../../../stores/RequestStore/useRequestStore';
 
 type Props = {
   user: userDataType;
@@ -11,6 +11,7 @@ type Props = {
 };
 const UserDetail: VFC<Props> = (props) => {
   const { user, onClick } = props;
+  const { requests } = useRequestStore();
   const [filterd, setFilterd] = useState<requestDataType[]>([]);
 
   useEffect(() => {

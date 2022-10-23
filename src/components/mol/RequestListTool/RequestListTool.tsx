@@ -1,7 +1,7 @@
 /* eslint-disable consistent-return */
 /* eslint-disable array-callback-return */
 import React, { VFC } from 'react';
-import { requests } from '../../../testData/RequestData';
+import useRequestStore from '../../../stores/RequestStore/useRequestStore';
 import { requestDataType } from '../../../types/data/requestDataType';
 import { selectHandlerType } from '../../../types/inputHandlerType';
 import SelectForm from '../SelectForm/SelectForm';
@@ -14,6 +14,7 @@ type Props = {
 
 const RequestListTool: VFC<Props> = (props) => {
   const { handler } = props;
+  const { requests } = useRequestStore();
 
   const requestToSelectMenu = () => {
     const applicants = requests.map((r: requestDataType) => ({

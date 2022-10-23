@@ -2,32 +2,26 @@ import { useState } from 'react';
 import useInputForm from '../../../hooks/InputForm/useInputForm';
 import { requestDataType } from '../../../types/data/requestDataType';
 import useSelectForm from '../../mol/SelectForm/useSelectForm';
-import { selectItemType } from '../../mol/SelectForm/selectItemType';
-import { userDataType } from '../../../types/data/userDataType';
 import useUserStore from '../../../stores/UserStore/useUserStore';
 
 const useRequestmanagement = () => {
   const [isDetail, setIsDetail] = useState(false);
   const [filterdRequests, setFilterdRequests] = useState<requestDataType[]>([]);
-  const [userSelectItems, setUserSelectItems] = useState<selectItemType[]>([]);
   const requestSearchHandler = useInputForm();
-  const toolStatusSelectHandler = useSelectForm();
-  const toolApplicantSelectHandler = useSelectForm();
   const applicantSelectHandler = useSelectForm();
   const { users } = useUserStore();
+
   const [request, setRequest] = useState<requestDataType>({
     id: 0,
-    date: '',
     title: '',
     description: '',
-    q_title: '',
-    q_description: '',
-    q_owner_id: 0,
-    q_owner: '',
-    q_reward: 0,
-    status: '',
     applicant_id: 0,
     applicant: '',
+    quest_description: '',
+    quest_title: '',
+    reward: 0,
+    status: '',
+    date: '',
   });
 
   const onClickRequestItem = (r: requestDataType) => {
@@ -59,6 +53,7 @@ const useRequestmanagement = () => {
   };
 
   return {
+    request,
     filterdRequests,
     requestSearchHandler,
     filteringRequest,

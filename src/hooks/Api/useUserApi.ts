@@ -6,6 +6,7 @@ import { userCreateType } from '../../types/data/userDataType';
 const useUserApi = () => {
   const axiosTokenInstance = createAxiosTokenInstance();
   const { setUsers } = useUserStore();
+
   // テナント内のユーザを全て取得する
   const fetchTenantMember = async () => {
     try {
@@ -15,6 +16,7 @@ const useUserApi = () => {
       console.log(e);
     }
   };
+
   // 特定のチームに所属するユーザを取得する。
   const fetchTeamMember = async (teamId: number) => {
     try {

@@ -1,7 +1,9 @@
 import { Button, Divider, TextField } from '@mui/material';
 import React, { VFC } from 'react';
+import useRequestApi from '../../../hooks/Api/useRequestApi';
 import useInputForm from '../../../hooks/InputForm/useInputForm';
 import { questDataType } from '../../../types/data/questDataType';
+import { createRequestType } from '../../../types/data/requestDataType';
 import OwnerHeader from '../../mol/OwnerHeader/OwnerHeader';
 
 type Props = {
@@ -10,7 +12,18 @@ type Props = {
 };
 const QuestDetail: VFC<Props> = (props) => {
   const { quest } = props;
+  const { createRequest } = useRequestApi();
   const requestHandler = useInputForm();
+  const onClickCreateRequest = () => {
+    const createParam: createRequestType = {
+      title: `${quest.title}-達成報告`,
+      description: requestHandler.value,
+      quest_id: quest.id,
+      applicant_id: Number(localStorage.getItem('user_id')),
+    };
+    createRequest(createParam);
+    requestHandler.clear();
+  };
   return (
     <div>
       <div className="text-text text-lg font-semibold text-center border-b-1">
@@ -62,7 +75,9 @@ const QuestDetail: VFC<Props> = (props) => {
               minRows={5}
             />
             <div className="h-5" />
-            <Button variant="contained">達成報告を提出</Button>
+            <Button variant="contained" onClick={onClickCreateRequest}>
+              達成報告を提出
+            </Button>
           </div>
         </div>
       )}
