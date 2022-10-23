@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import SplitTemplate from '../../templates/SplitTemplate';
 import QuestList from './QuestList';
-import { quests } from '../../../testData/QuestData';
 import useQuestManagement from './useQuestManagement';
 import QuestDetail from './QuestDetail';
 import useChangeComponent from '../../../hooks/ChangeComponent/useChangeComponent';
@@ -11,6 +10,8 @@ import QuestCreate from './QuestCreate';
 import QuestPanelHeader from './QuestPanelHeader';
 import EmptyStateIcon from '../../mol/EmptyStateIcon/EmptyStateIcon';
 import QuestSearchWindow from './QuestSearchWindow';
+import useQuestApi from '../../../hooks/Api/useQuestApi';
+import useQUestStore from '../../../stores/QuestStore/useQUestStore';
 
 const QuestManagement = () => {
   const {
@@ -24,7 +25,8 @@ const QuestManagement = () => {
     filteringQuest,
   } = useQuestManagement();
   const mainContents = useChangeComponent();
-
+  const { quests } = useQUestStore();
+  const { fetchAllQuests } = useQuestApi();
   const wrapOnClickQuestItem = (q: questDataType) => {
     onClickQuestItem(q);
     mainContents.chComponent(<QuestDetail quest={q} />);
@@ -34,9 +36,14 @@ const QuestManagement = () => {
     setIsDetail(false);
     mainContents.chComponent(<QuestCreate />);
   };
+
+  useEffect(() => {
+    fetchAllQuests();
+  }, []);
+
   useEffect(() => {
     filteringQuest(quests);
-  }, [questSearchHandler.value, selectHandler.value]);
+  }, [quests, questSearchHandler.value, selectHandler.value]);
 
   return (
     <SplitTemplate

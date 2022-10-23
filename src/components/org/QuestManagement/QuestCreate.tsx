@@ -1,12 +1,29 @@
 import { Button, Divider, TextField } from '@mui/material';
 import React from 'react';
+import useQuestApi from '../../../hooks/Api/useQuestApi';
 import useInputForm from '../../../hooks/InputForm/useInputForm';
+import { questRequestType } from '../../../types/data/questDataType';
 
 const QuestCreate = () => {
+  const { createQuest } = useQuestApi();
   const titleHandler = useInputForm();
   const rwdHandler = useInputForm();
   const descHandler = useInputForm();
   const exampleHandler = useInputForm();
+
+  const onClickCreate = () => {
+    const createParams: questRequestType = {
+      title: titleHandler.value,
+      description: descHandler.value,
+      example: exampleHandler.value,
+      reward: Number(rwdHandler.value),
+    };
+    createQuest(createParams);
+    titleHandler.clear();
+    descHandler.clear();
+    exampleHandler.clear();
+    rwdHandler.clear();
+  };
 
   return (
     <div className="px-3 text-text">
@@ -37,7 +54,9 @@ const QuestCreate = () => {
           />
         </div>
         <div className="ml-auto">
-          <Button variant="contained">クエスト発行</Button>
+          <Button variant="contained" onClick={onClickCreate}>
+            クエスト発行
+          </Button>
         </div>
       </div>
       <div className="my-5">

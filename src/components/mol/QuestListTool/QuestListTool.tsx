@@ -2,10 +2,10 @@
 /* eslint-disable array-callback-return */
 import React, { VFC } from 'react';
 import { selectHandlerType } from '../../../types/inputHandlerType';
-import { quests } from '../../../testData/QuestData';
 import { questDataType } from '../../../types/data/questDataType';
 import SelectForm from '../SelectForm/SelectForm';
 import { selectItemType } from '../SelectForm/selectItemType';
+import useQUestStore from '../../../stores/QuestStore/useQUestStore';
 
 type Props = {
   handler: selectHandlerType;
@@ -13,6 +13,7 @@ type Props = {
 
 const QuestListTool: VFC<Props> = (props) => {
   const { handler } = props;
+  const { quests } = useQUestStore();
 
   const userToSelectMenu = () => {
     const owners = quests.map((q: questDataType) => ({
@@ -26,7 +27,6 @@ const QuestListTool: VFC<Props> = (props) => {
         return o;
       }
     });
-    console.log(dupDel);
     return [{ id: 0, label: 'all' }, ...dupDel];
   };
 

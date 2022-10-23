@@ -26,7 +26,6 @@ const useTeamApi = () => {
         createParam,
       );
       fetchAllTeams();
-      console.log(result.data);
     } catch {
       alert('画面を更新してください');
     }

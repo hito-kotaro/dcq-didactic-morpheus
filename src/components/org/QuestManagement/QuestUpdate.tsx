@@ -1,7 +1,11 @@
 import { TextField, Button, Divider } from '@mui/material';
 import React, { VFC } from 'react';
+import useQuestApi from '../../../hooks/Api/useQuestApi';
 import useInputForm from '../../../hooks/InputForm/useInputForm';
-import { questDataType } from '../../../types/data/questDataType';
+import {
+  questDataType,
+  questRequestType,
+} from '../../../types/data/questDataType';
 
 type Props = {
   quest: questDataType;
@@ -9,10 +13,25 @@ type Props = {
 
 const QuestUpdate: VFC<Props> = (props) => {
   const { quest } = props;
+  const { updateQuest } = useQuestApi();
   const titleHandler = useInputForm(quest.title);
   const rwdHandler = useInputForm(String(quest.reward));
   const descHandler = useInputForm(quest.description);
   const exampleHandler = useInputForm(quest.example);
+
+  const onClickUpdate = () => {
+    const updateParams: questRequestType = {
+      title: titleHandler.value,
+      description: descHandler.value,
+      example: exampleHandler.value,
+      reward: Number(rwdHandler.value),
+    };
+    updateQuest(quest.id, updateParams);
+    titleHandler.clear();
+    descHandler.clear();
+    exampleHandler.clear();
+    rwdHandler.clear();
+  };
 
   return (
     <div className="px-3 text-text">
@@ -44,7 +63,9 @@ const QuestUpdate: VFC<Props> = (props) => {
           />
         </div>
         <div className="ml-auto">
-          <Button variant="contained">クエスト更新</Button>
+          <Button variant="contained" onClick={onClickUpdate}>
+            クエスト更新
+          </Button>
         </div>
       </div>
       <div className="my-5">

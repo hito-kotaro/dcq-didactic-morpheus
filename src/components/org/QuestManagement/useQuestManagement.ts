@@ -29,17 +29,18 @@ const useQuestManagement = () => {
 
     // allの時の絞り込み
     if (Number(selectHandler.value) === 0) {
-      if (data.owner.indexOf(questSearchHandler.value) !== -1) {
+      if (data.title.indexOf(questSearchHandler.value) !== -1) {
         flg = true;
       }
     } else if (Number(selectHandler.value) !== 0) {
       if (
         data.owner_id === Number(selectHandler.value) &&
-        data.owner.indexOf(questSearchHandler.value) !== -1
+        data.title.indexOf(questSearchHandler.value) !== -1
       ) {
         flg = true;
       }
     }
+    console.log(flg);
     return flg;
   };
 
