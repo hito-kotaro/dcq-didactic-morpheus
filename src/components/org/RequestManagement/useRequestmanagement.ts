@@ -54,6 +54,7 @@ const useRequestmanagement = () => {
 
   return {
     request,
+    setRequest,
     filterdRequests,
     requestSearchHandler,
     filteringRequest,

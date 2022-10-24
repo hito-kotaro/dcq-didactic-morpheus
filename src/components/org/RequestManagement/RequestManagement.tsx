@@ -23,6 +23,7 @@ const RequestManagement = () => {
   const mainContents = useChangeComponent();
   const { requests } = useRequestStore();
   const { fetchTenantRequests } = useRequestApi();
+
   const wrapOnClickRequestItem = (r: requestDataType) => {
     onClickRequestItem(r);
     mainContents.chComponent(<RequestDetail request={r} />);
@@ -32,10 +33,13 @@ const RequestManagement = () => {
     fetchTenantRequests();
   }, []);
 
-  // フィルター前のリクエスト一覧/検索条件が変わった時
-  // 一つ前のステートが出てしまう
   useEffect(() => {
-    filteringRequest(requests);
+    filteringRequest(
+      requests.filter((r: requestDataType) => r.status === 'open'),
+    );
+    mainContents.chComponent(
+      <EmptyStateIcon msg="リクエストを選択してください" />,
+    );
   }, [requests, requestSearchHandler.value, applicantSelectHandler.value]);
 
   return (

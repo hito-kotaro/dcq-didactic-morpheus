@@ -37,7 +37,8 @@ const useRequestApi = () => {
         `/request/${id}`,
         updateParam,
       );
-      setTimeout(fetchTenantRequests, 500);
+      await setTimeout(fetchTenantRequests, 300);
+      return result.data;
     } catch (e) {
       console.log(e);
     }

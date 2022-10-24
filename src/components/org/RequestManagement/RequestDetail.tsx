@@ -8,6 +8,7 @@ import {
 } from '../../../types/data/requestDataType';
 import OwnerHeader from '../../mol/OwnerHeader/OwnerHeader';
 
+// 表示の時に渡されるだけだから変わっていない
 type Props = {
   request: requestDataType;
 };
@@ -17,14 +18,15 @@ const RequestDetail: VFC<Props> = (props) => {
   const { updateRequest } = useRequestApi();
   const commentHandler = useInputForm();
 
-  const onClickUpdate = (status: string) => {
+  const wrapOnClickUpdate = async (status: string) => {
     const updateParam: updateRequestType = {
       status,
     };
-    updateRequest(request.id, updateParam);
+    await updateRequest(request.id, updateParam);
   };
 
-  console.log('updateDetail');
+  // console.log('updateDetail');
+  // console.log(request.status);
 
   return (
     <div className="px-3">
@@ -76,15 +78,24 @@ const RequestDetail: VFC<Props> = (props) => {
       />
       <div className="h-5" />
       <div className="flex justify-end">
-        <Button variant="contained" onClick={() => onClickUpdate('approved')}>
+        <Button
+          variant="contained"
+          onClick={() => wrapOnClickUpdate('approved')}
+        >
           承認
         </Button>
         <div className="w-3" />
-        <Button variant="contained" onClick={() => onClickUpdate('rejected')}>
+        <Button
+          variant="contained"
+          onClick={() => wrapOnClickUpdate('rejected')}
+        >
           却下
         </Button>
         <div className="w-3" />
-        <Button variant="contained" onClick={() => onClickUpdate('canceled')}>
+        <Button
+          variant="contained"
+          onClick={() => wrapOnClickUpdate('canceled')}
+        >
           キャンセル
         </Button>
         <div className="w-3" />
