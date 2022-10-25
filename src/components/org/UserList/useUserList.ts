@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import useUserStore from '../../../stores/UserStore/useUserStore';
+import useGlobalState from '../../../stores/useGlobalState';
 import { userDataType } from '../../../types/data/userDataType';
 
 const useUserList = () => {
-  const { users } = useUserStore();
+  const { users } = useGlobalState();
   const [user, setUser] = useState<userDataType>({
     id: 0,
     name: '',

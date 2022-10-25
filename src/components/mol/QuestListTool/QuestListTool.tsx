@@ -5,7 +5,7 @@ import { selectHandlerType } from '../../../types/inputHandlerType';
 import { questDataType } from '../../../types/data/questDataType';
 import SelectForm from '../SelectForm/SelectForm';
 import { selectItemType } from '../SelectForm/selectItemType';
-import useQUestStore from '../../../stores/QuestStore/useQUestStore';
+import useGlobalState from '../../../stores/useGlobalState';
 
 type Props = {
   handler: selectHandlerType;
@@ -13,7 +13,7 @@ type Props = {
 
 const QuestListTool: VFC<Props> = (props) => {
   const { handler } = props;
-  const { quests } = useQUestStore();
+  const { quests } = useGlobalState();
 
   const userToSelectMenu = () => {
     const owners = quests.map((q: questDataType) => ({

@@ -3,12 +3,10 @@ import { TextField, Button, Divider } from '@mui/material';
 import SelectForm from '../../mol/SelectForm/SelectForm';
 import useInputForm from '../../../hooks/InputForm/useInputForm';
 import useSelectForm from '../../mol/SelectForm/useSelectForm';
-import useRoleStore from '../../../stores/RoleStore/useRoleStore';
-import useTeamStore from '../../../stores/TeamStore/useTeamStore';
+import useGlobalState from '../../../stores/useGlobalState';
 
 const UserCreate = () => {
-  const { roles } = useRoleStore();
-  const { teams } = useTeamStore();
+  const { roles, teams } = useGlobalState();
   const userHandler = useInputForm();
   const pwdHandler = useInputForm();
   const rePwdHandler = useInputForm();

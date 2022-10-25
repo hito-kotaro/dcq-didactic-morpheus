@@ -6,7 +6,7 @@ import SelectForm from '../../mol/SelectForm/SelectForm';
 import useSelectForm from '../../mol/SelectForm/useSelectForm';
 import { teamDataType } from '../../../types/data/teamDataType';
 import useInputForm from '../../../hooks/InputForm/useInputForm';
-import useTeamStore from '../../../stores/TeamStore/useTeamStore';
+import useGlobalState from '../../../stores/useGlobalState';
 
 type Props = {
   penalty: penaltyDataType;
@@ -15,7 +15,7 @@ type Props = {
 const PenaltyDetail: VFC<Props> = (props) => {
   const { penalty } = props;
   const teamSelectHandler = useSelectForm();
-  const { teams } = useTeamStore();
+  const { teams } = useGlobalState();
   const commentHandler = useInputForm();
 
   const convertedSelectMenu = () => {

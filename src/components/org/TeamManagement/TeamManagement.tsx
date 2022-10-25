@@ -16,14 +16,14 @@ import UserPanelHeader from '../UserManagement/UserPanelHeader';
 import RequestPanelHeader from '../RequestManagement/RequestPanelHeader';
 import TeamCreate from './TeamCreate';
 import useTeamApi from '../../../hooks/Api/useTeamApi';
-import useTeamStore from '../../../stores/TeamStore/useTeamStore';
 import useUserApi from '../../../hooks/Api/useUserApi';
+import useGlobalState from '../../../stores/useGlobalState';
 
 const TeamManagement = () => {
   const { team, teamHandler, filterdTeams, setIsDetail, filteringTeam } =
     useTeamManagements();
 
-  const { teams } = useTeamStore();
+  const { teams } = useGlobalState();
   const { fetchTeamMember } = useUserApi();
   const { fetchAllTeams } = useTeamApi();
   const mainContents = useChangeComponent();

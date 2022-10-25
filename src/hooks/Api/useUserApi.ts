@@ -1,11 +1,11 @@
 import { AxiosResponse } from 'axios';
 import { createAxiosTokenInstance } from '../../lib/axiosInstance';
-import useUserStore from '../../stores/UserStore/useUserStore';
+import useGlobalState from '../../stores/useGlobalState';
 import { userCreateType } from '../../types/data/userDataType';
 
 const useUserApi = () => {
   const axiosTokenInstance = createAxiosTokenInstance();
-  const { setUsers } = useUserStore();
+  const { setUsers } = useGlobalState();
 
   // テナント内のユーザを全て取得する
   const fetchTenantMember = async () => {

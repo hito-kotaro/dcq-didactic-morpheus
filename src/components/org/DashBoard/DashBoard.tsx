@@ -1,5 +1,5 @@
 import React, { ReactElement } from 'react';
-import useTeamStore from '../../../stores/TeamStore/useTeamStore';
+import useGlobalState from '../../../stores/useGlobalState';
 import { teamDataType } from '../../../types/data/teamDataType';
 import DcpIcon from '../../atoms/DcpIcon/DcpIcon';
 import PenaltyIcon from '../../atoms/Icons/PenaltyIcon';
@@ -14,7 +14,7 @@ import DashBoardTemplate from '../../templates/DashBoardTemplate';
 import PiGraph from '../PiGraph/PiGraph';
 
 const DashBoard = () => {
-  const { teams } = useTeamStore();
+  const { teams } = useGlobalState();
 
   // テナント内の合計ポイント
   const totalPoint: number = teams.reduce(

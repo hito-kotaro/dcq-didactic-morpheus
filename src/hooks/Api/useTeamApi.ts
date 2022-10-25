@@ -1,11 +1,11 @@
 import { AxiosResponse } from 'axios';
 import { createAxiosTokenInstance } from '../../lib/axiosInstance';
-import useTeamStore from '../../stores/TeamStore/useTeamStore';
+import useGlobalState from '../../stores/useGlobalState';
 import { teamDataType } from '../../types/data/teamDataType';
 
 const useTeamApi = () => {
   const axiosTokenInstance = createAxiosTokenInstance();
-  const { setTeams } = useTeamStore();
+  const { setTeams } = useGlobalState();
 
   // テナント内のチームを取得
   const fetchAllTeams = async () => {

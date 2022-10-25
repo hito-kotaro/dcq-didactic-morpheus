@@ -4,16 +4,14 @@ import useWindowSize from '../../../hooks/WindowSize/useWindowSize';
 import SelectForm from '../../mol/SelectForm/SelectForm';
 import BarGraph from '../BarGraph/BarGraph';
 import useBarGraph from '../BarGraph/useBarGraph';
-import useUserStore from '../../../stores/UserStore/useUserStore';
-import useTeamStore from '../../../stores/TeamStore/useTeamStore';
 import useTeamApi from '../../../hooks/Api/useTeamApi';
 import useUserApi from '../../../hooks/Api/useUserApi';
+import useGlobalState from '../../../stores/useGlobalState';
 
 const Summary = () => {
   const { selectHandler, setFilterdUserData, filteringData, filterdUserData } =
     useBarGraph();
-  const { users } = useUserStore();
-  const { teams } = useTeamStore();
+  const { users, teams } = useGlobalState();
   const { fetchTenantMember } = useUserApi();
   const { fetchAllTeams } = useTeamApi();
   const [isTeam, setIsTeam] = useState(false);

@@ -2,14 +2,12 @@ import { useState } from 'react';
 import useInputForm from '../../../hooks/InputForm/useInputForm';
 import { requestDataType } from '../../../types/data/requestDataType';
 import useSelectForm from '../../mol/SelectForm/useSelectForm';
-import useUserStore from '../../../stores/UserStore/useUserStore';
 
 const useRequestmanagement = () => {
   const [isDetail, setIsDetail] = useState(false);
   const [filterdRequests, setFilterdRequests] = useState<requestDataType[]>([]);
   const requestSearchHandler = useInputForm();
   const applicantSelectHandler = useSelectForm();
-  const { users } = useUserStore();
 
   const [request, setRequest] = useState<requestDataType>({
     id: 0,

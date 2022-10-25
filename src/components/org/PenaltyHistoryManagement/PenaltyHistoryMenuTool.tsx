@@ -1,5 +1,5 @@
 import React, { VFC } from 'react';
-import useTeamStore from '../../../stores/TeamStore/useTeamStore';
+import useGlobalState from '../../../stores/useGlobalState';
 import { teamDataType } from '../../../types/data/teamDataType';
 import { selectHandlerType } from '../../../types/inputHandlerType';
 import SelectForm from '../../mol/SelectForm/SelectForm';
@@ -8,7 +8,7 @@ type Props = {
   teamSelectHandler: selectHandlerType;
 };
 const PenaltyHistoryMenuTool: VFC<Props> = (props) => {
-  const { teams } = useTeamStore();
+  const { teams } = useGlobalState();
   const { teamSelectHandler } = props;
   const teamToSelectMenu = () => {
     const tmp = teams.map((t: teamDataType) => ({ id: t.id, label: t.name }));

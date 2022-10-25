@@ -1,7 +1,6 @@
 import { Button, Divider } from '@mui/material';
 import React, { useEffect, VFC } from 'react';
-import useRoleStore from '../../../stores/RoleStore/useRoleStore';
-import useTeamStore from '../../../stores/TeamStore/useTeamStore';
+import useGlobalState from '../../../stores/useGlobalState';
 import { userDataType } from '../../../types/data/userDataType';
 import SelectForm from '../../mol/SelectForm/SelectForm';
 import useSelectForm from '../../mol/SelectForm/useSelectForm';
@@ -11,8 +10,7 @@ type Props = {
 };
 const UserAtrbuteUpdate: VFC<Props> = (props) => {
   const { user } = props;
-  const { roles } = useRoleStore();
-  const { teams } = useTeamStore();
+  const { roles, teams } = useGlobalState();
 
   const teamSelectHandler = useSelectForm();
   const roleSelectHandler = useSelectForm();

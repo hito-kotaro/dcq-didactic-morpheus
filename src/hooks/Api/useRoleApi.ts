@@ -1,11 +1,11 @@
 import { AxiosResponse } from 'axios';
 import { createAxiosTokenInstance } from '../../lib/axiosInstance';
-import useRoleStore from '../../stores/RoleStore/useRoleStore';
+import useGlobalState from '../../stores/useGlobalState';
 import { roleDataType } from '../../types/data/roleDataType';
 
 const useRoleApi = () => {
   const axiosTokenInstance = createAxiosTokenInstance();
-  const { setRoles } = useRoleStore();
+  const { setRoles } = useGlobalState();
 
   const fetchAllRoles = async () => {
     try {

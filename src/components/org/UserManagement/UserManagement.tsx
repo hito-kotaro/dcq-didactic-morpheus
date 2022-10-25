@@ -14,8 +14,8 @@ import { requestDataType } from '../../../types/data/requestDataType';
 import RequestDetail from '../RequestManagement/RequestDetail';
 import UserSearchWindow from './UserSearchWindow';
 import UserCreate from './UserCreate';
-import useUserStore from '../../../stores/UserStore/useUserStore';
 import useUserApi from '../../../hooks/Api/useUserApi';
+import useGlobalState from '../../../stores/useGlobalState';
 
 const UserManagement = () => {
   const {
@@ -33,7 +33,7 @@ const UserManagement = () => {
   } = useUserManagement();
 
   const { user, selectUser } = useUserList();
-  const { users, setUsers } = useUserStore();
+  const { users, setUsers } = useGlobalState();
   const { fetchTenantMember } = useUserApi();
   const mainContents = useChangeComponent();
 

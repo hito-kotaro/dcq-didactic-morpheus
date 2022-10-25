@@ -11,7 +11,7 @@ import QuestPanelHeader from './QuestPanelHeader';
 import EmptyStateIcon from '../../mol/EmptyStateIcon/EmptyStateIcon';
 import QuestSearchWindow from './QuestSearchWindow';
 import useQuestApi from '../../../hooks/Api/useQuestApi';
-import useQUestStore from '../../../stores/QuestStore/useQUestStore';
+import useGlobalState from '../../../stores/useGlobalState';
 
 const QuestManagement = () => {
   const {
@@ -25,7 +25,7 @@ const QuestManagement = () => {
     filteringQuest,
   } = useQuestManagement();
   const mainContents = useChangeComponent();
-  const { quests } = useQUestStore();
+  const { quests } = useGlobalState();
   const { fetchAllQuests } = useQuestApi();
   const wrapOnClickQuestItem = (q: questDataType) => {
     onClickQuestItem(q);

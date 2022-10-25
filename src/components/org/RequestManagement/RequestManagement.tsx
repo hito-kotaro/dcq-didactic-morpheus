@@ -9,8 +9,8 @@ import RequestPanelHeader from './RequestPanelHeader';
 import RequestListTool from '../../mol/RequestListTool/RequestListTool';
 import EmptyStateIcon from '../../mol/EmptyStateIcon/EmptyStateIcon';
 import SearchWindow from '../../mol/SearchWindow/SearchWindow';
-import useRequestStore from '../../../stores/RequestStore/useRequestStore';
 import useRequestApi from '../../../hooks/Api/useRequestApi';
+import useGlobalState from '../../../stores/useGlobalState';
 
 const RequestManagement = () => {
   const {
@@ -21,7 +21,7 @@ const RequestManagement = () => {
     onClickRequestItem,
   } = useRequestmanagement();
   const mainContents = useChangeComponent();
-  const { requests } = useRequestStore();
+  const { requests } = useGlobalState();
   const { fetchTenantRequests } = useRequestApi();
 
   const wrapOnClickRequestItem = (r: requestDataType) => {

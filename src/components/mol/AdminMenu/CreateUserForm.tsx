@@ -4,13 +4,12 @@ import useInputForm from '../../../hooks/InputForm/useInputForm';
 import SelectForm from '../SelectForm/SelectForm';
 import useSelectForm from '../SelectForm/useSelectForm';
 import useUserApi from '../../../hooks/Api/useUserApi';
-import useTeamStore from '../../../stores/TeamStore/useTeamStore';
-import useRoleStore from '../../../stores/RoleStore/useRoleStore';
+import useGlobalState from '../../../stores/useGlobalState';
 
 const CreateUserForm = () => {
   const { createUser } = useUserApi();
-  const { roles } = useRoleStore();
-  const { teams } = useTeamStore();
+  const { roles } = useGlobalState();
+  const { teams } = useGlobalState();
   const userHandler = useInputForm();
   const pwdHandler = useInputForm();
   const rePwdHandler = useInputForm();

@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 import { createAxiosTokenInstance } from '../../lib/axiosInstance';
-import useQUestStore from '../../stores/QuestStore/useQUestStore';
+import useGlobalState from '../../stores/useGlobalState';
 import {
   questRequestType,
   questDataType,
@@ -8,7 +8,7 @@ import {
 
 const useQuestApi = () => {
   const axiosTokenInstance = createAxiosTokenInstance();
-  const { setQuests } = useQUestStore();
+  const { setQuests } = useGlobalState();
 
   // テナント内のクエストを取得
   const fetchAllQuests = async () => {

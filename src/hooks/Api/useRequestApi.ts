@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 import { createAxiosTokenInstance } from '../../lib/axiosInstance';
-import useRequestStore from '../../stores/RequestStore/useRequestStore';
+import useGlobalState from '../../stores/useGlobalState';
 import {
   createRequestType,
   updateRequestType,
@@ -8,7 +8,7 @@ import {
 
 const useRequestApi = () => {
   const axiosTokenInstance = createAxiosTokenInstance();
-  const { setRequests } = useRequestStore();
+  const { setRequests } = useGlobalState();
 
   // テナント内のリクエストを全て取得する
   const fetchTenantRequests = async () => {
