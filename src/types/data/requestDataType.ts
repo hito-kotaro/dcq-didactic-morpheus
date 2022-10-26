@@ -20,6 +20,7 @@ export type createRequestType = {
 
 export type updateRequestType = {
   status: string;
+  auth_comment: string;
 };
 
 export type closedRequestDataType = {

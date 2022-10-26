@@ -21,12 +21,10 @@ const RequestDetail: VFC<Props> = (props) => {
   const wrapOnClickUpdate = async (status: string) => {
     const updateParam: updateRequestType = {
       status,
+      auth_comment: commentHandler.value,
     };
     await updateRequest(request.id, updateParam);
   };
-
-  // console.log('updateDetail');
-  // console.log(request.status);
 
   return (
     <div className="px-3">
