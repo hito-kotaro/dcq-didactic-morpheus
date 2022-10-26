@@ -44,6 +44,8 @@ const usePenaltyApi = () => {
         updateParam,
       );
       fetchAllPenalty();
+      console.log(result.data);
+      return result.data;
     } catch {
       alert('画面を更新してください');
     }

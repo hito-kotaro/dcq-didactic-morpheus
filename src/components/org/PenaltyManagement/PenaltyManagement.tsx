@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { penaltyDataType } from '../../../types/data/penaltyDataType';
-import UserInfo from '../../mol/MenuHeader/UserInfo';
 import SplitTemplate from '../../templates/SplitTemplate';
 import PenaltyList from './PenaltyList';
 import usePenaltyManagement from './usePenaltyManagement';

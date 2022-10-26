@@ -11,7 +11,6 @@ const PenaltyCreate = () => {
   const { createPenalty } = usePenaltyApi();
 
   const onClickCreate = () => {
-    console.log('create');
     const createParams: penaltyRequestType = {
       title: titleHandler.value,
       description: descHandler.value,
