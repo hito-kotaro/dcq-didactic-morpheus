@@ -36,7 +36,10 @@ const RequestDetail: VFC<Props> = (props) => {
       <div className="h-3" />
       <OwnerHeader
         owner={request.applicant}
-        date={request.date}
+        date={`${request.created_at.substring(
+          0,
+          10,
+        )} ${request.created_at.substring(11, 16)}`}
         reward={request.reward}
         status={request.status}
       />

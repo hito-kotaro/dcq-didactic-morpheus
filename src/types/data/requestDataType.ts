@@ -8,7 +8,24 @@ export type requestDataType = {
   quest_title: string;
   reward: number;
   status: string;
-  date: string;
+  authorizer?: string;
+  auth_comment?: string;
+  created_at: string;
+  updated_at: string;
+};
+
+export const emptyRequest: requestDataType = {
+  id: 0,
+  title: '',
+  description: '',
+  applicant_id: 0,
+  applicant: '',
+  quest_description: '',
+  quest_title: '',
+  reward: 0,
+  status: '',
+  created_at: '',
+  updated_at: '',
 };
 
 export type createRequestType = {

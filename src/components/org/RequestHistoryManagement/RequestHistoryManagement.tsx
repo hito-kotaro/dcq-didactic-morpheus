@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
+import useRequestApi from '../../../hooks/Api/useRequestApi';
 import useChangeComponent from '../../../hooks/ChangeComponent/useChangeComponent';
-import { closedRequests } from '../../../testData/RequestData';
-import { closedRequestDataType } from '../../../types/data/requestDataType';
+import useGlobalState from '../../../stores/useGlobalState';
+import { requestDataType } from '../../../types/data/requestDataType';
 import EmptyStateIcon from '../../mol/EmptyStateIcon/EmptyStateIcon';
 import SplitTemplate from '../../templates/SplitTemplate';
 import RequestHistoryDetail from './RequestHistoryDetail';
@@ -23,14 +24,25 @@ const RequestHistoryManagement = () => {
     statusSelectHandler,
   } = useRequestHistoryManagement();
   const mainComponents = useChangeComponent();
-
-  const wrapOnClickListItem = (r: closedRequestDataType) => {
+  const { requests } = useGlobalState();
+  const { fetchTenantRequests } = useRequestApi();
+  const wrapOnClickListItem = (r: requestDataType) => {
     onClickListItem(r);
-    mainComponents.chComponent(<RequestHistoryDetail cr={r} />);
+    mainComponents.chComponent(<RequestHistoryDetail request={r} />);
   };
+
   useEffect(() => {
-    filteringRequestHistory(closedRequests);
+    fetchTenantRequests();
+  }, []);
+
+  useEffect(() => {
+    filteringRequestHistory(
+      requests.filter((r: requestDataType) => {
+        return r.status !== 'open';
+      }),
+    );
   }, [
+    requests,
     requestSearchHandler.value,
     statusSelectHandler.value,
     userSelectHandler.value,
@@ -54,7 +66,7 @@ const RequestHistoryManagement = () => {
         />
       }
       mainHeader={
-        <RequestHistoryPanelHeader isDetail={isDetail} cr={request} />
+        <RequestHistoryPanelHeader isDetail={isDetail} request={request} />
       }
       mainContents={
         mainComponents.component ?? (

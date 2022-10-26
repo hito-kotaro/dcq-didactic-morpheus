@@ -1,17 +1,17 @@
 import React, { VFC } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
-import { closedRequestDataType } from '../../../types/data/requestDataType';
+import { requestDataType } from '../../../types/data/requestDataType';
 import MenuButton from '../../mol/MenuButton/MenuButton';
 import MyModal from '../../mol/MyModal/MyModal';
 import useMyModal from '../../mol/MyModal/useMyModal';
 
 type Props = {
-  cr: closedRequestDataType;
+  request: requestDataType;
   isDetail: boolean;
 };
 
 const RequestHistoryPanelHeader: VFC<Props> = (props) => {
-  const { isDetail, cr } = props;
+  const { isDetail, request } = props;
   const { open, handleOpen, handleClose } = useMyModal();
   const menuItems: { label: string; onClick: () => void }[] = [
     { label: '承認を取り消し', onClick: handleOpen },
@@ -23,7 +23,7 @@ const RequestHistoryPanelHeader: VFC<Props> = (props) => {
         open={open}
         handleOpen={handleOpen}
         handleClose={handleClose}
-        mainMsg={`「${cr.title}」を取り消しますか？`}
+        mainMsg={`「${request.title}」を取り消しますか？`}
         subMsg="取り消しすると付与されたポイント分が減少します。　取り消された履歴は残ります。"
         positiveBtnMsg="承認を取り消し"
         positiveBtnAction={deleteRequest}

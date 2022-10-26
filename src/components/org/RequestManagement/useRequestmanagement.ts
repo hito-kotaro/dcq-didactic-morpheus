@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import useInputForm from '../../../hooks/InputForm/useInputForm';
-import { requestDataType } from '../../../types/data/requestDataType';
+import {
+  emptyRequest,
+  requestDataType,
+} from '../../../types/data/requestDataType';
 import useSelectForm from '../../mol/SelectForm/useSelectForm';
 
 const useRequestmanagement = () => {
@@ -9,18 +12,7 @@ const useRequestmanagement = () => {
   const requestSearchHandler = useInputForm();
   const applicantSelectHandler = useSelectForm();
 
-  const [request, setRequest] = useState<requestDataType>({
-    id: 0,
-    title: '',
-    description: '',
-    applicant_id: 0,
-    applicant: '',
-    quest_description: '',
-    quest_title: '',
-    reward: 0,
-    status: '',
-    date: '',
-  });
+  const [request, setRequest] = useState<requestDataType>(emptyRequest);
 
   const onClickRequestItem = (r: requestDataType) => {
     setRequest(r);

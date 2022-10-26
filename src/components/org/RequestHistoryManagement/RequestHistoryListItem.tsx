@@ -1,12 +1,12 @@
 import React, { VFC } from 'react';
-import { Button, Avatar, Divider } from '@mui/material';
-import { closedRequestDataType } from '../../../types/data/requestDataType';
+import { Button, Divider } from '@mui/material';
+import { requestDataType } from '../../../types/data/requestDataType';
 import MyBadge from '../../atoms/MyBadge/MyBadge';
 import BoringAvatar from '../../atoms/MyAvatar/BoringAvatar';
 
 type Props = {
-  request: closedRequestDataType;
-  onClick: (r: closedRequestDataType) => void;
+  request: requestDataType;
+  onClick: (r: requestDataType) => void;
 };
 const RequestHistoryListItem: VFC<Props> = (props) => {
   const { request, onClick } = props;
@@ -38,7 +38,10 @@ const RequestHistoryListItem: VFC<Props> = (props) => {
               />
               <div className="w-3" />
               <MyBadge
-                content={` 申請日: ${request.date}`}
+                content={` 申請日: ${request.created_at.substring(
+                  0,
+                  10,
+                )} ${request.created_at.substring(11, 16)}`}
                 bg="bg-other"
                 text="text-other"
               />

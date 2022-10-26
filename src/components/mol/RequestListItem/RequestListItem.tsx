@@ -38,7 +38,10 @@ const RequestListItem: VFC<Props> = (props) => {
               />
               <div className="w-3" />
               <MyBadge
-                content={` 申請日: ${request.date}`}
+                content={` 申請日: ${request.created_at.substring(
+                  0,
+                  10,
+                )} ${request.created_at.substring(11, 16)}`}
                 bg="bg-other"
                 text="text-other"
               />

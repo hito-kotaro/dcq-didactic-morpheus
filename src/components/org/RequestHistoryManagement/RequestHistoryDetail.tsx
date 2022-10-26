@@ -1,27 +1,30 @@
 import React, { VFC } from 'react';
-import { closedRequestDataType } from '../../../types/data/requestDataType';
+import { requestDataType } from '../../../types/data/requestDataType';
 import OwnerHeader from '../../mol/OwnerHeader/OwnerHeader';
 
 type Props = {
-  cr: closedRequestDataType;
+  request: requestDataType;
 };
 
 const RequestHistoryDetail: VFC<Props> = (props) => {
-  const { cr } = props;
+  const { request } = props;
 
   return (
     <div>
       <div className="text-text text-lg font-semibold text-center border-b-1">
-        {cr.title}
+        {request.title}
       </div>
 
       <div className="px-3">
         <div className="h-3" />
         <OwnerHeader
-          owner={cr.applicant}
-          date={cr.date}
-          reward={cr.q_reward}
-          status={cr.status}
+          owner={request.applicant}
+          date={`${request.created_at.substring(
+            0,
+            10,
+          )} ${request.created_at.substring(11, 16)}`}
+          reward={request.reward}
+          status={request.status}
         />
 
         <div className="h-8" />
@@ -29,14 +32,14 @@ const RequestHistoryDetail: VFC<Props> = (props) => {
         <div className="text-text">
           <div className="text-lg font-semibold border-b-1">クエスト内容</div>
           <div className="mt-3">
-            <p>{cr.q_description}</p>
+            <p>{request.quest_description}</p>
           </div>
 
           <div className="h-8" />
 
           <div className="text-lg font-semibold border-b-1">リクエスト内容</div>
           <div className="mt-3">
-            <p>{cr.description}</p>
+            <p>{request.description}</p>
           </div>
 
           <div className="h-8" />
@@ -44,13 +47,16 @@ const RequestHistoryDetail: VFC<Props> = (props) => {
           <div className="text-lg font-semibold border-b-1">承認情報</div>
           <div className="h-8" />
           <OwnerHeader
-            owner={cr.authorizer}
-            date={cr.date}
-            reward={0}
-            status={cr.status}
+            owner={request.authorizer!}
+            date={`${request.updated_at.substring(
+              0,
+              10,
+            )} ${request.updated_at.substring(11, 16)}`}
+            reward={request.reward}
+            status={request.status}
           />
           <div className="mt-3">
-            <p>{cr.comment}</p>
+            <p>{request.auth_comment!}</p>
           </div>
         </div>
       </div>
