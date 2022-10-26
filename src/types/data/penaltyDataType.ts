@@ -9,6 +9,12 @@ export type penaltyDataType = {
   comment?: string;
 };
 
+export type penaltyRequestType = {
+  title: string;
+  description: string;
+  penalty: number;
+};
+
 export type assignedPenaltyDateType = {
   id: number;
   p_id: number;

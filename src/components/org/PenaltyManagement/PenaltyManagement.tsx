@@ -3,16 +3,16 @@ import { penaltyDataType } from '../../../types/data/penaltyDataType';
 import UserInfo from '../../mol/MenuHeader/UserInfo';
 import SplitTemplate from '../../templates/SplitTemplate';
 import PenaltyList from './PenaltyList';
-import { penalties } from '../../../testData/PenaltyData';
 import usePenaltyManagement from './usePenaltyManagement';
 import useChangeComponent from '../../../hooks/ChangeComponent/useChangeComponent';
 import PenaltyDetail from './PenaltyDetail';
 import PenaltyListTool from '../../mol/PenaltyListTool/PenaltyListTool';
 import PenaltyPanelHeader from './PenaltyPanelHeader';
-import PenaltyUpdate from './PenaltyUpdate';
 import PenaltyCreate from './PenaltyCreate';
 import EmptyStateIcon from '../../mol/EmptyStateIcon/EmptyStateIcon';
 import PenaltySearchWindow from './PenaltySearchWindow';
+import usePenaltyApi from '../../../hooks/Api/usePenaltyApi';
+import useGlobalState from '../../../stores/useGlobalState';
 
 const PenaltyManagement = () => {
   const {
@@ -24,11 +24,17 @@ const PenaltyManagement = () => {
     filteringPenalty,
     selectHandler,
   } = usePenaltyManagement();
+  const { fetchAllPenalty } = usePenaltyApi();
+  const { penalties } = useGlobalState();
   const mainContents = useChangeComponent();
 
   useEffect(() => {
+    fetchAllPenalty();
+  }, []);
+
+  useEffect(() => {
     filteringPenalty(penalties);
-  }, [penaltySearchHandler.value, selectHandler.value]);
+  }, [penalties, penaltySearchHandler.value, selectHandler.value]);
 
   const wrapOnClickPenaltyItem = (p: penaltyDataType) => {
     onClickPenaltyItem(p);

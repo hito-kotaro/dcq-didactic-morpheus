@@ -1,10 +1,9 @@
-import React, { VFC } from 'react';
+import React, { useEffect, VFC } from 'react';
 import { Button, Divider, TextField } from '@mui/material';
 import { penaltyDataType } from '../../../types/data/penaltyDataType';
 import OwnerHeader from '../../mol/OwnerHeader/OwnerHeader';
 import SelectForm from '../../mol/SelectForm/SelectForm';
 import useSelectForm from '../../mol/SelectForm/useSelectForm';
-import { teamDataType } from '../../../types/data/teamDataType';
 import useInputForm from '../../../hooks/InputForm/useInputForm';
 import useGlobalState from '../../../stores/useGlobalState';
 
@@ -18,9 +17,10 @@ const PenaltyDetail: VFC<Props> = (props) => {
   const { teams } = useGlobalState();
   const commentHandler = useInputForm();
 
-  const convertedSelectMenu = () => {
-    return teams.map((t: teamDataType) => ({ id: t.id, label: t.name }));
-  };
+  useEffect(() => {
+    teamSelectHandler.formatSelectItem(teams);
+  }, [teams]);
+
   return (
     <div>
       <div className="text-text text-lg font-semibold text-center border-b-1">
@@ -54,7 +54,7 @@ const PenaltyDetail: VFC<Props> = (props) => {
             <SelectForm
               handler={teamSelectHandler}
               label="チームを選択"
-              menu={convertedSelectMenu()}
+              menu={teamSelectHandler.selectItem}
             />
             <div className="h-5" />
             <TextField

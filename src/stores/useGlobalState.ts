@@ -1,4 +1,5 @@
 import { useRecoilState } from 'recoil';
+import { penaltyState } from './PenaltyStore/penaltyStore';
 import { questState } from './QuestStore/questStore';
 import { requestState } from './RequestStore/requestStore';
 import { roleState } from './RoleStore/roleStore';
@@ -11,6 +12,7 @@ const useGlobalState = () => {
   const [quests, setQuests] = useRecoilState(questState);
   const [users, setUsers] = useRecoilState(userState);
   const [teams, setTeams] = useRecoilState(teamState);
+  const [penalties, setPenalties] = useRecoilState(penaltyState);
 
   return {
     roles,
@@ -23,6 +25,8 @@ const useGlobalState = () => {
     setUsers,
     teams,
     setTeams,
+    penalties,
+    setPenalties,
   };
 };
 

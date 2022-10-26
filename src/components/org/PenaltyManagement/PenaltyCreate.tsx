@@ -1,11 +1,29 @@
 import React from 'react';
 import { TextField, Button, Divider } from '@mui/material';
 import useInputForm from '../../../hooks/InputForm/useInputForm';
+import { penaltyRequestType } from '../../../types/data/penaltyDataType';
+import usePenaltyApi from '../../../hooks/Api/usePenaltyApi';
 
 const PenaltyCreate = () => {
   const titleHandler = useInputForm();
   const penaltyHandler = useInputForm();
   const descHandler = useInputForm();
+  const { createPenalty } = usePenaltyApi();
+
+  const onClickCreate = () => {
+    console.log('create');
+    const createParams: penaltyRequestType = {
+      title: titleHandler.value,
+      description: descHandler.value,
+      penalty: Number(penaltyHandler.value),
+    };
+
+    createPenalty(createParams);
+
+    titleHandler.clear();
+    descHandler.clear();
+    penaltyHandler.clear();
+  };
 
   return (
     <div className="px-3 text-text">
@@ -25,18 +43,16 @@ const PenaltyCreate = () => {
           <TextField
             fullWidth
             type="text"
-            // label="新しいチームの説明(任意)"
             label="ペナルティポイント"
             variant="outlined"
             onChange={penaltyHandler.onChange}
             value={penaltyHandler.value}
-            // multiline
-            // maxRows={5}
-            // minRows={5}
           />
         </div>
         <div className="ml-auto">
-          <Button variant="contained">ペナルティ発行</Button>
+          <Button variant="contained" onClick={onClickCreate}>
+            ペナルティ発行
+          </Button>
         </div>
       </div>
       <div className="my-5">
@@ -46,7 +62,6 @@ const PenaltyCreate = () => {
       <TextField
         fullWidth
         type="text"
-        // label="新しいチームの説明(任意)"
         label="ペナルティ内容"
         variant="outlined"
         onChange={descHandler.onChange}

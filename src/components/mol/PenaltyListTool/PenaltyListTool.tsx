@@ -1,7 +1,7 @@
 /* eslint-disable consistent-return */
 /* eslint-disable array-callback-return */
 import React, { VFC } from 'react';
-import { penalties } from '../../../testData/PenaltyData';
+import useGlobalState from '../../../stores/useGlobalState';
 import { penaltyDataType } from '../../../types/data/penaltyDataType';
 import { selectHandlerType } from '../../../types/inputHandlerType';
 import SelectForm from '../SelectForm/SelectForm';
@@ -12,6 +12,7 @@ type Props = {
 };
 const PenaltyListTool: VFC<Props> = (props) => {
   const { handler } = props;
+  const { penalties } = useGlobalState();
 
   const penaltyToSelectMenu = () => {
     const owners = penalties.map((p: penaltyDataType) => ({
