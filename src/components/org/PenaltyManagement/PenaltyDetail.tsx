@@ -6,6 +6,7 @@ import SelectForm from '../../mol/SelectForm/SelectForm';
 import useSelectForm from '../../mol/SelectForm/useSelectForm';
 import useInputForm from '../../../hooks/InputForm/useInputForm';
 import useGlobalState from '../../../stores/useGlobalState';
+import useTeamApi from '../../../hooks/Api/useTeamApi';
 
 type Props = {
   penalty: penaltyDataType;
@@ -14,8 +15,13 @@ type Props = {
 const PenaltyDetail: VFC<Props> = (props) => {
   const { penalty } = props;
   const teamSelectHandler = useSelectForm();
+  const { fetchAllTeams } = useTeamApi();
   const { teams } = useGlobalState();
   const commentHandler = useInputForm();
+
+  useEffect(() => {
+    fetchAllTeams();
+  }, []);
 
   useEffect(() => {
     teamSelectHandler.formatSelectItem(teams);
