@@ -1,39 +1,22 @@
 import { useState } from 'react';
 import useInputForm from '../../../hooks/InputForm/useInputForm';
-import { assignedPenaltyDateType } from '../../../types/data/penaltyDataType';
+import { emptyIssue, issueDataType } from '../../../types/data/penaltyDataType';
 import useSelectForm from '../../mol/SelectForm/useSelectForm';
 
 const usePenaltyHistoryManagement = () => {
   const penaltySearchHandler = useInputForm();
   const teamSelectHandler = useSelectForm();
-  const [penalty, setPenalty] = useState<assignedPenaltyDateType>({
-    id: 0,
-    p_id: 0,
-    title: '',
-    p_title: '',
-    p_desciription: '',
-    penalty: 0,
-    date: '',
-    team: '',
-    team_id: 0,
-    owner: '',
-    owner_id: 0,
-    authorizer: '',
-    authorizer_id: 0,
-    comment: '',
-  });
+  const [issue, setIssue] = useState<issueDataType>(emptyIssue);
   const [isDetail, setIsDetail] = useState(false);
-  const [filterdPenalties, setFilterdPenalties] = useState<
-    assignedPenaltyDateType[]
-  >([]);
+  const [filterdPenalties, setFilterdPenalties] = useState<issueDataType[]>([]);
 
-  const onClickListItem = (p: assignedPenaltyDateType) => {
+  const onClickListItem = (i: issueDataType) => {
     setIsDetail(true);
-    setPenalty(p);
+    setIssue(i);
   };
 
   // requestDataを受け取って条件に一致していれば1していなければ-1を返す
-  const filterCheck = (data: assignedPenaltyDateType) => {
+  const filterCheck = (data: issueDataType) => {
     let flg = false;
 
     // 名前がallの時の絞り込み
@@ -53,15 +36,13 @@ const usePenaltyHistoryManagement = () => {
     return flg;
   };
 
-  const filteringPenalty = (data: assignedPenaltyDateType[]) => {
-    setFilterdPenalties(
-      data.filter((d: assignedPenaltyDateType) => filterCheck(d)),
-    );
+  const filteringPenalty = (data: issueDataType[]) => {
+    setFilterdPenalties(data.filter((d: issueDataType) => filterCheck(d)));
   };
 
   return {
     isDetail,
-    penalty,
+    issue,
     filterdPenalties,
     onClickListItem,
     filteringPenalty,

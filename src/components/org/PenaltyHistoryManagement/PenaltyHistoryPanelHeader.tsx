@@ -1,17 +1,17 @@
 import React, { VFC } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
-import { assignedPenaltyDateType } from '../../../types/data/penaltyDataType';
 import MenuButton from '../../mol/MenuButton/MenuButton';
 import MyModal from '../../mol/MyModal/MyModal';
 import useMyModal from '../../mol/MyModal/useMyModal';
+import { issueDataType } from '../../../types/data/penaltyDataType';
 
 type Props = {
-  penalty: assignedPenaltyDateType;
+  issue: issueDataType;
   isDetail: boolean;
 };
 
 const PenaltyHistoryPanelHeader: VFC<Props> = (props) => {
-  const { penalty, isDetail } = props;
+  const { issue, isDetail } = props;
   const { open, handleOpen, handleClose } = useMyModal();
   const menuItems: { label: string; onClick: () => void }[] = [
     { label: 'ペナルティを取り消し', onClick: handleOpen },
@@ -25,7 +25,7 @@ const PenaltyHistoryPanelHeader: VFC<Props> = (props) => {
         open={open}
         handleOpen={handleOpen}
         handleClose={handleClose}
-        mainMsg={`「${penalty.title}」を取り消しますか？`}
+        mainMsg={`「${issue.title}」を取り消しますか？`}
         subMsg="取り消すると付与されたペナルティポイントは減少します。　取り消された履歴は残ります。"
         positiveBtnMsg="承認を取り消し"
         positiveBtnAction={deletePenalty}

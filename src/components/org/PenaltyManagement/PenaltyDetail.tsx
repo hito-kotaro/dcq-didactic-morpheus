@@ -1,12 +1,16 @@
 import React, { useEffect, VFC } from 'react';
 import { Button, Divider, TextField } from '@mui/material';
-import { penaltyDataType } from '../../../types/data/penaltyDataType';
+import {
+  issueRequestType,
+  penaltyDataType,
+} from '../../../types/data/penaltyDataType';
 import OwnerHeader from '../../mol/OwnerHeader/OwnerHeader';
 import SelectForm from '../../mol/SelectForm/SelectForm';
 import useSelectForm from '../../mol/SelectForm/useSelectForm';
 import useInputForm from '../../../hooks/InputForm/useInputForm';
 import useGlobalState from '../../../stores/useGlobalState';
 import useTeamApi from '../../../hooks/Api/useTeamApi';
+import usePenaltyApi from '../../../hooks/Api/usePenaltyApi';
 
 type Props = {
   penalty: penaltyDataType;
@@ -16,8 +20,9 @@ const PenaltyDetail: VFC<Props> = (props) => {
   const { penalty } = props;
   const teamSelectHandler = useSelectForm();
   const { fetchAllTeams } = useTeamApi();
+  const { createIssue } = usePenaltyApi();
   const { teams } = useGlobalState();
-  const commentHandler = useInputForm();
+  const descHandler = useInputForm();
 
   useEffect(() => {
     fetchAllTeams();
@@ -26,6 +31,17 @@ const PenaltyDetail: VFC<Props> = (props) => {
   useEffect(() => {
     teamSelectHandler.formatSelectItem(teams);
   }, [teams]);
+
+  const onClickCreateIssue = () => {
+    const createParam: issueRequestType = {
+      title: `付与済み - ${penalty.title}`,
+      description: descHandler.value,
+      team_id: Number(teamSelectHandler.value),
+      penalty_id: penalty.id,
+    };
+    createIssue(createParam);
+    descHandler.clear();
+  };
 
   return (
     <div>
@@ -69,14 +85,16 @@ const PenaltyDetail: VFC<Props> = (props) => {
               // label="新しいチームの説明(任意)"
               label="ペナルティコメント(任意)"
               variant="outlined"
-              onChange={commentHandler.onChange}
-              value={commentHandler.value}
+              onChange={descHandler.onChange}
+              value={descHandler.value}
               multiline
               maxRows={5}
               minRows={5}
             />
             <div className="h-5" />
-            <Button variant="contained">ペナルティを付与</Button>
+            <Button variant="contained" onClick={onClickCreateIssue}>
+              ペナルティを付与
+            </Button>
             <div className="h-5" />
           </div>
         </div>

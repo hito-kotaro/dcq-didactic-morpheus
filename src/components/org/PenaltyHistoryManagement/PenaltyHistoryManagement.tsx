@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
+import usePenaltyApi from '../../../hooks/Api/usePenaltyApi';
 import useChangeComponent from '../../../hooks/ChangeComponent/useChangeComponent';
-import { assinedPenalty } from '../../../testData/PenaltyData';
-import { assignedPenaltyDateType } from '../../../types/data/penaltyDataType';
+import useGlobalState from '../../../stores/useGlobalState';
+import { issueDataType } from '../../../types/data/penaltyDataType';
 import EmptyStateIcon from '../../mol/EmptyStateIcon/EmptyStateIcon';
 import SplitTemplate from '../../templates/SplitTemplate';
 import PenaltyHistoryDetail from './PenaltyHistoryDetail';
@@ -14,23 +15,29 @@ import usePenaltyHistoryManagement from './usePenaltyHistoryManagement';
 const PenaltyHistoryManagement = () => {
   const {
     isDetail,
-    penalty,
+    issue,
     onClickListItem,
     filterdPenalties,
     filteringPenalty,
     teamSelectHandler,
     penaltySearchHandler,
   } = usePenaltyHistoryManagement();
-
+  const { issues } = useGlobalState();
+  const { fetchAllIssue } = usePenaltyApi();
   const mainContents = useChangeComponent();
 
-  const wrapOnclickListItem = (p: assignedPenaltyDateType) => {
-    onClickListItem(p);
-    mainContents.chComponent(<PenaltyHistoryDetail penalty={p} />);
+  const wrapOnclickListItem = (i: issueDataType) => {
+    onClickListItem(i);
+    mainContents.chComponent(<PenaltyHistoryDetail issue={i} />);
   };
+
   useEffect(() => {
-    filteringPenalty(assinedPenalty);
-  }, [penaltySearchHandler.value, teamSelectHandler.value]);
+    fetchAllIssue();
+  }, []);
+
+  useEffect(() => {
+    filteringPenalty(issues);
+  }, [issues, penaltySearchHandler.value, teamSelectHandler.value]);
   return (
     <SplitTemplate
       menuHeader={
@@ -41,12 +48,12 @@ const PenaltyHistoryManagement = () => {
       }
       menuContents={
         <PenaltyHistoryList
-          penalties={filterdPenalties}
+          issues={filterdPenalties}
           onClick={wrapOnclickListItem}
         />
       }
       mainHeader={
-        <PenaltyHistoryPanelHeader isDetail={isDetail} penalty={penalty} />
+        <PenaltyHistoryPanelHeader isDetail={isDetail} issue={issue} />
       }
       mainContents={
         mainContents.component ?? (

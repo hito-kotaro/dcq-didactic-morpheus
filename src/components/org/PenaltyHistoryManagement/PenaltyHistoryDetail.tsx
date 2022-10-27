@@ -1,26 +1,29 @@
 import React, { VFC } from 'react';
-import { assignedPenaltyDateType } from '../../../types/data/penaltyDataType';
+import { issueDataType } from '../../../types/data/penaltyDataType';
 import OwnerHeader from '../../mol/OwnerHeader/OwnerHeader';
 
 type Props = {
-  penalty: assignedPenaltyDateType;
+  issue: issueDataType;
 };
 
 const PenaltyHistoryDetail: VFC<Props> = (props) => {
-  const { penalty } = props;
+  const { issue } = props;
 
   return (
     <div>
       <div className="text-text text-lg font-semibold text-center border-b-1">
-        {penalty.title}
+        {issue.title}
       </div>
 
       <div className="px-3">
         <div className="h-3" />
         <OwnerHeader
-          owner={penalty.team}
-          date={penalty.date}
-          reward={penalty.penalty}
+          owner={issue.team}
+          date={`${issue.penalty_updated_at.substring(
+            0,
+            10,
+          )} ${issue.penalty_updated_at.substring(11, 16)}`}
+          reward={issue.point}
           status="penalty"
           isPenalty
           isTeam
@@ -29,11 +32,9 @@ const PenaltyHistoryDetail: VFC<Props> = (props) => {
         <div className="h-8" />
 
         <div className="text-text">
-          <div className="text-lg font-semibold border-b-1">
-            {penalty.title}
-          </div>
+          <div className="text-lg font-semibold border-b-1">{issue.title}</div>
           <div className="mt-3">
-            <p>{penalty.p_desciription}</p>
+            <p>{issue.penalty_description}</p>
           </div>
 
           <div className="h-8" />
@@ -43,8 +44,11 @@ const PenaltyHistoryDetail: VFC<Props> = (props) => {
           </div>
           <div className="h-8" />
           <OwnerHeader
-            owner={penalty.authorizer}
-            date={penalty.date}
+            owner={issue.authorizer}
+            date={`${issue.created_at.substring(
+              0,
+              10,
+            )} ${issue.created_at.substring(11, 16)}`}
             reward={0}
             status="assigned"
             isPenalty
@@ -52,9 +56,9 @@ const PenaltyHistoryDetail: VFC<Props> = (props) => {
           <div className="mt-3">
             <div className="text-lg font-semibold border-b-1">コメント</div>
             <p>
-              {penalty.comment === ''
+              {issue.description === ''
                 ? 'コメントはありません'
-                : penalty.comment}
+                : issue.description}
             </p>
           </div>
         </div>

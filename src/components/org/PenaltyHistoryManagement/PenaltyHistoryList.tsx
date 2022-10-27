@@ -1,17 +1,18 @@
 import React, { VFC } from 'react';
-import { assignedPenaltyDateType } from '../../../types/data/penaltyDataType';
+import { issueDataType } from '../../../types/data/penaltyDataType';
 import PenaltyHistoryListItem from './PenaltyHistoryListItem';
 
 type Props = {
-  penalties: assignedPenaltyDateType[];
-  onClick: (p: assignedPenaltyDateType) => void;
+  issues: issueDataType[];
+  // eslint-disable-next-line no-unused-vars
+  onClick: (i: issueDataType) => void;
 };
 const PenaltyHistoryList: VFC<Props> = (props) => {
-  const { penalties, onClick } = props;
+  const { issues, onClick } = props;
   return (
     <>
-      {penalties.map((p: assignedPenaltyDateType) => (
-        <PenaltyHistoryListItem penalty={p} onClick={onClick} />
+      {issues.map((i: issueDataType) => (
+        <PenaltyHistoryListItem issue={i} onClick={onClick} />
       ))}
     </>
   );
