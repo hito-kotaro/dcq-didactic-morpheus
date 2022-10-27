@@ -24,7 +24,7 @@ const PenaltyUpdate: VFC<Props> = (props) => {
     const createParam: penaltyRequestType = {
       title: titleHandler.value,
       description: descHandler.value,
-      penalty: Number(penaltyHandler.value),
+      point: Number(penaltyHandler.value),
     };
     const result: penaltyDataType = await updatePenalty(
       penalty.id,

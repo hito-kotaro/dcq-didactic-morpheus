@@ -12,7 +12,7 @@ export type penaltyDataType = {
 export type penaltyRequestType = {
   title: string;
   description: string;
-  penalty: number;
+  point: number;
 };
 
 export type assignedPenaltyDateType = {

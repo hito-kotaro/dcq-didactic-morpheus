@@ -14,7 +14,7 @@ const PenaltyCreate = () => {
     const createParams: penaltyRequestType = {
       title: titleHandler.value,
       description: descHandler.value,
-      penalty: Number(penaltyHandler.value),
+      point: Number(penaltyHandler.value),
     };
 
     createPenalty(createParams);
