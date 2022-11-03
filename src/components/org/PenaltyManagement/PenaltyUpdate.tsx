@@ -6,7 +6,7 @@ import {
   penaltyDataType,
   penaltyRequestType,
 } from '../../../types/data/penaltyDataType';
-import PenaltyDetail from './PenaltyDetail';
+import PenaltyDetail from '../../mol/Details/PenaltyDetail';
 
 type Props = {
   penalty: penaltyDataType;

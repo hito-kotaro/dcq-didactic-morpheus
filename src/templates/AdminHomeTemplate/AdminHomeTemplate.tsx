@@ -1,8 +1,8 @@
 import React, { ReactElement, useEffect, VFC } from 'react';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-import AdminHomeHeader from '../../components/org/AdminHomeHeader/AdminHomeHeader';
-import Header from '../../components/org/Header/Header';
+import AdminHomeHeader from '../../components/mol/Headers/AdminHomeHeader';
+import Header from '../../components/mol/Headers/Header';
 import SideMenu from '../../components/org/SideMenu/SideMenu';
 import useLoginApi from '../../hooks/Api/useLoginApi';
 import useTeamApi from '../../hooks/Api/useTeamApi';

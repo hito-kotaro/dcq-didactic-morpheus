@@ -1,6 +1,6 @@
 import React, { ReactElement, VFC } from 'react';
 import useWindowSize from '../../hooks/WindowSize/useWindowSize';
-import DashBoardHeader from '../mol/DashBoardHeader/DashBoardHeader';
+import DashBoardHeader from '../mol/PanelHeaders/DashBoardHeader';
 import PiGraph from '../org/PiGraph/PiGraph';
 
 type Props = {

@@ -3,14 +3,14 @@ import usePenaltyApi from '../../../hooks/Api/usePenaltyApi';
 import useChangeComponent from '../../../hooks/ChangeComponent/useChangeComponent';
 import useGlobalState from '../../../stores/useGlobalState';
 import { issueDataType } from '../../../types/data/penaltyDataType';
-import EmptyStateIcon from '../../mol/EmptyStateIcon/EmptyStateIcon';
+import EmptyStateIcon from '../../atoms/EmptyStateIcon/EmptyStateIcon';
 import SplitTemplate from '../../templates/SplitTemplate';
-import PenaltyHistoryDetail from './PenaltyHistoryDetail';
-import PenaltyHistoryList from './PenaltyHistoryList';
-import PenaltyHistoryMenuHeader from './PenaltyHistoryMenuHeader';
-import PenaltyHistoryMenuTool from './PenaltyHistoryMenuTool';
-import PenaltyHistoryPanelHeader from './PenaltyHistoryPanelHeader';
+import PenaltyHistoryDetail from '../../mol/Details/PenaltyHistoryDetail';
+import PenaltyHistoryList from '../List/PenaltyHistoryList';
+import PenaltyHistoryMenuHeader from '../../mol/PanelHeaders/PenaltyHistoryMenuHeader';
+import PenaltyHistoryMenuTool from '../../mol/ListTools/PenaltyHistoryListTool';
 import usePenaltyHistoryManagement from './usePenaltyHistoryManagement';
+import PenaltyHistoryPanelHeader from '../../mol/PanelHeaders/PenaltyHistoryPanelHeader';
 
 const PenaltyHistoryManagement = () => {
   const {

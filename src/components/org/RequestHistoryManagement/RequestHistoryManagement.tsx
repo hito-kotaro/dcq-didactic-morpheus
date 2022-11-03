@@ -3,14 +3,14 @@ import useRequestApi from '../../../hooks/Api/useRequestApi';
 import useChangeComponent from '../../../hooks/ChangeComponent/useChangeComponent';
 import useGlobalState from '../../../stores/useGlobalState';
 import { requestDataType } from '../../../types/data/requestDataType';
-import EmptyStateIcon from '../../mol/EmptyStateIcon/EmptyStateIcon';
+import EmptyStateIcon from '../../atoms/EmptyStateIcon/EmptyStateIcon';
 import SplitTemplate from '../../templates/SplitTemplate';
-import RequestHistoryDetail from './RequestHistoryDetail';
-import RequestHistoryList from './RequestHistoryList';
-import RequestHistoryListTool from './RequestHistoryListTool';
-import RequestHistoryMenuHeader from './RequestHistoryMenuHeader';
-import RequestHistoryPanelHeader from './RequestHistoryPanelHeader';
+import RequestHistoryDetail from '../../mol/Details/RequestHistoryDetail';
+import RequestHistoryList from '../List/RequestHistoryList';
+import RequestHistoryListTool from '../../mol/ListTools/RequestHistoryListTool';
+import RequestHistoryMenuHeader from '../../mol/PanelHeaders/RequestHistoryMenuHeader';
 import useRequestHistoryManagement from './useRequestHistoryManagement';
+import RequestHistoryPanelHeader from '../../mol/PanelHeaders/RequestHistoryPanelHeader';
 
 const RequestHistoryManagement = () => {
   const {

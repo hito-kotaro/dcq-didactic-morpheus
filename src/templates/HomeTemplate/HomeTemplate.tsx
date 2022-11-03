@@ -8,7 +8,7 @@ import AssignmentTurnedInIcon from '@mui/icons-material/AssignmentTurnedIn';
 import PersonIcon from '@mui/icons-material/Person';
 import GroupsIcon from '@mui/icons-material/Groups';
 import SideMenu from '../../components/org/SideMenu/SideMenu';
-import Header from '../../components/org/Header/Header';
+import Header from '../../components/mol/Headers/Header';
 import UserManagement from '../../components/org/UserManagement/UserManagement';
 import TeamManagement from '../../components/org/TeamManagement/TeamManagement';
 import Summary from '../../components/org/Summary/Summary';

@@ -1,6 +1,6 @@
 import React, { VFC } from 'react';
 import { questDataType } from '../../../types/data/questDataType';
-import QuestListItem from '../../mol/QuestListItem/QuestListItem';
+import QuestListItem from '../../atoms/ListItems/QuestListItem';
 
 type Props = {
   quests: questDataType[];

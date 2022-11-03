@@ -1,15 +1,15 @@
 import React, { ReactElement } from 'react';
 import useGlobalState from '../../../stores/useGlobalState';
 import { teamDataType } from '../../../types/data/teamDataType';
-import DcpIcon from '../../atoms/DcpIcon/DcpIcon';
+import DcpIcon from '../../atoms/Icons/DcpIcon';
 import PenaltyIcon from '../../atoms/Icons/PenaltyIcon';
 import PIcon from '../../atoms/Icons/PIcon';
 import QIcon from '../../atoms/Icons/QIcon';
 import RIcon from '../../atoms/Icons/RIcon';
 import SumIcon from '../../atoms/Icons/SumIcon';
 import DisplayWrapRow from '../../mol/DisplayWraper/DisplayWrapRow';
-import PointDisplay from '../../mol/PointDisplay/PointDisplay';
-import RewardList from '../../mol/RewardList/RewardList';
+import PointDisplay from '../../atoms/PointDisplay/PointDisplay';
+import RewardList from '../List/RewardList';
 import DashBoardTemplate from '../../templates/DashBoardTemplate';
 import PiGraph from '../PiGraph/PiGraph';
 
