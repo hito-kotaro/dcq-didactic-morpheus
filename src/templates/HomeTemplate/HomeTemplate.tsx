@@ -19,6 +19,7 @@ import RequestHistoryManagement from '../../components/org/RequestHistoryManagem
 import PenaltyHistoryManagement from '../../components/org/PenaltyHistoryManagement/PenaltyHistoryManagement';
 import DashBoard from '../../components/org/DashBoard/DashBoard';
 import { sideMenuDataType } from '../../components/org/SideMenu/sideMenuDataType';
+import useWindowSize from '../../hooks/WindowSize/useWindowSize';
 
 const HomeTemplate = () => {
   const [component, setComponent] = useState<ReactElement>(<DashBoard />);
@@ -26,6 +27,7 @@ const HomeTemplate = () => {
   const chComponent = (c: ReactElement) => {
     setComponent(c);
   };
+  const [width, height] = useWindowSize();
 
   const sideMenuItemList: sideMenuDataType[] = [
     {
@@ -88,7 +90,7 @@ const HomeTemplate = () => {
     <>
       <Header />
       <div className="flex h-screen pt-10">
-        <SideMenu itemList={sideMenuItemList} />
+        {width > 1000 ? <SideMenu itemList={sideMenuItemList} /> : ''}
         <div className="w-full">{component}</div>
       </div>
     </>

@@ -1,7 +1,7 @@
 import React from 'react';
-import RewardListItem from '../../atoms/ListItems/RewardListItem';
-import { rewards } from '../../../testData/RewardData';
-import { RewardType } from '../../../types/data/RewardType';
+import RewardListItem from '../../../atoms/ListItems/RewardListItem';
+import { rewards } from '../../../../testData/RewardData';
+import { RewardType } from '../../../../types/data/RewardType';
 
 const RewardList = () => {
   return (

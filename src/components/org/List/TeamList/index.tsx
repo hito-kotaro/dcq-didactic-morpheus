@@ -1,7 +1,7 @@
 import { Divider } from '@mui/material';
 import React, { VFC } from 'react';
-import { teamDataType } from '../../../types/data/teamDataType';
-import TeamListItem from '../../atoms/ListItems/TeamListItem';
+import { teamDataType } from '../../../../types/data/teamDataType';
+import TeamListItem from '../../../atoms/ListItems/TeamListItem';
 
 type Props = {
   teams: teamDataType[];

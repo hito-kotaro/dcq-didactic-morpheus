@@ -1,6 +1,6 @@
 import React, { VFC } from 'react';
-import { issueDataType } from '../../../types/data/penaltyDataType';
-import PenaltyHistoryListItem from '../../atoms/ListItems/PenaltyHistoryListItem';
+import { issueDataType } from '../../../../types/data/penaltyDataType';
+import PenaltyHistoryListItem from '../../../atoms/ListItems/PenaltyHistoryListItem';
 
 type Props = {
   issues: issueDataType[];

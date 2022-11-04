@@ -18,6 +18,7 @@ import TeamCreate from './TeamCreate';
 import useTeamApi from '../../../hooks/Api/useTeamApi';
 import useUserApi from '../../../hooks/Api/useUserApi';
 import useGlobalState from '../../../stores/useGlobalState';
+import List from '../List';
 
 const TeamManagement = () => {
   const { team, teamHandler, filterdTeams, setIsDetail, filteringTeam } =
@@ -98,7 +99,8 @@ const TeamManagement = () => {
       }
       // 固定
       menuContents={
-        <TeamList teams={filterdTeams} onClick={wrapOnClickTeamListItem} />
+        <List />
+        // <TeamList teams={filterdTeams} onClick={wrapOnClickTeamListItem} />
       }
       // メインコンポーネントに付随して変更する
       mainHeader={

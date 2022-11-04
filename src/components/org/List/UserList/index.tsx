@@ -1,7 +1,7 @@
 import React, { VFC } from 'react';
 import { Divider } from '@mui/material';
-import UserListItem from '../../atoms/ListItems/UserListItem';
-import { userDataType } from '../../../types/data/userDataType';
+import UserListItem from '../../../atoms/ListItems/UserListItem';
+import { userDataType } from '../../../../types/data/userDataType';
 
 type Props = {
   users: userDataType[];

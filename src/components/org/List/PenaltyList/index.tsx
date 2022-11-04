@@ -1,6 +1,6 @@
 import React, { VFC } from 'react';
-import { penaltyDataType } from '../../../types/data/penaltyDataType';
-import PenaltyListItem from '../../atoms/ListItems/PenaltyListItem';
+import { penaltyDataType } from '../../../../types/data/penaltyDataType';
+import PenaltyListItem from '../../../atoms/ListItems/PenaltyListItem';
 
 type Props = {
   penalties: penaltyDataType[];

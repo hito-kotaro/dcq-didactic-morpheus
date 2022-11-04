@@ -1,6 +1,6 @@
 import React, { VFC } from 'react';
-import { requestDataType } from '../../../types/data/requestDataType';
-import RequestListItem from '../../atoms/ListItems/RequestListItem';
+import { requestDataType } from '../../../../types/data/requestDataType';
+import RequestListItem from '../../../atoms/ListItems/RequestListItem';
 
 type Props = {
   requests: requestDataType[];
