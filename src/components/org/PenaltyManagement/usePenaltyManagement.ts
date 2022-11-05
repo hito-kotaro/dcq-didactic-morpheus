@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import useInputForm from '../../../hooks/InputForm/useInputForm';
+import useGlobalState from '../../../stores/useGlobalState';
 import { penaltyDataType } from '../../../types/data/penaltyDataType';
 import useSelectForm from '../../mol/SelectForm/useSelectForm';
 
@@ -9,6 +10,7 @@ const usePenaltyManagement = () => {
     [],
   );
   const selectHandler = useSelectForm();
+  const { penalties } = useGlobalState();
   const penaltySearchHandler = useInputForm();
   const [penalty, setPenalty] = useState<penaltyDataType>({
     id: 0,
@@ -48,6 +50,11 @@ const usePenaltyManagement = () => {
     setFilterdPenalties(data.filter((p: penaltyDataType) => filterCheck(p)));
   };
 
+  const pickPenalty = (id: number): penaltyDataType => {
+    const pick = penalties.filter((p: penaltyDataType) => p.id === id);
+    return pick[0];
+  };
+
   return {
     penalty,
     filterdPenalties,
@@ -55,6 +62,7 @@ const usePenaltyManagement = () => {
     penaltySearchHandler,
     onClickPenaltyItem,
     filteringPenalty,
+    pickPenalty,
     selectHandler,
   };
 };

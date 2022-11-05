@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import useInputForm from '../../../hooks/InputForm/useInputForm';
+import useGlobalState from '../../../stores/useGlobalState';
 import {
   emptyRequest,
   requestDataType,
@@ -8,6 +9,7 @@ import useSelectForm from '../../mol/SelectForm/useSelectForm';
 
 const useRequestmanagement = () => {
   const [isDetail, setIsDetail] = useState(false);
+  const { requests } = useGlobalState();
   const [filterdRequests, setFilterdRequests] = useState<requestDataType[]>([]);
   const requestSearchHandler = useInputForm();
   const applicantSelectHandler = useSelectForm();
@@ -42,6 +44,11 @@ const useRequestmanagement = () => {
     setFilterdRequests(data.filter((r: requestDataType) => filterCheck(r)));
   };
 
+  const pickRequest = (id: number): requestDataType => {
+    const pick = requests.filter((r: requestDataType) => r.id === id);
+    return pick[0];
+  };
+
   return {
     request,
     setRequest,
@@ -50,6 +57,7 @@ const useRequestmanagement = () => {
     filteringRequest,
     applicantSelectHandler,
     onClickRequestItem,
+    pickRequest,
   };
 };
 

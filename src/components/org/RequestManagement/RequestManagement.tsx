@@ -11,6 +11,8 @@ import EmptyStateIcon from '../../atoms/EmptyStateIcon/EmptyStateIcon';
 import SearchWindow from '../../mol/SearchWindow/SearchWindow';
 import useRequestApi from '../../../hooks/Api/useRequestApi';
 import useGlobalState from '../../../stores/useGlobalState';
+import useList from '../List/useList';
+import List from '../List';
 
 const RequestManagement = () => {
   const {
@@ -18,15 +20,17 @@ const RequestManagement = () => {
     requestSearchHandler,
     filteringRequest,
     applicantSelectHandler,
+    pickRequest,
     onClickRequestItem,
   } = useRequestmanagement();
   const mainContents = useChangeComponent();
+  const { convRequest } = useList();
   const { requests } = useGlobalState();
   const { fetchTenantRequests } = useRequestApi();
 
-  const wrapOnClickRequestItem = (r: requestDataType) => {
-    onClickRequestItem(r);
-    mainContents.chComponent(<RequestDetail request={r} />);
+  const wrapOnClickRequestItem = (id: number) => {
+    onClickRequestItem(pickRequest(id));
+    mainContents.chComponent(<RequestDetail request={pickRequest(id)} />);
   };
 
   useEffect(() => {
@@ -34,9 +38,9 @@ const RequestManagement = () => {
   }, []);
 
   useEffect(() => {
-    filteringRequest(
-      requests.filter((r: requestDataType) => r.status === 'open'),
-    );
+    // filteringRequest(
+    //   requests.filter((r: requestDataType) => r.status === 'open'),
+    // );
     mainContents.chComponent(
       <EmptyStateIcon msg="リクエストを選択してください" />,
     );
@@ -52,10 +56,11 @@ const RequestManagement = () => {
       }
       menuTool={<RequestListTool handler={applicantSelectHandler} />}
       menuContents={
-        <RequestList
-          requests={filterdRequests}
-          onClick={wrapOnClickRequestItem}
-        />
+        <List list={convRequest()} onClick={wrapOnClickRequestItem} />
+        // <RequestList
+        //   requests={filterdRequests}
+        //   onClick={wrapOnClickRequestItem}
+        // />
       }
       mainHeader={<RequestPanelHeader />}
       mainContents={

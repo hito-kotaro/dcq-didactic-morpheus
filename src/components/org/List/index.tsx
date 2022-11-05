@@ -19,7 +19,7 @@ const List: VFC<Props> = (props) => {
           <ListItem
             key={l.id}
             title={l.title}
-            avatar={l.title}
+            avatar={l.avatar}
             description={l.description}
             badgeList={l.badges}
             date=""
