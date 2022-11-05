@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import useInputForm from '../../../hooks/InputForm/useInputForm';
+import useGlobalState from '../../../stores/useGlobalState';
 import { userDataType } from '../../../types/data/userDataType';
 import useSelectForm from '../../mol/SelectForm/useSelectForm';
 
@@ -11,7 +12,7 @@ const useUserManagement = () => {
   const rePwdHandler = useInputForm();
   const [isDetail, setIsDetail] = useState(false);
   const [filterd, setFilterd] = useState<userDataType[]>([]);
-
+  const { users } = useGlobalState();
   const roleSelectHandler = useSelectForm();
   const teamSelectHandler = useSelectForm();
 
@@ -43,6 +44,11 @@ const useUserManagement = () => {
     setFilterd(data.filter((u: userDataType) => filterCheck(u)));
   };
 
+  const pickUser = (id: number): userDataType => {
+    const pick = users.filter((u: userDataType) => u.id === id);
+    return pick[0];
+  };
+
   return {
     isDetail,
     filterd,
@@ -53,6 +59,7 @@ const useUserManagement = () => {
     roleSelectHandler,
     teamSelectHandler,
     selectHandler,
+    pickUser,
     wrapSetIsDetail,
     filteringUser,
   };

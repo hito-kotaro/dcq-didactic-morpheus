@@ -8,16 +8,16 @@ import useMyModal from '../../atoms/MyModal/useMyModal';
 import UpdateTeam from '../../org/TeamManagement/UpdateTeam';
 
 type Props = {
-  team: teamDataType;
+  // teamName: string;
   chComponent: (component: ReactElement) => void;
 };
 
 const TeamPanelHeader: VFC<Props> = (props) => {
-  const { team, chComponent } = props;
+  const { chComponent } = props;
   const { open, handleOpen, handleClose } = useMyModal();
 
   const teamUpdate = () => {
-    chComponent(<UpdateTeam team={team} />);
+    chComponent(<UpdateTeam />);
   };
   const menuItems: { label: string; onClick: () => void }[] = [
     { label: 'チームを削除', onClick: handleOpen },
@@ -25,7 +25,6 @@ const TeamPanelHeader: VFC<Props> = (props) => {
   ];
 
   const deleteTeam = () => {
-    console.log(`delete ${team.name}`);
     handleClose();
   };
 
@@ -35,7 +34,7 @@ const TeamPanelHeader: VFC<Props> = (props) => {
         open={open}
         handleOpen={handleOpen}
         handleClose={handleClose}
-        mainMsg={`${team.name}を削除しますか？`}
+        mainMsg="チームを削除しますか？"
         subMsg="グループに所属しているメンバーがいる場合は他のグループに移動してから削除してください。"
         positiveBtnMsg="削除"
         positiveBtnAction={deleteTeam}
@@ -43,11 +42,7 @@ const TeamPanelHeader: VFC<Props> = (props) => {
 
       <span className="text-2xl font-semibold text-text">チームメンバ一覧</span>
       <div className="flex justify-end">
-        {team.name !== '' ? (
-          <MenuButton menuItems={menuItems} icon={<MenuIcon />} />
-        ) : (
-          ''
-        )}
+        <MenuButton menuItems={menuItems} icon={<MenuIcon />} />
       </div>
     </div>
   );

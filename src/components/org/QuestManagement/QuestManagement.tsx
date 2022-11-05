@@ -12,6 +12,8 @@ import EmptyStateIcon from '../../atoms/EmptyStateIcon/EmptyStateIcon';
 import QuestSearchWindow from './QuestSearchWindow';
 import useQuestApi from '../../../hooks/Api/useQuestApi';
 import useGlobalState from '../../../stores/useGlobalState';
+import List from '../List';
+import useList from '../List/useList';
 
 const QuestManagement = () => {
   const {
@@ -21,15 +23,18 @@ const QuestManagement = () => {
     setIsDetail,
     questSearchHandler,
     selectHandler,
+    pickQuest,
     onClickQuestItem,
     filteringQuest,
   } = useQuestManagement();
   const mainContents = useChangeComponent();
   const { quests } = useGlobalState();
+  const { convQuest } = useList();
   const { fetchAllQuests } = useQuestApi();
-  const wrapOnClickQuestItem = (q: questDataType) => {
-    onClickQuestItem(q);
-    mainContents.chComponent(<QuestDetail quest={q} />);
+
+  const wrapOnClickQuestItem = (id: number) => {
+    onClickQuestItem(pickQuest(id));
+    mainContents.chComponent(<QuestDetail quest={pickQuest(id)} />);
   };
 
   const wrapOnclickQuestCreate = () => {
@@ -55,7 +60,8 @@ const QuestManagement = () => {
       }
       menuTool={<QuestListTool handler={selectHandler} />}
       menuContents={
-        <QuestList quests={filterdQuests} onClick={wrapOnClickQuestItem} />
+        <List list={convQuest()} onClick={wrapOnClickQuestItem} />
+        // <QuestList quests={filterdQuests} onClick={wrapOnClickQuestItem} />
       }
       mainHeader={
         <QuestPanelHeader

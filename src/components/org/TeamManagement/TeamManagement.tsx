@@ -19,11 +19,12 @@ import useTeamApi from '../../../hooks/Api/useTeamApi';
 import useUserApi from '../../../hooks/Api/useUserApi';
 import useGlobalState from '../../../stores/useGlobalState';
 import List from '../List';
+import useList from '../List/useList';
 
 const TeamManagement = () => {
-  const { team, teamHandler, filterdTeams, setIsDetail, filteringTeam } =
+  const { pickTeam, teamHandler, filterdTeams, setIsDetail, filteringTeam } =
     useTeamManagements();
-
+  const { convTeam } = useList();
   const { teams } = useGlobalState();
   const { fetchTeamMember } = useUserApi();
   const { fetchAllTeams } = useTeamApi();
@@ -35,7 +36,7 @@ const TeamManagement = () => {
   }, []);
 
   useEffect(() => {
-    filteringTeam(teams);
+    filteringTeam(convTeam());
   }, [teams, teamHandler.value]);
 
   const wrapOnClickRequestItem = (r: requestDataType) => {
@@ -56,12 +57,14 @@ const TeamManagement = () => {
     );
   };
 
-  const wrapOnClickTeamListItem = async (t: teamDataType) => {
-    // 詳細表示になったことを保持
+  const wrapOnClickTeamListItem = async (id: number) => {
+    // team idからteamを取得
+    const clickedTeam: teamDataType[] = teams.filter((t: teamDataType) => {
+      return t.id === id;
+    });
+
     setIsDetail(true);
-    // 対象のチームメンバを取得
-    // クリックしたチームのUser情報を取得
-    const filterd: userDataType[] = await fetchTeamMember(t.id);
+    const filterd: userDataType[] = await fetchTeamMember(id);
 
     // const filterd: userDataType[] = users.filter(
     //   (u: userDataType) => t.id === u.team_id,
@@ -72,7 +75,7 @@ const TeamManagement = () => {
       <UserList users={filterd} onClick={onClickUserItem} />,
     );
     mainHeaderContents.chComponent(
-      <TeamPanelHeader team={t} chComponent={mainContents.chComponent} />,
+      <TeamPanelHeader chComponent={mainContents.chComponent} />,
     );
   };
 
@@ -99,13 +102,13 @@ const TeamManagement = () => {
       }
       // 固定
       menuContents={
-        <List />
+        <List list={filterdTeams} onClick={wrapOnClickTeamListItem} />
         // <TeamList teams={filterdTeams} onClick={wrapOnClickTeamListItem} />
       }
       // メインコンポーネントに付随して変更する
       mainHeader={
         mainHeaderContents.component ?? (
-          <TeamPanelHeader team={team} chComponent={mainContents.chComponent} />
+          <TeamPanelHeader chComponent={mainContents.chComponent} />
         )
       }
       // コンポーネントを切り替える

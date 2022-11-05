@@ -17,7 +17,7 @@ const MyBadgeList: VFC<Props> = (props) => {
               <div className="w-3" />
             </>
           ))
-        : 'badgeなし'}
+        : ''}
     </div>
   );
 };

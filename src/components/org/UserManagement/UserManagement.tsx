@@ -16,6 +16,8 @@ import UserSearchWindow from './UserSearchWindow';
 import UserCreate from './UserCreate';
 import useUserApi from '../../../hooks/Api/useUserApi';
 import useGlobalState from '../../../stores/useGlobalState';
+import useList from '../List/useList';
+import List from '../List';
 
 const UserManagement = () => {
   const {
@@ -28,10 +30,11 @@ const UserManagement = () => {
     roleSelectHandler,
     teamSelectHandler,
     selectHandler,
+    pickUser,
     wrapSetIsDetail,
     filteringUser,
   } = useUserManagement();
-
+  const { convUser } = useList();
   const { user, selectUser } = useUserList();
   const { users, setUsers } = useGlobalState();
   const { fetchTenantMember } = useUserApi();
@@ -58,12 +61,19 @@ const UserManagement = () => {
     mainContents.chComponent(<RequestDetail request={r} />);
   };
 
+  const onClickUserList = (id: number) => {
+    wrapSetIsDetail(true);
+    mainContents.chComponent(
+      <UserDetail user={pickUser(id)} onClick={wrapOnClickRequestItem} />,
+    );
+  };
   const wrapSelectUser = (u: userDataType) => {
     wrapSetIsDetail(true);
     mainContents.chComponent(
       <UserDetail user={u} onClick={wrapOnClickRequestItem} />,
     );
   };
+
   const wrapOnclickUserCreate = () => {
     mainContents.chComponent(<UserCreate />);
   };
@@ -78,7 +88,8 @@ const UserManagement = () => {
       }
       // ここは、ロールでの絞り込みにする
       menuTool={<UserListTool handler={selectHandler} />}
-      menuContents={<UserList users={filterd} onClick={wrapSelectUser} />}
+      menuContents={<List list={convUser()} onClick={onClickUserList} />}
+      // menuContents={<UserList users={filterd} onClick={wrapSelectUser} />}
       mainHeader={
         <UserPanelHeader
           user={user}

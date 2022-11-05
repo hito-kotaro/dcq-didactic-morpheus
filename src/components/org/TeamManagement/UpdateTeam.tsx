@@ -5,7 +5,6 @@ import { inputHandlerType } from '../../../types/inputHandlerType';
 import useInputForm from '../../../hooks/InputForm/useInputForm';
 
 type Props = {
-  team: teamDataType;
   // nameHandler: inputHandlerType;
   // descHandler: inputHandlerType;
   // onClickUpdate: (newTeam: newTeamType) => void;

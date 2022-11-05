@@ -2,12 +2,14 @@ import { useState } from 'react';
 import { questDataType } from '../../../types/data/questDataType';
 import useInputForm from '../../../hooks/InputForm/useInputForm';
 import useSelectForm from '../../mol/SelectForm/useSelectForm';
+import useGlobalState from '../../../stores/useGlobalState';
 
 const useQuestManagement = () => {
   const questSearchHandler = useInputForm();
   const selectHandler = useSelectForm();
   const [filterdQuests, setFilterdQuests] = useState<questDataType[]>([]);
   const [isDetail, setIsDetail] = useState(false);
+  const { quests } = useGlobalState();
   const [quest, setQuest] = useState<questDataType>({
     id: 0,
     title: '',
@@ -47,12 +49,19 @@ const useQuestManagement = () => {
   const filteringQuest = (data: questDataType[]) => {
     setFilterdQuests(data.filter((q: questDataType) => filterCheck(q)));
   };
+
+  const pickQuest = (id: number): questDataType => {
+    const pick = quests.filter((q: questDataType) => q.id === id);
+    return pick[0];
+  };
+
   return {
     isDetail,
     quest,
     filterdQuests,
     questSearchHandler,
     selectHandler,
+    pickQuest,
     setIsDetail,
     onClickQuestItem,
     filteringQuest,
