@@ -11,6 +11,8 @@ import PenaltyHistoryMenuHeader from '../../mol/PanelHeaders/PenaltyHistoryMenuH
 import PenaltyHistoryMenuTool from '../../mol/ListTools/PenaltyHistoryListTool';
 import usePenaltyHistoryManagement from './usePenaltyHistoryManagement';
 import PenaltyHistoryPanelHeader from '../../mol/PanelHeaders/PenaltyHistoryPanelHeader';
+import useList from '../List/useList';
+import List from '../List';
 
 const PenaltyHistoryManagement = () => {
   const {
@@ -22,11 +24,13 @@ const PenaltyHistoryManagement = () => {
     teamSelectHandler,
     penaltySearchHandler,
   } = usePenaltyHistoryManagement();
+  const { convPenaltyHis, pickItem } = useList();
   const { issues } = useGlobalState();
   const { fetchAllIssue } = usePenaltyApi();
   const mainContents = useChangeComponent();
 
-  const wrapOnclickListItem = (i: issueDataType) => {
+  const wrapOnclickListItem = (id: number) => {
+    const i = pickItem(id, issues);
     onClickListItem(i);
     mainContents.chComponent(<PenaltyHistoryDetail issue={i} />);
   };
@@ -47,8 +51,8 @@ const PenaltyHistoryManagement = () => {
         <PenaltyHistoryMenuTool teamSelectHandler={teamSelectHandler} />
       }
       menuContents={
-        <PenaltyHistoryList
-          issues={filterdPenalties}
+        <List
+          list={convPenaltyHis(filterdPenalties)}
           onClick={wrapOnclickListItem}
         />
       }

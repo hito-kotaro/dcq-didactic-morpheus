@@ -38,9 +38,9 @@ const RequestManagement = () => {
   }, []);
 
   useEffect(() => {
-    // filteringRequest(
-    //   requests.filter((r: requestDataType) => r.status === 'open'),
-    // );
+    filteringRequest(
+      requests.filter((r: requestDataType) => r.status === 'open'),
+    );
     mainContents.chComponent(
       <EmptyStateIcon msg="リクエストを選択してください" />,
     );
@@ -56,7 +56,10 @@ const RequestManagement = () => {
       }
       menuTool={<RequestListTool handler={applicantSelectHandler} />}
       menuContents={
-        <List list={convRequest()} onClick={wrapOnClickRequestItem} />
+        <List
+          list={convRequest(filterdRequests)}
+          onClick={wrapOnClickRequestItem}
+        />
         // <RequestList
         //   requests={filterdRequests}
         //   onClick={wrapOnClickRequestItem}

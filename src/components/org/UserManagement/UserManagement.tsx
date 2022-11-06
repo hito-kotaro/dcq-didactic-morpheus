@@ -30,11 +30,10 @@ const UserManagement = () => {
     roleSelectHandler,
     teamSelectHandler,
     selectHandler,
-    pickUser,
     wrapSetIsDetail,
     filteringUser,
   } = useUserManagement();
-  const { convUser } = useList();
+  const { convUser, pickItem } = useList();
   const { user, selectUser } = useUserList();
   const { users, setUsers } = useGlobalState();
   const { fetchTenantMember } = useUserApi();
@@ -64,13 +63,10 @@ const UserManagement = () => {
   const onClickUserList = (id: number) => {
     wrapSetIsDetail(true);
     mainContents.chComponent(
-      <UserDetail user={pickUser(id)} onClick={wrapOnClickRequestItem} />,
-    );
-  };
-  const wrapSelectUser = (u: userDataType) => {
-    wrapSetIsDetail(true);
-    mainContents.chComponent(
-      <UserDetail user={u} onClick={wrapOnClickRequestItem} />,
+      <UserDetail
+        user={pickItem(id, users)}
+        onClick={wrapOnClickRequestItem}
+      />,
     );
   };
 
@@ -88,7 +84,7 @@ const UserManagement = () => {
       }
       // ここは、ロールでの絞り込みにする
       menuTool={<UserListTool handler={selectHandler} />}
-      menuContents={<List list={convUser()} onClick={onClickUserList} />}
+      menuContents={<List list={convUser(filterd)} onClick={onClickUserList} />}
       // menuContents={<UserList users={filterd} onClick={wrapSelectUser} />}
       mainHeader={
         <UserPanelHeader

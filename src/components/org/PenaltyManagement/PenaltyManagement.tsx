@@ -24,9 +24,8 @@ const PenaltyManagement = () => {
     onClickPenaltyItem,
     filteringPenalty,
     selectHandler,
-    pickPenalty,
   } = usePenaltyManagement();
-  const { convPenalty } = useList();
+  const { convPenalty, pickItem } = useList();
   const { fetchAllPenalty } = usePenaltyApi();
   const { penalties } = useGlobalState();
   const mainContents = useChangeComponent();
@@ -40,7 +39,7 @@ const PenaltyManagement = () => {
   }, [penalties, penaltySearchHandler.value, selectHandler.value]);
 
   const wrapOnClickPenaltyItem = (id: number) => {
-    const p = pickPenalty(id);
+    const p = pickItem(id, penalties);
     onClickPenaltyItem(p);
     mainContents.chComponent(<PenaltyDetail penalty={p} />);
   };
@@ -60,7 +59,10 @@ const PenaltyManagement = () => {
       }
       menuTool={<PenaltyListTool handler={selectHandler} />}
       menuContents={
-        <List list={convPenalty()} onClick={wrapOnClickPenaltyItem} />
+        <List
+          list={convPenalty(filterdPenalties)}
+          onClick={wrapOnClickPenaltyItem}
+        />
       }
       mainHeader={
         <PenaltyPanelHeader

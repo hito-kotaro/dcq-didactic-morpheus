@@ -44,11 +44,6 @@ const useUserManagement = () => {
     setFilterd(data.filter((u: userDataType) => filterCheck(u)));
   };
 
-  const pickUser = (id: number): userDataType => {
-    const pick = users.filter((u: userDataType) => u.id === id);
-    return pick[0];
-  };
-
   return {
     isDetail,
     filterd,
@@ -59,7 +54,6 @@ const useUserManagement = () => {
     roleSelectHandler,
     teamSelectHandler,
     selectHandler,
-    pickUser,
     wrapSetIsDetail,
     filteringUser,
   };

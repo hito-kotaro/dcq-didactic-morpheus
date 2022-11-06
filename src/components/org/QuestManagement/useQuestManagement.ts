@@ -50,18 +50,12 @@ const useQuestManagement = () => {
     setFilterdQuests(data.filter((q: questDataType) => filterCheck(q)));
   };
 
-  const pickQuest = (id: number): questDataType => {
-    const pick = quests.filter((q: questDataType) => q.id === id);
-    return pick[0];
-  };
-
   return {
     isDetail,
     quest,
     filterdQuests,
     questSearchHandler,
     selectHandler,
-    pickQuest,
     setIsDetail,
     onClickQuestItem,
     filteringQuest,

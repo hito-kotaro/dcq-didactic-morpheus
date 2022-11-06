@@ -22,7 +22,7 @@ import List from '../List';
 import useList from '../List/useList';
 
 const TeamManagement = () => {
-  const { pickTeam, teamHandler, filterdTeams, setIsDetail, filteringTeam } =
+  const { teamHandler, filterdTeams, setIsDetail, filteringTeam } =
     useTeamManagements();
   const { convTeam } = useList();
   const { teams } = useGlobalState();

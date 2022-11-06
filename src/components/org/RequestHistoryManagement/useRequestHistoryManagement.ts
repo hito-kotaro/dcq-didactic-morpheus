@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import useInputForm from '../../../hooks/InputForm/useInputForm';
+import useGlobalState from '../../../stores/useGlobalState';
 import {
   emptyRequest,
   requestDataType,
@@ -11,7 +12,7 @@ const useRequestHistoryManagement = () => {
     useState<requestDataType>(emptyRequest);
   const [isDetail, setIsDetail] = useState(false);
   const [request, setRequest] = useState<requestDataType>(emptyRequest);
-
+  const { requests } = useGlobalState();
   const userSelectHandler = useSelectForm();
   const statusSelectHandler = useSelectForm();
   const requestSearchHandler = useInputForm();
@@ -71,6 +72,11 @@ const useRequestHistoryManagement = () => {
     setFilterdRequests(data.filter((r: requestDataType) => filterCheck(r)));
   };
 
+  const pickRequest = (id: number): requestDataType => {
+    const pick = requests.filter((r: requestDataType) => r.id === id);
+    return pick[0];
+  };
+
   return {
     request,
     isDetail,
@@ -80,6 +86,7 @@ const useRequestHistoryManagement = () => {
     setIsDetail,
     onClickListItem,
     filteringRequestHistory,
+    pickRequest,
     requestSearchHandler,
     userSelectHandler,
     statusSelectHandler,

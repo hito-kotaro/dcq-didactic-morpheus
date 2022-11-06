@@ -6,11 +6,12 @@ import { requestDataType } from '../../../types/data/requestDataType';
 import EmptyStateIcon from '../../atoms/EmptyStateIcon/EmptyStateIcon';
 import SplitTemplate from '../../templates/SplitTemplate';
 import RequestHistoryDetail from '../../mol/Details/RequestHistoryDetail';
-import RequestHistoryList from '../List/RequestHistoryList';
 import RequestHistoryListTool from '../../mol/ListTools/RequestHistoryListTool';
 import RequestHistoryMenuHeader from '../../mol/PanelHeaders/RequestHistoryMenuHeader';
 import useRequestHistoryManagement from './useRequestHistoryManagement';
 import RequestHistoryPanelHeader from '../../mol/PanelHeaders/RequestHistoryPanelHeader';
+import List from '../List';
+import useList from '../List/useList';
 
 const RequestHistoryManagement = () => {
   const {
@@ -23,10 +24,12 @@ const RequestHistoryManagement = () => {
     userSelectHandler,
     statusSelectHandler,
   } = useRequestHistoryManagement();
+  const { convRequest, pickItem } = useList();
   const mainComponents = useChangeComponent();
   const { requests } = useGlobalState();
   const { fetchTenantRequests } = useRequestApi();
-  const wrapOnClickListItem = (r: requestDataType) => {
+  const wrapOnClickListItem = (id: number) => {
+    const r = pickItem(id, requests);
     onClickListItem(r);
     mainComponents.chComponent(<RequestHistoryDetail request={r} />);
   };
@@ -60,8 +63,8 @@ const RequestHistoryManagement = () => {
         />
       }
       menuContents={
-        <RequestHistoryList
-          requests={filterdRequests}
+        <List
+          list={convRequest(filterdRequests)}
           onClick={wrapOnClickListItem}
         />
       }

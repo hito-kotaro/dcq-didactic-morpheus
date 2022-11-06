@@ -23,18 +23,18 @@ const QuestManagement = () => {
     setIsDetail,
     questSearchHandler,
     selectHandler,
-    pickQuest,
     onClickQuestItem,
     filteringQuest,
   } = useQuestManagement();
   const mainContents = useChangeComponent();
   const { quests } = useGlobalState();
-  const { convQuest } = useList();
+  const { convQuest, pickItem } = useList();
   const { fetchAllQuests } = useQuestApi();
 
   const wrapOnClickQuestItem = (id: number) => {
-    onClickQuestItem(pickQuest(id));
-    mainContents.chComponent(<QuestDetail quest={pickQuest(id)} />);
+    const q = pickItem(id, quests);
+    onClickQuestItem(q);
+    mainContents.chComponent(<QuestDetail quest={q} />);
   };
 
   const wrapOnclickQuestCreate = () => {
@@ -60,7 +60,7 @@ const QuestManagement = () => {
       }
       menuTool={<QuestListTool handler={selectHandler} />}
       menuContents={
-        <List list={convQuest()} onClick={wrapOnClickQuestItem} />
+        <List list={convQuest(filterdQuests)} onClick={wrapOnClickQuestItem} />
         // <QuestList quests={filterdQuests} onClick={wrapOnClickQuestItem} />
       }
       mainHeader={

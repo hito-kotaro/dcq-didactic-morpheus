@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
 import useGlobalState from '../../../stores/useGlobalState';
-import { penaltyDataType } from '../../../types/data/penaltyDataType';
+import {
+  issueDataType,
+  penaltyDataType,
+} from '../../../types/data/penaltyDataType';
 import { questDataType } from '../../../types/data/questDataType';
 import { requestDataType } from '../../../types/data/requestDataType';
 import { teamDataType } from '../../../types/data/teamDataType';
@@ -8,9 +10,14 @@ import { userDataType } from '../../../types/data/userDataType';
 import { listType } from './listType';
 
 const useList = () => {
-  const { teams, users, quests, requests, penalties } = useGlobalState();
+  const { teams } = useGlobalState();
 
   // いろんな方をListの方に変換するp必要がある
+
+  const pickItem = (id: number, data: any[]) => {
+    const pick = data.filter((d: any) => d.id === id);
+    return pick[0];
+  };
 
   // Team型をlistTypeに変換
   const convTeam = (): listType[] => {
@@ -26,7 +33,7 @@ const useList = () => {
     });
   };
 
-  const convUser = (): listType[] => {
+  const convUser = (users: userDataType[]): listType[] => {
     return users.map((u: userDataType) => {
       return {
         id: u.id,
@@ -39,7 +46,7 @@ const useList = () => {
     });
   };
 
-  const convQuest = (): listType[] => {
+  const convQuest = (quests: questDataType[]): listType[] => {
     return quests.map((q: questDataType) => {
       return {
         id: q.id,
@@ -52,25 +59,25 @@ const useList = () => {
     });
   };
 
-  const convRequest = (): listType[] => {
-    //  先にフィルターする
-    const filtered: requestDataType[] = requests.filter(
-      (r: requestDataType) => r.status === 'open',
-    );
+  // const convRequest = (requests: requestDataType[]): listType[] => {
+  //   //  先にフィルターする
+  //   // const filtered: requestDataType[] = requests.filter(
+  //   //   (r: requestDataType) => r.status === 'open',
+  //   // );
 
-    return filtered.map((r: requestDataType) => {
-      return {
-        id: r.id,
-        avatar: r.applicant,
-        title: r.title,
-        description: r.description,
-        badges: [{ bg: 'bg-open', text: 'text-open', content: 'open' }],
-        date: r.created_at,
-      };
-    });
-  };
+  //   return requests.map((r: requestDataType) => {
+  //     return {
+  //       id: r.id,
+  //       avatar: r.applicant,
+  //       title: r.title,
+  //       description: r.description,
+  //       badges: [{ bg: 'bg-open', text: 'text-open', content: 'open' }],
+  //       date: r.created_at,
+  //     };
+  //   });
+  // };
 
-  const convPenalty = (): listType[] => {
+  const convPenalty = (penalties: penaltyDataType[]): listType[] => {
     return penalties.map((p: penaltyDataType) => {
       return {
         id: p.id,
@@ -83,7 +90,43 @@ const useList = () => {
     });
   };
 
-  return { convTeam, convUser, convQuest, convRequest, convPenalty };
+  const convRequest = (requests: requestDataType[]): listType[] => {
+    return requests.map((r: requestDataType) => {
+      return {
+        id: r.id,
+        avatar: r.applicant,
+        title: r.title,
+        description: r.description,
+        badges: [
+          { bg: `bg-${r.status}`, text: `text-${r.status}`, content: r.status },
+        ],
+        date: r.updated_at,
+      };
+    });
+  };
+
+  const convPenaltyHis = (issues: issueDataType[]): listType[] => {
+    return issues.map((i: issueDataType) => {
+      return {
+        id: i.id,
+        avatar: i.team,
+        title: i.title,
+        description: i.description,
+        badges: [],
+        date: i.created_at,
+      };
+    });
+  };
+
+  return {
+    pickItem,
+    convTeam,
+    convUser,
+    convQuest,
+    convRequest,
+    convPenalty,
+    convPenaltyHis,
+  };
 };
 
 export default useList;
