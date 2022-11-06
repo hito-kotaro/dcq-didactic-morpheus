@@ -16,7 +16,7 @@ const ListItem: VFC<Props> = (props) => {
   const { avatar, title, description, date, badgeList, onClick } = props;
   return (
     <Button fullWidth onClick={onClick}>
-      <div className="w-full text-text flex py-1">
+      <div className="w-full text-text flex py-2">
         <div>
           <UserAvatar name={avatar} />
         </div>
@@ -24,13 +24,13 @@ const ListItem: VFC<Props> = (props) => {
         <div className="w-3" />
 
         <div className="w-full text-left ml-2">
+          <div className="flex justify-end">
+            {badgeList ? <MyBadgeList badgeList={badgeList} /> : ''}
+          </div>
           <div className="text-2xl font-semibold">{title}</div>
           <div className="text-left">{date}</div>
           <Divider />
           <div className="h-3" />
-          <div className="flex justify-end">
-            {badgeList ? <MyBadgeList badgeList={badgeList} /> : ''}
-          </div>
           <div className="break-words">{description}</div>
         </div>
       </div>
