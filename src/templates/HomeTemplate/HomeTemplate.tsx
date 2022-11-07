@@ -20,11 +20,14 @@ import PenaltyHistoryManagement from '../../components/org/PenaltyHistoryManagem
 import DashBoard from '../../components/org/DashBoard/DashBoard';
 import { sideMenuDataType } from '../../components/org/SideMenu/sideMenuDataType';
 import useWindowSize from '../../hooks/WindowSize/useWindowSize';
+import useSidemenuState from '../../stores/SideMenuStore/useSidemenuState';
 
 const HomeTemplate = () => {
   const [component, setComponent] = useState<ReactElement>(<DashBoard />);
+  const { toggle } = useSidemenuState();
 
   const chComponent = (c: ReactElement) => {
+    toggle();
     setComponent(c);
   };
   const [width, height] = useWindowSize();

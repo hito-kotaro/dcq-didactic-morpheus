@@ -13,8 +13,8 @@ const useLoginApi = () => {
     password: string,
   ) => {
     const authParam = {
-      tenantName,
-      userName,
+      tenant_name: tenantName,
+      user_name: userName,
       password,
     };
 
@@ -28,8 +28,8 @@ const useLoginApi = () => {
 
       localStorage.setItem('token', result.data.access_token);
       localStorage.setItem('tenant_name', result.data.tenant_name);
-      localStorage.setItem('user_id', result.data.user);
-      localStorage.setItem('user', result.data.user_id);
+      localStorage.setItem('user', result.data.user);
+      localStorage.setItem('user_id', result.data.user_id);
       // localStorage.setItem('token', result.data.access_token);
       navigate('/home');
     } catch (e) {
@@ -73,6 +73,9 @@ const useLoginApi = () => {
   const logout = async () => {
     localStorage.removeItem('token');
     localStorage.removeItem('admin');
+    localStorage.removeItem('tenant_namr');
+    localStorage.removeItem('user_id');
+    localStorage.removeItem('user');
     navigate('/');
   };
   return { login, logout, tenantLogin, signUp };

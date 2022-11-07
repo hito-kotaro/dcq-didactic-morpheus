@@ -17,7 +17,8 @@ const RewardListItem: VFC<Props> = (props) => {
         <div className="h-3" />
       </div>
       <div className="w-2/12 ml-auto">
-        <ScoreIcon icon={<DcpIcon />} score={rewardData.point} />
+        <div className=" text-3xl ml-auto text-text">{rewardData.point}</div>
+        {/* <ScoreIcon icon={<DcpIcon />} score={rewardData.point} /> */}
       </div>
     </div>
   );

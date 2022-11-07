@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useEffect } from 'react';
 import useGlobalState from '../../../stores/useGlobalState';
 import { teamDataType } from '../../../types/data/teamDataType';
 import DcpIcon from '../../atoms/Icons/DcpIcon';
@@ -12,10 +12,15 @@ import PointDisplay from '../../atoms/PointDisplay/PointDisplay';
 import RewardList from '../List/RewardList';
 import DashBoardTemplate from '../../templates/DashBoardTemplate';
 import PiGraph from '../PiGraph/PiGraph';
+import useTeamApi from '../../../hooks/Api/useTeamApi';
 
 const DashBoard = () => {
   const { teams } = useGlobalState();
+  const { fetchAllTeams } = useTeamApi();
 
+  useEffect(() => {
+    fetchAllTeams();
+  }, []);
   // テナント内の合計ポイント
   const totalPoint: number = teams.reduce(
     (acc: number, val: teamDataType): number => {

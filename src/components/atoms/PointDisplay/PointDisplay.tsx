@@ -13,7 +13,7 @@ const PointDisplay: VFC<Props> = (props) => {
         <div>{msg}</div>
         <div className="h-2" />
         <div className="flex">
-          {icon}
+          {/* {icon} */}
           <div className=" text-5xl ml-auto">{point}</div>
         </div>
       </div>

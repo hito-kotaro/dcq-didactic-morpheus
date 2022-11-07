@@ -12,7 +12,7 @@ const PiGraph: VFC<Props> = (props) => {
   return (
     <div className="border-1">
       <PieChart
-        width={width / 4}
+        width={width > 1000 ? width / 4 : width / 2}
         height={height / 3}
         margin={{ top: 50, right: 50, bottom: 50, left: 50 }}
       >

@@ -1,7 +1,6 @@
 import React, { ReactElement, VFC } from 'react';
 import useWindowSize from '../../hooks/WindowSize/useWindowSize';
 import DashBoardHeader from '../mol/PanelHeaders/DashBoardHeader';
-import PiGraph from '../org/PiGraph/PiGraph';
 
 type Props = {
   firstLine: ReactElement;
@@ -27,10 +26,18 @@ const DashBoardTemplate: VFC<Props> = (props) => {
       <div>
         {firstLine}
         {secondLine}
-        <div className="flex">
-          <div className={listClass}>{list}</div>
-          <div className="w-1/3 pt-5">{graph}</div>
-        </div>
+
+        {width > 1000 ? (
+          <div className="flex">
+            <div className={listClass}>{list}</div>
+            <div className="w-1/3 pt-5">{graph}</div>
+          </div>
+        ) : (
+          <div className="">
+            <div>{list}</div>
+            <div className="w-full p-1">{graph}</div>
+          </div>
+        )}
       </div>
     </div>
   );

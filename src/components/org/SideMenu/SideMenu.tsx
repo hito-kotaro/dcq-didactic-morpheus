@@ -9,6 +9,7 @@ import {
   ListItemText,
 } from '@mui/material';
 import useWindowSize from '../../../hooks/WindowSize/useWindowSize';
+import useSidemenuState from '../../../stores/SideMenuStore/useSidemenuState';
 
 type Props = {
   itemList: {
@@ -26,13 +27,17 @@ const SideMenu: VFC<Props> = (props) => {
     action: (c: ReactElement) => void;
     component: ReactElement;
   };
+  const { toggle, open } = useSidemenuState();
 
   const [width, height] = useWindowSize();
   const { itemList } = props;
   const drawerWidth = width / 5;
   return (
     <Drawer
-      variant="permanent"
+      variant="temporary"
+      // variant={width > 1000 ? 'permanent' : 'temporary'}
+      open={open}
+      onClose={toggle}
       sx={{
         width: drawerWidth,
         flexShrink: 0,
