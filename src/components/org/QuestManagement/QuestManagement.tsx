@@ -14,6 +14,9 @@ import useQuestApi from '../../../hooks/Api/useQuestApi';
 import useGlobalState from '../../../stores/useGlobalState';
 import List from '../List';
 import useList from '../List/useList';
+import useWindowSize from '../../../hooks/WindowSize/useWindowSize';
+import useModal from '../../atoms/MyModal/useMyModal';
+import ControlModal from '../../mol/ControlModal';
 
 const QuestManagement = () => {
   const {
@@ -30,11 +33,18 @@ const QuestManagement = () => {
   const { quests } = useGlobalState();
   const { convQuest, pickItem } = useList();
   const { fetchAllQuests } = useQuestApi();
+  const [width, height] = useWindowSize();
+  const { open, handleOpen, handleClose } = useModal();
 
   const wrapOnClickQuestItem = (id: number) => {
     const q = pickItem(id, quests);
-    onClickQuestItem(q);
-    mainContents.chComponent(<QuestDetail quest={q} />);
+    if (width > 1000) {
+      onClickQuestItem(q);
+      mainContents.chComponent(<QuestDetail quest={q} />);
+    } else {
+      handleOpen();
+      mainContents.chComponent(<QuestDetail quest={q} />);
+    }
   };
 
   const wrapOnclickQuestCreate = () => {
@@ -51,31 +61,41 @@ const QuestManagement = () => {
   }, [quests, questSearchHandler.value, selectHandler.value]);
 
   return (
-    <SplitTemplate
-      menuHeader={
-        <QuestSearchWindow
-          handler={questSearchHandler}
-          onClickQuestCreate={wrapOnclickQuestCreate}
-        />
-      }
-      menuTool={<QuestListTool handler={selectHandler} />}
-      menuContents={
-        <List list={convQuest(filterdQuests)} onClick={wrapOnClickQuestItem} />
-        // <QuestList quests={filterdQuests} onClick={wrapOnClickQuestItem} />
-      }
-      mainHeader={
-        <QuestPanelHeader
-          quest={quest}
-          chComponent={mainContents.chComponent}
-          isDetail={isDetail}
-        />
-      }
-      mainContents={
-        mainContents.component ?? (
-          <EmptyStateIcon msg="クエストを選択してください" />
-        )
-      }
-    />
+    <>
+      <ControlModal
+        open={open}
+        handleClose={handleClose}
+        content={mainContents.component ?? <div>no</div>}
+      />
+      <SplitTemplate
+        menuHeader={
+          <QuestSearchWindow
+            handler={questSearchHandler}
+            onClickQuestCreate={wrapOnclickQuestCreate}
+          />
+        }
+        menuTool={<QuestListTool handler={selectHandler} />}
+        menuContents={
+          <List
+            list={convQuest(filterdQuests)}
+            onClick={wrapOnClickQuestItem}
+          />
+          // <QuestList quests={filterdQuests} onClick={wrapOnClickQuestItem} />
+        }
+        mainHeader={
+          <QuestPanelHeader
+            quest={quest}
+            chComponent={mainContents.chComponent}
+            isDetail={isDetail}
+          />
+        }
+        mainContents={
+          mainContents.component ?? (
+            <EmptyStateIcon msg="クエストを選択してください" />
+          )
+        }
+      />
+    </>
   );
 };
 

@@ -1,5 +1,7 @@
+import { Drawer } from '@mui/material';
 import React, { ReactElement, VFC } from 'react';
 import useWindowSize from '../../hooks/WindowSize/useWindowSize';
+import useSidemenuState from '../../stores/SideMenuStore/useSidemenuState';
 
 type Props = {
   menuHeader: ReactElement;
@@ -13,6 +15,7 @@ const SplitTemplate: VFC<Props> = (props) => {
   const { menuHeader, menuTool, menuContents, mainHeader, mainContents } =
     props;
   const [width, height] = useWindowSize();
+  const { open, toggle } = useSidemenuState();
   console.log(width);
   return (
     <div className="w-full h-full ">
