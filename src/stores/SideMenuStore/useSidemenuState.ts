@@ -5,6 +5,7 @@ const useSidemenuState = () => {
   const [open, setOpen] = useRecoilState(sideMenuState);
 
   const toggle = () => {
+    console.log(open);
     setOpen(!open);
   };
   return { open, toggle };

@@ -31,7 +31,8 @@ const SideMenu: VFC<Props> = (props) => {
 
   const [width, height] = useWindowSize();
   const { itemList } = props;
-  const drawerWidth = width / 5;
+  const drawerEmptyArea = 100;
+  const drawerWidth = width > 1000 ? width / 2 : width - drawerEmptyArea;
   return (
     <Drawer
       variant="temporary"

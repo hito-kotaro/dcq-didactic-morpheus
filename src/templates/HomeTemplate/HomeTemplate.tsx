@@ -93,7 +93,7 @@ const HomeTemplate = () => {
     <>
       <Header />
       <div className="flex h-screen pt-10">
-        {width > 1000 ? <SideMenu itemList={sideMenuItemList} /> : ''}
+        <SideMenu itemList={sideMenuItemList} />
         <div className="w-full">{component}</div>
       </div>
     </>
