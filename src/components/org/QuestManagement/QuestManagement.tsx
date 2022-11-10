@@ -1,10 +1,8 @@
 import React, { useEffect } from 'react';
 import SplitTemplate from '../../templates/SplitTemplate';
-import QuestList from './QuestList';
 import useQuestManagement from './useQuestManagement';
 import QuestDetail from '../../mol/Details/QuestDetail';
 import useChangeComponent from '../../../hooks/ChangeComponent/useChangeComponent';
-import { questDataType } from '../../../types/data/questDataType';
 import QuestListTool from '../../mol/ListTools/QuestListTool';
 import QuestCreate from './QuestCreate';
 import QuestPanelHeader from '../../mol/PanelHeaders/QuestPanelHeader';
@@ -48,8 +46,13 @@ const QuestManagement = () => {
   };
 
   const wrapOnclickQuestCreate = () => {
-    setIsDetail(false);
-    mainContents.chComponent(<QuestCreate />);
+    if (width > 1000) {
+      setIsDetail(false);
+      mainContents.chComponent(<QuestCreate />);
+    } else {
+      handleOpen();
+      mainContents.chComponent(<QuestCreate handleClose={handleClose} />);
+    }
   };
 
   useEffect(() => {

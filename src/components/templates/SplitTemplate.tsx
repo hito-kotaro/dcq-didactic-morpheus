@@ -16,7 +16,6 @@ const SplitTemplate: VFC<Props> = (props) => {
     props;
   const [width, height] = useWindowSize();
   const { open, toggle } = useSidemenuState();
-  console.log(width);
   return (
     <div className="w-full h-full ">
       <div className="flex w-full h-full">

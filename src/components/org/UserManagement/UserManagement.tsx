@@ -1,13 +1,11 @@
 import React, { useEffect } from 'react';
 import SplitTemplate from '../../templates/SplitTemplate';
-import UserList from '../List/UserList';
 import UserListTool from '../../mol/ListTools/UserListTool';
 import useUserManagement from './useUserManagement';
 import UserPanelHeader from '../../mol/PanelHeaders/UserPanelHeader';
 import useUserList from '../UserList/useUserList';
 import useChangeComponent from '../../../hooks/ChangeComponent/useChangeComponent';
 import { userCreateHandlerType } from './types/userCreateHandler';
-import { userDataType } from '../../../types/data/userDataType';
 import UserDetail from '../../mol/Details/UserDetail';
 import EmptyStateIcon from '../../atoms/EmptyStateIcon/EmptyStateIcon';
 import { requestDataType } from '../../../types/data/requestDataType';
@@ -18,6 +16,9 @@ import useUserApi from '../../../hooks/Api/useUserApi';
 import useGlobalState from '../../../stores/useGlobalState';
 import useList from '../List/useList';
 import List from '../List';
+import useWindowSize from '../../../hooks/WindowSize/useWindowSize';
+import useModal from '../../atoms/MyModal/useMyModal';
+import ControlModal from '../../mol/ControlModal';
 
 const UserManagement = () => {
   const {
@@ -38,6 +39,8 @@ const UserManagement = () => {
   const { users, setUsers } = useGlobalState();
   const { fetchTenantMember } = useUserApi();
   const mainContents = useChangeComponent();
+  const [width, height] = useWindowSize();
+  const { open, handleOpen, handleClose } = useModal();
 
   const userCreateHandler: userCreateHandlerType = {
     userHandler,
@@ -61,13 +64,18 @@ const UserManagement = () => {
   };
 
   const onClickUserList = (id: number) => {
+    const u = pickItem(id, users);
     wrapSetIsDetail(true);
-    mainContents.chComponent(
-      <UserDetail
-        user={pickItem(id, users)}
-        onClick={wrapOnClickRequestItem}
-      />,
-    );
+    if (width > 1000) {
+      mainContents.chComponent(
+        <UserDetail user={u} onClick={wrapOnClickRequestItem} />,
+      );
+    } else {
+      handleOpen();
+      mainContents.chComponent(
+        <UserDetail user={u} onClick={wrapOnClickRequestItem} />,
+      );
+    }
   };
 
   const wrapOnclickUserCreate = () => {
@@ -75,30 +83,39 @@ const UserManagement = () => {
   };
 
   return (
-    <SplitTemplate
-      menuHeader={
-        <UserSearchWindow
-          handler={userSearchHandler}
-          onClickUserCreate={wrapOnclickUserCreate}
-        />
-      }
-      // ここは、ロールでの絞り込みにする
-      menuTool={<UserListTool handler={selectHandler} />}
-      menuContents={<List list={convUser(filterd)} onClick={onClickUserList} />}
-      // menuContents={<UserList users={filterd} onClick={wrapSelectUser} />}
-      mainHeader={
-        <UserPanelHeader
-          user={user}
-          chComponent={mainContents.chComponent}
-          isDetail={isDetail}
-        />
-      }
-      mainContents={
-        mainContents.component ?? (
-          <EmptyStateIcon msg="ユーザを選択してください" />
-        )
-      }
-    />
+    <>
+      <ControlModal
+        open={open}
+        handleClose={handleClose}
+        content={mainContents.component ?? <div>no</div>}
+      />
+
+      <SplitTemplate
+        menuHeader={
+          <UserSearchWindow
+            handler={userSearchHandler}
+            onClickUserCreate={wrapOnclickUserCreate}
+          />
+        }
+        // ここは、ロールでの絞り込みにする
+        menuTool={<UserListTool handler={selectHandler} />}
+        menuContents={
+          <List list={convUser(filterd)} onClick={onClickUserList} />
+        }
+        mainHeader={
+          <UserPanelHeader
+            user={user}
+            chComponent={mainContents.chComponent}
+            isDetail={isDetail}
+          />
+        }
+        mainContents={
+          mainContents.component ?? (
+            <EmptyStateIcon msg="ユーザを選択してください" />
+          )
+        }
+      />
+    </>
   );
 };
 

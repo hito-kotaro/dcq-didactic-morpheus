@@ -1,10 +1,14 @@
 import { Button, Divider, TextField } from '@mui/material';
-import React from 'react';
+import React, { VFC } from 'react';
 import useQuestApi from '../../../hooks/Api/useQuestApi';
 import useInputForm from '../../../hooks/InputForm/useInputForm';
 import { questRequestType } from '../../../types/data/questDataType';
 
-const QuestCreate = () => {
+type Props = {
+  handleClose?: () => void;
+};
+const QuestCreate: VFC<Props> = (props) => {
+  const { handleClose } = props;
   const { createQuest } = useQuestApi();
   const titleHandler = useInputForm();
   const rwdHandler = useInputForm();
@@ -23,6 +27,9 @@ const QuestCreate = () => {
     descHandler.clear();
     exampleHandler.clear();
     rwdHandler.clear();
+    if (handleClose) {
+      handleClose();
+    }
   };
 
   return (
