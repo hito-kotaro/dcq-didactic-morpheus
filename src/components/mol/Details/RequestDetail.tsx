@@ -11,10 +11,11 @@ import OwnerHeader from '../PanelHeaders/OwnerHeader';
 // 表示の時に渡されるだけだから変わっていない
 type Props = {
   request: requestDataType;
+  handleClose?: () => void;
 };
 
 const RequestDetail: VFC<Props> = (props) => {
-  const { request } = props;
+  const { request, handleClose } = props;
   const { updateRequest } = useRequestApi();
   const commentHandler = useInputForm();
 
@@ -23,6 +24,11 @@ const RequestDetail: VFC<Props> = (props) => {
       status,
       auth_comment: commentHandler.value,
     };
+
+    if (handleClose) {
+      handleClose();
+    }
+
     await updateRequest(request.id, updateParam);
   };
 
