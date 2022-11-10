@@ -42,13 +42,9 @@ const useUserApi = () => {
       name,
       password,
     };
-    console.log(userParams);
     try {
-      const result: AxiosResponse = await axiosTokenInstance.post(
-        '/user/',
-        userParams,
-      );
-      console.log(result.data);
+      await axiosTokenInstance.post('/user/', userParams);
+      fetchTenantMember();
     } catch (e) {
       console.log(e);
     }

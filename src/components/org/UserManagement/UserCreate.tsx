@@ -1,12 +1,19 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, VFC } from 'react';
 import { TextField, Button, Divider } from '@mui/material';
 import SelectForm from '../../mol/SelectForm/SelectForm';
 import useInputForm from '../../../hooks/InputForm/useInputForm';
 import useSelectForm from '../../mol/SelectForm/useSelectForm';
 import useGlobalState from '../../../stores/useGlobalState';
+import useUserApi from '../../../hooks/Api/useUserApi';
 
-const UserCreate = () => {
+type Props = {
+  handleClose?: () => void;
+};
+
+const UserCreate: VFC<Props> = (props) => {
+  const { handleClose } = props;
   const { roles, teams } = useGlobalState();
+  const { createUser } = useUserApi();
   const userHandler = useInputForm();
   const pwdHandler = useInputForm();
   const rePwdHandler = useInputForm();
@@ -20,6 +27,18 @@ const UserCreate = () => {
   useEffect(() => {
     teamSelectHandler.formatSelectItem(teams);
   }, [teams]);
+
+  const wrapOnClickCreate = () => {
+    createUser(
+      userHandler.value,
+      pwdHandler.value,
+      Number(roleSelectHandler.value),
+      Number(teamSelectHandler.value),
+    );
+    if (handleClose) {
+      handleClose();
+    }
+  };
 
   return (
     <div className="px-3">
@@ -75,7 +94,9 @@ const UserCreate = () => {
       />
 
       <div className="h-3" />
-      <Button variant="contained">新しいユーザを作成</Button>
+      <Button variant="contained" onClick={wrapOnClickCreate}>
+        新しいユーザを作成
+      </Button>
     </div>
   );
 };

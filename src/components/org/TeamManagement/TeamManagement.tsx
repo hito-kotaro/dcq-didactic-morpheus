@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Divider } from '@mui/material';
 import SplitTemplate from '../../templates/SplitTemplate';
 import TeamListTool from '../../mol/ListTools/TeamListTool';
 import useTeamManagements from './useTeamManagements';
@@ -78,6 +79,7 @@ const TeamManagement = () => {
 
     setIsDetail(true);
     const filterd: userDataType[] = await fetchTeamMember(id);
+    console.log(filterd);
     // const filterd: userDataType[] = users.filter(
     //   (u: userDataType) => t.id === u.team_id,
     // );
@@ -85,7 +87,7 @@ const TeamManagement = () => {
     // コンポーネントを切り替え
     if (width > 1000) {
       mainContents.chComponent(
-        <List list={convUser(users)} onClick={onClickUserItem} />,
+        <List list={convUser(filterd)} onClick={onClickUserItem} />,
         // <UserList users={filterd} onClick={onClickUserItem} />,
       );
       mainHeaderContents.chComponent(
@@ -94,7 +96,11 @@ const TeamManagement = () => {
     } else {
       handleOpen();
       mainContents.chComponent(
-        <List list={convUser(filterd)} onClick={onClickUserItem} />,
+        <>
+          <TeamPanelHeader chComponent={mainContents.chComponent} />
+          <Divider />
+          <List list={convUser(filterd)} onClick={onClickUserItem} />
+        </>,
         // <UserList users={filterd} onClick={onClickUserItem} />,
       );
     }

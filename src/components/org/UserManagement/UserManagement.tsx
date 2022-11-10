@@ -13,6 +13,7 @@ import RequestDetail from '../../mol/Details/RequestDetail';
 import UserSearchWindow from './UserSearchWindow';
 import UserCreate from './UserCreate';
 import useUserApi from '../../../hooks/Api/useUserApi';
+import useRoleApi from '../../../hooks/Api/useRoleApi';
 import useGlobalState from '../../../stores/useGlobalState';
 import useList from '../List/useList';
 import List from '../List';
@@ -34,6 +35,7 @@ const UserManagement = () => {
     wrapSetIsDetail,
     filteringUser,
   } = useUserManagement();
+  const { fetchAllRoles } = useRoleApi();
   const { convUser, pickItem } = useList();
   const { user, selectUser } = useUserList();
   const { users, setUsers } = useGlobalState();
@@ -52,6 +54,7 @@ const UserManagement = () => {
 
   useEffect(() => {
     fetchTenantMember();
+    fetchAllRoles();
   }, []);
 
   useEffect(() => {
@@ -73,13 +76,25 @@ const UserManagement = () => {
     } else {
       handleOpen();
       mainContents.chComponent(
-        <UserDetail user={u} onClick={wrapOnClickRequestItem} />,
+        <>
+          <UserPanelHeader
+            user={user}
+            chComponent={mainContents.chComponent}
+            isDetail={isDetail}
+          />
+          <UserDetail user={u} onClick={wrapOnClickRequestItem} />,
+        </>,
       );
     }
   };
 
   const wrapOnclickUserCreate = () => {
-    mainContents.chComponent(<UserCreate />);
+    if (width > 1000) {
+      mainContents.chComponent(<UserCreate />);
+    } else {
+      handleOpen();
+      mainContents.chComponent(<UserCreate handleClose={handleClose} />);
+    }
   };
 
   return (

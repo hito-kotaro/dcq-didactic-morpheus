@@ -3,7 +3,7 @@ import { createAxiosTokenInstance } from '../../lib/axiosInstance';
 import useGlobalState from '../../stores/useGlobalState';
 import { roleDataType } from '../../types/data/roleDataType';
 
-const useRoleApi = () => {
+export const useRoleApi = () => {
   const axiosTokenInstance = createAxiosTokenInstance();
   const { setRoles } = useGlobalState();
 
