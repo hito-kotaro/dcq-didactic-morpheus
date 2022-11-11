@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import useChangeComponent from '../../../hooks/ChangeComponent/useChangeComponent';
 import useInputForm from '../../../hooks/InputForm/useInputForm';
 import useGlobalState from '../../../stores/useGlobalState';
 import { teamDataType } from '../../../types/data/teamDataType';
@@ -6,17 +7,9 @@ import { listType } from '../List/listType';
 
 const useTeamManagements = () => {
   const teamHandler = useInputForm();
-
-  const [team, setTeam] = useState<teamDataType>({
-    id: 0,
-    name: '',
-    member: 0,
-    point: 0,
-    penalty: 0,
-  });
-
+  const mainContents = useChangeComponent();
+  const mainHeaderContents = useChangeComponent();
   const [filterdTeams, setFilterdTeams] = useState<listType[]>([]);
-  const [isDetail, setIsDetail] = useState(false);
   const [isCreate, setIsCreate] = useState(false);
   const { teams } = useGlobalState();
 
@@ -41,13 +34,13 @@ const useTeamManagements = () => {
   };
 
   return {
-    team,
     teamHandler,
     filterdTeams,
-    setIsDetail,
     toggleCreate,
     filteringTeam,
     pickTeam,
+    mainContents,
+    mainHeaderContents,
   };
 };
 

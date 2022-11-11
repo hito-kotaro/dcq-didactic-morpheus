@@ -14,10 +14,11 @@ import usePenaltyApi from '../../../hooks/Api/usePenaltyApi';
 
 type Props = {
   penalty: penaltyDataType;
+  handleClose?: () => void;
 };
 
 const PenaltyDetail: VFC<Props> = (props) => {
-  const { penalty } = props;
+  const { penalty, handleClose } = props;
   const teamSelectHandler = useSelectForm();
   const { fetchAllTeams } = useTeamApi();
   const { createIssue } = usePenaltyApi();
@@ -41,6 +42,7 @@ const PenaltyDetail: VFC<Props> = (props) => {
     };
     createIssue(createParam);
     descHandler.clear();
+    if (handleClose) handleClose();
   };
 
   return (

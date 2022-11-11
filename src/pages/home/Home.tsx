@@ -6,11 +6,13 @@ import CreateTeamForm from '../../components/mol/AdminMenu/CreateTeamForm';
 import CreateUserForm from '../../components/mol/AdminMenu/CreateUserForm';
 import SeasonSetting from '../../components/mol/AdminMenu/SeasonSetting';
 import SlackConnection from '../../components/mol/AdminMenu/SlackConnection';
+import useIsMobile from '../../stores/IsMobileStore/useIsMobile';
 import AdminHomeTemplate from '../../templates/AdminHomeTemplate/AdminHomeTemplate';
 import HomeTemplate from '../../templates/HomeTemplate/HomeTemplate';
 
 const Home = () => {
   const navigate = useNavigate();
+
   const settings = [
     <>
       <ChangeTenantPassword />

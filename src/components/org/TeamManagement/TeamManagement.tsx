@@ -22,17 +22,24 @@ import useList from '../List/useList';
 import ControlModal from '../../mol/ControlModal';
 import useModal from '../../atoms/MyModal/useMyModal';
 import useWindowSize from '../../../hooks/WindowSize/useWindowSize';
+import { MOBILE_WIDTH_MAX_LIMIT } from '../../../lib/constants';
 
 const TeamManagement = () => {
-  const { teamHandler, filterdTeams, setIsDetail, filteringTeam } =
-    useTeamManagements();
+  const {
+    teamHandler,
+    filterdTeams,
+    filteringTeam,
+    mainContents,
+    mainHeaderContents,
+  } = useTeamManagements();
+
   const { convTeam, convUser, pickItem } = useList();
   const { fetchTenantMember } = useUserApi();
   const { teams, users } = useGlobalState();
   const { fetchTeamMember } = useUserApi();
   const { fetchAllTeams } = useTeamApi();
-  const mainContents = useChangeComponent();
-  const mainHeaderContents = useChangeComponent();
+  // const mainContents = useChangeComponent();
+  // const mainHeaderContents = useChangeComponent();
   const [width, height] = useWindowSize();
   const { open, handleOpen, handleClose } = useModal();
 
@@ -42,10 +49,11 @@ const TeamManagement = () => {
   }, []);
 
   useEffect(() => {
+    // 検索文字列が変わるたびにフィルタリング
     filteringTeam(convTeam());
   }, [teams, teamHandler.value]);
 
-  const wrapOnClickRequestItem = (r: requestDataType) => {
+  const onClickRequestItem = (r: requestDataType) => {
     mainContents.chComponent(<RequestDetail request={r} />);
     mainHeaderContents.chComponent(<RequestPanelHeader />);
   };
@@ -54,7 +62,7 @@ const TeamManagement = () => {
     const u = pickItem(id, users);
     if (width > 1000) {
       mainContents.chComponent(
-        <UserDetail user={u} onClick={wrapOnClickRequestItem} />,
+        <UserDetail user={u} onClick={onClickRequestItem} />,
       );
       mainHeaderContents.chComponent(
         <UserPanelHeader
@@ -66,29 +74,17 @@ const TeamManagement = () => {
     } else {
       handleOpen();
       mainContents.chComponent(
-        <UserDetail user={u} onClick={wrapOnClickRequestItem} />,
+        <UserDetail user={u} onClick={onClickRequestItem} />,
       );
     }
   };
 
-  const wrapOnClickTeamListItem = async (id: number) => {
-    // team idからteamを取得
-    const clickedTeam: teamDataType[] = teams.filter((t: teamDataType) => {
-      return t.id === id;
-    });
-
-    setIsDetail(true);
+  const onClickTeam = async (id: number) => {
     const filterd: userDataType[] = await fetchTeamMember(id);
-    console.log(filterd);
-    // const filterd: userDataType[] = users.filter(
-    //   (u: userDataType) => t.id === u.team_id,
-    // );
-
     // コンポーネントを切り替え
-    if (width > 1000) {
+    if (width > MOBILE_WIDTH_MAX_LIMIT) {
       mainContents.chComponent(
         <List list={convUser(filterd)} onClick={onClickUserItem} />,
-        // <UserList users={filterd} onClick={onClickUserItem} />,
       );
       mainHeaderContents.chComponent(
         <TeamPanelHeader chComponent={mainContents.chComponent} />,
@@ -101,7 +97,6 @@ const TeamManagement = () => {
           <Divider />
           <List list={convUser(filterd)} onClick={onClickUserItem} />
         </>,
-        // <UserList users={filterd} onClick={onClickUserItem} />,
       );
     }
   };
@@ -140,7 +135,7 @@ const TeamManagement = () => {
         }
         // 固定
         menuContents={
-          <List list={filterdTeams} onClick={wrapOnClickTeamListItem} />
+          <List list={filterdTeams} onClick={onClickTeam} />
           // <TeamList teams={filterdTeams} onClick={wrapOnClickTeamListItem} />
         }
         // メインコンポーネントに付随して変更する

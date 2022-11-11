@@ -109,7 +109,7 @@ const useList = () => {
     return issues.map((i: issueDataType) => {
       return {
         id: i.id,
-        avatar: i.team,
+        avatar: i.authorizer,
         title: i.title,
         description: i.description,
         badges: [],
