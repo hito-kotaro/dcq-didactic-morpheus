@@ -8,17 +8,13 @@ import QuestUpdate from '../../org/QuestManagement/QuestUpdate';
 
 type Props = {
   quest: questDataType;
+  // eslint-disable-next-line no-unused-vars
   chComponent: (component: ReactElement) => void;
-  isDetail: boolean;
 };
 
 const QuestPanelHeader: VFC<Props> = (props) => {
-  const { isDetail, quest, chComponent } = props;
+  const { quest, chComponent } = props;
   const { open, handleOpen, handleClose } = useMyModal();
-
-  const dummy = () => {
-    console.log('hello');
-  };
 
   const questUpdate = () => {
     chComponent(<QuestUpdate quest={quest} />);
@@ -29,9 +25,6 @@ const QuestPanelHeader: VFC<Props> = (props) => {
     { label: 'クエストを更新', onClick: questUpdate },
   ];
 
-  const deleteQuest = () => {
-    console.log('delete');
-  };
   return (
     <div className="pt-7 text-center">
       <MyModal
@@ -41,14 +34,10 @@ const QuestPanelHeader: VFC<Props> = (props) => {
         mainMsg={`${quest.title}を削除しますか？`}
         subMsg="削除しても、過去のクエスト達成履歴は保持されます。"
         positiveBtnMsg="削除"
-        positiveBtnAction={deleteQuest}
+        positiveBtnAction={() => {}}
       />
       <div className="flex justify-end">
-        {isDetail ? (
-          <MenuButton menuItems={menuItems} icon={<MenuIcon />} />
-        ) : (
-          ''
-        )}
+        <MenuButton menuItems={menuItems} icon={<MenuIcon />} />
       </div>
       <span className="text-2xl font-semibold text-text">クエスト管理</span>
     </div>

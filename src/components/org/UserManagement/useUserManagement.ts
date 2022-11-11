@@ -1,31 +1,27 @@
 import { useState } from 'react';
 import useInputForm from '../../../hooks/InputForm/useInputForm';
-import useGlobalState from '../../../stores/useGlobalState';
-import { userDataType } from '../../../types/data/userDataType';
 import useSelectForm from '../../mol/SelectForm/useSelectForm';
+import { userDataType } from '../../../types/data/userDataType';
 
 const useUserManagement = () => {
+  const [user, setUser] = useState<userDataType>({
+    id: 0,
+    name: '',
+    point: 0,
+    team_id: 0,
+    team: '',
+    role_id: 0,
+    role: '',
+  });
   const userSearchHandler = useInputForm();
   const selectHandler = useSelectForm();
-  const userHandler = useInputForm();
-  const pwdHandler = useInputForm();
-  const rePwdHandler = useInputForm();
-  const [isDetail, setIsDetail] = useState(false);
   const [filterd, setFilterd] = useState<userDataType[]>([]);
-  const { users } = useGlobalState();
-  const roleSelectHandler = useSelectForm();
-  const teamSelectHandler = useSelectForm();
-
-  const wrapSetIsDetail = (d: boolean) => {
-    setIsDetail(d);
-  };
 
   const filterCheck = (data: userDataType) => {
     let flg = false;
 
     // allの時の絞り込み
     if (Number(selectHandler.value) === 0) {
-      console.log('all');
       if (data.name.indexOf(userSearchHandler.value) !== -1) {
         flg = true;
       }
@@ -45,16 +41,11 @@ const useUserManagement = () => {
   };
 
   return {
-    isDetail,
     filterd,
     userSearchHandler,
-    userHandler,
-    pwdHandler,
-    rePwdHandler,
-    roleSelectHandler,
-    teamSelectHandler,
     selectHandler,
-    wrapSetIsDetail,
+    user,
+    setUser,
     filteringUser,
   };
 };

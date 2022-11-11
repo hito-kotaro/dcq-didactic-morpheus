@@ -1,66 +1,79 @@
 import React, { useEffect } from 'react';
-import { penaltyDataType } from '../../../types/data/penaltyDataType';
-import SplitTemplate from '../../templates/SplitTemplate';
-import PenaltyList from '../List/PenaltyList';
-import usePenaltyManagement from './usePenaltyManagement';
-import useChangeComponent from '../../../hooks/ChangeComponent/useChangeComponent';
+
+// components
+import ControlModal from '../../mol/ControlModal';
+import EmptyStateIcon from '../../atoms/EmptyStateIcon/EmptyStateIcon';
+import List from '../List';
 import PenaltyDetail from '../../mol/Details/PenaltyDetail';
 import PenaltyListTool from '../../mol/ListTools/PenaltyListTool';
 import PenaltyPanelHeader from '../../mol/PanelHeaders/PenaltyPanelHeader';
 import PenaltyCreate from './PenaltyCreate';
-import EmptyStateIcon from '../../atoms/EmptyStateIcon/EmptyStateIcon';
 import PenaltySearchWindow from './PenaltySearchWindow';
-import usePenaltyApi from '../../../hooks/Api/usePenaltyApi';
-import useGlobalState from '../../../stores/useGlobalState';
-import useList from '../List/useList';
-import ControlModal from '../../mol/ControlModal';
-import List from '../List';
-import useModal from '../../atoms/MyModal/useMyModal';
-import useWindowSize from '../../../hooks/WindowSize/useWindowSize';
+import SplitTemplate from '../../templates/SplitTemplate';
+
 import { MOBILE_WIDTH_MAX_LIMIT } from '../../../lib/constants';
 
+// custom hooks
+import useList from '../List/useList';
+import usePenaltyApi from '../../../hooks/Api/usePenaltyApi';
+import useGlobalState from '../../../stores/useGlobalState';
+import useModal from '../../atoms/MyModal/useMyModal';
+import useWindowSize from '../../../hooks/WindowSize/useWindowSize';
+import usePenaltyManagement from './usePenaltyManagement';
+import useChangeComponent from '../../../hooks/ChangeComponent/useChangeComponent';
+import useIsMobile from '../../../stores/IsMobileStore/useIsMobile';
+
 const PenaltyManagement = () => {
-  const {
-    penalty,
-    filterdPenalties,
-    isDetail,
-    penaltySearchHandler,
-    onClickPenaltyItem,
-    filteringPenalty,
-    selectHandler,
-  } = usePenaltyManagement();
+  const { filterd, searchHandler, filtering, selectHandler } =
+    usePenaltyManagement();
   const { convPenalty, pickItem } = useList();
   const { open, handleOpen, handleClose } = useModal();
   const { fetchAllPenalty } = usePenaltyApi();
   const { penalties } = useGlobalState();
+  const { isMobile } = useIsMobile();
   const mainContents = useChangeComponent();
-  const [width, height] = useWindowSize();
+  const mainHeaderContents = useChangeComponent();
 
   useEffect(() => {
     fetchAllPenalty();
   }, []);
 
   useEffect(() => {
-    filteringPenalty(penalties);
-  }, [penalties, penaltySearchHandler.value, selectHandler.value]);
+    filtering(penalties);
+  }, [penalties, searchHandler.value, selectHandler.value]);
 
-  const wrapOnClickPenaltyItem = (id: number) => {
+  const onClickPenalty = (id: number) => {
     const p = pickItem(id, penalties);
-    if (width > MOBILE_WIDTH_MAX_LIMIT) {
-      onClickPenaltyItem(p);
-      mainContents.chComponent(<PenaltyDetail penalty={p} />);
-    } else {
+    if (isMobile) {
       handleOpen();
-      onClickPenaltyItem(p);
       mainContents.chComponent(
-        <PenaltyDetail penalty={p} handleClose={handleClose} />,
+        <>
+          <PenaltyPanelHeader
+            penalty={p}
+            chComponent={mainContents.chComponent}
+          />
+          <PenaltyDetail penalty={p} handleClose={handleClose} />
+        </>,
       );
+    } else {
+      mainHeaderContents.chComponent(
+        <PenaltyPanelHeader
+          penalty={p}
+          chComponent={mainContents.chComponent}
+        />,
+      );
+      mainContents.chComponent(<PenaltyDetail penalty={p} />);
     }
   };
 
-  const wrapOnClickCreatePenalty = () => {
+  const onClickCreate = () => {
     // create componentに切り替える
-    mainContents.chComponent(<PenaltyCreate />);
+    if (isMobile) {
+      handleOpen();
+      mainContents.chComponent(<PenaltyCreate />);
+    } else {
+      mainContents.chComponent(<PenaltyCreate />);
+    }
   };
 
   return (
@@ -74,24 +87,15 @@ const PenaltyManagement = () => {
       <SplitTemplate
         menuHeader={
           <PenaltySearchWindow
-            handler={penaltySearchHandler}
-            onClickPenaltyCreate={wrapOnClickCreatePenalty}
+            handler={searchHandler}
+            onClickPenaltyCreate={onClickCreate}
           />
         }
         menuTool={<PenaltyListTool handler={selectHandler} />}
         menuContents={
-          <List
-            list={convPenalty(filterdPenalties)}
-            onClick={wrapOnClickPenaltyItem}
-          />
+          <List list={convPenalty(filterd)} onClick={onClickCreate} />
         }
-        mainHeader={
-          <PenaltyPanelHeader
-            penalty={penalty}
-            chComponent={mainContents.chComponent}
-            isDetail={isDetail}
-          />
-        }
+        mainHeader={mainHeaderContents.component ?? <div>ペナルティ管理</div>}
         mainContents={
           mainContents.component ?? (
             <EmptyStateIcon msg="ペナルティを選択してください" />

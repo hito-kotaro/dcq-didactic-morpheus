@@ -1,38 +1,27 @@
 import { useState } from 'react';
 import useInputForm from '../../../hooks/InputForm/useInputForm';
-import useGlobalState from '../../../stores/useGlobalState';
-import {
-  emptyRequest,
-  requestDataType,
-} from '../../../types/data/requestDataType';
+import { requestDataType } from '../../../types/data/requestDataType';
 import useSelectForm from '../../mol/SelectForm/useSelectForm';
 
 const useRequestmanagement = () => {
-  const [isDetail, setIsDetail] = useState(false);
-  const { requests } = useGlobalState();
-  const [filterdRequests, setFilterdRequests] = useState<requestDataType[]>([]);
-  const requestSearchHandler = useInputForm();
-  const applicantSelectHandler = useSelectForm();
+  const [filterd, setFilterd] = useState<requestDataType[]>([]);
+  const searchHandler = useInputForm();
+  const selectHandler = useSelectForm();
 
-  const [request, setRequest] = useState<requestDataType>(emptyRequest);
-
-  const onClickRequestItem = (r: requestDataType) => {
-    setRequest(r);
-    setIsDetail(true);
-  };
+  // const [request, setRequest] = useState<requestDataType>(emptyRequest);
 
   const filterCheck = (data: requestDataType) => {
     let flg = false;
 
     // allの時の絞り込み
-    if (Number(applicantSelectHandler.value) === 0) {
-      if (data.title.indexOf(requestSearchHandler.value) !== -1) {
+    if (Number(selectHandler.value) === 0) {
+      if (data.title.indexOf(searchHandler.value) !== -1) {
         flg = true;
       }
-    } else if (Number(applicantSelectHandler.value) !== 0) {
+    } else if (Number(selectHandler.value) !== 0) {
       if (
-        data.applicant_id === Number(applicantSelectHandler.value) &&
-        data.title.indexOf(requestSearchHandler.value) !== -1
+        data.applicant_id === Number(selectHandler.value) &&
+        data.title.indexOf(searchHandler.value) !== -1
       ) {
         flg = true;
       }
@@ -40,24 +29,15 @@ const useRequestmanagement = () => {
     return flg;
   };
 
-  const filteringRequest = (data: requestDataType[]) => {
-    setFilterdRequests(data.filter((r: requestDataType) => filterCheck(r)));
-  };
-
-  const pickRequest = (id: number): requestDataType => {
-    const pick = requests.filter((r: requestDataType) => r.id === id);
-    return pick[0];
+  const filtering = (data: requestDataType[]) => {
+    setFilterd(data.filter((r: requestDataType) => filterCheck(r)));
   };
 
   return {
-    request,
-    setRequest,
-    filterdRequests,
-    requestSearchHandler,
-    filteringRequest,
-    applicantSelectHandler,
-    onClickRequestItem,
-    pickRequest,
+    filterd,
+    searchHandler,
+    selectHandler,
+    filtering,
   };
 };
 

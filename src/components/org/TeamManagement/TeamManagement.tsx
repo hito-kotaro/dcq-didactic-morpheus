@@ -1,27 +1,32 @@
 import React, { useEffect } from 'react';
 import { Divider } from '@mui/material';
+
+// components
 import SplitTemplate from '../../templates/SplitTemplate';
 import TeamListTool from '../../mol/ListTools/TeamListTool';
-import useTeamManagements from './useTeamManagements';
 import TeamPanelHeader from '../../mol/PanelHeaders/TeamPanelHeader';
-import useChangeComponent from '../../../hooks/ChangeComponent/useChangeComponent';
-import { teamDataType } from '../../../types/data/teamDataType';
-import { userDataType } from '../../../types/data/userDataType';
 import EmptyStateIcon from '../../atoms/EmptyStateIcon/EmptyStateIcon';
 import UserDetail from '../../mol/Details/UserDetail';
-import { requestDataType } from '../../../types/data/requestDataType';
 import RequestDetail from '../../mol/Details/RequestDetail';
 import UserPanelHeader from '../../mol/PanelHeaders/UserPanelHeader';
 import RequestPanelHeader from '../../mol/PanelHeaders/RequestPanelHeader';
 import TeamCreate from './TeamCreate';
+import List from '../List';
+import ControlModal from '../../mol/ControlModal';
+
+// custom hooks
+import useTeamManagements from './useTeamManagements';
+import useChangeComponent from '../../../hooks/ChangeComponent/useChangeComponent';
 import useTeamApi from '../../../hooks/Api/useTeamApi';
 import useUserApi from '../../../hooks/Api/useUserApi';
 import useGlobalState from '../../../stores/useGlobalState';
-import List from '../List';
 import useList from '../List/useList';
-import ControlModal from '../../mol/ControlModal';
 import useModal from '../../atoms/MyModal/useMyModal';
 import useIsMobile from '../../../stores/IsMobileStore/useIsMobile';
+
+// types
+import type { userDataType } from '../../../types/data/userDataType';
+import type { requestDataType } from '../../../types/data/requestDataType';
 
 const TeamManagement = () => {
   const { teamHandler, filterdTeams, filteringTeam } = useTeamManagements();
@@ -45,7 +50,11 @@ const TeamManagement = () => {
     filteringTeam(convTeam());
   }, [teams, teamHandler.value]);
 
-  const onClickRequestItem = (r: requestDataType) => {
+  // ------------------------------------ //
+  //   START wrap List Item click action  //
+  // ------------------------------------ //
+
+  const onClickRequest = (r: requestDataType) => {
     mainContents.chComponent(<RequestDetail request={r} />);
     mainHeaderContents.chComponent(<RequestPanelHeader />);
   };
@@ -55,18 +64,14 @@ const TeamManagement = () => {
     if (isMobile) {
       handleOpen();
       mainContents.chComponent(
-        <UserDetail user={u} onClick={onClickRequestItem} />,
+        <UserDetail user={u} onClick={onClickRequest} />,
       );
     } else {
       mainContents.chComponent(
-        <UserDetail user={u} onClick={onClickRequestItem} />,
+        <UserDetail user={u} onClick={onClickRequest} />,
       );
       mainHeaderContents.chComponent(
-        <UserPanelHeader
-          user={u}
-          chComponent={mainContents.chComponent}
-          isDetail
-        />,
+        <UserPanelHeader user={u} chComponent={mainContents.chComponent} />,
       );
     }
   };
@@ -106,6 +111,10 @@ const TeamManagement = () => {
       );
     }
   };
+
+  // ------------------------------------ //
+  //    END  wrap List Item click action  //
+  // ------------------------------------ //
 
   return (
     <>

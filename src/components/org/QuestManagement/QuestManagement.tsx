@@ -1,67 +1,70 @@
 import React, { useEffect } from 'react';
-import SplitTemplate from '../../templates/SplitTemplate';
-import useQuestManagement from './useQuestManagement';
+
+// components
+import ControlModal from '../../mol/ControlModal';
+import EmptyStateIcon from '../../atoms/EmptyStateIcon/EmptyStateIcon';
+import List from '../List';
 import QuestDetail from '../../mol/Details/QuestDetail';
-import useChangeComponent from '../../../hooks/ChangeComponent/useChangeComponent';
 import QuestListTool from '../../mol/ListTools/QuestListTool';
 import QuestCreate from './QuestCreate';
 import QuestPanelHeader from '../../mol/PanelHeaders/QuestPanelHeader';
-import EmptyStateIcon from '../../atoms/EmptyStateIcon/EmptyStateIcon';
 import QuestSearchWindow from './QuestSearchWindow';
-import useQuestApi from '../../../hooks/Api/useQuestApi';
+import SplitTemplate from '../../templates/SplitTemplate';
+
+// custom hooks
+import useChangeComponent from '../../../hooks/ChangeComponent/useChangeComponent';
 import useGlobalState from '../../../stores/useGlobalState';
-import List from '../List';
-import useList from '../List/useList';
-import useWindowSize from '../../../hooks/WindowSize/useWindowSize';
 import useModal from '../../atoms/MyModal/useMyModal';
-import ControlModal from '../../mol/ControlModal';
+import useList from '../List/useList';
+import useQuestManagement from './useQuestManagement';
+import useQuestApi from '../../../hooks/Api/useQuestApi';
+import useIsMobile from '../../../stores/IsMobileStore/useIsMobile';
 
 const QuestManagement = () => {
-  const {
-    quest,
-    filterdQuests,
-    isDetail,
-    setIsDetail,
-    questSearchHandler,
-    selectHandler,
-    onClickQuestItem,
-    filteringQuest,
-  } = useQuestManagement();
+  const { quest, filterd, searchHandler, selectHandler, setQuest, filtering } =
+    useQuestManagement();
   const mainContents = useChangeComponent();
+  const { isMobile } = useIsMobile();
   const { quests } = useGlobalState();
   const { convQuest, pickItem } = useList();
   const { fetchAllQuests } = useQuestApi();
-  const [width, height] = useWindowSize();
   const { open, handleOpen, handleClose } = useModal();
-
-  const wrapOnClickQuestItem = (id: number) => {
-    const q = pickItem(id, quests);
-    if (width > 1000) {
-      onClickQuestItem(q);
-      mainContents.chComponent(<QuestDetail quest={q} />);
-    } else {
-      handleOpen();
-      mainContents.chComponent(<QuestDetail quest={q} />);
-    }
-  };
-
-  const wrapOnclickQuestCreate = () => {
-    if (width > 1000) {
-      setIsDetail(false);
-      mainContents.chComponent(<QuestCreate />);
-    } else {
-      handleOpen();
-      mainContents.chComponent(<QuestCreate handleClose={handleClose} />);
-    }
-  };
 
   useEffect(() => {
     fetchAllQuests();
   }, []);
 
   useEffect(() => {
-    filteringQuest(quests);
-  }, [quests, questSearchHandler.value, selectHandler.value]);
+    filtering(quests);
+  }, [quests, searchHandler.value, selectHandler.value]);
+
+  // ------------------------------------ //
+  //   START wrap List Item click action  //
+  // ------------------------------------ //
+
+  const onClickQuest = (id: number) => {
+    const q = pickItem(id, quests);
+    if (isMobile) {
+      handleOpen();
+      mainContents.chComponent(<QuestDetail quest={q} />);
+    } else {
+      setQuest(q);
+      mainContents.chComponent(<QuestDetail quest={q} />);
+    }
+  };
+
+  const onClickCreate = () => {
+    if (isMobile) {
+      handleOpen();
+      mainContents.chComponent(<QuestCreate handleClose={handleClose} />);
+    } else {
+      mainContents.chComponent(<QuestCreate />);
+    }
+  };
+
+  // ------------------------------------ //
+  //    END  wrap List Item click action  //
+  // ------------------------------------ //
 
   return (
     <>
@@ -73,23 +76,16 @@ const QuestManagement = () => {
       <SplitTemplate
         menuHeader={
           <QuestSearchWindow
-            handler={questSearchHandler}
-            onClickQuestCreate={wrapOnclickQuestCreate}
+            handler={searchHandler}
+            onClickQuestCreate={onClickCreate}
           />
         }
         menuTool={<QuestListTool handler={selectHandler} />}
-        menuContents={
-          <List
-            list={convQuest(filterdQuests)}
-            onClick={wrapOnClickQuestItem}
-          />
-          // <QuestList quests={filterdQuests} onClick={wrapOnClickQuestItem} />
-        }
+        menuContents={<List list={convQuest(filterd)} onClick={onClickQuest} />}
         mainHeader={
           <QuestPanelHeader
             quest={quest}
             chComponent={mainContents.chComponent}
-            isDetail={isDetail}
           />
         }
         mainContents={

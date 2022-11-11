@@ -8,12 +8,11 @@ import MyModal from '../../atoms/MyModal/MyModal';
 
 type Props = {
   penalty: penaltyDataType;
-  isDetail: boolean;
   // eslint-disable-next-line no-unused-vars
   chComponent: (component: ReactElement) => void;
 };
 const PenaltyPanelHeader: VFC<Props> = (props) => {
-  const { penalty, isDetail, chComponent } = props;
+  const { penalty, chComponent } = props;
   const { open, handleOpen, handleClose } = useMyModal();
   const penaltyUpdate = () => {
     chComponent(<PenaltyUpdate penalty={penalty} chComponent={chComponent} />);
@@ -36,7 +35,7 @@ const PenaltyPanelHeader: VFC<Props> = (props) => {
         positiveBtnAction={deletePenalty}
       />
       <div className="flex justify-end">
-        {isDetail ? (
+        {penalty ? (
           <MenuButton menuItems={menuItems} icon={<MenuIcon />} />
         ) : (
           ''

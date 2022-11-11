@@ -1,63 +1,67 @@
 import React, { useEffect } from 'react';
-import useChangeComponent from '../../../hooks/ChangeComponent/useChangeComponent';
-import { requestDataType } from '../../../types/data/requestDataType';
-import SplitTemplate from '../../templates/SplitTemplate';
-import useRequestmanagement from './useRequestmanagement';
+
+// components
+import ControlModal from '../../mol/ControlModal';
+import EmptyStateIcon from '../../atoms/EmptyStateIcon/EmptyStateIcon';
+import List from '../List';
 import RequestDetail from '../../mol/Details/RequestDetail';
 import RequestPanelHeader from '../../mol/PanelHeaders/RequestPanelHeader';
 import RequestListTool from '../../mol/ListTools/RequestListTool';
-import EmptyStateIcon from '../../atoms/EmptyStateIcon/EmptyStateIcon';
 import SearchWindow from '../../mol/SearchWindow/SearchWindow';
-import useRequestApi from '../../../hooks/Api/useRequestApi';
+import SplitTemplate from '../../templates/SplitTemplate';
+
+// custom hooks
+import useChangeComponent from '../../../hooks/ChangeComponent/useChangeComponent';
 import useGlobalState from '../../../stores/useGlobalState';
-import useList from '../List/useList';
-import List from '../List';
-import { MOBILE_WIDTH_MAX_LIMIT } from '../../../lib/constants';
-import useWindowSize from '../../../hooks/WindowSize/useWindowSize';
-import ControlModal from '../../mol/ControlModal';
 import useModal from '../../atoms/MyModal/useMyModal';
+import useList from '../List/useList';
+import useRequestmanagement from './useRequestmanagement';
+import useRequestApi from '../../../hooks/Api/useRequestApi';
+import useIsMobile from '../../../stores/IsMobileStore/useIsMobile';
+
+// types
+import { requestDataType } from '../../../types/data/requestDataType';
 
 const RequestManagement = () => {
-  const {
-    filterdRequests,
-    requestSearchHandler,
-    filteringRequest,
-    applicantSelectHandler,
-    onClickRequestItem,
-  } = useRequestmanagement();
+  const { filterd, searchHandler, filtering, selectHandler } =
+    useRequestmanagement();
+  const { isMobile } = useIsMobile();
   const { open, handleOpen, handleClose } = useModal();
   const mainContents = useChangeComponent();
   const { convRequest, pickItem } = useList();
   const { requests } = useGlobalState();
   const { fetchTenantRequests } = useRequestApi();
-  const [width, height] = useWindowSize();
-
-  const wrapOnClickRequestItem = (id: number) => {
-    const r = pickItem(id, requests);
-    if (width > MOBILE_WIDTH_MAX_LIMIT) {
-      onClickRequestItem(r);
-      mainContents.chComponent(<RequestDetail request={r} />);
-    } else {
-      handleOpen();
-      onClickRequestItem(r);
-      mainContents.chComponent(
-        <RequestDetail request={r} handleClose={handleClose} />,
-      );
-    }
-  };
 
   useEffect(() => {
     fetchTenantRequests();
   }, []);
 
   useEffect(() => {
-    filteringRequest(
-      requests.filter((r: requestDataType) => r.status === 'open'),
-    );
+    filtering(requests.filter((r: requestDataType) => r.status === 'open'));
     mainContents.chComponent(
       <EmptyStateIcon msg="リクエストを選択してください" />,
     );
-  }, [requests, requestSearchHandler.value, applicantSelectHandler.value]);
+  }, [requests, searchHandler.value, selectHandler.value]);
+
+  // ------------------------------------ //
+  //   START wrap List Item click action  //
+  // ------------------------------------ //
+
+  const onClickRequest = (id: number) => {
+    const r = pickItem(id, requests);
+    if (isMobile) {
+      handleOpen();
+      mainContents.chComponent(
+        <RequestDetail request={r} handleClose={handleClose} />,
+      );
+    } else {
+      mainContents.chComponent(<RequestDetail request={r} />);
+    }
+  };
+
+  // ------------------------------------ //
+  //    END  wrap List Item click action  //
+  // ------------------------------------ //
 
   return (
     <>
@@ -69,20 +73,13 @@ const RequestManagement = () => {
       <SplitTemplate
         menuHeader={
           <SearchWindow
-            handler={requestSearchHandler}
+            handler={searchHandler}
             placeholder="リクエストタイトルで検索"
           />
         }
-        menuTool={<RequestListTool handler={applicantSelectHandler} />}
+        menuTool={<RequestListTool handler={selectHandler} />}
         menuContents={
-          <List
-            list={convRequest(filterdRequests)}
-            onClick={wrapOnClickRequestItem}
-          />
-          // <RequestList
-          //   requests={filterdRequests}
-          //   onClick={wrapOnClickRequestItem}
-          // />
+          <List list={convRequest(filterd)} onClick={onClickRequest} />
         }
         mainHeader={<RequestPanelHeader />}
         mainContents={
