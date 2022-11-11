@@ -21,26 +21,18 @@ import List from '../List';
 import useList from '../List/useList';
 import ControlModal from '../../mol/ControlModal';
 import useModal from '../../atoms/MyModal/useMyModal';
-import useWindowSize from '../../../hooks/WindowSize/useWindowSize';
-import { MOBILE_WIDTH_MAX_LIMIT } from '../../../lib/constants';
+import useIsMobile from '../../../stores/IsMobileStore/useIsMobile';
 
 const TeamManagement = () => {
-  const {
-    teamHandler,
-    filterdTeams,
-    filteringTeam,
-    mainContents,
-    mainHeaderContents,
-  } = useTeamManagements();
-
+  const { teamHandler, filterdTeams, filteringTeam } = useTeamManagements();
   const { convTeam, convUser, pickItem } = useList();
   const { fetchTenantMember } = useUserApi();
   const { teams, users } = useGlobalState();
   const { fetchTeamMember } = useUserApi();
   const { fetchAllTeams } = useTeamApi();
-  // const mainContents = useChangeComponent();
-  // const mainHeaderContents = useChangeComponent();
-  const [width, height] = useWindowSize();
+  const mainContents = useChangeComponent();
+  const mainHeaderContents = useChangeComponent();
+  const { isMobile } = useIsMobile();
   const { open, handleOpen, handleClose } = useModal();
 
   useEffect(() => {
@@ -58,9 +50,14 @@ const TeamManagement = () => {
     mainHeaderContents.chComponent(<RequestPanelHeader />);
   };
 
-  const onClickUserItem = (id: number) => {
+  const onClickUser = (id: number) => {
     const u = pickItem(id, users);
-    if (width > 1000) {
+    if (isMobile) {
+      handleOpen();
+      mainContents.chComponent(
+        <UserDetail user={u} onClick={onClickRequestItem} />,
+      );
+    } else {
       mainContents.chComponent(
         <UserDetail user={u} onClick={onClickRequestItem} />,
       );
@@ -71,47 +68,42 @@ const TeamManagement = () => {
           isDetail
         />,
       );
-    } else {
-      handleOpen();
-      mainContents.chComponent(
-        <UserDetail user={u} onClick={onClickRequestItem} />,
-      );
     }
   };
 
   const onClickTeam = async (id: number) => {
     const filterd: userDataType[] = await fetchTeamMember(id);
     // コンポーネントを切り替え
-    if (width > MOBILE_WIDTH_MAX_LIMIT) {
-      mainContents.chComponent(
-        <List list={convUser(filterd)} onClick={onClickUserItem} />,
-      );
-      mainHeaderContents.chComponent(
-        <TeamPanelHeader chComponent={mainContents.chComponent} />,
-      );
-    } else {
+    if (isMobile) {
       handleOpen();
       mainContents.chComponent(
         <>
           <TeamPanelHeader chComponent={mainContents.chComponent} />
           <Divider />
-          <List list={convUser(filterd)} onClick={onClickUserItem} />
+          <List list={convUser(filterd)} onClick={onClickUser} />
         </>,
+      );
+    } else {
+      mainContents.chComponent(
+        <List list={convUser(filterd)} onClick={onClickUser} />,
+      );
+      mainHeaderContents.chComponent(
+        <TeamPanelHeader chComponent={mainContents.chComponent} />,
       );
     }
   };
 
   const onClickTeamCreate = () => {
-    if (width > 1000) {
+    if (isMobile) {
+      handleOpen();
+      mainContents.chComponent(<TeamCreate />);
+    } else {
       mainContents.chComponent(<TeamCreate />);
       mainHeaderContents.chComponent(
         <div className="text-center text-2xl font-semibold text-text">
           チーム新規作成
         </div>,
       );
-    } else {
-      handleOpen();
-      mainContents.chComponent(<TeamCreate />);
     }
   };
 

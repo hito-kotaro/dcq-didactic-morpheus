@@ -7,9 +7,12 @@ import { isMobileState } from './isMobileStore';
 const useIsMobile = () => {
   const [isMobile, setIsMobile] = useRecoilState(isMobileState);
   const [width] = useWindowSize();
-
   useEffect(() => {
-    setIsMobile(width > MOBILE_WIDTH_MAX_LIMIT);
+    if (width > MOBILE_WIDTH_MAX_LIMIT) {
+      setIsMobile(false);
+    } else {
+      setIsMobile(true);
+    }
   }, [width]);
 
   return { isMobile, setIsMobile };

@@ -21,6 +21,7 @@ import DashBoard from '../../components/org/DashBoard/DashBoard';
 import { sideMenuDataType } from '../../components/org/SideMenu/sideMenuDataType';
 import useWindowSize from '../../hooks/WindowSize/useWindowSize';
 import useSidemenuState from '../../stores/SideMenuStore/useSidemenuState';
+import useIsMobile from '../../stores/IsMobileStore/useIsMobile';
 
 const HomeTemplate = () => {
   const [component, setComponent] = useState<ReactElement>(<DashBoard />);

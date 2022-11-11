@@ -12,7 +12,6 @@ import HomeTemplate from '../../templates/HomeTemplate/HomeTemplate';
 
 const Home = () => {
   const navigate = useNavigate();
-
   const settings = [
     <>
       <ChangeTenantPassword />

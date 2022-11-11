@@ -7,8 +7,6 @@ import { listType } from '../List/listType';
 
 const useTeamManagements = () => {
   const teamHandler = useInputForm();
-  const mainContents = useChangeComponent();
-  const mainHeaderContents = useChangeComponent();
   const [filterdTeams, setFilterdTeams] = useState<listType[]>([]);
   const [isCreate, setIsCreate] = useState(false);
   const { teams } = useGlobalState();
@@ -39,8 +37,6 @@ const useTeamManagements = () => {
     toggleCreate,
     filteringTeam,
     pickTeam,
-    mainContents,
-    mainHeaderContents,
   };
 };
 
