@@ -1,105 +1,99 @@
 import React, { useEffect } from 'react';
-import useRequestApi from '../../../hooks/Api/useRequestApi';
-import useChangeComponent from '../../../hooks/ChangeComponent/useChangeComponent';
-import useGlobalState from '../../../stores/useGlobalState';
-import { requestDataType } from '../../../types/data/requestDataType';
+
+// components
 import EmptyStateIcon from '../../atoms/EmptyStateIcon/EmptyStateIcon';
-import SplitTemplate from '../../templates/SplitTemplate';
+import ControlModal from '../../mol/ControlModal';
+import List from '../List';
 import RequestHistoryDetail from '../../mol/Details/RequestHistoryDetail';
 import RequestHistoryListTool from '../../mol/ListTools/RequestHistoryListTool';
 import RequestHistoryMenuHeader from '../../mol/PanelHeaders/RequestHistoryMenuHeader';
-import useRequestHistoryManagement from './useRequestHistoryManagement';
 import RequestHistoryPanelHeader from '../../mol/PanelHeaders/RequestHistoryPanelHeader';
-import ControlModal from '../../mol/ControlModal';
-import List from '../List';
+import SplitTemplate from '../../templates/SplitTemplate';
+
+// custom hooks
+import useRequestHistoryManagement from './useRequestHistoryManagement';
 import useList from '../List/useList';
-import useWindowSize from '../../../hooks/WindowSize/useWindowSize';
+import useRequestApi from '../../../hooks/Api/useRequestApi';
+import useChangeComponent from '../../../hooks/ChangeComponent/useChangeComponent';
+import useGlobalState from '../../../stores/useGlobalState';
 import useModal from '../../atoms/MyModal/useMyModal';
-import { MOBILE_WIDTH_MAX_LIMIT } from '../../../lib/constants';
+import useIsMobile from '../../../stores/IsMobileStore/useIsMobile';
+
+// types
+import { requestDataType } from '../../../types/data/requestDataType';
 
 const RequestHistoryManagement = () => {
-  const {
-    request,
-    isDetail,
-    filterdRequests,
-    filteringRequestHistory,
-    onClickListItem,
-    requestSearchHandler,
-    userSelectHandler,
-    statusSelectHandler,
-  } = useRequestHistoryManagement();
+  const mainContents = useChangeComponent();
+  const mainHeaderContents = useChangeComponent();
+
+  const { filterd, filtering, searchHandler, userSelect, statusSelect } =
+    useRequestHistoryManagement();
   const { convRequest, pickItem } = useList();
-  const [width, height] = useWindowSize();
+  const { isMobile } = useIsMobile();
   const { open, handleOpen, handleClose } = useModal();
-  const mainComponents = useChangeComponent();
   const { requests } = useGlobalState();
   const { fetchTenantRequests } = useRequestApi();
-
-  const wrapOnClickListItem = (id: number) => {
-    const r = pickItem(id, requests);
-    if (width > MOBILE_WIDTH_MAX_LIMIT) {
-      onClickListItem(r);
-      mainComponents.chComponent(<RequestHistoryDetail request={r} />);
-    } else {
-      handleOpen();
-      onClickListItem(r);
-      mainComponents.chComponent(
-        <>
-          <RequestHistoryPanelHeader isDetail={isDetail} request={request} />
-          <RequestHistoryDetail request={r} />
-        </>,
-      );
-    }
-  };
 
   useEffect(() => {
     fetchTenantRequests();
   }, []);
 
   useEffect(() => {
-    filteringRequestHistory(
+    filtering(
       requests.filter((r: requestDataType) => {
         return r.status !== 'open';
       }),
     );
-  }, [
-    requests,
-    requestSearchHandler.value,
-    statusSelectHandler.value,
-    userSelectHandler.value,
-  ]);
+  }, [requests, searchHandler.value, statusSelect.value, userSelect.value]);
+
+  // ------------------------------------ //
+  //   START wrap List Item click action  //
+  // ------------------------------------ //
+
+  const onClickRequest = (id: number) => {
+    const r = pickItem(id, requests);
+    if (isMobile) {
+      handleOpen();
+      mainContents.chComponent(
+        <>
+          <RequestHistoryPanelHeader request={r} />
+          <RequestHistoryDetail request={r} />
+        </>,
+      );
+    } else {
+      mainHeaderContents.chComponent(<RequestHistoryPanelHeader request={r} />);
+      mainContents.chComponent(<RequestHistoryDetail request={r} />);
+    }
+  };
+
+  // ------------------------------------ //
+  //    END  wrap List Item click action  //
+  // ------------------------------------ //
 
   return (
     <>
       <ControlModal
         open={open}
         handleClose={handleClose}
-        content={mainComponents.component ?? <div>no</div>}
+        content={mainContents.component ?? <div>no</div>}
       />
 
       <SplitTemplate
         menuHeader={
-          <RequestHistoryMenuHeader
-            requestSearchHandler={requestSearchHandler}
-          />
+          <RequestHistoryMenuHeader requestSearchHandler={searchHandler} />
         }
         menuTool={
           <RequestHistoryListTool
-            userSelectHandler={userSelectHandler}
-            statusSelectHandler={statusSelectHandler}
+            userSelectHandler={userSelect}
+            statusSelectHandler={statusSelect}
           />
         }
         menuContents={
-          <List
-            list={convRequest(filterdRequests)}
-            onClick={wrapOnClickListItem}
-          />
+          <List list={convRequest(filterd)} onClick={onClickRequest} />
         }
-        mainHeader={
-          <RequestHistoryPanelHeader isDetail={isDetail} request={request} />
-        }
+        mainHeader={mainHeaderContents.component ?? <div>リクエスト履歴</div>}
         mainContents={
-          mainComponents.component ?? (
+          mainContents.component ?? (
             <EmptyStateIcon msg="リクエストを選択してください" />
           )
         }

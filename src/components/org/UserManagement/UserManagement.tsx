@@ -20,26 +20,22 @@ import useRoleApi from '../../../hooks/Api/useRoleApi';
 import useUserManagement from './useUserManagement';
 import useChangeComponent from '../../../hooks/ChangeComponent/useChangeComponent';
 import useModal from '../../atoms/MyModal/useMyModal';
+import useIsMobile from '../../../stores/IsMobileStore/useIsMobile';
 
 // types
 import type { requestDataType } from '../../../types/data/requestDataType';
-import useIsMobile from '../../../stores/IsMobileStore/useIsMobile';
 
 const UserManagement = () => {
-  const {
-    user,
-    filterd,
-    userSearchHandler,
-    selectHandler,
-    setUser,
-    filteringUser,
-  } = useUserManagement();
+  const mainContents = useChangeComponent();
+  const mainHeaderContents = useChangeComponent();
+
+  const { filterd, searchHandler, selectHandler, filtering } =
+    useUserManagement();
   const { isMobile } = useIsMobile();
   const { fetchAllRoles } = useRoleApi();
   const { convUser, pickItem } = useList();
   const { users } = useGlobalState();
   const { fetchTenantMember } = useUserApi();
-  const mainContents = useChangeComponent();
   const { open, handleOpen, handleClose } = useModal();
 
   useEffect(() => {
@@ -48,8 +44,8 @@ const UserManagement = () => {
   }, []);
 
   useEffect(() => {
-    filteringUser(users);
-  }, [users, userSearchHandler.value, selectHandler.value]);
+    filtering(users);
+  }, [users, searchHandler.value, selectHandler.value]);
 
   // ------------------------------------ //
   //   START wrap List Item click action  //
@@ -61,7 +57,6 @@ const UserManagement = () => {
 
   const onClickUser = (id: number) => {
     const u = pickItem(id, users);
-    setUser(u);
     if (isMobile) {
       handleOpen();
       mainContents.chComponent(
@@ -71,6 +66,9 @@ const UserManagement = () => {
         </>,
       );
     } else {
+      mainHeaderContents.chComponent(
+        <UserPanelHeader user={u} chComponent={mainContents.chComponent} />,
+      );
       mainContents.chComponent(
         <UserDetail user={u} onClick={onClickRequest} />,
       );
@@ -101,19 +99,14 @@ const UserManagement = () => {
       <SplitTemplate
         menuHeader={
           <UserSearchWindow
-            handler={userSearchHandler}
+            handler={searchHandler}
             onClickUserCreate={onClickCreate}
           />
         }
         // ここは、ロールでの絞り込みにする
         menuTool={<UserListTool handler={selectHandler} />}
         menuContents={<List list={convUser(filterd)} onClick={onClickUser} />}
-        mainHeader={
-          <UserPanelHeader
-            user={user!}
-            chComponent={mainContents.chComponent}
-          />
-        }
+        mainHeader={mainHeaderContents.component ?? <div>ユーザ管理</div>}
         mainContents={
           mainContents.component ?? (
             <EmptyStateIcon msg="ユーザを選択してください" />

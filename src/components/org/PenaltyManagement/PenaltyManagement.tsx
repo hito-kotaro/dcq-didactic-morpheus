@@ -11,19 +11,19 @@ import PenaltyCreate from './PenaltyCreate';
 import PenaltySearchWindow from './PenaltySearchWindow';
 import SplitTemplate from '../../templates/SplitTemplate';
 
-import { MOBILE_WIDTH_MAX_LIMIT } from '../../../lib/constants';
-
 // custom hooks
 import useList from '../List/useList';
 import usePenaltyApi from '../../../hooks/Api/usePenaltyApi';
 import useGlobalState from '../../../stores/useGlobalState';
 import useModal from '../../atoms/MyModal/useMyModal';
-import useWindowSize from '../../../hooks/WindowSize/useWindowSize';
 import usePenaltyManagement from './usePenaltyManagement';
 import useChangeComponent from '../../../hooks/ChangeComponent/useChangeComponent';
 import useIsMobile from '../../../stores/IsMobileStore/useIsMobile';
 
 const PenaltyManagement = () => {
+  const mainContents = useChangeComponent();
+  const mainHeaderContents = useChangeComponent();
+
   const { filterd, searchHandler, filtering, selectHandler } =
     usePenaltyManagement();
   const { convPenalty, pickItem } = useList();
@@ -31,8 +31,6 @@ const PenaltyManagement = () => {
   const { fetchAllPenalty } = usePenaltyApi();
   const { penalties } = useGlobalState();
   const { isMobile } = useIsMobile();
-  const mainContents = useChangeComponent();
-  const mainHeaderContents = useChangeComponent();
 
   useEffect(() => {
     fetchAllPenalty();
@@ -41,6 +39,10 @@ const PenaltyManagement = () => {
   useEffect(() => {
     filtering(penalties);
   }, [penalties, searchHandler.value, selectHandler.value]);
+
+  // ------------------------------------ //
+  //   START wrap List Item click action  //
+  // ------------------------------------ //
 
   const onClickPenalty = (id: number) => {
     const p = pickItem(id, penalties);
@@ -76,6 +78,10 @@ const PenaltyManagement = () => {
     }
   };
 
+  // ------------------------------------ //
+  //    END  wrap List Item click action  //
+  // ------------------------------------ //
+
   return (
     <>
       <ControlModal
@@ -93,7 +99,7 @@ const PenaltyManagement = () => {
         }
         menuTool={<PenaltyListTool handler={selectHandler} />}
         menuContents={
-          <List list={convPenalty(filterd)} onClick={onClickCreate} />
+          <List list={convPenalty(filterd)} onClick={onClickPenalty} />
         }
         mainHeader={mainHeaderContents.component ?? <div>ペナルティ管理</div>}
         mainContents={

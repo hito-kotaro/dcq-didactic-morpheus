@@ -1,62 +1,68 @@
 import React, { useEffect } from 'react';
-import usePenaltyApi from '../../../hooks/Api/usePenaltyApi';
-import useChangeComponent from '../../../hooks/ChangeComponent/useChangeComponent';
-import useGlobalState from '../../../stores/useGlobalState';
+
+// components
 import EmptyStateIcon from '../../atoms/EmptyStateIcon/EmptyStateIcon';
-import SplitTemplate from '../../templates/SplitTemplate';
+import ControlModal from '../../mol/ControlModal';
+import List from '../List';
 import PenaltyHistoryDetail from '../../mol/Details/PenaltyHistoryDetail';
 import PenaltyHistoryMenuHeader from '../../mol/PanelHeaders/PenaltyHistoryMenuHeader';
 import PenaltyHistoryMenuTool from '../../mol/ListTools/PenaltyHistoryListTool';
-import usePenaltyHistoryManagement from './usePenaltyHistoryManagement';
 import PenaltyHistoryPanelHeader from '../../mol/PanelHeaders/PenaltyHistoryPanelHeader';
-import ControlModal from '../../mol/ControlModal';
+import SplitTemplate from '../../templates/SplitTemplate';
+
+// custom hooks
+import usePenaltyHistoryManagement from './usePenaltyHistoryManagement';
 import useList from '../List/useList';
-import List from '../List';
-import useWindowSize from '../../../hooks/WindowSize/useWindowSize';
+import usePenaltyApi from '../../../hooks/Api/usePenaltyApi';
+import useChangeComponent from '../../../hooks/ChangeComponent/useChangeComponent';
+import useGlobalState from '../../../stores/useGlobalState';
 import useModal from '../../atoms/MyModal/useMyModal';
-import { MOBILE_WIDTH_MAX_LIMIT } from '../../../lib/constants';
+import useIsMobile from '../../../stores/IsMobileStore/useIsMobile';
 
 const PenaltyHistoryManagement = () => {
-  const {
-    isDetail,
-    issue,
-    onClickListItem,
-    filterdPenalties,
-    filteringPenalty,
-    teamSelectHandler,
-    penaltySearchHandler,
-  } = usePenaltyHistoryManagement();
+  const mainContents = useChangeComponent();
+  const mainHeaderContents = useChangeComponent();
+
+  const { filterd, filtering, selectHandler, searchHandler } =
+    usePenaltyHistoryManagement();
   const { convPenaltyHis, pickItem } = useList();
-  const [width, height] = useWindowSize();
   const { open, handleOpen, handleClose } = useModal();
   const { issues } = useGlobalState();
   const { fetchAllIssue } = usePenaltyApi();
-  const mainContents = useChangeComponent();
-
-  const wrapOnclickListItem = (id: number) => {
-    const i = pickItem(id, issues);
-    if (width > MOBILE_WIDTH_MAX_LIMIT) {
-      onClickListItem(i);
-      mainContents.chComponent(<PenaltyHistoryDetail issue={i} />);
-    } else {
-      handleOpen();
-      onClickListItem(i);
-      mainContents.chComponent(
-        <>
-          <PenaltyHistoryPanelHeader isDetail={isDetail} issue={issue} />
-          <PenaltyHistoryDetail issue={i} />
-        </>,
-      );
-    }
-  };
+  const { isMobile } = useIsMobile();
 
   useEffect(() => {
     fetchAllIssue();
   }, []);
 
   useEffect(() => {
-    filteringPenalty(issues);
-  }, [issues, penaltySearchHandler.value, teamSelectHandler.value]);
+    filtering(issues);
+  }, [issues, searchHandler.value, selectHandler.value]);
+
+  // ------------------------------------ //
+  //   START wrap List Item click action  //
+  // ------------------------------------ //
+
+  const onClickPenalty = (id: number) => {
+    const i = pickItem(id, issues);
+    if (isMobile) {
+      handleOpen();
+      mainContents.chComponent(
+        <>
+          <PenaltyHistoryPanelHeader issue={i} />
+          <PenaltyHistoryDetail issue={i} />
+        </>,
+      );
+    } else {
+      mainHeaderContents.chComponent(<PenaltyHistoryPanelHeader issue={i} />);
+      mainContents.chComponent(<PenaltyHistoryDetail issue={i} />);
+    }
+  };
+
+  // ------------------------------------ //
+  //    END  wrap List Item click action  //
+  // ------------------------------------ //
+
   return (
     <>
       <ControlModal
@@ -67,22 +73,13 @@ const PenaltyHistoryManagement = () => {
 
       <SplitTemplate
         menuHeader={
-          <PenaltyHistoryMenuHeader
-            penaltySearchHandler={penaltySearchHandler}
-          />
+          <PenaltyHistoryMenuHeader penaltySearchHandler={searchHandler} />
         }
-        menuTool={
-          <PenaltyHistoryMenuTool teamSelectHandler={teamSelectHandler} />
-        }
+        menuTool={<PenaltyHistoryMenuTool teamSelectHandler={selectHandler} />}
         menuContents={
-          <List
-            list={convPenaltyHis(filterdPenalties)}
-            onClick={wrapOnclickListItem}
-          />
+          <List list={convPenaltyHis(filterd)} onClick={onClickPenalty} />
         }
-        mainHeader={
-          <PenaltyHistoryPanelHeader isDetail={isDetail} issue={issue} />
-        }
+        mainHeader={mainHeaderContents.component ?? <div>ペナルティ管理</div>}
         mainContents={
           mainContents.component ?? (
             <EmptyStateIcon msg="ペナルティを選択してください" />

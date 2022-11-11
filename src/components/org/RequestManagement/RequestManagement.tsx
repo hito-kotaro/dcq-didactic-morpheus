@@ -23,11 +23,12 @@ import useIsMobile from '../../../stores/IsMobileStore/useIsMobile';
 import { requestDataType } from '../../../types/data/requestDataType';
 
 const RequestManagement = () => {
+  const mainContents = useChangeComponent();
+
   const { filterd, searchHandler, filtering, selectHandler } =
     useRequestmanagement();
   const { isMobile } = useIsMobile();
   const { open, handleOpen, handleClose } = useModal();
-  const mainContents = useChangeComponent();
   const { convRequest, pickItem } = useList();
   const { requests } = useGlobalState();
   const { fetchTenantRequests } = useRequestApi();

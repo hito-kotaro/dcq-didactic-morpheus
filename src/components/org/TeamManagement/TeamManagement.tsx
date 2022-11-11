@@ -29,14 +29,15 @@ import type { userDataType } from '../../../types/data/userDataType';
 import type { requestDataType } from '../../../types/data/requestDataType';
 
 const TeamManagement = () => {
+  const mainContents = useChangeComponent();
+  const mainHeaderContents = useChangeComponent();
+
   const { teamHandler, filterdTeams, filteringTeam } = useTeamManagements();
   const { convTeam, convUser, pickItem } = useList();
   const { fetchTenantMember } = useUserApi();
   const { teams, users } = useGlobalState();
   const { fetchTeamMember } = useUserApi();
   const { fetchAllTeams } = useTeamApi();
-  const mainContents = useChangeComponent();
-  const mainHeaderContents = useChangeComponent();
   const { isMobile } = useIsMobile();
   const { open, handleOpen, handleClose } = useModal();
 

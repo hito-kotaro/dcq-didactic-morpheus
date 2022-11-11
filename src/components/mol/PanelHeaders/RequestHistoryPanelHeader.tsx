@@ -7,11 +7,10 @@ import useMyModal from '../../atoms/MyModal/useMyModal';
 
 type Props = {
   request: requestDataType;
-  isDetail: boolean;
 };
 
 const RequestHistoryPanelHeader: VFC<Props> = (props) => {
-  const { isDetail, request } = props;
+  const { request } = props;
   const { open, handleOpen, handleClose } = useMyModal();
   const menuItems: { label: string; onClick: () => void }[] = [
     { label: '承認を取り消し', onClick: handleOpen },
@@ -29,7 +28,7 @@ const RequestHistoryPanelHeader: VFC<Props> = (props) => {
         positiveBtnAction={deleteRequest}
       />
       <div className="flex justify-end">
-        {isDetail ? (
+        {request ? (
           <MenuButton menuItems={menuItems} icon={<MenuIcon />} />
         ) : (
           <div className="h-10" />

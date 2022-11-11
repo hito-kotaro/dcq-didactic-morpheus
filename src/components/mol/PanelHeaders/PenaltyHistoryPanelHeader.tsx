@@ -7,11 +7,10 @@ import { issueDataType } from '../../../types/data/penaltyDataType';
 
 type Props = {
   issue: issueDataType;
-  isDetail: boolean;
 };
 
 const PenaltyHistoryPanelHeader: VFC<Props> = (props) => {
-  const { issue, isDetail } = props;
+  const { issue } = props;
   const { open, handleOpen, handleClose } = useMyModal();
   const menuItems: { label: string; onClick: () => void }[] = [
     { label: 'ペナルティを取り消し', onClick: handleOpen },
@@ -31,7 +30,7 @@ const PenaltyHistoryPanelHeader: VFC<Props> = (props) => {
         positiveBtnAction={deletePenalty}
       />
       <div className="flex justify-end">
-        {isDetail ? (
+        {issue ? (
           <MenuButton menuItems={menuItems} icon={<MenuIcon />} />
         ) : (
           <div className="h-10" />

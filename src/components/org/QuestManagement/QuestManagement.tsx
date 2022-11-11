@@ -21,9 +21,11 @@ import useQuestApi from '../../../hooks/Api/useQuestApi';
 import useIsMobile from '../../../stores/IsMobileStore/useIsMobile';
 
 const QuestManagement = () => {
-  const { quest, filterd, searchHandler, selectHandler, setQuest, filtering } =
-    useQuestManagement();
   const mainContents = useChangeComponent();
+  const mainHeaderContents = useChangeComponent();
+
+  const { filterd, searchHandler, selectHandler, filtering } =
+    useQuestManagement();
   const { isMobile } = useIsMobile();
   const { quests } = useGlobalState();
   const { convQuest, pickItem } = useList();
@@ -48,7 +50,9 @@ const QuestManagement = () => {
       handleOpen();
       mainContents.chComponent(<QuestDetail quest={q} />);
     } else {
-      setQuest(q);
+      mainHeaderContents.chComponent(
+        <QuestPanelHeader quest={q} chComponent={mainContents.chComponent} />,
+      );
       mainContents.chComponent(<QuestDetail quest={q} />);
     }
   };
@@ -82,12 +86,7 @@ const QuestManagement = () => {
         }
         menuTool={<QuestListTool handler={selectHandler} />}
         menuContents={<List list={convQuest(filterd)} onClick={onClickQuest} />}
-        mainHeader={
-          <QuestPanelHeader
-            quest={quest}
-            chComponent={mainContents.chComponent}
-          />
-        }
+        mainHeader={mainHeaderContents.component ?? <div>クエスト管理</div>}
         mainContents={
           mainContents.component ?? (
             <EmptyStateIcon msg="クエストを選択してください" />
