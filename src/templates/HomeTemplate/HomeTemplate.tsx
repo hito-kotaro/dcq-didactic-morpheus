@@ -11,14 +11,14 @@ import PersonIcon from '@mui/icons-material/Person';
 import GroupsIcon from '@mui/icons-material/Groups';
 import SideMenu from '../../components/org/SideMenu/SideMenu';
 import Header from '../../components/mol/Headers/Header';
-import UserManagement from '../../components/org/UserManagement/UserManagement';
-import TeamManagement from '../../components/org/TeamManagement/TeamManagement';
+import UserManagement from '../../components/org/Managements/UserManagement/UserManagement';
+import TeamManagement from '../../components/org/Managements/TeamManagement/TeamManagement';
 import Summary from '../../components/org/Summary/Summary';
-import QuestManagement from '../../components/org/QuestManagement/QuestManagement';
-import RequestManagement from '../../components/org/RequestManagement/RequestManagement';
-import PenaltyManagement from '../../components/org/PenaltyManagement/PenaltyManagement';
-import RequestHistoryManagement from '../../components/org/RequestHistoryManagement/RequestHistoryManagement';
-import PenaltyHistoryManagement from '../../components/org/PenaltyHistoryManagement/PenaltyHistoryManagement';
+import QuestManagement from '../../components/org/Managements/QuestManagement/QuestManagement';
+import RequestManagement from '../../components/org/Managements/RequestManagement/RequestManagement';
+import PenaltyManagement from '../../components/org/Managements/PenaltyManagement/PenaltyManagement';
+import RequestHistoryManagement from '../../components/org/Managements/RequestHistoryManagement/RequestHistoryManagement';
+import PenaltyHistoryManagement from '../../components/org/Managements/PenaltyHistoryManagement/PenaltyHistoryManagement';
 import DashBoard from '../../components/org/DashBoard/DashBoard';
 
 // custom hooks

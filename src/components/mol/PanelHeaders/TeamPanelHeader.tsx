@@ -5,7 +5,7 @@ import { teamDataType } from '../../../types/data/teamDataType';
 import MenuButton from '../../atoms/MenuButton/MenuButton';
 import MyModal from '../../atoms/MyModal/MyModal';
 import useMyModal from '../../atoms/MyModal/useMyModal';
-import UpdateTeam from '../../org/TeamManagement/UpdateTeam';
+import UpdateTeam from '../../org/Managements/TeamManagement/UpdateTeam';
 
 type Props = {
   // teamName: string;

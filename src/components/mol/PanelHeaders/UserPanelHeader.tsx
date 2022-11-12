@@ -4,9 +4,9 @@ import { userDataType } from '../../../types/data/userDataType';
 import MenuButton from '../../atoms/MenuButton/MenuButton';
 import MyModal from '../../atoms/MyModal/MyModal';
 import useMyModal from '../../atoms/MyModal/useMyModal';
-import UserAtrbuteUpdate from '../../org/UserManagement/UserAtrbuteUpdate';
-import UserNameUpdate from '../../org/UserManagement/UserNameUpdate';
-import UserPwdUpdate from '../../org/UserManagement/UserPwdUpdate';
+import UserAtrbuteUpdate from '../../org/Managements/UserManagement/UserAtrbuteUpdate';
+import UserNameUpdate from '../../org/Managements/UserManagement/UserNameUpdate';
+import UserPwdUpdate from '../../org/Managements/UserManagement/UserPwdUpdate';
 
 type Props = {
   user: userDataType;

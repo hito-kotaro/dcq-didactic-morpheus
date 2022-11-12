@@ -2,9 +2,9 @@ import React, { ReactElement, VFC } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import MenuButton from '../../atoms/MenuButton/MenuButton';
 import useMyModal from '../../atoms/MyModal/useMyModal';
-import PenaltyUpdate from '../../org/PenaltyManagement/PenaltyUpdate';
 import { penaltyDataType } from '../../../types/data/penaltyDataType';
 import MyModal from '../../atoms/MyModal/MyModal';
+import PenaltyUpdate from '../../org/Managements/PenaltyManagement/PenaltyUpdate';
 
 type Props = {
   penalty: penaltyDataType;

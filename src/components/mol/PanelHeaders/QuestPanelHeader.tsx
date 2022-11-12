@@ -4,7 +4,7 @@ import { questDataType } from '../../../types/data/questDataType';
 import MenuButton from '../../atoms/MenuButton/MenuButton';
 import MyModal from '../../atoms/MyModal/MyModal';
 import useMyModal from '../../atoms/MyModal/useMyModal';
-import QuestUpdate from '../../org/QuestManagement/QuestUpdate';
+import QuestUpdate from '../../org/Managements/QuestManagement/QuestUpdate';
 
 type Props = {
   quest: questDataType;
