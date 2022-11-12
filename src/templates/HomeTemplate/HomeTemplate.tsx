@@ -1,4 +1,6 @@
 import React, { ReactElement, useState } from 'react';
+
+// components
 import HistoryIcon from '@mui/icons-material/History';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import AnnouncementIcon from '@mui/icons-material/Announcement';
@@ -18,10 +20,12 @@ import PenaltyManagement from '../../components/org/PenaltyManagement/PenaltyMan
 import RequestHistoryManagement from '../../components/org/RequestHistoryManagement/RequestHistoryManagement';
 import PenaltyHistoryManagement from '../../components/org/PenaltyHistoryManagement/PenaltyHistoryManagement';
 import DashBoard from '../../components/org/DashBoard/DashBoard';
-import { sideMenuDataType } from '../../components/org/SideMenu/sideMenuDataType';
-import useWindowSize from '../../hooks/WindowSize/useWindowSize';
+
+// custom hooks
 import useSidemenuState from '../../stores/SideMenuStore/useSidemenuState';
-import useIsMobile from '../../stores/IsMobileStore/useIsMobile';
+
+// types
+import { sideMenuDataType } from '../../components/org/SideMenu/sideMenuDataType';
 
 const HomeTemplate = () => {
   const [component, setComponent] = useState<ReactElement>(<DashBoard />);
@@ -31,7 +35,6 @@ const HomeTemplate = () => {
     toggle();
     setComponent(c);
   };
-  const [width, height] = useWindowSize();
 
   const sideMenuItemList: sideMenuDataType[] = [
     {

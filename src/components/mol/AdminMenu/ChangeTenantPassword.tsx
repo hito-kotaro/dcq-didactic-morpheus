@@ -1,6 +1,7 @@
 import { Button, TextField } from '@mui/material';
 import React from 'react';
 import useInputForm from '../../../hooks/InputForm/useInputForm';
+import AdminMenuTemplate from '../../templates/AdminMenuTemplate';
 
 const ChangeTenantPassword = () => {
   const currentPwdHandler = useInputForm();
@@ -8,9 +9,8 @@ const ChangeTenantPassword = () => {
   const rePwdHandler = useInputForm();
 
   return (
-    <div className="flex">
-      <div className="w-1/2">テナントパスワードを変更する</div>
-      <div className="w-1/2">
+    <AdminMenuTemplate title="テナントパスワート度変更する">
+      <>
         <TextField
           fullWidth
           type="password"
@@ -41,8 +41,8 @@ const ChangeTenantPassword = () => {
         <div className="h-3" />
 
         <Button variant="contained">パスワードを変更</Button>
-      </div>
-    </div>
+      </>
+    </AdminMenuTemplate>
   );
 };
 

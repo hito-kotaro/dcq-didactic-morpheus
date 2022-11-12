@@ -1,7 +1,8 @@
-import { TextField, Button } from '@mui/material';
 import React from 'react';
+import { TextField, Button } from '@mui/material';
 import useTeamApi from '../../../hooks/Api/useTeamApi';
 import useInputForm from '../../../hooks/InputForm/useInputForm';
+import AdminMenuTemplate from '../../templates/AdminMenuTemplate';
 
 const CreateTeamForm = () => {
   const teamHandler = useInputForm();
@@ -11,9 +12,8 @@ const CreateTeamForm = () => {
     teamHandler.clear();
   };
   return (
-    <div className="flex">
-      <div className="w-1/2">新しいチームを作成する</div>
-      <div className="w-1/2">
+    <AdminMenuTemplate title="新しいチームを作成する">
+      <>
         <TextField
           fullWidth
           type="text"
@@ -27,8 +27,8 @@ const CreateTeamForm = () => {
         <Button variant="contained" onClick={onClickCreate}>
           新しいチームを作成
         </Button>
-      </div>
-    </div>
+      </>
+    </AdminMenuTemplate>
   );
 };
 

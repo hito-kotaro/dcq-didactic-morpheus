@@ -5,6 +5,7 @@ import SelectForm from '../SelectForm/SelectForm';
 import useSelectForm from '../SelectForm/useSelectForm';
 import useUserApi from '../../../hooks/Api/useUserApi';
 import useGlobalState from '../../../stores/useGlobalState';
+import AdminMenuTemplate from '../../templates/AdminMenuTemplate';
 
 const CreateUserForm = () => {
   const { createUser } = useUserApi();
@@ -40,9 +41,8 @@ const CreateUserForm = () => {
     teamSelectHandler.setValue('');
   };
   return (
-    <div className="flex">
-      <div className="w-1/2">新しいユーザーを作成する</div>
-      <div className="w-1/2">
+    <AdminMenuTemplate title="新しいユーザを作成">
+      <>
         <TextField
           fullWidth
           type="text"
@@ -88,8 +88,8 @@ const CreateUserForm = () => {
         <Button variant="contained" onClick={onClickCreate}>
           新しいユーザーを作成
         </Button>
-      </div>
-    </div>
+      </>
+    </AdminMenuTemplate>
   );
 };
 
