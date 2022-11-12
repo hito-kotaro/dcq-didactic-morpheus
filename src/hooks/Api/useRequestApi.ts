@@ -22,10 +22,7 @@ const useRequestApi = () => {
 
   const createRequest = async (createParams: createRequestType) => {
     try {
-      const result: AxiosResponse = await axiosTokenInstance.post(
-        '/request',
-        createParams,
-      );
+      await axiosTokenInstance.post('/request', createParams);
     } catch (e) {
       console.log(e);
     }
