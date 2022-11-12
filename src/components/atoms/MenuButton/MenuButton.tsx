@@ -1,6 +1,5 @@
 import React, { ReactElement, VFC } from 'react';
-import MenuIcon from '@mui/icons-material/Menu';
-import { Button, Divider, IconButton, Menu, MenuItem } from '@mui/material';
+import { Divider, IconButton, Menu, MenuItem } from '@mui/material';
 import BoringAvatar from '../MyAvatar/BoringAvatar';
 
 type Props = {
@@ -43,10 +42,10 @@ const MenuButton: VFC<Props> = (props) => {
         {isHeaderMenu ? (
           <div className="px-2">
             <div className="flex">
-              <BoringAvatar name="佐藤" />
+              <BoringAvatar name={localStorage.getItem('name') ?? ''} />
               <div className="w-2" />
               <div className="text-text text-lg font-semibold leading-10">
-                佐藤
+                {localStorage.getItem('name')}
               </div>
             </div>
             <div className="my-3">

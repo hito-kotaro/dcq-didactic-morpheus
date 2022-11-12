@@ -16,7 +16,7 @@ const AdminHomeTemplate: VFC<Props> = (props) => {
   const { settings } = props;
   const { fetchAllTeams } = useTeamApi();
   const { fetchAllRoles } = useRoleApi();
-  const { logout } = useLoginApi();
+
   const dummy = (c: ReactElement) => {
     console.log('hello temmmmy');
   };
@@ -37,12 +37,6 @@ const AdminHomeTemplate: VFC<Props> = (props) => {
       label: 'どりかむリスト',
       icon: <InboxIcon />,
       action: dummy,
-      component: <div>dummy</div>,
-    },
-    {
-      label: 'ログアウト',
-      icon: <InboxIcon />,
-      action: logout,
       component: <div>dummy</div>,
     },
   ];

@@ -27,7 +27,7 @@ const Header = () => {
       <div className="ml-auto mr-5">
         <MenuButton
           menuItems={menuItems}
-          icon={<BoringAvatar name="佐藤" />}
+          icon={<BoringAvatar name={localStorage.getItem('name') ?? ''} />}
           isHeaderMenu
         />
       </div>

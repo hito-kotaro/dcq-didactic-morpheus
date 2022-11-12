@@ -27,7 +27,7 @@ const useLoginApi = () => {
       console.log(result.data.access_token);
 
       localStorage.setItem('token', result.data.access_token);
-      localStorage.setItem('tenant_name', result.data.tenant_name);
+      localStorage.setItem('tenant_name', result.data.tenant);
       localStorage.setItem('user', result.data.user);
       localStorage.setItem('user_id', result.data.user_id);
       // localStorage.setItem('token', result.data.access_token);
@@ -46,7 +46,8 @@ const useLoginApi = () => {
       );
       console.log(result.data);
       localStorage.setItem('token', result.data.access_token);
-      localStorage.setItem('tenant_name', result.data.tenant_name);
+      localStorage.setItem('name', result.data.tenant);
+      localStorage.setItem('tenant_name', result.data.tenant);
       localStorage.setItem('admin', '1');
       navigate('/home');
     } catch (e) {

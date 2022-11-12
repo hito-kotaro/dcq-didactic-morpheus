@@ -4,18 +4,10 @@ import React from 'react';
 const AdminHomeHeader = () => {
   return (
     <div className="flex font-mono">
-      <div id="icon-tmp" className="h-16 w-16 rounded-md bg-orange-400" />
-      <div className="w-10" />
-      <div className="">
+      <div className=" border-l-4 border-primary pl-3">
         <Typography variant="h4">
           {localStorage.getItem('tenant_name')}
         </Typography>
-        <div className="flex">
-          <div className="h-5 leading-5 text-lg font-semibold">TennantID:</div>
-          <div className="h-5 leading-5 text-text">
-            tekitounaaidexi-wokokoniiremasu
-          </div>
-        </div>
       </div>
     </div>
   );
