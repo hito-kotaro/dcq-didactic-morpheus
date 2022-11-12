@@ -48,7 +48,9 @@ const QuestManagement = () => {
     const q = pickItem(id, quests);
     if (isMobile) {
       handleOpen();
-      mainContents.chComponent(<QuestDetail quest={q} />);
+      mainContents.chComponent(
+        <QuestDetail quest={q} handleClose={handleClose} />,
+      );
     } else {
       mainHeaderContents.chComponent(
         <QuestPanelHeader quest={q} chComponent={mainContents.chComponent} />,

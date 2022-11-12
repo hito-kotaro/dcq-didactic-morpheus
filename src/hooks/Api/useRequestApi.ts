@@ -12,6 +12,7 @@ const useRequestApi = () => {
 
   // テナント内のリクエストを全て取得する
   const fetchTenantRequests = async () => {
+    console.log('fetchTenant');
     try {
       const result: AxiosResponse = await axiosTokenInstance.get('/request');
       setRequests(result.data.requests);
