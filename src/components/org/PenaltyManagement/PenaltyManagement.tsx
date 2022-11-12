@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 // components
 import ControlModal from '../../mol/ControlModal';
 import EmptyStateIcon from '../../atoms/EmptyStateIcon/EmptyStateIcon';
-import List from '../List';
+import List from '../../mol/List';
 import PenaltyDetail from '../../mol/Details/PenaltyDetail';
 import PenaltyListTool from '../../mol/ListTools/PenaltyListTool';
 import PenaltyPanelHeader from '../../mol/PanelHeaders/PenaltyPanelHeader';
@@ -12,7 +12,7 @@ import PenaltySearchWindow from './PenaltySearchWindow';
 import SplitTemplate from '../../templates/SplitTemplate';
 
 // custom hooks
-import useList from '../List/useList';
+import useList from '../../mol/List/useList';
 import usePenaltyApi from '../../../hooks/Api/usePenaltyApi';
 import useGlobalState from '../../../stores/useGlobalState';
 import useModal from '../../atoms/MyModal/useMyModal';

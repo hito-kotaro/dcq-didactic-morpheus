@@ -9,7 +9,7 @@ import RIcon from '../../atoms/Icons/RIcon';
 import SumIcon from '../../atoms/Icons/SumIcon';
 import DisplayWrapRow from '../../mol/DisplayWraper/DisplayWrapRow';
 import PointDisplay from '../../atoms/PointDisplay/PointDisplay';
-import RewardList from '../List/RewardList';
+import RewardList from '../../mol/List/RewardList';
 import DashBoardTemplate from '../../templates/DashBoardTemplate';
 import PiGraph from '../PiGraph/PiGraph';
 import useTeamApi from '../../../hooks/Api/useTeamApi';

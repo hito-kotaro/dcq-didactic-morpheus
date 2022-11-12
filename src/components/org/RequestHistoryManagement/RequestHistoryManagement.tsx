@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 // components
 import EmptyStateIcon from '../../atoms/EmptyStateIcon/EmptyStateIcon';
 import ControlModal from '../../mol/ControlModal';
-import List from '../List';
+import List from '../../mol/List';
 import RequestHistoryDetail from '../../mol/Details/RequestHistoryDetail';
 import RequestHistoryListTool from '../../mol/ListTools/RequestHistoryListTool';
 import RequestHistoryMenuHeader from '../../mol/PanelHeaders/RequestHistoryMenuHeader';
@@ -12,7 +12,7 @@ import SplitTemplate from '../../templates/SplitTemplate';
 
 // custom hooks
 import useRequestHistoryManagement from './useRequestHistoryManagement';
-import useList from '../List/useList';
+import useList from '../../mol/List/useList';
 import useRequestApi from '../../../hooks/Api/useRequestApi';
 import useChangeComponent from '../../../hooks/ChangeComponent/useChangeComponent';
 import useGlobalState from '../../../stores/useGlobalState';

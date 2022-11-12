@@ -1,16 +1,18 @@
 import React, { useEffect, useState, VFC } from 'react';
 import { Divider } from '@mui/material';
 import { userDataType } from '../../../types/data/userDataType';
-import RequestList from '../../org/List/RequestList';
 import { requestDataType } from '../../../types/data/requestDataType';
 import useGlobalState from '../../../stores/useGlobalState';
+import List from '../List';
+import useList from '../List/useList';
 
 type Props = {
   user: userDataType;
-  onClick: (r: requestDataType) => void;
+  onClick: (id: number) => void;
 };
 const UserDetail: VFC<Props> = (props) => {
   const { user, onClick } = props;
+  const { convRequest } = useList();
   const { requests } = useGlobalState();
   const [filterd, setFilterd] = useState<requestDataType[]>([]);
 
@@ -28,7 +30,7 @@ const UserDetail: VFC<Props> = (props) => {
       <div className="mt-3">
         <Divider />
       </div>
-      <RequestList requests={filterd} onClick={onClick} />
+      <List list={convRequest(filterd)} onClick={onClick} />
     </div>
   );
 };

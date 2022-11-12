@@ -3,7 +3,7 @@ import useChangeComponent from '../../../hooks/ChangeComponent/useChangeComponen
 import useInputForm from '../../../hooks/InputForm/useInputForm';
 import useGlobalState from '../../../stores/useGlobalState';
 import { teamDataType } from '../../../types/data/teamDataType';
-import { listType } from '../List/listType';
+import { listType } from '../../mol/List/listType';
 
 const useTeamManagements = () => {
   const teamHandler = useInputForm();

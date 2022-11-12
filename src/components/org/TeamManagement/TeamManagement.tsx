@@ -11,7 +11,7 @@ import RequestDetail from '../../mol/Details/RequestDetail';
 import UserPanelHeader from '../../mol/PanelHeaders/UserPanelHeader';
 import RequestPanelHeader from '../../mol/PanelHeaders/RequestPanelHeader';
 import TeamCreate from './TeamCreate';
-import List from '../List';
+import List from '../../mol/List';
 import ControlModal from '../../mol/ControlModal';
 
 // custom hooks
@@ -20,13 +20,12 @@ import useChangeComponent from '../../../hooks/ChangeComponent/useChangeComponen
 import useTeamApi from '../../../hooks/Api/useTeamApi';
 import useUserApi from '../../../hooks/Api/useUserApi';
 import useGlobalState from '../../../stores/useGlobalState';
-import useList from '../List/useList';
+import useList from '../../mol/List/useList';
 import useModal from '../../atoms/MyModal/useMyModal';
 import useIsMobile from '../../../stores/IsMobileStore/useIsMobile';
 
 // types
 import type { userDataType } from '../../../types/data/userDataType';
-import type { requestDataType } from '../../../types/data/requestDataType';
 
 const TeamManagement = () => {
   const mainContents = useChangeComponent();
@@ -35,7 +34,7 @@ const TeamManagement = () => {
   const { teamHandler, filterdTeams, filteringTeam } = useTeamManagements();
   const { convTeam, convUser, pickItem } = useList();
   const { fetchTenantMember } = useUserApi();
-  const { teams, users } = useGlobalState();
+  const { teams, users, requests } = useGlobalState();
   const { fetchTeamMember } = useUserApi();
   const { fetchAllTeams } = useTeamApi();
   const { isMobile } = useIsMobile();
@@ -55,7 +54,8 @@ const TeamManagement = () => {
   //   START wrap List Item click action  //
   // ------------------------------------ //
 
-  const onClickRequest = (r: requestDataType) => {
+  const onClickRequest = (id: number) => {
+    const r = pickItem(id, requests);
     mainContents.chComponent(<RequestDetail request={r} />);
     mainHeaderContents.chComponent(<RequestPanelHeader />);
   };

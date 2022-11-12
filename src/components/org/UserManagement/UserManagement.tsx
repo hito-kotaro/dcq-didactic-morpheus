@@ -9,8 +9,8 @@ import EmptyStateIcon from '../../atoms/EmptyStateIcon/EmptyStateIcon';
 import RequestDetail from '../../mol/Details/RequestDetail';
 import UserSearchWindow from './UserSearchWindow';
 import UserCreate from './UserCreate';
-import useList from '../List/useList';
-import List from '../List';
+import useList from '../../mol/List/useList';
+import List from '../../mol/List';
 import ControlModal from '../../mol/ControlModal';
 
 // custom hooks
@@ -34,7 +34,7 @@ const UserManagement = () => {
   const { isMobile } = useIsMobile();
   const { fetchAllRoles } = useRoleApi();
   const { convUser, pickItem } = useList();
-  const { users } = useGlobalState();
+  const { users, requests } = useGlobalState();
   const { fetchTenantMember } = useUserApi();
   const { open, handleOpen, handleClose } = useModal();
 
@@ -51,7 +51,8 @@ const UserManagement = () => {
   //   START wrap List Item click action  //
   // ------------------------------------ //
 
-  const onClickRequest = (r: requestDataType) => {
+  const onClickRequest = (id: number) => {
+    const r = pickItem(id, requests);
     mainContents.chComponent(<RequestDetail request={r} />);
   };
 
