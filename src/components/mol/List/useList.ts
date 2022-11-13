@@ -40,7 +40,7 @@ const useList = () => {
         avatar: u.name,
         title: u.name,
         description: '',
-        badges: [{ bg: '', text: '', content: u.role }],
+        badges: [],
         date: '',
       };
     });

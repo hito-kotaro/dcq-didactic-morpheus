@@ -12,17 +12,12 @@ type Props = {
 
 const UserCreate: VFC<Props> = (props) => {
   const { handleClose } = props;
-  const { roles, teams } = useGlobalState();
+  const { teams } = useGlobalState();
   const { createUser } = useUserApi();
   const userHandler = useInputForm();
   const pwdHandler = useInputForm();
   const rePwdHandler = useInputForm();
-  const roleSelectHandler = useSelectForm();
   const teamSelectHandler = useSelectForm();
-
-  useEffect(() => {
-    roleSelectHandler.formatSelectItem(roles);
-  }, [roles]);
 
   useEffect(() => {
     teamSelectHandler.formatSelectItem(teams);
@@ -32,7 +27,6 @@ const UserCreate: VFC<Props> = (props) => {
     createUser(
       userHandler.value,
       pwdHandler.value,
-      Number(roleSelectHandler.value),
       Number(teamSelectHandler.value),
     );
     if (handleClose) {
@@ -77,13 +71,6 @@ const UserCreate: VFC<Props> = (props) => {
         variant="outlined"
         onChange={rePwdHandler.onChange}
         value={rePwdHandler.value}
-      />
-
-      <div className="h-3" />
-      <SelectForm
-        menu={roleSelectHandler.selectItem}
-        label="ロールを選択してください"
-        handler={roleSelectHandler}
       />
 
       <div className="h-3" />

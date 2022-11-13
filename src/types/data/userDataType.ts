@@ -10,13 +10,10 @@ export type userDataType = {
   point: number;
   team_id: number;
   team: string;
-  role_id: number;
-  role: string;
 };
 
 export type userCreateType = {
   tenant_id: number;
-  role_id: number;
   team_id: number;
   name: string;
   password: string;

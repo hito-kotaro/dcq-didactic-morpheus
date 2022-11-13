@@ -29,15 +29,9 @@ const useUserApi = () => {
     }
   };
 
-  const createUser = async (
-    name: string,
-    password: string,
-    roleId: number,
-    teamId: number,
-  ) => {
+  const createUser = async (name: string, password: string, teamId: number) => {
     const userParams: userCreateType = {
       tenant_id: Number(localStorage.getItem('id')),
-      role_id: roleId,
       team_id: teamId,
       name,
       password,

@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 
 // componsents
 import SplitTemplate from '../../../templates/SplitTemplate';
-import UserListTool from '../../../mol/ListTools/UserListTool';
 import UserPanelHeader from '../../../mol/PanelHeaders/UserPanelHeader';
 import UserDetail from '../../../mol/Details/UserDetail';
 import EmptyStateIcon from '../../../atoms/EmptyStateIcon/EmptyStateIcon';
@@ -16,7 +15,6 @@ import ControlModal from '../../../mol/ControlModal';
 // custom hooks
 import useGlobalState from '../../../../stores/useGlobalState';
 import useUserApi from '../../../../hooks/Api/useUserApi';
-import useRoleApi from '../../../../hooks/Api/useRoleApi';
 import useUserManagement from './useUserManagement';
 import useChangeComponent from '../../../../hooks/ChangeComponent/useChangeComponent';
 import useModal from '../../../atoms/MyModal/useMyModal';
@@ -29,7 +27,6 @@ const UserManagement = () => {
   const { filterd, searchHandler, selectHandler, filtering } =
     useUserManagement();
   const { isMobile } = useIsMobile();
-  const { fetchAllRoles } = useRoleApi();
   const { convUser, pickItem } = useList();
   const { users, requests } = useGlobalState();
   const { fetchTenantMember } = useUserApi();
@@ -37,7 +34,6 @@ const UserManagement = () => {
 
   useEffect(() => {
     fetchTenantMember();
-    fetchAllRoles();
   }, []);
 
   useEffect(() => {
@@ -102,7 +98,7 @@ const UserManagement = () => {
           />
         }
         // ここは、ロールでの絞り込みにする
-        menuTool={<UserListTool handler={selectHandler} />}
+        menuTool={<div>tmp</div>}
         menuContents={<List list={convUser(filterd)} onClick={onClickUser} />}
         mainHeader={mainHeaderContents.component ?? <div>ユーザ管理</div>}
         mainContents={

@@ -9,20 +9,13 @@ import AdminMenuTemplate from '../../templates/AdminMenuTemplate';
 
 const CreateUserForm = () => {
   const { createUser } = useUserApi();
-  const { roles } = useGlobalState();
   const { teams } = useGlobalState();
   const userHandler = useInputForm();
   const pwdHandler = useInputForm();
   const rePwdHandler = useInputForm();
-  const roleSelectHandler = useSelectForm();
   const teamSelectHandler = useSelectForm();
 
-  // useEffectでロールを取得してselectItemTypeに入れる
-  useEffect(() => {
-    roleSelectHandler.formatSelectItem(roles);
-  }, [roles]);
-
-  // useEffectでグループを取得してselectItemTypeに入れる
+  // チームを取得してselectItemTypeに入れる
   useEffect(() => {
     teamSelectHandler.formatSelectItem(teams);
   }, [teams]);
@@ -31,13 +24,11 @@ const CreateUserForm = () => {
     createUser(
       userHandler.value,
       pwdHandler.value,
-      Number(roleSelectHandler.value),
       Number(teamSelectHandler.value),
     );
     userHandler.clear();
     pwdHandler.clear();
     rePwdHandler.clear();
-    roleSelectHandler.setValue('');
     teamSelectHandler.setValue('');
   };
   return (
@@ -68,13 +59,6 @@ const CreateUserForm = () => {
           variant="outlined"
           onChange={rePwdHandler.onChange}
           value={rePwdHandler.value}
-        />
-
-        <div className="h-3" />
-        <SelectForm
-          menu={roleSelectHandler.selectItem}
-          label="ロールを選択してください"
-          handler={roleSelectHandler}
         />
 
         <div className="h-3" />

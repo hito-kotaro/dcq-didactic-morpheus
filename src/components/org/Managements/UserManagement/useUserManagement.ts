@@ -13,14 +13,9 @@ const useUserManagement = () => {
 
     // allの時の絞り込み
     if (Number(selectHandler.value) === 0) {
-      if (data.name.indexOf(searchHandler.value) !== -1) {
-        flg = true;
-      }
+      flg = true;
     } else if (Number(selectHandler.value) !== 0) {
-      if (
-        data.role_id === Number(selectHandler.value) &&
-        data.name.indexOf(searchHandler.value) !== -1
-      ) {
+      if (data.name.indexOf(searchHandler.value) !== -1) {
         flg = true;
       }
     }

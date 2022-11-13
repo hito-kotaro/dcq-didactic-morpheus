@@ -10,14 +10,9 @@ type Props = {
 };
 const UserAtrbuteUpdate: VFC<Props> = (props) => {
   const { user } = props;
-  const { roles, teams } = useGlobalState();
+  const { teams } = useGlobalState();
 
   const teamSelectHandler = useSelectForm();
-  const roleSelectHandler = useSelectForm();
-
-  useEffect(() => {
-    roleSelectHandler.formatSelectItem(roles);
-  }, [roles]);
 
   useEffect(() => {
     teamSelectHandler.formatSelectItem(teams);
@@ -32,18 +27,10 @@ const UserAtrbuteUpdate: VFC<Props> = (props) => {
         <Divider />
       </div>
       <div className="h-3" />
-      <div className="text-text">
-        <span className="font-semibold text-lg">現在のロール: </span>
-        {user.role}
-      </div>
+
       <div className="my-3">
         <Divider />
       </div>
-      <SelectForm
-        menu={roleSelectHandler.selectItem}
-        label="ロールを選択してください"
-        handler={roleSelectHandler}
-      />
       <div className="h-3" />
       <div className="text-text">
         <span className="font-semibold text-lg">現在のチーム: </span>
