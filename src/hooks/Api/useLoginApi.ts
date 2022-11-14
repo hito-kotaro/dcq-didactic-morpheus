@@ -45,6 +45,7 @@ const useLoginApi = () => {
         loginParam,
       );
       console.log(result.data);
+      localStorage.setItem('tenant_id', result.data.tenant_id);
       localStorage.setItem('token', result.data.access_token);
       localStorage.setItem('name', result.data.tenant);
       localStorage.setItem('tenant_name', result.data.tenant);

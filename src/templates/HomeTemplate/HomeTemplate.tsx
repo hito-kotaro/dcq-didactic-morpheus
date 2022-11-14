@@ -56,12 +56,6 @@ const HomeTemplate = () => {
       component: <TeamManagement />,
     },
     {
-      label: 'ユーザ管理',
-      icon: <PersonIcon />,
-      action: chComponent,
-      component: <UserManagement />,
-    },
-    {
       label: 'クエスト管理',
       icon: <AssignmentTurnedInIcon />,
       action: chComponent,

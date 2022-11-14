@@ -97,8 +97,6 @@ const UserManagement = () => {
             onClickUserCreate={onClickCreate}
           />
         }
-        // ここは、ロールでの絞り込みにする
-        menuTool={<div>tmp</div>}
         menuContents={<List list={convUser(filterd)} onClick={onClickUser} />}
         mainHeader={mainHeaderContents.component ?? <div>ユーザ管理</div>}
         mainContents={

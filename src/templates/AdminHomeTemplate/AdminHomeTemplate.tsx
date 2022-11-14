@@ -1,8 +1,18 @@
-import React, { ReactElement, useEffect, VFC } from 'react';
+import React, { ReactElement, useEffect, useState, VFC } from 'react';
+
+// MUI iconst
+import PersonIcon from '@mui/icons-material/Person';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
+
+// componetnts
+import AdminSettingsTemplate from './AdminSettingsTemplate';
 import AdminHomeHeader from '../../components/mol/Headers/AdminHomeHeader';
 import Header from '../../components/mol/Headers/Header';
 import SideMenu from '../../components/org/SideMenu/SideMenu';
+import UserManagement from '../../components/org/Managements/UserManagement/UserManagement';
+
+// hooks
+import useSidemenuState from '../../stores/SideMenuStore/useSidemenuState';
 import useTeamApi from '../../hooks/Api/useTeamApi';
 
 type Props = {
@@ -11,27 +21,39 @@ type Props = {
 
 const AdminHomeTemplate: VFC<Props> = (props) => {
   const { settings } = props;
+  const [component, setComponent] = useState<ReactElement>(
+    <AdminSettingsTemplate settings={settings} />,
+  );
+  const { toggle } = useSidemenuState();
   const { fetchAllTeams } = useTeamApi();
-
-  const dummy = (c: ReactElement) => {
-    console.log('hello temmmmy');
-  };
 
   useEffect(() => {
     fetchAllTeams();
   }, []);
 
+  const chComponent = (c: ReactElement) => {
+    toggle();
+    setComponent(c);
+  };
+
   const itemList = [
     {
       label: '一般設定',
       icon: <InboxIcon />,
-      action: dummy,
-      component: <div>dummy</div>,
+      action: chComponent,
+      // 設定を全て表示
+      component: <AdminSettingsTemplate settings={settings} />,
+    },
+    {
+      label: 'ユーザ管理',
+      icon: <PersonIcon />,
+      action: chComponent,
+      component: <UserManagement />,
     },
     {
       label: 'どりかむリスト',
       icon: <InboxIcon />,
-      action: dummy,
+      action: chComponent,
       component: <div>dummy</div>,
     },
   ];
@@ -39,22 +61,13 @@ const AdminHomeTemplate: VFC<Props> = (props) => {
   return (
     <>
       <Header />
+      <SideMenu itemList={itemList} />
 
-      <div className="flex h-screen py-10">
-        {/* side menu */}
-        <SideMenu itemList={itemList} />
-        {/* main panel */}
-        <div className=" w-11/12 overflow-y-scroll">
-          <div className="w-4/5 mx-auto">
-            <div className="h-10" />
-            <AdminHomeHeader />
-            <div className="h-10" />
-            <div className="rounded-lg border-1 py-3 px-3">
-              {settings.map((setting: ReactElement) => setting)}
-            </div>
-          </div>
-          <div className="h-10" />
-        </div>
+      <div className="h-screen py-20 px-3">
+        <div className="h-10" />
+        <AdminHomeHeader />
+        {component}
+        <div className="h-10" />
       </div>
     </>
   );
